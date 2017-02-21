@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:49:28 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:49:29 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/21 12:19:14 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static t_obj	set_default_sphere(t_env *env)
 	new_sphere.brillance = 10;
 	new_sphere.specular = 1;
 	new_sphere.diffuse = 1;
+	new_sphere.reflection = 0;
 	new_sphere.func_obj = &sphere;
 	return (new_sphere);
 }
@@ -32,7 +33,7 @@ static int		check_reference(t_pars_object reference)
 {
 	if (reference.position > 1 || reference.color > 1 || reference.rayon > 1
 		|| reference.brillance > 1 || reference.rotation > 1
-		|| reference.specular > 1 || reference.diffuse > 1)
+		|| reference.specular > 1 || reference.diffuse > 1 || reference.reflection > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.normal || reference.apex || reference.axis
 		|| reference.angle || reference.from || reference.to || reference.size)

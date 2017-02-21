@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 15:45:10 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/21 12:22:09 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define WIN_HEIGHT_OCT 125
 # define B 0x00FFFFFF
 # define NBR_OBJECT 6
-# define NBR_DESCRIPTION 12
+# define NBR_DESCRIPTION 13
 # define ZERO 0.000000001
 # define LIGHT_PTR ((t_light*)(tmp_light->content))
 
@@ -104,6 +104,7 @@ typedef struct		s_obj
 	double			size;
 	double			specular;
 	double			diffuse;
+	int				reflection;
 }					t_obj;
 
 typedef struct		s_limit
@@ -153,6 +154,7 @@ typedef	struct		s_env
 	int				sizeline;
 	int				endian;
 	int				width;
+	int				reflection;
 	int				height;
 	double			zoom;
 	void			*img;
@@ -197,6 +199,8 @@ int					set_size(t_env *env, char *tmp,
 int					set_diffuse(t_env *env, char *tmp,
 						t_obj *new, t_pars_object *index);
 int					set_specular(t_env *env, char *tmp,
+						t_obj *new, t_pars_object *index);
+int					set_reflection(t_env *env, char *tmp,
 						t_obj *new, t_pars_object *index);
 
 int					set_camera(t_env *env);
