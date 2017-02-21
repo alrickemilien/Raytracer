@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 15:44:31 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/21 12:31:54 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,29 +55,27 @@ static int	get_intersection(t_env *env, t_ray *ray, t_obj **tmp)
 	return (0);
 }
 
-void		raycast(t_env *env, t_ray ray, int i, int j)
+int				raycast(t_env *env, t_ray ray, t_color *color, int depth)
 {
 	t_obj		*tmp;
-	t_color		test;
 	double		t;
 
 	t = 0;
+	depth = 0;
 	tmp = NULL;
 	if (get_intersection(env, &ray, &tmp))
 	{
 		get_surface_caracter(env, ray, tmp, &t);
 		t += env->k;
-		test.red = (unsigned char)(ft_dtrim(0, 255,
-						((double)tmp->color.red * t)));
-		test.green = (unsigned char)(ft_dtrim(0, 255,
-						((double)tmp->color.green * t)));
-		test.blue = (unsigned char)(ft_dtrim(0, 255,
-						((double)tmp->color.blue * t)));
-		mlx_put_pixel_to_image(env, i, j, test);
+		color->red += (unsigned char)(ft_dtrim(0, 255 - color->red,
+					((double)tmp->color.red * t)));
+		color->green += (unsigned char)(ft_dtrim(0, 255 - color->green,
+					((double)tmp->color.green * t)));
+		color->blue += (unsigned char)(ft_dtrim(0, 255 - color->blue,
+					((double)tmp->color.blue * t)));
+		return (1);
 	}
-	else
-		mlx_put_pixel_to_image(env, i, j, split_color(
-								mlx_get_color_value(env->mlx, 0x001A3134)));
+	return (0);
 }
 
 void		*raytracing(void *params)
@@ -85,6 +83,7 @@ void		*raytracing(void *params)
 	int			index;
 	t_limit		l;
 	t_env		*env;
+	t_color		color;
 
 	env = (t_env*)(params);
 	l = ft_limit_thread(env->nb_t);
@@ -93,9 +92,14 @@ void		*raytracing(void *params)
 		l.x = l.tmp_x;
 		while (++l.x < l.max_x)
 		{
+			ft_memset(&color, 0, sizeof(color));
 			index = (l.y * WIN_HEIGHT + l.x);
 			set_primary_ray(env, env->tab_ray + index, l.x, l.y);
-			raycast(env, *(env->tab_ray + index), l.x, l.y);
+			if (raycast(env, *(env->tab_ray + index), &color, 0))
+				mlx_put_pixel_to_image(env, l.x, l.y, color);
+			else
+				mlx_put_pixel_to_image(env, l.x, l.y, split_color(
+							mlx_get_color_value(env->mlx, 0x001A3134)));
 		}
 	}
 	return (NULL);
