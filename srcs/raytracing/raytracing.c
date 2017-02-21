@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/21 12:31:54 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/21 14:17:14 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,24 @@ int				raycast(t_env *env, t_ray ray, t_color *color, int depth)
 {
 	t_obj		*tmp;
 	double		t;
+	t_surface	s;
 
 	t = 0;
-	depth = 0;
 	tmp = NULL;
 	if (get_intersection(env, &ray, &tmp))
 	{
-		get_surface_caracter(env, ray, tmp, &t);
+		s = get_surface_caracter(env, ray, tmp, &t);
 		t += env->k;
 		color->red += (unsigned char)(ft_dtrim(0, 255 - color->red,
-					((double)tmp->color.red * t)));
+					((double)tmp->color.red * t * pow(0.5, depth))));
 		color->green += (unsigned char)(ft_dtrim(0, 255 - color->green,
-					((double)tmp->color.green * t)));
+					((double)tmp->color.green * t * pow(0.5, depth))));
 		color->blue += (unsigned char)(ft_dtrim(0, 255 - color->blue,
-					((double)tmp->color.blue * t)));
+					((double)tmp->color.blue * t * pow(0.5, depth))));
+		if (depth > 1)
+			return (1);
+		if (tmp->reflection)
+			raycast(env, get_reflection(s, ray), color, depth + 1);
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/21 12:22:09 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/21 13:43:42 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,6 +248,7 @@ int					merror(void);
 double				get_specularity(t_vector intersection, t_vector n,
 							t_vector light_dir, t_obj *obj);
 double				get_diffuse(t_vector n, t_vector light_dir);
-void				get_surface_caracter(t_env *env, t_ray ray,
+t_surface				get_surface_caracter(t_env *env, t_ray ray,
 							t_obj *tmp, double *t);
+t_ray				get_reflection(t_surface s, t_ray ray);
 #endif

@@ -6,13 +6,13 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:32 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:51:33 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/21 13:46:00 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void			get_surface_caracter(t_env *env, t_ray ray,
+t_surface			get_surface_caracter(t_env *env, t_ray ray,
 									t_obj *tmp, double *t)
 {
 	t_surface	s;
@@ -38,4 +38,5 @@ void			get_surface_caracter(t_env *env, t_ray ray,
 				* (s.diffuse + s.spec));
 		tmp_light = tmp_light->next;
 	}
+	return (s);
 }
