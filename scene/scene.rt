@@ -1,0 +1,32 @@
+camera:
+	from: (10 10 10)
+	to: (2 2 2)
+
+camera:
+	from: (0 15 13)
+	to: (0 0 0)
+
+
+light:
+	position: ( 2 -4 0)
+	intensity: (10)
+
+camera:
+	from: (0 0 0)
+	to: (2 2 2)
+
+cylinder:
+	apex: (-3 0 0)
+	rotation: (-90 150 0)
+	rayon: (0.3)
+
+plan:
+	position: ( -6 0 0)
+	normal: ( 0 1 0 )
+	color: (0x335509)
+	rotation: (0 0 90)
+
+plan:
+	position: ( -6 -7 0)
+	normal: ( 0 -1 0 )
+	color: (0x335509)

@@ -1,0 +1,17 @@
+camera:
+	from: (0 0 0)
+	to: (1 0 0)
+
+light:
+	position: (0 0 0)
+	intensity: (1)
+
+cylinder:
+	apex: (3 0 0)
+	rayon: (0.1)
+	axis: (-0.2 0.5 0)
+
+plan:
+	color: (0xFC9F5B)
+	normal: (-0.5 0.5 0)
+	position: (0 -3 3)
