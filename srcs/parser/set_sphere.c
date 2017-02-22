@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:49:28 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/21 12:19:14 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/22 13:35:54 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static t_obj	set_default_sphere(t_env *env)
 	new_sphere.specular = 1;
 	new_sphere.diffuse = 1;
 	new_sphere.reflection = 0;
+	new_sphere.refraction = 1;
 	new_sphere.func_obj = &sphere;
 	return (new_sphere);
 }

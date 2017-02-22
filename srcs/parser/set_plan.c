@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/21 12:19:48 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/22 13:45:20 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static t_obj		set_default_plan(t_env *env)
 	new_plan.etat = PLAN;
 	new_plan.func_obj = &plan;
 	new_plan.reflection = 0;
+	new_plan.refraction = 1;
 	return (new_plan);
 }
 

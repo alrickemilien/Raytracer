@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:54:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/21 12:17:53 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/22 13:35:29 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@
 # define SPECULAR "specular:"
 # define DIFFUSE "diffuse:"
 # define REFLECTION "reflection:"
+# define REFRACTION "refraction:"
 
 int				check_indent(char *str, int n);
 int				parse_error(char *str);
@@ -84,6 +85,7 @@ typedef struct	s_pars_object
 	int			diffuse;
 	int			specular;
 	int			reflection;
+	int			refraction;
 }				t_pars_object;
 
 #endif

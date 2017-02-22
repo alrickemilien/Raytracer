@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:09 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/21 12:20:16 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/22 13:36:32 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static t_obj		set_default_cone(t_env *env)
 	new_cone.etat = CONE;
 	new_cone.func_obj = &cone;
 	new_cone.reflection = 0;
+	new_cone.refraction = 1;
 	return (new_cone);
 }
 
