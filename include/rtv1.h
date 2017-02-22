@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/22 13:48:57 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/22 15:07:34 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ typedef struct		s_light
 	double			specular;
 	double			diffuse;
 	int				(*hit_light)(
-						struct s_light light,
-						t_ray *ray, double *t);
+			struct s_light light,
+			t_ray *ray, double *t);
 }					t_light;
 
 typedef struct		s_matrix_rot
@@ -93,7 +93,7 @@ typedef struct		s_obj
 	t_vector		n;
 	t_color			color;
 	int				(*func_obj)(struct s_obj tmp,
-						t_ray *ray, double *t);
+			t_ray *ray, double *t);
 	int				etat;
 	t_vector		axis;
 	t_vector		apex;
@@ -167,8 +167,8 @@ typedef	struct		s_env
 	int				(*set_object[NBR_OBJECT])(struct s_env *env);
 	char			**tab_str_description;
 	int				(*check_description[NBR_DESCRIPTION])(
-							struct s_env *env, char *str,
-							t_obj *new, t_pars_object *index);
+			struct s_env *env, char *str,
+			t_obj *new, t_pars_object *index);
 	t_list			*list;
 	t_list			*camera;
 	int				nbr_cam;
@@ -178,33 +178,33 @@ typedef	struct		s_env
 }					t_env;
 
 int					set_color(t_env *env, char *tmp,
-						t_obj *new, t_pars_object *index);
+		t_obj *new, t_pars_object *index);
 int					set_axis(t_env *env, char *tmp,
-						t_obj *new, t_pars_object *index);
+		t_obj *new, t_pars_object *index);
 int					set_apex(t_env *env, char *tmp,
-						t_obj *new, t_pars_object *index);
+		t_obj *new, t_pars_object *index);
 int					set_position(t_env *env, char *tmp,
-						t_obj *new, t_pars_object *index);
+		t_obj *new, t_pars_object *index);
 int					set_angle(t_env *env, char *tmp,
-						t_obj *new, t_pars_object *index);
+		t_obj *new, t_pars_object *index);
 int					set_brillance(t_env *env, char *tmp,
-						t_obj *new, t_pars_object *index);
+		t_obj *new, t_pars_object *index);
 int					set_rayon(t_env *env, char *tmp,
-						t_obj *new, t_pars_object *index);
+		t_obj *new, t_pars_object *index);
 int					set_normal(t_env *env, char *tmp,
-						t_obj *new, t_pars_object *index);
+		t_obj *new, t_pars_object *index);
 int					set_rotation(t_env *env, char *tmp,
-						t_obj *new, t_pars_object *index);
+		t_obj *new, t_pars_object *index);
 int					set_size(t_env *env, char *tmp,
-						t_obj *new, t_pars_object *index);
+		t_obj *new, t_pars_object *index);
 int					set_diffuse(t_env *env, char *tmp,
-						t_obj *new, t_pars_object *index);
+		t_obj *new, t_pars_object *index);
 int					set_specular(t_env *env, char *tmp,
-						t_obj *new, t_pars_object *index);
+		t_obj *new, t_pars_object *index);
 int					set_reflection(t_env *env, char *tmp,
-						t_obj *new, t_pars_object *index);
+		t_obj *new, t_pars_object *index);
 int					set_refraction(t_env *env, char *tmp,
-						t_obj *new, t_pars_object *index);
+		t_obj *new, t_pars_object *index);
 
 int					set_camera(t_env *env);
 int					set_light(t_env *env);
@@ -222,7 +222,7 @@ void				init_tab_function_object(t_env *env);
 void				free_data(void *content, size_t size);
 void				free_tab(char ***tab, size_t size);
 t_vector			get_surface_normal(t_vector intersection,
-						t_obj *tmp, t_ray ray);
+		t_obj *tmp, t_ray ray);
 void				rotate_object(t_obj *object, t_vector *vector);
 void				init_default_camera(t_env *env);
 void				sort_camera(t_env *env);
@@ -238,7 +238,7 @@ void				*raytracing(void *env);
 int					cone(t_obj cone, t_ray *ray, double *t);
 t_color				split_color(unsigned long color);
 void				mlx_put_pixel_to_image(t_env *env, int x, int y,
-						t_color color);
+		t_color color);
 int					hit_light(t_light light, t_ray *ray, double *t);
 int					error(t_env *env, char *str);
 int					key_press(int keycode, t_env *env);
@@ -249,9 +249,13 @@ void				end_program(t_env *env);
 double				shadow(t_env *env, t_ray ray, double norme);
 int					merror(void);
 double				get_specularity(t_vector intersection, t_vector n,
-							t_vector light_dir, t_obj *obj);
+		t_vector light_dir, t_obj *obj);
 double				get_diffuse(t_vector n, t_vector light_dir);
 t_surface				get_surface_caracter(t_env *env, t_ray ray,
-							t_obj *tmp, double *t);
+		t_obj *tmp, double *t);
 t_ray				get_reflection(t_surface s, t_ray ray);
+double  			*set_camera_matrix(
+							t_vector vec_forward, t_vector vec_up,
+							t_vector vec_right, t_vector from);
+
 #endif

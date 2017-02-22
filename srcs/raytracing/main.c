@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:38 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 15:44:43 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/22 16:54:21 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ int		main(int ac, char **av)
 		error(env, "error malloc in main");
 	env->mlx = mlx_init();
 	init_env_values(env);
-	if ((env->fd = open(av[1], O_DIRECTORY)) > 0)
-		error(env, INVALID_DIRECTORY);
-	if ((env->fd = open(av[1], O_RDONLY)) == -1)
+	if ((env->fd = open(av[1], O_RDWR)) == -1)
 		error(env, INVALID_FILE);
 	if (!parser(env))
 		end_program(env);

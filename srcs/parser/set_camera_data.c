@@ -6,13 +6,13 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:53 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:47:54 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/22 15:05:51 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/rtv1.h"
 
-static double	*set_camera_matrix(
+double	*set_camera_matrix(
 		t_vector vec_forward, t_vector vec_up,
 		t_vector vec_right, t_vector from)
 {

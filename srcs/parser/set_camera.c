@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:46 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/21 12:22:23 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/22 17:39:48 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static double		ft_dabs(double n)
 }
 
 static int			check_camera(
-					t_env *env, t_camera *new,
-					char *tmp, t_pars_object *index)
+		t_env *env, t_camera *new,
+		char *tmp, t_pars_object *index)
 {
 	int				n;
 
@@ -50,21 +50,39 @@ static int			check_camera(
 	return (1);
 }
 
+int		check_straight(t_camera *cam)
+{
+	t_vector	f;
+	t_vector	vec_forward;
+	t_vector	vec_right;
+	t_vector	vec_up;
+
+	f = vec_diff(cam->pos, cam->to);
+	normalize_vec(&f);
+	if (ft_dabs(f.x) <= 1 && ft_dabs(f.y) > 0.988 && ft_dabs(f.z) <= 1)
+	{
+		vec_forward = vec_diff(cam->pos, cam->to);
+		normalize_vec(&vec_forward);
+		set_vec(&f, 0, 0, 1);
+		normalize_vec(&f);
+		vec_right = cross_product(f, vec_forward);
+		vec_up = cross_product(vec_forward, vec_right);
+		cam->matrix = set_camera_matrix(vec_forward, vec_up,
+				vec_right, cam->pos);
+		return (1);
+	}
+	return (0);
+}
+
 int					check_ref_camera(t_pars_object ref, t_camera new)
 {
-	t_vector		f;
-
 	if (ref.from > 1 || ref.to > 1 || ref.position || ref.brillance || ref.angle
 			|| ref.rayon || ref.color || ref.apex || ref.axis || ref.normal
 			|| ref.rotation || ref.intensity || ref.size || ref.diffuse
-			|| ref.specular || ref.reflection)
+			|| ref.specular)
 		return (parse_error(INVALID_OBJECT));
 	if (new.pos.x == new.to.x && new.pos.z == new.to.z && new.pos.y == new.to.y)
 		return (parse_error(INVALID_CAMERA));
-	f = vec_diff(new.pos, new.to);
-	normalize_vec(&f);
-	if (ft_dabs(f.x) < ZERO && ft_dabs(f.y) == 1 && ft_dabs(f.z) < ZERO)
-		return (parse_error(INVALID_LOOKAT));
 	return (1);
 }
 
@@ -91,7 +109,8 @@ int					set_camera(t_env *env)
 	ft_strdel(&line);
 	if (!(check_ref_camera(reference, new)))
 		return (0);
-	set_camera_data(&new);
+	if (!check_straight(&new))
+		set_camera_data(&new);
 	ft_lstadd(&env->camera, ft_lstnew(&new, (sizeof(t_camera))));
 	return (1);
 }

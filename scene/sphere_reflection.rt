@@ -1,0 +1,20 @@
+camera:
+	from: (0.1 6 0)
+	to: (0 0 0)
+
+sphere:
+	rayon: (0.2)
+	color: (0xbf1233)
+
+plan:
+	color: (0xde00fa)
+	position: (-1 -3 0)
+	normal: (1 2.5 0.3)
+
+light:
+	position: (-0.5 1 0.3)
+	intensity: (2.5)
+
+light:
+	position: (0.5 1 0.3)
+	intensity: (2.5)
