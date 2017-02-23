@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/21 14:17:14 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/23 10:36:51 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,15 @@ int				raycast(t_env *env, t_ray ray, t_color *color, int depth)
 	tmp = NULL;
 	if (get_intersection(env, &ray, &tmp))
 	{
-		s = get_surface_caracter(env, ray, tmp, &t);
-		t += env->k;
+		s = get_surface_caracter(ray, tmp);
+		set_color_coeff(env, s, tmp, &t);
 		color->red += (unsigned char)(ft_dtrim(0, 255 - color->red,
 					((double)tmp->color.red * t * pow(0.5, depth))));
 		color->green += (unsigned char)(ft_dtrim(0, 255 - color->green,
 					((double)tmp->color.green * t * pow(0.5, depth))));
 		color->blue += (unsigned char)(ft_dtrim(0, 255 - color->blue,
 					((double)tmp->color.blue * t * pow(0.5, depth))));
-		if (depth > 1)
-			return (1);
-		if (tmp->reflection)
+		if (depth < 1 && tmp->reflection)
 			raycast(env, get_reflection(s, ray), color, depth + 1);
 		return (1);
 	}
