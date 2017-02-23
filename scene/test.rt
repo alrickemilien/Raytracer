@@ -4,20 +4,16 @@ sphere:
 	specular: (0.6)
 	diffuse: (0.6)
 	rayon: (3)
+	reflection: (1)
+	refraction: (1.9)
 
 camera:
 	from: (0 0 0)
 	to: (1 1 1)
 
-
 camera:
 	from: (2 2 2)
 	to: (20 20 20)
-
-camera:
-	from: (45 45 45)
-	to: (20 20 20)
-
 
 light:
 	position: (13 -2.5 -2.5)
@@ -28,6 +24,11 @@ light:
 plan:
 	position: (20 20 20)
 	normal: (1 1 1.5)
+	color: (0xb66fa1)
+
+plan:
+	position: (0 20 0)
+	normal: (-0.3 1 0)
 	color: (0xb66fa1)
 
 light:

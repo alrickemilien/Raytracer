@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:46 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/22 17:39:48 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/23 14:08:32 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,6 @@ static void			set_default_camera(t_camera *new)
 	set_vec(&new->pos, 0, 0, 0);
 	set_vec(&new->to, 0, 0, 1);
 	new->num = 0;
-}
-
-static double		ft_dabs(double n)
-{
-	if (n < 0)
-		return (-n);
-	return (n);
 }
 
 static int			check_camera(

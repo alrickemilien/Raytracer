@@ -24,6 +24,7 @@ sphere:
 	specular: (0.1)
 	reflection: (1)
 	rayon: (0.2)
+	refraction: (0.9)
 
 plan:
 	color: (0xFC9F9B)

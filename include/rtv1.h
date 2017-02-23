@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/23 10:37:19 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/23 13:58:50 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct		s_ray
 	t_vector		org;
 	t_vector		dir;
 	double			t;
+	double			coeff;
 }					t_ray;
 
 typedef struct		s_light
@@ -254,9 +255,11 @@ double				get_specularity(t_vector intersection, t_vector n,
 double				get_diffuse(t_vector n, t_vector light_dir);
 t_surface				get_surface_caracter(t_ray ray, t_obj *tmp);
 t_ray				get_reflection(t_surface s, t_ray ray);
+t_ray				get_refraction(t_surface s, t_ray ray);
 double  			*set_camera_matrix(
 							t_vector vec_forward, t_vector vec_up,
 							t_vector vec_right, t_vector from);
 void				set_color_coeff(t_env *env, t_surface s,
 									t_obj *tmp, double *t);
+double				fresnel(t_ray ray, t_surface s);
 #endif

@@ -25,6 +25,7 @@ SRCS=\
 	srcs/raytracing/get_reflection.c\
 	srcs/raytracing/get_refraction.c\
 	srcs/raytracing/set_color_coeff.c\
+	srcs/raytracing/fresnel.c\
 	srcs/event/end_program.c\
 	srcs/event/free_data.c\
 	srcs/event/free_tab.c\

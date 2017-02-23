@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:30 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:46:31 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/23 11:19:32 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,11 @@ void			negative_vec(t_vector *v)
 	v->x = -v->x;
 	v->y = -v->y;
 	v->z = -v->z;
+}
+
+int				is_vectornull(t_vector v)
+{
+	if (!v.x && !v.y && !v.z)
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: salibert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 19:37:30 by salibert          #+#    #+#             */
-/*   Updated: 2017/02/08 19:37:55 by salibert         ###   ########.fr       */
+/*   Updated: 2017/02/23 14:08:06 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ char			*ft_strjoinf(char const *s1, char const *s2, char c);
 int				ft_trim(int min, int max, int nb);
 void			ft_freetab(char ***tab);
 void			ft_putxy(int x, int y);
+double			ft_dabs(double nb);
 int				get_next_line(const int fb, char **line);
 #endif

@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/23 10:36:51 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/23 18:19:25 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	set_primary_ray(t_env *env, t_ray *ray, int j, int i)
 	ft_bzero(&null_vector, sizeof(t_vector));
 	ray->org = product_vec_matrix(env->select->c->matrix,
 			null_vector);
+	ray->coeff = 1;
 }
 
 static int	get_intersection(t_env *env, t_ray *ray, t_obj **tmp)
@@ -55,29 +56,52 @@ static int	get_intersection(t_env *env, t_ray *ray, t_obj **tmp)
 	return (0);
 }
 
-int				raycast(t_env *env, t_ray ray, t_color *color, int depth)
+static t_color	add_color(t_color current, t_color to_add, double t)
 {
-	t_obj		*tmp;
-	double		t;
-	t_surface	s;
+	current.red += (unsigned char)(ft_dtrim(0, 255 - current.red,
+						((double)to_add.red * t)));
+	current.green += (unsigned char)(ft_dtrim(0, 255 - current.green,
+						((double)to_add.green * t)));
+	current.blue += (unsigned char)(ft_dtrim(0, 255 - current.blue,
+						((double)to_add.blue * t)));
+	return (current);
+}
+
+/*t_color	beers_law(t_color color, t_obj *obj, t_light light) // applied when dot_product(ray.dir, n) > 0
+{
+	color.red = exp(-obj->absorption.red * get_absorb_distance(obj, light));
+}*/
+
+t_color				raycast(t_env *env, t_ray ray, int depth)
+{
+	t_obj			*tmp;
+	double			t;
+	t_surface		s;
+	t_color			color;
+	t_color			ret;
 
 	t = 0;
 	tmp = NULL;
+	ft_memset(&color, 0, sizeof(color));
 	if (get_intersection(env, &ray, &tmp))
 	{
 		s = get_surface_caracter(ray, tmp);
 		set_color_coeff(env, s, tmp, &t);
-		color->red += (unsigned char)(ft_dtrim(0, 255 - color->red,
-					((double)tmp->color.red * t * pow(0.5, depth))));
-		color->green += (unsigned char)(ft_dtrim(0, 255 - color->green,
-					((double)tmp->color.green * t * pow(0.5, depth))));
-		color->blue += (unsigned char)(ft_dtrim(0, 255 - color->blue,
-					((double)tmp->color.blue * t * pow(0.5, depth))));
-		if (depth < 1 && tmp->reflection)
-			raycast(env, get_reflection(s, ray), color, depth + 1);
-		return (1);
+		color = add_color(color, tmp->color, t);
+		if (depth < 2 && (ray.coeff = fresnel(ray, s)) < 1 && tmp->reflection && tmp->refraction != 1)
+		{
+			ret = raycast(env, get_refraction(s, ray), depth + 1);
+			color = add_color(color, ret, 1 - ray.coeff);
+		}
+		if (depth < 2 && tmp->reflection)
+		{
+		//	if (ray.coeff != 1)
+		//		printf("ray.coeff : %lf\n", ray.coeff);
+			ret = raycast(env, get_reflection(s, ray), depth + 1);
+			color = add_color(color, ret, ray.coeff);
+		}
 	}
-	return (0);
+	return (color);
 }
 
 void		*raytracing(void *params)
@@ -94,14 +118,10 @@ void		*raytracing(void *params)
 		l.x = l.tmp_x;
 		while (++l.x < l.max_x)
 		{
-			ft_memset(&color, 0, sizeof(color));
 			index = (l.y * WIN_HEIGHT + l.x);
 			set_primary_ray(env, env->tab_ray + index, l.x, l.y);
-			if (raycast(env, *(env->tab_ray + index), &color, 0))
-				mlx_put_pixel_to_image(env, l.x, l.y, color);
-			else
-				mlx_put_pixel_to_image(env, l.x, l.y, split_color(
-							mlx_get_color_value(env->mlx, 0x001A3134)));
+			color = raycast(env, *(env->tab_ray + index), 0);
+			mlx_put_pixel_to_image(env, l.x, l.y, color);
 		}
 	}
 	return (NULL);
