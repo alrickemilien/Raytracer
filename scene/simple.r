@@ -23,9 +23,9 @@ plan:
 sphere:
 	position: (2.5 -0.2 0)
 	rayon: (0.5)
-	color: (0x0000)
-	refraction: (1.01)
-	reflection: (0)
+	color: (0xFF0000)
+	refraction: (1.05)
+	reflection: (1)
 
 light: 
 	position: (0 1.5 0)
