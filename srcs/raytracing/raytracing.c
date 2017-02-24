@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/23 18:19:25 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/24 13:30:56 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,6 @@ static t_color	add_color(t_color current, t_color to_add, double t)
 	return (current);
 }
 
-/*t_color	beers_law(t_color color, t_obj *obj, t_light light) // applied when dot_product(ray.dir, n) > 0
-{
-	color.red = exp(-obj->absorption.red * get_absorb_distance(obj, light));
-}*/
-
 t_color				raycast(t_env *env, t_ray ray, int depth)
 {
 	t_obj			*tmp;
@@ -83,20 +78,20 @@ t_color				raycast(t_env *env, t_ray ray, int depth)
 	t = 0;
 	tmp = NULL;
 	ft_memset(&color, 0, sizeof(color));
+	(void)depth;
+	(void)ret;
 	if (get_intersection(env, &ray, &tmp))
 	{
 		s = get_surface_caracter(ray, tmp);
 		set_color_coeff(env, s, tmp, &t);
 		color = add_color(color, tmp->color, t);
-		if (depth < 2 && (ray.coeff = fresnel(ray, s)) < 1 && tmp->reflection && tmp->refraction != 1)
+		if (depth < 1 && (ray.coeff = fresnel(ray, s)) < 1 && tmp->reflection && tmp->refraction >= 1)
 		{
 			ret = raycast(env, get_refraction(s, ray), depth + 1);
 			color = add_color(color, ret, 1 - ray.coeff);
 		}
-		if (depth < 2 && tmp->reflection)
+		if (depth < 1 && tmp->reflection)
 		{
-		//	if (ray.coeff != 1)
-		//		printf("ray.coeff : %lf\n", ray.coeff);
 			ret = raycast(env, get_reflection(s, ray), depth + 1);
 			color = add_color(color, ret, ray.coeff);
 		}
