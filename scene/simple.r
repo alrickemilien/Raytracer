@@ -6,13 +6,14 @@ camera:
 	from: (-5 0 0)
 	to: (1 0 0)
 
+camera:
+	from: (-5 2 0)
+	to: (1 0 0)
 
 plan:
 	normal: (0.2 0 0)
 	position: (6 0 0)
-	color: (0x0)
-	reflection: (1)
-	refraction: (1)
+	color: (0x009912)
 
 plan:
 	normal: (0.2 0 0)
@@ -20,9 +21,11 @@ plan:
 	color: (0x0012d2)
 
 sphere:
-	position: (2.5 0.5 0)
-	rayon: (0.2)
-
+	position: (2.5 -0.2 0)
+	rayon: (0.5)
+	color: (0x0000)
+	refraction: (1.01)
+	reflection: (0)
 
 light: 
 	position: (0 1.5 0)

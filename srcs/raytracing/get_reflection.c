@@ -10,6 +10,5 @@ t_ray	get_reflection(t_surface s, t_ray ray)
 		r.org = vec_add(s.intersection, n_vec(r.dir, 0.0001));
 	else
 		r.org = vec_add(s.intersection, n_vec(r.dir, -0.0001));
-	r.coeff = ray.coeff;
 	return (r);
 }

@@ -36,8 +36,9 @@ double	fresnel(t_ray ray, t_surface s)
 	}
 	x = 1 - cos_x;
 	ret = r0 + (1 - r0)*x*x*x*x*x;
-	return (0.1 + (1 - 0.1) * ret);
-	/*double	cos_in;
+	return (0.8 + (1 - 0.8) * ret);
+
+/*	double	cos_in;
 	double	sin_tn;
 	double	cos_tn;
 
@@ -45,17 +46,17 @@ double	fresnel(t_ray ray, t_surface s)
 	double	etat;
 
 	double	rs;
-	double	rp;*/
+	double	rp;
 
-	/*etai = 1;
+	etai = 1;
 	etat = s.refraction;
 	cos_in = dot_product(ray.dir, s.n);
 	if (cos_in > 0)
 		ft_dswap(&etai, &etat);
-	sin_tn = etai / etat * sqrt(ft_dtrim(0, 1, 1 - cos_in * cos_in));
+	sin_tn = (etai / etat) * (etai / etat) * sqrt(ft_dtrim(0, 1, 1 - cos_in * cos_in));
 	if (sin_tn >= 1)
 		return (1);
-	cos_tn = sqrt(ft_dtrim(0, 1, 1 - sin_tn * sin_tn));
+	cos_tn = sqrt(ft_dtrim(0, 1, 1 - sin_tn));
 	cos_in = ft_dabs(cos_in);
 	rs = ((etat * cos_in) - (etai * cos_tn)) / ((etat * cos_in) + (etai *cos_tn));
 	rp = ((etai * cos_in) - (etat * cos_tn)) / ((etai * cos_in) + (etat *cos_tn));
