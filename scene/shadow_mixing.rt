@@ -25,13 +25,6 @@ sphere:
 	reflection: (1)
 	refraction: (1.1)
 
-sphere:
-	position: (1.53 0.1 0)
-	rayon: (0.15)
-	color: (0xFF0000)
-	reflection: (1)
-	refraction: (1.1)
-
 plan:
 	color: (0x00FF00)
 	position: (2 0 1)
@@ -44,7 +37,7 @@ plan:
 
 cone:
 	angle: (20)
-	color: (0xFF0000)
+	color: (0xFF00aa)
 	apex: (1.2 0 0.2)
 	axis: (0 1 0)
 

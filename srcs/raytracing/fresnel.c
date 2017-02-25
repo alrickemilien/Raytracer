@@ -12,7 +12,7 @@ void	ft_dswap(double *a, double *b)
 double	fresnel(t_ray ray, t_surface s)
 {
 
-	/*double	r0;
+	double	r0;
 	double	original_n;
 	double	new_n;
 	double	n;
@@ -44,9 +44,9 @@ double	fresnel(t_ray ray, t_surface s)
 	}
 	x = 1 - cos_x;
 	ret = r0 + (1 - r0)*x*x*x*x*x;
-	return (0.9 + (1 - 0.9) * ret);*/
+	return (ret);
 
-	double	cos_in;
+/*	double	cos_in;
 	double	sin_tn;
 	double	cos_tn;
 
@@ -75,5 +75,5 @@ double	fresnel(t_ray ray, t_surface s)
 	rs = ((new_n * cos_in) - (original_n * cos_tn)) / ((new_n * cos_in) + (original_n *cos_tn));
 	rp = ((original_n * cos_in) - (new_n * cos_tn)) / ((original_n * cos_in) + (new_n *cos_tn));
 //	printf("rs : %lf\n", (rs * rs + rp *rp) / 2);
-	return ((rs * rs + rp *rp) / 2);
+	return ((rs * rs + rp *rp) / 2);*/
 }

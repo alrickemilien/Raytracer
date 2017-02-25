@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/24 18:42:58 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/25 10:30:24 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,12 @@ t_color				raycast(t_env *env, t_ray ray, int depth)
 		if (depth < 3 && (ray.coeff = fresnel(ray, s)) < 1 && tmp->refraction > 1)
 		{
 			ret = raycast(env, get_refraction(s, ray), depth + 1);
-			color = add_color(color, ret, ray.coeff);
+			color = add_color(color, ret, 1 - ray.coeff);
 		}
 		if (depth < 3 && tmp->reflection)
 		{
 			ret = raycast(env, get_reflection(s, ray), depth + 1);
-			color = add_color(color, ret, 1 - ray.coeff);
+			color = add_color(color, ret, ray.coeff);
 		}
 	}
 	return (color);

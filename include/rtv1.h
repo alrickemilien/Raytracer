@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/23 13:58:50 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/25 10:36:27 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ typedef struct		s_obj
 	double			diffuse;
 	double			refraction;
 	int				reflection;
+	t_vector		absorbtion;
 }					t_obj;
 
 typedef struct		s_limit

@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:59 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:48:02 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/25 10:47:11 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,8 @@ int		set_color(t_env *env, char *tmp, t_obj *new, t_pars_object *index)
 	tmp += 2;
 	new->color = split_color(
 			mlx_get_color_value(env->mlx, ft_atoi_base(tmp, 16)));
+	new->absorbtion.x = ((double)new->color.red / 255);
+	new->absorbtion.y = ((double)new->color.green / 255);
+	new->absorbtion.z = ((double)new->color.blue / 255);
 	return (1);
 }
