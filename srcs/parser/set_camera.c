@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:46 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/23 14:08:32 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/25 13:23:20 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int					check_ref_camera(t_pars_object ref, t_camera new)
 	if (ref.from > 1 || ref.to > 1 || ref.position || ref.brillance || ref.angle
 			|| ref.rayon || ref.color || ref.apex || ref.axis || ref.normal
 			|| ref.rotation || ref.intensity || ref.size || ref.diffuse
-			|| ref.specular)
+			|| ref.specular || ref.transparent)
 		return (parse_error(INVALID_OBJECT));
 	if (new.pos.x == new.to.x && new.pos.z == new.to.z && new.pos.y == new.to.y)
 		return (parse_error(INVALID_CAMERA));

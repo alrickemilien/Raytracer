@@ -25,6 +25,7 @@ SRCS=\
 	srcs/raytracing/get_reflection.c\
 	srcs/raytracing/get_refraction.c\
 	srcs/raytracing/set_color_coeff.c\
+	srcs/raytracing/beers_law.c\
 	srcs/raytracing/fresnel.c\
 	srcs/event/end_program.c\
 	srcs/event/free_data.c\
@@ -61,6 +62,7 @@ SRCS=\
 	srcs/parser/set_specular.c\
 	srcs/parser/set_reflection.c\
 	srcs/parser/set_refraction.c\
+	srcs/parser/set_transparent.c\
 	srcs/parser/set_camera.c\
 	srcs/parser/set_light.c\
 	srcs/parser/set_sphere.c\

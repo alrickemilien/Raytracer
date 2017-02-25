@@ -20,7 +20,7 @@ light:
 
 sphere:
 	position: (1.5 0 0)
-	rayon: (0.15)
+	rayon: (0.1)
 	color: (0x58A4B0)
 	reflection: (1)
 

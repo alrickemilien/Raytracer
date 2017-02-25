@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:17 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/22 13:38:16 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/25 13:22:51 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static t_obj		set_default_cylinder(t_env *env)
 	new.func_obj = &cylindre;
 	new.reflection = 0;
 	new.refraction = 1;
+	new.transparent = 0;
 	return (new);
 }
 
@@ -59,7 +60,7 @@ static int			check_reference(t_pars_object reference)
 		|| reference.rayon > 1 || reference.brillance > 1
 		|| reference.rotation > 1 || reference.size > 1
 		|| reference.specular > 1 || reference.diffuse > 1
-		|| reference.reflection > 1)
+		|| reference.reflection > 1 || reference.transparent > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.normal || reference.position
 		|| reference.angle || reference.from || reference.to)

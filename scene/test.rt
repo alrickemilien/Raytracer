@@ -6,6 +6,7 @@ sphere:
 	rayon: (3)
 	reflection: (1)
 	refraction: (1.9)
+	transparent: (0.1)
 
 camera:
 	from: (0 0 0)

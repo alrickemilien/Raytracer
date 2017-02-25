@@ -22,13 +22,13 @@ double	get_absorb_distance(t_ray ray, t_obj *obj, t_surface s)
 t_color	beers_law(t_color color, t_obj *obj, t_surface s, t_ray ray) // applied when dot_product(ray.dir, n) > 0
 {
 	color.red = (unsigned char)((double)color.red *
-			exp(-((double)color.red * 100 / 255)
+			exp(-obj->absorbtion.x
 				* get_absorb_distance(ray, obj, s)));
 	color.blue = (unsigned char)((double)color.blue *
-			exp(-((double)color.blue * 100 / 255)
+			exp(-obj->absorbtion.y
 				* get_absorb_distance(ray, obj, s)));
 	color.green = (unsigned char)((double)color.green *
-			exp(-((double)color.green * 100 / 255)
+			exp(-obj->absorbtion.z
 				* get_absorb_distance(ray, obj, s)));
 	return (color);
 }

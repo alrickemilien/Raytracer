@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:32 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/21 12:21:18 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/25 13:23:04 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int			check_reference(t_pars_object reference)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.normal || reference.apex || reference.axis
 		|| reference.angle || reference.from || reference.to
-		|| reference.rayon || reference.brillance || reference.rotation || reference.reflection)
+		|| reference.rayon || reference.brillance || reference.rotation || reference.reflection || reference.transparent)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
 }

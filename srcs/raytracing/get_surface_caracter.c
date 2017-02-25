@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:32 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/23 11:56:19 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/25 13:25:41 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ t_surface			get_surface_caracter(t_ray ray, t_obj *tmp)
 	s.n = get_surface_normal(s.intersection, tmp, ray);
 	normalize_vec(&s.n);
 	s.refraction = tmp->refraction;
+	s.transparent = tmp->transparent;
 	return (s);
 }

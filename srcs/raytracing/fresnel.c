@@ -44,7 +44,7 @@ double	fresnel(t_ray ray, t_surface s)
 	}
 	x = 1 - cos_x;
 	ret = r0 + (1 - r0)*x*x*x*x*x;
-	return (ret);
+	return ((1 - s.transparent) - (1 - (1 - s.transparent)) * ret);
 
 /*	double	cos_in;
 	double	sin_tn;

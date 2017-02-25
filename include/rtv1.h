@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/25 10:36:27 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/25 13:25:24 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define WIN_HEIGHT_OCT 125
 # define B 0x00FFFFFF
 # define NBR_OBJECT 6
-# define NBR_DESCRIPTION 14
+# define NBR_DESCRIPTION 15
 # define ZERO 0.000000001
 # define LIGHT_PTR ((t_light*)(tmp_light->content))
 
@@ -108,6 +108,7 @@ typedef struct		s_obj
 	double			refraction;
 	int				reflection;
 	t_vector		absorbtion;
+	double			transparent;
 }					t_obj;
 
 typedef struct		s_limit
@@ -141,6 +142,7 @@ typedef struct		s_surface
 	double			spec;
 	double			diffuse;
 	double			refraction;
+	double			transparent;
 }					t_surface;
 
 typedef	struct		s_env
@@ -208,6 +210,8 @@ int					set_reflection(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
 int					set_refraction(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
+int					set_transparent(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
 
 int					set_camera(t_env *env);
 int					set_light(t_env *env);
@@ -263,4 +267,5 @@ double  			*set_camera_matrix(
 void				set_color_coeff(t_env *env, t_surface s,
 									t_obj *tmp, double *t);
 double				fresnel(t_ray ray, t_surface s);
+t_color				beers_law(t_color color, t_obj *obj, t_surface s, t_ray ray);
 #endif

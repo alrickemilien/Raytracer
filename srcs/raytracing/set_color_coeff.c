@@ -6,6 +6,7 @@ void	set_color_coeff(t_env *env, t_surface s,
 	t_vector	light_dir;
 	t_list		*tmp_light;
 	t_ray		ray;
+	double		shadow_ret;
 
 	tmp_light = env->light;
 	while (tmp_light)
@@ -16,11 +17,9 @@ void	set_color_coeff(t_env *env, t_surface s,
 		ray.dir = vec_diff(LIGHT_PTR->org, ray.org);
 		s.spec = get_specularity(s.intersection, s.n, light_dir, tmp)
 			* LIGHT_PTR->specular;
-		if (shadow(env, ray, light_dir.norme) != 1)
-		{
-			s.spec = 0;
-			s.diffuse = 0;
-		}
+		shadow_ret = shadow(env, ray, light_dir.norme);
+		s.spec *= shadow_ret;
+		s.diffuse *= shadow_ret;
 		*t += ft_dtrim(0, 1, (LIGHT_PTR->intensity / light_dir.norme)
 				* (s.diffuse + s.spec));
 		tmp_light = tmp_light->next;

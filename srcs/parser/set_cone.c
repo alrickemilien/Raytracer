@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:09 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/22 13:36:32 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/25 13:22:33 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static t_obj		set_default_cone(t_env *env)
 	new_cone.func_obj = &cone;
 	new_cone.reflection = 0;
 	new_cone.refraction = 1;
+	new_cone.transparent = 0;
 	return (new_cone);
 }
 
@@ -58,7 +59,8 @@ static int			check_reference(t_pars_object reference)
 	if (reference.apex > 1 || reference.axis > 1
 			|| reference.color > 1 || reference.angle > 1
 			|| reference.brillance > 1 || reference.rotation > 1
-			|| reference.specular > 1 || reference.diffuse > 1 || reference.reflection > 1)
+			|| reference.specular > 1 || reference.diffuse > 1
+			|| reference.reflection > 1 || reference.transparent > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.normal || reference.position || reference.to
 			|| reference.from || reference.rayon || reference.size)

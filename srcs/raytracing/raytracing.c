@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/25 11:34:05 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/25 15:24:49 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,19 +89,12 @@ t_color				raycast(t_env *env, t_ray ray, int depth)
 		{
 			lol = 1;
 			ret = raycast(env, get_refraction(s, ray), depth + 1);
-			color = add_color(color, ret, 1 - ray.coeff);
+			color = add_color(color, ret, (1 - ray.coeff));
 		}
 		if (depth < 5 && tmp->reflection)
 		{
 			ret = raycast(env, get_reflection(s, ray), depth + 1);
-			if (lol)
-				color = add_color(color, ret, ray.coeff);
-			else
-			{
-				ft_putendl("lol");
-				color = add_color(color, ret, 0.9);
-			}
-
+			color = add_color(color, ret, (ray.coeff));
 		}
 	}
 	return (color);

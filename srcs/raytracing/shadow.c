@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:55 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:51:56 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/25 15:31:11 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ double			shadow(t_env *env, t_ray ray, double norme)
 					*((t_obj*)(tmp_list->content)), &ray, &t)))
 		{
 			if (t <= norme && t >= 0)
-				return (0);
+				return (((t_obj*)(tmp_list->content))->transparent);
 		}
 		tmp_list = tmp_list->next;
 	}
