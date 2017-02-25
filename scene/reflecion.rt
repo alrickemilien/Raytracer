@@ -23,8 +23,8 @@ sphere:
 	position: (2.5 0 0)
 	specular: (0.1)
 	reflection: (1)
+	refraction: (1)
 	rayon: (0.2)
-	refraction: (0.9)
 
 plan:
 	color: (0xFC9F9B)
@@ -38,6 +38,7 @@ cylinder:
 	apex: (2.5 0 1)
 	rayon: (0.2)
 	reflection: (1)
+	refraction: (1)
 
 plan:
 	color: (0xFC9F9B)

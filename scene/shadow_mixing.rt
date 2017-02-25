@@ -23,7 +23,6 @@ sphere:
 	rayon: (0.15)
 	color: (0x58A4B0)
 	reflection: (1)
-	refraction: (1.1)
 
 plan:
 	color: (0x00FF00)
