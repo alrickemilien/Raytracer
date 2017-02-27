@@ -6,7 +6,7 @@
 /*   By: salibert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 19:37:30 by salibert          #+#    #+#             */
-/*   Updated: 2017/02/23 14:08:06 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/27 11:43:37 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,5 @@ void			ft_freetab(char ***tab);
 void			ft_putxy(int x, int y);
 double			ft_dabs(double nb);
 int				get_next_line(const int fb, char **line);
+int				get_next_char(const int fb, char **line, char c);
 #endif

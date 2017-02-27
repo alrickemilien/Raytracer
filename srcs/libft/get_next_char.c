@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/05 13:43:30 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/27 10:05:19 by aemilien         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line.h"
 
 static t_list	*ft_create_file(int fd)
@@ -36,18 +24,18 @@ static t_list	*ft_lstsearch(t_list *list, int fd)
 	return (NULL);
 }
 
-static int		ft_buf(t_list *tmp, char **line)
+static int		ft_buf(t_list *tmp, char **line, char c)
 {
 	char			*buf_tmp;
 
-	if (ft_strchr(((t_file*)(tmp->content))->buf, '\n'))
+	if (ft_strchr(((t_file*)(tmp->content))->buf, c))
 	{
 		*line = ft_strsub(((t_file*)(tmp->content))->buf, 0,
-				ft_strchr(((t_file*)(tmp->content))->buf, '\n')
+				ft_strchr(((t_file*)(tmp->content))->buf, c)
 				- ((t_file*)(tmp->content))->buf);
 		buf_tmp = ((t_file*)(tmp->content))->buf;
 		((t_file*)(tmp->content))->buf = ft_strsub(ft_strchr(
-			((t_file*)(tmp->content))->buf, '\n') + 1,
+			((t_file*)(tmp->content))->buf, c) + 1,
 		0, ft_strlen(((t_file*)(tmp->content))->buf) - ft_strlen(*line));
 		ft_strdel(&buf_tmp);
 		return (1);
@@ -77,7 +65,7 @@ static void	ft_addtobuf(t_list *tmp, char *read_buf)
 	}
 }
 
-int		get_next_line(const int fd, char **line)
+int		get_next_char(const int fd, char **line, char c)
 {
 	static t_list	*list = NULL;
 	t_list			*tmp;
@@ -90,7 +78,7 @@ int		get_next_line(const int fd, char **line)
 		tmp = list;
 	}
 	ft_bzero(read_buf, BUFF_SIZE);
-	while (!ft_strchr(read_buf, '\n')
+	while (!ft_strchr(read_buf, c)
 			&& (ret = read(fd, read_buf, BUFF_SIZE)) > 0)
 	{
 		read_buf[ret] = '\0';
@@ -98,7 +86,7 @@ int		get_next_line(const int fd, char **line)
 	}
 	if (ret == -1)
 		return (-1);
-	if (((t_file*)(tmp->content))->buf && ft_buf(tmp, line))
+	if (((t_file*)(tmp->content))->buf && ft_buf(tmp, line, c))
 		return (1);
 	return (0);
 }

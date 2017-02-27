@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/25 13:22:05 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/27 13:16:53 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static t_obj		set_default_plan(t_env *env)
 	new_plan.reflection = 0;
 	new_plan.refraction = 1;
 	new_plan.transparent = 0;
+	new_plan.csg = NULL;
 	return (new_plan);
 }
 
@@ -41,7 +42,7 @@ static int			check_plan(t_env *env, t_obj *new,
 	while (i < NBR_DESCRIPTION)
 	{
 		if (!ft_strncmp(env->tab_str_description[i],
-				tmp, (n = ft_strlen(env->tab_str_description[i]))))
+					tmp, (n = ft_strlen(env->tab_str_description[i]))))
 			break ;
 		i++;
 	}
@@ -55,17 +56,17 @@ static int			check_plan(t_env *env, t_obj *new,
 static int			check_reference(t_pars_object reference)
 {
 	if (reference.normal > 1 || reference.position > 1 || reference.color > 1
-		|| reference.brillance > 1 || reference.rotation > 1
-		|| reference.specular > 1 || reference.diffuse > 1
-		|| reference.reflection > 1 || reference.transparent > 1)
+			|| reference.brillance > 1 || reference.rotation > 1
+			|| reference.specular > 1 || reference.diffuse > 1
+			|| reference.reflection > 1 || reference.transparent > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.axis || reference.apex || reference.rayon
-		|| reference.angle || reference.to || reference.from || reference.size)
+			|| reference.angle || reference.to || reference.from || reference.size)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
 }
 
-int					set_plan(t_env *env)
+int					set_plan(t_env *env, t_list **list_obj)
 {
 	t_obj			new_plan;
 	char			*line;
@@ -74,15 +75,14 @@ int					set_plan(t_env *env)
 	new_plan = set_default_plan(env);
 	ft_bzero(&reference, sizeof(reference));
 	line = NULL;
-	while (get_next_line(env->fd, &line))
+	while (get_next_char(env->fd, &line, '\n'))
 	{
-		if (!ft_strcmp(line, ""))
-			break ;
-		if (!check_indent(line, 1))
-			return (parse_error(BAD_INDENT));
 		recycle(&line, ft_strtrim(line));
-		if (!check_plan(env, &new_plan, line, &reference))
-			return (0);
+		if (ft_strcmp(line, "") && line[0] != '}')
+			if (!check_plan(env, &new_plan, line, &reference))
+				return (0);
+		if(line[ft_strlen(line) - 1] == '}')
+			break ;
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
@@ -90,6 +90,6 @@ int					set_plan(t_env *env)
 		return (0);
 	normalize_vec(&new_plan.n);
 	rotate_object(&new_plan, &new_plan.n);
-	ft_lstadd(&env->list, ft_lstnew(&new_plan, (sizeof(t_obj))));
+	ft_lstadd(list_obj, ft_lstnew(&new_plan, (sizeof(t_obj))));
 	return (1);
 }

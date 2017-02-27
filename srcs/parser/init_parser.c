@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:08 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/25 13:17:52 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/27 13:26:05 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	init_tab_str_object(t_env *env)
 	env->tab_str_object[PLAN] = ft_strdup("plan:");
 	env->tab_str_object[CAMERA] = ft_strdup("camera:");
 	env->tab_str_object[LIGHT] = ft_strdup("light:");
+	env->tab_str_object[CSG] = ft_strdup("csg:");
 }
 
 void	init_tab_function_object(t_env *env)
@@ -73,4 +74,5 @@ void	init_tab_function_object(t_env *env)
 	env->set_object[PLAN] = &set_plan;
 	env->set_object[CAMERA] = &set_camera;
 	env->set_object[LIGHT] = &set_light;
+	env->set_object[CSG] = &set_csg;
 }

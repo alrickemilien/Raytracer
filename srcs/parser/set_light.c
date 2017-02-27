@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:32 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/25 13:23:04 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/27 13:15:29 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static int			check_reference(t_pars_object reference)
 {
 	if (reference.position > 1 || reference.intensity > 1
-		|| reference.specular > 1 || reference.diffuse > 1)
+			|| reference.specular > 1 || reference.diffuse > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.normal || reference.apex || reference.axis
-		|| reference.angle || reference.from || reference.to
-		|| reference.rayon || reference.brillance || reference.rotation || reference.reflection || reference.transparent)
+			|| reference.angle || reference.from || reference.to
+			|| reference.rayon || reference.brillance || reference.rotation || reference.reflection || reference.transparent)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
 }
@@ -62,24 +62,24 @@ static int			check_light(t_light *new, char *tmp, t_pars_object *index)
 	return (1);
 }
 
-int					set_light(t_env *env)
+int					set_light(t_env *env, t_list **list_obj)
 {
 	t_light			new_light;
 	char			*line;
 	t_pars_object	reference;
 
+	(void)list_obj;
 	set_default_light(&new_light);
 	ft_bzero(&reference, sizeof(reference));
 	line = NULL;
-	while (get_next_line(env->fd, &line))
+	while (get_next_char(env->fd, &line, '\n'))
 	{
-		if (!ft_strcmp(line, ""))
-			break ;
-		if (!check_indent(line, 1))
-			return (parse_error(BAD_INDENT));
 		recycle(&line, ft_strtrim(line));
-		if (!check_light(&new_light, line, &reference))
-			return (0);
+		if (ft_strcmp(line, "") && line[0] != '}')
+			if (!check_light(&new_light, line, &reference))
+				return (0);
+		if(line[ft_strlen(line) - 1] == '}')
+			break ;
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);

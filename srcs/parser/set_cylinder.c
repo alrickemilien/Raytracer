@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:17 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/25 13:22:51 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/27 13:18:15 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static t_obj		set_default_cylinder(t_env *env)
 	new.reflection = 0;
 	new.refraction = 1;
 	new.transparent = 0;
+	new.csg = NULL;
 	return (new);
 }
 
@@ -57,18 +58,18 @@ static int			check_cylinder(t_env *env, t_obj *new,
 static int			check_reference(t_pars_object reference)
 {
 	if (reference.apex > 1 || reference.axis > 1 || reference.color > 1
-		|| reference.rayon > 1 || reference.brillance > 1
-		|| reference.rotation > 1 || reference.size > 1
-		|| reference.specular > 1 || reference.diffuse > 1
-		|| reference.reflection > 1 || reference.transparent > 1)
+			|| reference.rayon > 1 || reference.brillance > 1
+			|| reference.rotation > 1 || reference.size > 1
+			|| reference.specular > 1 || reference.diffuse > 1
+			|| reference.reflection > 1 || reference.transparent > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.normal || reference.position
-		|| reference.angle || reference.from || reference.to)
+			|| reference.angle || reference.from || reference.to)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
 }
 
-int					set_cylinder(t_env *env)
+int					set_cylinder(t_env *env, t_list **list_obj)
 {
 	t_obj			new_cylinder;
 	char			*line;
@@ -77,21 +78,20 @@ int					set_cylinder(t_env *env)
 	new_cylinder = set_default_cylinder(env);
 	ft_bzero(&reference, sizeof(reference));
 	line = NULL;
-	while (get_next_line(env->fd, &line))
+	while (get_next_char(env->fd, &line, '\n'))
 	{
-		if (!ft_strcmp(line, ""))
-			break ;
-		if (!check_indent(line, 1))
-			return (parse_error(BAD_INDENT));
 		recycle(&line, ft_strtrim(line));
-		if (!check_cylinder(env, &new_cylinder, line, &reference))
-			return (0);
+		if (ft_strcmp(line, "") && line[0] != '}')
+			if (!check_cylinder(env, &new_cylinder, line, &reference))
+				return (0);
+		if(line[ft_strlen(line) - 1] == '}')
+			break ;
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
 	if (!check_reference(reference))
 		return (parse_error(INVALID_OBJECT));
 	rotate_object(&new_cylinder, &new_cylinder.axis);
-	ft_lstadd(&env->list, ft_lstnew(&new_cylinder, (sizeof(t_obj))));
+	ft_lstadd(list_obj, ft_lstnew(&new_cylinder, (sizeof(t_obj))));
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:49:28 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/25 13:21:39 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/27 13:16:00 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,19 @@ static t_obj	set_default_sphere(t_env *env)
 	new_sphere.refraction = 1;
 	new_sphere.transparent = 0;
 	new_sphere.func_obj = &sphere;
+	new_sphere.csg = NULL;
 	return (new_sphere);
 }
 
 static int		check_reference(t_pars_object reference)
 {
 	if (reference.position > 1 || reference.color > 1 || reference.rayon > 1
-		|| reference.brillance > 1 || reference.rotation > 1
-		|| reference.specular > 1 || reference.diffuse > 1
-		|| reference.reflection > 1 || reference.transparent > 1)
+			|| reference.brillance > 1 || reference.rotation > 1
+			|| reference.specular > 1 || reference.diffuse > 1
+			|| reference.reflection > 1 || reference.transparent > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.normal || reference.apex || reference.axis
-		|| reference.angle || reference.from || reference.to || reference.size)
+			|| reference.angle || reference.from || reference.to || reference.size)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
 }
@@ -65,7 +66,7 @@ static int		check_sphere(t_env *env, t_obj *new,
 	return (1);
 }
 
-int				set_sphere(t_env *env)
+int				set_sphere(t_env *env, t_list **list_obj)
 {
 	t_obj			new;
 	char			*line;
@@ -74,20 +75,19 @@ int				set_sphere(t_env *env)
 	new = set_default_sphere(env);
 	line = NULL;
 	ft_bzero(&reference, sizeof(reference));
-	while (get_next_line(env->fd, &line))
+	while (get_next_char(env->fd, &line, '\n'))
 	{
-		if (!ft_strcmp(line, ""))
-			break ;
-		if (!check_indent(line, 1))
-			return (parse_error(BAD_INDENT));
 		recycle(&line, ft_strtrim(line));
-		if (!check_sphere(env, &new, line, &reference))
-			return (0);
+		if (ft_strcmp(line, "") && line[0] != '}')
+			if (!check_sphere(env, &new, line, &reference))
+				return (0);
+		if(line[ft_strlen(line) - 1] == '}')
+			break ;
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
 	if (!check_reference(reference))
 		return (0);
-	ft_lstadd(&env->list, ft_lstnew(&new, (sizeof(t_obj))));
+	ft_lstadd(list_obj, ft_lstnew(&new, (sizeof(t_obj))));
 	return (1);
 }

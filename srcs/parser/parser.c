@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:19 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:50:37 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/27 13:24:36 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,18 @@ int		parser(t_env *env)
 	int		i;
 
 	line = 0;
-	while (get_next_line(env->fd, &line))
+	while (get_next_char(env->fd, &line, '{'))
 	{
-		if (!check_indent(line, 0))
-			return (parse_error(BAD_INDENT));
 		recycle(&line, ft_strtrim(line));
 		i = -1;
-		while (++i < 6)
+		while (++i < NBR_OBJECT)
 			if (!ft_strcmp(line, env->tab_str_object[i]))
 				break ;
 		if (ft_strcmp(line, ""))
 		{
-			if (i == 6)
+			if (i == NBR_OBJECT)
 				return (parse_error(INVALID_FORMAT_FILE));
-			if (!env->set_object[i](env))
+			if (!env->set_object[i](env, &env->list))
 				return (0);
 		}
 		ft_strdel(&line);

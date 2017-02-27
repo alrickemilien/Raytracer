@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 11:32:01 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/06 09:13:40 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/27 10:03:13 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ typedef struct	s_file
 }				t_file;
 
 int				get_next_line(const int fd, char **line);
+int				get_next_char(const int fd, char **line, char c);
 
 #endif

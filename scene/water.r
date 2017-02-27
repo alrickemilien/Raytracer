@@ -1,5 +1,5 @@
 camera:
-	from: (7 7 7)
+	from: (7 2 7)
 	to: (0 0 0)
 
 plan:
@@ -8,16 +8,16 @@ plan:
 	color: (0x839fce)
 
 light: 
-	position: (10 20 10)
-	intensity: (15)
+	position: (5 10 5)
+	intensity: (20)
 
 plan:
 	position: (3 0.5 3)
 	normal: (0 1 0)
 	reflection: (1)
-	refraction: (1.1)
-	transparent: (0.9)
-	color: (0x0)
+	refraction: (1.2)
+	transparent: (0.2)
+	color: (0x03)
 
 sphere:
 	position: (3 4 3)
@@ -36,22 +36,27 @@ sphere:
 
 sphere:
 	rayon: (0.5)
-	color: (0x483723)
+	color: (0x4823)
 	position: (0.5 0 0)
 
 sphere:
 	rayon: (0.5)
-	color: (0x483723)
+	color: (0x4833)
 	position: (-0.5 0 0)
+
+plan:
+	position: (3 -3 3)
+	normal: (0 1 0)
+	color: (0x483723)
 
 sphere:
 	rayon: (0.5)
-	color: (0x483723)
+	color: (0x8332)
 	position: (-1 0 0)
 
 sphere:
 	rayon: (0.5)
-	color: (0x483723)
+	color: (0x4823)
 	position: (1 0 0)
 
 sphere:
@@ -71,5 +76,6 @@ sphere:
 
 sphere:
 	rayon: (0.5)
-	color: (0x483723)
+	color: (0x1823)
 	position: (1 0.5 0)
+

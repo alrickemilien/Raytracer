@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:46 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/25 13:23:20 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/27 13:15:45 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,24 +79,24 @@ int					check_ref_camera(t_pars_object ref, t_camera new)
 	return (1);
 }
 
-int					set_camera(t_env *env)
+int					set_camera(t_env *env, t_list **list_obj)
 {
 	t_camera		new;
 	char			*line;
 	t_pars_object	reference;
 
+	(void)list_obj;
 	set_default_camera(&new);
 	ft_bzero(&reference, sizeof(reference));
 	line = NULL;
-	while (get_next_line(env->fd, &line))
+	while (get_next_char(env->fd, &line, '\n'))
 	{
-		if (!ft_strcmp(line, ""))
-			break ;
-		if (!check_indent(line, 1))
-			return (parse_error(BAD_INDENT));
 		recycle(&line, ft_strtrim(line));
-		if (!check_camera(env, &new, line, &reference))
-			return (0);
+		if (ft_strcmp(line, "") && line[0] != '}')
+			if (!check_camera(env, &new, line, &reference))
+				return (0);
+		if(line[ft_strlen(line) - 1] == '}')
+			break ;
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);

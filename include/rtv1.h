@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/25 13:25:24 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/27 13:27:09 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define WIN_WIDTH_OCT 125
 # define WIN_HEIGHT_OCT 125
 # define B 0x00FFFFFF
-# define NBR_OBJECT 6
+# define NBR_OBJECT 7
 # define NBR_DESCRIPTION 15
 # define ZERO 0.000000001
 # define LIGHT_PTR ((t_light*)(tmp_light->content))
@@ -82,7 +82,8 @@ enum {
 	CONE,
 	CYLINDRE,
 	CAMERA,
-	LIGHT
+	LIGHT,
+	CSG
 };
 
 typedef struct		s_obj
@@ -109,6 +110,7 @@ typedef struct		s_obj
 	int				reflection;
 	t_vector		absorbtion;
 	double			transparent;
+	t_list			*csg;
 }					t_obj;
 
 typedef struct		s_limit
@@ -169,7 +171,7 @@ typedef	struct		s_env
 	double			k;
 	t_ray			*tab_ray;
 	char			**tab_str_object;
-	int				(*set_object[NBR_OBJECT])(struct s_env *env);
+	int				(*set_object[NBR_OBJECT])(struct s_env *env, t_list **list_obj);
 	char			**tab_str_description;
 	int				(*check_description[NBR_DESCRIPTION])(
 			struct s_env *env, char *str,
@@ -213,12 +215,13 @@ int					set_refraction(t_env *env, char *tmp,
 int					set_transparent(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
 
-int					set_camera(t_env *env);
-int					set_light(t_env *env);
-int					set_cone(t_env *env);
-int					set_cylinder(t_env *env);
-int					set_sphere(t_env *env);
-int					set_plan(t_env *env);
+int					set_camera(t_env *env, t_list **list_obj);
+int					set_light(t_env *env, t_list **list_obj);
+int					set_cone(t_env *env, t_list **list_obj);
+int					set_cylinder(t_env *env, t_list **list_obj);
+int					set_sphere(t_env *env, t_list **list_obj);
+int					set_plan(t_env *env, t_list **list_obj);
+int					set_csg(t_env *env, t_list **list_obj);
 int					parser(t_env *env);
 
 void				init_tab_str_description(t_env *env);

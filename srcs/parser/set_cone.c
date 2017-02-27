@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:09 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/25 13:22:33 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/27 13:16:34 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static t_obj		set_default_cone(t_env *env)
 	new_cone.reflection = 0;
 	new_cone.refraction = 1;
 	new_cone.transparent = 0;
+	new_cone.csg= NULL;
 	return (new_cone);
 }
 
@@ -68,7 +69,7 @@ static int			check_reference(t_pars_object reference)
 	return (1);
 }
 
-static void			join_cone(t_env *env, t_obj cone)
+static void			join_cone(t_list **list_obj, t_obj cone)
 {
 	t_obj	obj;
 
@@ -82,10 +83,10 @@ static void			join_cone(t_env *env, t_obj cone)
 	obj.rotation = cone.rotation;
 	obj.brillance = cone.brillance;
 	obj.func_obj = &cylindre;
-	ft_lstadd(&env->list, ft_lstnew(&obj, (sizeof(t_obj))));
+	ft_lstadd(list_obj, ft_lstnew(&obj, (sizeof(t_obj))));
 }
 
-int					set_cone(t_env *env)
+int					set_cone(t_env *env, t_list **list_obj)
 {
 	t_obj			new_cone;
 	char			*line;
@@ -94,22 +95,21 @@ int					set_cone(t_env *env)
 	new_cone = set_default_cone(env);
 	ft_bzero(&reference, sizeof(reference));
 	line = NULL;
-	while (get_next_line(env->fd, &line))
+	while (get_next_char(env->fd, &line, '\n'))
 	{
-		if (!ft_strcmp(line, ""))
-			break ;
-		if (!check_indent(line, 1))
-			return (parse_error(BAD_INDENT));
 		recycle(&line, ft_strtrim(line));
-		if (!check_cone(env, &new_cone, line, &reference))
-			return (0);
+		if (ft_strcmp(line, "") && line[0] != '}')
+			if (!check_cone(env, &new_cone, line, &reference))
+				return (0);
+		if(line[ft_strlen(line) - 1] == '}')
+			break ;
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
 	rotate_object(&new_cone, &new_cone.axis);
-	ft_lstadd(&env->list, ft_lstnew(&new_cone, (sizeof(t_obj))));
+	ft_lstadd(list_obj, ft_lstnew(&new_cone, (sizeof(t_obj))));
 	if (!check_reference(reference))
 		return (0);
-	join_cone(env, new_cone);
+	join_cone(list_obj, new_cone);
 	return (1);
 }

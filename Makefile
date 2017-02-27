@@ -68,6 +68,7 @@ SRCS=\
 	srcs/parser/set_sphere.c\
 	srcs/parser/set_cone.c\
 	srcs/parser/set_cylinder.c\
+	srcs/parser/set_csg.c\
 	srcs/parser/set_plan.c\
 	srcs/parser/func_parse.c\
 	srcs/parser/parser.c\
