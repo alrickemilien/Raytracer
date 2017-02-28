@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:32 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/27 13:15:29 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/28 14:24:10 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int					set_light(t_env *env, t_list **list_obj)
 	while (get_next_char(env->fd, &line, '\n'))
 	{
 		recycle(&line, ft_strtrim(line));
-		if (ft_strcmp(line, "") && line[0] != '}')
+		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_light(&new_light, line, &reference))
 				return (0);
 		if(line[ft_strlen(line) - 1] == '}')

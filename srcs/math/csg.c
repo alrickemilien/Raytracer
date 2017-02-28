@@ -30,6 +30,6 @@ int		csg(t_obj obj, t_ray *ray, double *t)
 {
 	(void)obj;
 	(void)ray;
-	*t = 200;
+	*t = 200;	
 	return (1);
 }

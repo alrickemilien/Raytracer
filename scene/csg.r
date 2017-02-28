@@ -13,6 +13,7 @@ plan:
 csg:
 {
 	type: (union)
+	position: (0 0 0)
 	csg:
 	{	
 		type: (difference)
@@ -29,9 +30,10 @@ csg:
 		rayon: (0.2)
 		color: (0xff0000)
 	}
+	color: (0x0ff)
 }
 
-sphere: 
+sphere:
 { 
 	position: (1 1 1)
 	rayon: (0.1)

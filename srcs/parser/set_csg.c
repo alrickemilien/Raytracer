@@ -34,8 +34,21 @@ static int	check_object(t_env *env, char *line, t_obj *new)
 	return (1);
 }
 
+static int	check_reference(t_pars_object reference)
+{
+	if (reference.position || reference.color > 1 || reference.rayon
+			|| reference.brillance || reference.rotation
+			|| reference.specular > 1 || reference.diffuse > 1
+			|| reference.reflection > 1 || reference.transparent > 1 || reference.type > 1)
+		return (parse_error(INVALID_OBJECT));
+	if (reference.normal || reference.apex || reference.axis
+			|| reference.angle || reference.from || reference.to || reference.size)
+		return (parse_error(INVALID_OBJECT));
+	return (1);
+}
+
 static int		check_csg(t_env *env, t_obj *new,
-					char *tmp, t_pars_object *index)
+		char *tmp, t_pars_object *index)
 {
 	int		n;
 	int		i;
@@ -49,18 +62,11 @@ static int		check_csg(t_env *env, t_obj *new,
 		i++;
 	}
 	if (i < NBR_DESCRIPTION)
-	{
 		if (!env->check_description[i](env, tmp + n, new, index))
 			return (0);
-	}
-	else
-	{
+	if (i == NBR_DESCRIPTION)
 		if (!check_object(env, tmp, new))
-		{
-			ft_putendl("slt");
 			return (0);
-		}
-	}
 	return (1);
 }
 
@@ -84,8 +90,8 @@ int				set_csg(t_env *env, t_list **list_obj)
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
-	//if (!check_reference(reference))
-	//	return (0);
+	if (!check_reference(reference))
+		return (0);
 	ft_lstadd(list_obj, ft_lstnew(&new, (sizeof(t_obj))));
 	return (1);
 }
