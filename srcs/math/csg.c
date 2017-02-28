@@ -1,6 +1,6 @@
 #include "../include/rtv1.h"
 
-static int	get_intersection(t_list *csg, t_ray *ray, t_obj **tmp)
+/*static int	get_intersection(t_list *csg, t_ray *ray, t_obj **tmp)
 {
 	double		t;
 	t_list		*tmp_list;
@@ -24,9 +24,12 @@ static int	get_intersection(t_list *csg, t_ray *ray, t_obj **tmp)
 	if (*tmp)
 		return (1);
 	return (0);
-}
+}*/
 
 int		csg(t_obj obj, t_ray *ray, double *t)
 {
-	
+	(void)obj;
+	(void)ray;
+	*t = 200;
+	return (1);
 }

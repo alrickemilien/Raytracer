@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:46:48 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/27 18:01:20 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,7 @@ int				check_number_int(char *str)
 		if (str[i++] == ')')
 			break ;
 	}
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-	if (str[i])
+	if (!check_end_data(str + i))
 		return (parse_error(INVALID_PARAM_FORMAT));
 	if (!check_size(str))
 		return (parse_error(INVALID_INT));

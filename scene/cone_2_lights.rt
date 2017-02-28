@@ -32,5 +32,26 @@ plan:
 
 csg:
 {
-	
+	type: (intersection)
+	csg:
+	{
+		type: (difference)
+		cone:
+		{
+			position: (0 0 0)
+			color: (0xaaaa)
+		}
+		sphere:
+		{
+			position: (0.5 0.5 0.5)
+			color: (0xff0000)
+			rayon: (0.5)
+		}
+	}
+	sphere:
+	{
+		position: (0 0 0)
+		rayon: (0.5)
+		color: (0xaa00aa)
+	}
 }

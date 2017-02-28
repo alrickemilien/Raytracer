@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:49:28 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/27 13:16:00 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/28 10:02:55 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ int				set_sphere(t_env *env, t_list **list_obj)
 	new = set_default_sphere(env);
 	line = NULL;
 	ft_bzero(&reference, sizeof(reference));
-	while (get_next_char(env->fd, &line, '\n'))
+	while (get_next_line(env->fd, &line))
 	{
 		recycle(&line, ft_strtrim(line));
-		if (ft_strcmp(line, "") && line[0] != '}')
+		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_sphere(env, &new, line, &reference))
 				return (0);
 		if(line[ft_strlen(line) - 1] == '}')

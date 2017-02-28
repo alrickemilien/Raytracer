@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:54:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/25 13:20:39 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/27 18:04:26 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define INVALID_DIRECTORY "Argument is a directory"
 # define INVALID_NO_OBJ "List object null"
 # define INVALID_LOOKAT "Camera matrix looking straight up/down : not defined"
+# define INVALID_CSG "More than 2 objects in CSG object"
 
 # define POSITION "position:"
 # define RAYON "rayon:"
@@ -57,6 +58,7 @@
 # define REFLECTION "reflection:"
 # define REFRACTION "refraction:"
 # define TRANSPARENT "transparent:"
+# define TYPE "type:"
 
 int				check_indent(char *str, int n);
 int				parse_error(char *str);
@@ -67,6 +69,7 @@ int				check_data_type_color(char *str);
 int				check_data_type_nbr(char *str, int k);
 int				error_file(char *file);
 int				fill_int_data(char *str, int *data);
+int				check_end_data(char *str);
 
 typedef struct	s_pars_object
 {
@@ -88,6 +91,7 @@ typedef struct	s_pars_object
 	int			reflection;
 	int			refraction;
 	int			transparent;
+	int			type;
 }				t_pars_object;
 
 #endif

@@ -40,6 +40,7 @@ SRCS=\
 	srcs/math/plan.c\
 	srcs/math/cone.c\
 	srcs/math/cylindre.c\
+	srcs/math/csg.c\
 	srcs/math/rotation.c\
 	srcs/parser/init_default_camera.c\
 	srcs/parser/recycle.c\
@@ -63,6 +64,7 @@ SRCS=\
 	srcs/parser/set_reflection.c\
 	srcs/parser/set_refraction.c\
 	srcs/parser/set_transparent.c\
+	srcs/parser/set_type.c\
 	srcs/parser/set_camera.c\
 	srcs/parser/set_light.c\
 	srcs/parser/set_sphere.c\

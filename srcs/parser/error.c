@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:51 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:46:52 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/27 19:27:48 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		error(t_env *env, char *str)
 
 int		parse_error(char *str)
 {
-	ft_putendl_fd(str, 2);
+	ft_putendl_fd(str, 1);
 	return (0);
 }
 

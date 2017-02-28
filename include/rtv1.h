@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/27 13:27:09 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/28 13:27:09 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define WIN_HEIGHT_OCT 125
 # define B 0x00FFFFFF
 # define NBR_OBJECT 7
-# define NBR_DESCRIPTION 15
+# define NBR_DESCRIPTION 16
 # define ZERO 0.000000001
 # define LIGHT_PTR ((t_light*)(tmp_light->content))
 
@@ -86,6 +86,12 @@ enum {
 	CSG
 };
 
+enum {
+	UNION,
+	INTERSECTION,
+	DIFFERENCE,
+};
+
 typedef struct		s_obj
 {
 	t_vector		pos;
@@ -110,6 +116,8 @@ typedef struct		s_obj
 	int				reflection;
 	t_vector		absorbtion;
 	double			transparent;
+	int				intersection;
+	int				type;
 	t_list			*csg;
 }					t_obj;
 
@@ -214,6 +222,8 @@ int					set_refraction(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
 int					set_transparent(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
+int					set_type(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
 
 int					set_camera(t_env *env, t_list **list_obj);
 int					set_light(t_env *env, t_list **list_obj);
@@ -244,6 +254,7 @@ int					sphere(t_obj sphere, t_ray *ray, double *t);
 int					hit_light(t_light light, t_ray *ray, double *t);
 int					cylindre(t_obj cylindre, t_ray *ray, double *t);
 int					plan(t_obj plan, t_ray *ray, double *t);
+int					csg(t_obj csg, t_ray *ray, double *t);
 void				*raytracing(void *env);
 int					cone(t_obj cone, t_ray *ray, double *t);
 t_color				split_color(unsigned long color);

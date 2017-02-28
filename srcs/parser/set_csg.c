@@ -2,48 +2,65 @@
 
 static t_obj	set_default_csg(t_env *env)
 {
-	t_obj		csg;
+	t_obj		new_csg;
 
 	(void)env;
-	ft_bzero(&csg, sizeof(t_obj));
-	csg.etat = CSG;
-	return (csg);
+	ft_bzero(&new_csg, sizeof(t_obj));
+	new_csg.etat = CSG;
+	new_csg.intersection = UNION;
+	new_csg.func_obj = &csg;
+	return (new_csg);
 }
 
-static int		check_reference(t_pars_object reference)
+static int	check_object(t_env *env, char *line, t_obj *new)
 {
-	if (reference.position > 1 || reference.color > 1 || reference.rayon > 1
-			|| reference.brillance > 1 || reference.rotation > 1
-			|| reference.specular > 1 || reference.diffuse > 1
-			|| reference.reflection > 1 || reference.transparent > 1)
-		return (parse_error(INVALID_OBJECT));
-	if (reference.normal || reference.apex || reference.axis
-			|| reference.angle || reference.from || reference.to || reference.size)
-		return (parse_error(INVALID_OBJECT));
+	int		i;
+	char	*crochet;
+
+	i = -1;
+	while (++i < NBR_OBJECT)
+		if (!ft_strcmp(line, env->tab_str_object[i]))
+			break ;
+	if (i == LIGHT || i == CAMERA || i == NBR_OBJECT)
+		return (parse_error(INVALID_FORMAT_FILE));
+	get_next_line(env->fd, &crochet);
+	recycle(&crochet, ft_strtrim(crochet));
+	if (ft_strcmp("{", crochet))
+	{
+		return (parse_error(INVALID_FORMAT_FILE));
+	}
+	if (!env->set_object[i](env, &new->csg))
+		return (0);
 	return (1);
 }
 
 static int		check_csg(t_env *env, t_obj *new,
-		char *tmp, t_pars_object *index)
+					char *tmp, t_pars_object *index)
 {
 	int		n;
 	int		i;
 
-	(void)index;
 	i = 0;
 	while (i < NBR_DESCRIPTION)
 	{
-		if (!ft_strncmp(env->tab_str_object[i],
-					tmp, (n = ft_strlen(env->tab_str_object[i]))))
+		if (!ft_strncmp(env->tab_str_description[i],
+					tmp, (n = ft_strlen(env->tab_str_description[i]))))
 			break ;
 		i++;
 	}
-	if (i == NBR_DESCRIPTION)
-		return (parse_error(INVALID_DESCRIPTION));
-	if (i == LIGHT || i == CAMERA)
-		return (parse_error(INVALID_DESCRIPTION));
-	if (!env->set_object[i](env, &new->csg))
-		return (0);
+	if (i < NBR_DESCRIPTION)
+	{
+		if (!env->check_description[i](env, tmp + n, new, index))
+			return (0);
+	}
+	else
+	{
+		if (!check_object(env, tmp, new))
+		{
+			ft_putendl("slt");
+			return (0);
+		}
+	}
 	return (1);
 }
 
@@ -56,19 +73,19 @@ int				set_csg(t_env *env, t_list **list_obj)
 	new = set_default_csg(env);
 	line = NULL;
 	ft_bzero(&reference, sizeof(reference));
-	while (get_next_char(env->fd, &line, '\n'))
+	while (get_next_line(env->fd, &line))
 	{
 		recycle(&line, ft_strtrim(line));
-		if (ft_strcmp(line, "") && line[0] != '}')
+		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_csg(env, &new, line, &reference))
 				return (0);
-		if(line[ft_strlen(line) - 1] == '}')
+		if (line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
-	if (!check_reference(reference))
-		return (0);
+	//if (!check_reference(reference))
+	//	return (0);
 	ft_lstadd(list_obj, ft_lstnew(&new, (sizeof(t_obj))));
 	return (1);
 }

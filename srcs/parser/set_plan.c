@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/27 13:16:53 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/27 19:26:46 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int					set_plan(t_env *env, t_list **list_obj)
 	new_plan = set_default_plan(env);
 	ft_bzero(&reference, sizeof(reference));
 	line = NULL;
-	while (get_next_char(env->fd, &line, '\n'))
+	while (get_next_line(env->fd, &line))
 	{
 		recycle(&line, ft_strtrim(line));
 		if (ft_strcmp(line, "") && line[0] != '}')
