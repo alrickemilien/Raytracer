@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:17 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/28 14:25:15 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/01 14:39:22 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int					set_cylinder(t_env *env, t_list **list_obj)
 	new_cylinder = set_default_cylinder(env);
 	ft_bzero(&reference, sizeof(reference));
 	line = NULL;
-	while (get_next_char(env->fd, &line, '\n'))
+	while (get_next_line(env->fd, &line))
 	{
 		recycle(&line, ft_strtrim(line));
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))

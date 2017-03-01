@@ -13,7 +13,6 @@ plan:
 csg:
 {
 	type: (union)
-	position: (0 0 0)
 	csg:
 	{	
 		type: (difference)

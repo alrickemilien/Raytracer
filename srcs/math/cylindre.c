@@ -6,13 +6,13 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:45:37 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/01 09:08:55 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/01 15:51:02 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/rtv1.h"
 
-int		cylindre(t_obj cylindre, t_ray *ray, double *t)
+int		cylindre(t_obj cylindre, t_ray *ray, double *t, t_list **inter)
 {
 	t_vector	coeffs;
 	double		delta;
@@ -37,7 +37,7 @@ int		cylindre(t_obj cylindre, t_ray *ray, double *t)
 		*t = tmp.x;
 	if (*t < 0)
 		return (0);
-	ft_lstadd(&ray->inter, ft_lstnew(&tmp.x, sizeof(double)));
-	ft_lstadd(&ray->inter, ft_lstnew(&tmp.y, sizeof(double)));
+	ft_lstadd(inter, ft_lstnew(&tmp.x, sizeof(double)));
+	ft_lstadd(inter, ft_lstnew(&tmp.y, sizeof(double)));
 	return (1);
 }

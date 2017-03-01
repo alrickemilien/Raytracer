@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/01 09:10:07 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/01 13:27:17 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ typedef struct		s_light
 			t_ray *ray, double *t);
 }					t_light;
 
+typedef struct	s_intersection
+{
+	double		t;
+	int			a_in;
+	int			b_in;
+}				t_intersection;
+
 typedef struct		s_matrix_rot
 {
 	double			a;
@@ -102,7 +109,7 @@ typedef struct		s_obj
 	t_vector		n;
 	t_color			color;
 	int				(*func_obj)(struct s_obj tmp,
-			t_ray *ray, double *t);
+			t_ray *ray, double *t, t_list **inter);
 	int				etat;
 	t_vector		axis;
 	t_vector		apex;
@@ -251,13 +258,13 @@ void				recycle(char **old_ptr, char *new_ptr);
 void				init_thread(t_env env);
 t_limit				ft_limit_thread(int nb);
 void				ft_put_pos_select(t_env *env);
-int					sphere(t_obj sphere, t_ray *ray, double *t);
+int					sphere(t_obj sphere, t_ray *ray, double *t, t_list **inter);
 int					hit_light(t_light light, t_ray *ray, double *t);
-int					cylindre(t_obj cylindre, t_ray *ray, double *t);
-int					plan(t_obj plan, t_ray *ray, double *t);
-int					csg(t_obj csg, t_ray *ray, double *t);
+int					cylindre(t_obj cylindre, t_ray *ray, double *t, t_list **inter);
+int					plan(t_obj plan, t_ray *ray, double *t, t_list **inter);
+int					csg(t_obj csg, t_ray *ray, double *t, t_list **inter);
 void				*raytracing(void *env);
-int					cone(t_obj cone, t_ray *ray, double *t);
+int					cone(t_obj cone, t_ray *ray, double *t, t_list **inter);
 t_color				split_color(unsigned long color);
 void				mlx_put_pixel_to_image(t_env *env, int x, int y,
 		t_color color);
