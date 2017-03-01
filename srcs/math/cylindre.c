@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:45:37 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:45:38 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/01 09:08:55 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int		cylindre(t_obj cylindre, t_ray *ray, double *t)
 
 	x = vec_diff(ray->org, cylindre.apex);
 	coeffs.x = dot_product(ray->dir, ray->dir)
-				- dot_product(ray->dir, cylindre.axis)
-					* dot_product(ray->dir, cylindre.axis);
+		- dot_product(ray->dir, cylindre.axis)
+		* dot_product(ray->dir, cylindre.axis);
 	delta = dot_product(ray->dir, x);
 	coeffs.y = (delta + delta) - dot_product(ray->dir, cylindre.axis)
-				* dot_product(x, cylindre.axis) * (double)2;
+		* dot_product(x, cylindre.axis) * (double)2;
 	coeffs.z = dot_product(x, x) - dot_product(x, cylindre.axis)
-				* dot_product(x, cylindre.axis) - cylindre.r * cylindre.r;
+		* dot_product(x, cylindre.axis) - cylindre.r * cylindre.r;
 	if ((delta = (coeffs.y * coeffs.y) - ((double)4 * coeffs.x * coeffs.z)) < 0)
 		return (0);
 	tmp.x = ((double)((-coeffs.y - sqrt(delta)) / (coeffs.x + coeffs.x)));
@@ -37,5 +37,7 @@ int		cylindre(t_obj cylindre, t_ray *ray, double *t)
 		*t = tmp.x;
 	if (*t < 0)
 		return (0);
+	ft_lstadd(&ray->inter, ft_lstnew(&tmp.x, sizeof(double)));
+	ft_lstadd(&ray->inter, ft_lstnew(&tmp.y, sizeof(double)));
 	return (1);
 }

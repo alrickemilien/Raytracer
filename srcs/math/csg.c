@@ -1,35 +1,25 @@
 #include "../include/rtv1.h"
 
-/*static int	get_intersection(t_list *csg, t_ray *ray, t_obj **tmp)
+int		csg(t_obj obj, t_ray *ray, double *t)
 {
 	double		t;
 	t_list		*tmp_list;
+	t_obj		*obj;
 
 	ray->t = 2000000;
 	t = 0;
-	tmp_list = csg;
+	tmp_list = obj->csg;
 	while (tmp_list)
 	{
 		if (((t_obj*)(tmp_list->content))->func_obj(
 					*((t_obj*)(tmp_list->content)), ray, &t))
 		{
 			if (ray->t > t && t > ZERO)
-			{
-				ray->t = t;
 				*tmp = (t_obj*)(tmp_list->content);
-			}
 		}
 		tmp_list = tmp_list->next;
 	}
 	if (*tmp)
 		return (1);
 	return (0);
-}*/
-
-int		csg(t_obj obj, t_ray *ray, double *t)
-{
-	(void)obj;
-	(void)ray;
-	*t = 200;	
-	return (1);
 }

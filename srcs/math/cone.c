@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:45:31 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:45:33 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/01 09:08:40 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ int				cone(t_obj cone, t_ray *ray, double *t)
 		*t = tmp.x;
 	if (*t < 0)
 		return (0);
+	ft_lstadd(&ray->inter, ft_lstnew(&tmp.x, sizeof(double)));
+	ft_lstadd(&ray->inter, ft_lstnew(&tmp.y, sizeof(double)));
 	return (1);
 }

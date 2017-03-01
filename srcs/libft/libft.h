@@ -6,7 +6,7 @@
 /*   By: salibert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 19:37:30 by salibert          #+#    #+#             */
-/*   Updated: 2017/02/27 11:43:37 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/01 10:31:01 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void			ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
 void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstadd(t_list **alst, t_list *new);
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
+void			ft_lstsort(t_list *lst, int (*cmp)(void *a, void *b));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void			ft_putstrtab(char **s);
 void			ft_push_back(t_list **alst, t_list *new);

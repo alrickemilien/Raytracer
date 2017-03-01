@@ -10,7 +10,7 @@ SRCS =ft_memchr.c ft_putnbr_fd.c ft_striter.c ft_strnew.c ft_atoi.c ft_memcmp.c\
 	  ft_lstdel.c  ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_push_front.c ft_push_back.c\
 	  ft_putstrtab.c ft_strjoinf.c ft_trim.c ft_freetab.c ft_putxy.c get_next_line.c\
 	  ft_litoa.c ft_itoa_base.c ft_pow.c ft_ditoa.c ft_dtrim.c ft_strlowcase.c\
-	  ft_ismin.c ft_ismaj.c ft_atod.c ft_atoi_base.c ft_dabs.c get_next_char.c\
+	  ft_ismin.c ft_ismaj.c ft_atod.c ft_atoi_base.c ft_dabs.c get_next_char.c ft_lstsort.c\
 
 O = $(SRCS:.c=.o)
 

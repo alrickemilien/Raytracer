@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/28 13:27:09 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/01 09:10:07 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct		s_ray
 	t_vector		dir;
 	double			t;
 	double			coeff;
+	t_list			*inter;
 }					t_ray;
 
 typedef struct		s_light
