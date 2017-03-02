@@ -11,18 +11,18 @@ plan:
 }
 
 csg:
-{	
+{
 	type: (intersection)
 	sphere:
 	{
 		position: (3 0 0)
-		rayon: (0.1)
+		rayon: (0.5)
 		color: (0x120aa2)
 	}
 	sphere:
 	{
-		position: (3.2 0.5 0)
-		rayon: (0.4)
+		position: (3 0.5 0)
+		rayon: (0.5)
 		color: (0x120aa2)
 	}
 }
@@ -36,5 +36,5 @@ sphere:
 
 light:
 {
-	position: (0 3 0)
+	position: (0 2 -2)
 }

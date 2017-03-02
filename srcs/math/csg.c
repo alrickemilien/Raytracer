@@ -90,11 +90,6 @@ t_list	*function(t_list *a, t_list *b)
 	t_list *tmp_b;
 
 	ret = NULL;
-	/*if (!a)
-	{
-		
-
-	}*/
 	while (a)
 	{
 		tmp_b = b;
@@ -160,7 +155,6 @@ int		csg(t_obj obj, t_ray *ray, double *t, t_list **inter)
 	((t_obj*)(tmp_list->content))->func_obj(
 				*((t_obj*)(tmp_list->content)),
 				ray, t, &a);
-	printf("list a len : %d\n", ft_lstlen(a));
 	*inter = function(a, b);
 	get_smaller_t(*inter, t);
 	if (*inter)
