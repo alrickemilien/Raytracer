@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:45:44 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:45:45 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/02 15:02:43 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ t_vector	get_surface_normal(t_vector intersection, t_obj *tmp, t_ray ray)
 		m = dot_product(n, tmp->axis);
 		projection = n_vec(tmp->axis, m);
 		n = vec_diff(n, projection);
+	}
+	else if (tmp->etat == CSG)
+	{
+		n = vec_diff(intersection, tmp->pos);
 	}
 	normalize_vec(&n);
 	return (n);

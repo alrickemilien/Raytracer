@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:45:37 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/01 15:51:02 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/02 14:32:22 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int		cylindre(t_obj cylindre, t_ray *ray, double *t, t_list **inter)
 		*t = tmp.x;
 	if (*t < 0)
 		return (0);
-	ft_lstadd(inter, ft_lstnew(&tmp.x, sizeof(double)));
-	ft_lstadd(inter, ft_lstnew(&tmp.y, sizeof(double)));
+	ft_lstadd(inter, ft_lstnew(&tmp, sizeof(double)));
 	return (1);
 }

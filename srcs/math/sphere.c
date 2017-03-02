@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:16 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/01 15:51:47 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/02 10:37:01 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int		sphere(t_obj obj, t_ray *ray, double *t, t_list **inter)
 		*t = tmp.x;
 	if (*t < ZERO)
 		return (0);
-	ft_lstadd(inter, ft_lstnew(&tmp.x, sizeof(double)));
-	ft_lstadd(inter, ft_lstnew(&tmp.y, sizeof(double)));
+	ft_lstadd(inter, ft_lstnew(&tmp, sizeof(t_vector)));
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/01 13:27:17 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/02 14:33:31 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,6 @@ typedef struct		s_light
 			struct s_light light,
 			t_ray *ray, double *t);
 }					t_light;
-
-typedef struct	s_intersection
-{
-	double		t;
-	int			a_in;
-	int			b_in;
-}				t_intersection;
 
 typedef struct		s_matrix_rot
 {

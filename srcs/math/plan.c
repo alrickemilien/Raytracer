@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:45:58 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/01 15:51:24 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/02 14:32:46 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int		plan(t_obj p, t_ray *ray, double *t, t_list **inter)
 	if (alpha >= 0)
 	{
 		*t = alpha;
+		v.x = alpha;
+		v.y = alpha;
 		return (1);
 	}
 	ft_lstadd(inter, ft_lstnew(&alpha, sizeof(double)));

@@ -9,6 +9,12 @@ static t_obj	set_default_csg(t_env *env)
 	new_csg.etat = CSG;
 	new_csg.intersection = UNION;
 	new_csg.func_obj = &csg;
+	new_csg.csg = NULL;
+	new_csg.color = split_color(mlx_get_color_value(env->mlx, 0xFF0000));
+	new_csg.diffuse = 0.5;
+	new_csg.specular = 0.5;
+	new_csg.reflection = 0;
+	new_csg.refraction = 1;
 	return (new_csg);
 }
 
