@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/02 15:19:16 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/03 12:30:07 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	get_intersection(t_env *env, t_ray *ray, t_obj **tmp)
 	while (tmp_list)
 	{
 		if (((t_obj*)(tmp_list->content))->func_obj(
-					*((t_obj*)(tmp_list->content)), ray,
+					(t_obj*)(tmp_list->content), ray,
 					&t, &inter))
 		{
 			if (ray->t > t && t > ZERO)

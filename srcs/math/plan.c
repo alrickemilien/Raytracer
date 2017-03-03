@@ -6,28 +6,28 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:45:58 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/02 14:32:46 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/03 13:47:06 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/rtv1.h"
 #include <stdio.h>
 
-int		plan(t_obj p, t_ray *ray, double *t, t_list **inter)
+int		plan(t_obj *p, t_ray *ray, double *t, t_list **inter)
 {
 	double		alpha;
-	t_vector	v;
+	t_range		range;
 
-	alpha = dot_product(ray->org, p.n);
-	alpha = dot_product(vec_diff(p.pos, ray->org), p.n) /
-			dot_product(ray->dir, p.n);
+	alpha = dot_product(ray->org, p->n);
+	alpha = dot_product(vec_diff(p->pos, ray->org), p->n) /
+			dot_product(ray->dir, p->n);
 	if (alpha >= 0)
 	{
 		*t = alpha;
-		v.x = alpha;
-		v.y = alpha;
 		return (1);
 	}
-	ft_lstadd(inter, ft_lstnew(&alpha, sizeof(double)));
+	range.t1 = (t_inter){alpha, obj};
+	range.t2 = (t_inter){alpha, obj};
+	ft_lstadd(inter, ft_lstnew(&range, sizeof(double)));
 	return (0);
 }

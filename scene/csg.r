@@ -4,6 +4,12 @@ camera:
 	to: (1 0 0)
 }
 
+camera:
+{
+	from:(3 3 6)
+	to: (1 0 0)
+}
+
 plan:
 {
 	position: (5 0 0)
@@ -19,11 +25,12 @@ csg:
 		rayon: (0.5)
 		color: (0x120aa2)
 	}
-	sphere:
+	cylinder:
 	{
-		position: (3 0.5 0)
-		rayon: (0.5)
+		apex: (3 0 0)
+		axis: (0 1 0.5)
 		color: (0x120aa2)
+		rayon: (0.2)
 	}
 }
 	

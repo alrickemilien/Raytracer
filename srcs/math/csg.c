@@ -46,22 +46,37 @@ static double	range(double a, double b)
 	return (0);
 }
 
-static void	set_spaces(t_vector *a, t_vector *b)
+static void	swap_object(t_range *a, t_range *b)
 {
-	if (range(a->x, a->y) < range(b->x, b->y))
+	t_obj	*tmp;
+
+	tmp = a->t1.obj;
+	a->t1.obj = b->t1.obj;
+	b->t1.obj = tmp;
+	tmp = a->t2.obj;
+	a->t2.obj = b->t2.obj;
+	b->t2.obj = tmp;
+}
+
+static void	set_spaces(t_range *a, t_range *b)
+{
+	t_obj	*tmp;
+
+	if (range(a->t1.t, a->t2.t) < range(b->t1.t, b->t2.t))
 	{
-		swap(&a->x, &b->x);
-		swap(&a->y, &b->y);
+		swap(&a->t1.t, &b->t1.t);
+		swap(&a->t2.t, &b->t2.t);
+		swap_object(a, b);
 	}
 	if (a->x > a->y)
 		swap(&a->x, &a->y);
 	if (b->x > b->y)
 		swap(&b->x, &b->y);
-	// 	printf("structure a : a.x = %lf --- a.y = %lf\n", a->x, a->y);
-	//	printf("structure b : b.x = %lf --- b.y = %lf\n\n", b->x, b->y);
+	//printf("structure a : a.x = %lf --- a.y = %lf\n", a->x, a->y);
+	//printf("structure b : b.x = %lf --- b.y = %lf\n\n", b->x, b->y);
 }
 
-void	intersection(t_list **ret, t_vector a, t_vector b)
+void	intersection(t_list **ret, t_range a, t_range b)
 {
 	t_vector	n;
 	int			k;
@@ -96,8 +111,8 @@ t_list	*function(t_list *a, t_list *b)
 		while(tmp_b)
 		{
 			intersection(&ret,
-					*((t_vector*)(a->content)),
-					*((t_vector*)(tmp_b->content)));
+					*((t_range*)(a->content)),
+					*((t_range*)(tmp_b->content)));
 			tmp_b = tmp_b->next;
 		}
 		a = a->next;
@@ -139,7 +154,7 @@ int		ft_lstlen(t_list *lst)
 	return (i);
 }
 
-int		csg(t_obj obj, t_ray *ray, double *t, t_list **inter)
+int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 {
 	t_list			*tmp_list;
 	t_list			*a; // liste d'intersections pour l'objet a (x et y)
@@ -147,13 +162,13 @@ int		csg(t_obj obj, t_ray *ray, double *t, t_list **inter)
 
 	a = NULL;
 	b = NULL;
-	tmp_list = obj.csg;
+	tmp_list = obj->csg;
 	((t_obj*)(tmp_list->content))->func_obj(
-				*((t_obj*)(tmp_list->content)),
+				((t_obj*)(tmp_list->content)),
 				ray, t, &b);
 	tmp_list = tmp_list->next;
 	((t_obj*)(tmp_list->content))->func_obj(
-				*((t_obj*)(tmp_list->content)),
+				((t_obj*)(tmp_list->content)),
 				ray, t, &a);
 	*inter = function(a, b);
 	get_smaller_t(*inter, t);

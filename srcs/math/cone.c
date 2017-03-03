@@ -1,33 +1,22 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cone.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/20 14:45:31 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/02 14:32:13 by aemilien         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../include/rtv1.h"
 
-int				cone(t_obj cone, t_ray *ray, double *t, t_list **inter)
+int				cone(t_obj *cone, t_ray *ray, double *t, t_list **inter)
 {
 	t_vector	coeffs;
 	double		delta;
 	t_vector	tmp;
 	t_vector	x;
+	t_range		range;
 
-	x = vec_diff(ray->org, cone.apex);
-	coeffs.x = dot_product(ray->dir, ray->dir) - (1 + cone.angle)
-		* dot_product(ray->dir, cone.axis) * dot_product(ray->dir, cone.axis);
+	x = vec_diff(ray->org, cone->apex);
+	coeffs.x = dot_product(ray->dir, ray->dir) - (1 + cone->angle)
+		* dot_product(ray->dir, cone->axis) * dot_product(ray->dir, cone->axis);
 	delta = dot_product(ray->dir, x);
-	coeffs.y = (delta + delta) - (1 + cone.angle)
-		* dot_product(ray->dir, cone.axis)
-		* dot_product(x, cone.axis) * (double)2;
-	coeffs.z = dot_product(x, x) - (1 + cone.angle)
-		* dot_product(x, cone.axis) * dot_product(x, cone.axis);
+	coeffs.y = (delta + delta) - (1 + cone->angle)
+		* dot_product(ray->dir, cone->axis)
+		* dot_product(x, cone->axis) * (double)2;
+	coeffs.z = dot_product(x, x) - (1 + cone->angle)
+		* dot_product(x, cone->axis) * dot_product(x, cone->axis);
 	if ((delta = (coeffs.y * coeffs.y) - ((double)4 * coeffs.x * coeffs.z)) < 0)
 		return (0);
 	tmp.x = ((double)((-coeffs.y - sqrt(delta)) / (coeffs.x + coeffs.x)));
@@ -37,6 +26,8 @@ int				cone(t_obj cone, t_ray *ray, double *t, t_list **inter)
 		*t = tmp.x;
 	if (*t < 0)
 		return (0);
-	ft_lstadd(inter, ft_lstnew(&tmp, sizeof(double)));
+	range.t1 = (t_inter){tmp.x, obj};
+	range.t2 = (t_inter){tmp.y, obj};
+	ft_lstadd(inter, ft_lstnew(&range, sizeof(double)));
 	return (1);
 }

@@ -8,7 +8,7 @@ double	get_absorb_distance(t_ray ray, t_obj *obj, t_surface s)
 
 	front = ray.t;
 	ray.org = vec_add(s.intersection, n_vec(ray.dir, 0.001));
-	obj->func_obj(*obj, &ray, &back, &inter);
+	obj->func_obj(obj, &ray, &back, &inter);
 	return (front - back);
 	if (back > 0 && front < 0)
 		return (back - front);
