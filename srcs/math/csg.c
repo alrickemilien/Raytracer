@@ -60,8 +60,6 @@ static void	swap_object(t_range *a, t_range *b)
 
 static void	set_spaces(t_range *a, t_range *b)
 {
-	t_obj	*tmp;
-
 	if (range(a->t1.t, a->t2.t) < range(b->t1.t, b->t2.t))
 	{
 		swap(&a->t1.t, &b->t1.t);
@@ -126,17 +124,23 @@ t_list	*function(t_list *a, t_list *b)
  *
  */
 
-static void	get_smaller_t(t_list *lst, double *t)
+static void	get_smaller_t(t_list *lst, t_obj **obj, double *t)
 {
 	*t = 2000000;
 	while (lst)
 	{
-		if (((t_vector*)(lst->content))->x < *t
-			&& ((t_vector*)(lst->content))->x > ZERO)
-			*t = ((t_vector*)(lst->content))->x;
-		if (((t_vector*)(lst->content))->y < *t
-			&& ((t_vector*)(lst->content))->y > ZERO)
-			*t = ((t_vector*)(lst->content))->y;
+		if (((t_range*)(lst->content))->t1.t < *t
+			&& ((t_range*)(lst->content))->t1.t > ZERO)
+		{
+			*t = ((t_range*)(lst->content))->t1.t;
+			*obj = ((t_range*)(lst->content))->t1.obj;
+		}
+		if (((t_range*)(lst->content))->t2.t < *t
+			&& ((t_range*)(lst->content))->t2.t > ZERO)
+		{
+			*t = ((t_range*)(lst->content))->t2.t;
+			*obj = ((t_range*)(lst->content))->t2.obj;
+		}
 		lst = lst->next;
 	}
 }
@@ -159,9 +163,11 @@ int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 	t_list			*tmp_list;
 	t_list			*a; // liste d'intersections pour l'objet a (x et y)
 	t_list			*b;
+	t_obj			*lol;
 
 	a = NULL;
 	b = NULL;
+	lol  = NULL;
 	tmp_list = obj->csg;
 	((t_obj*)(tmp_list->content))->func_obj(
 				((t_obj*)(tmp_list->content)),
@@ -171,7 +177,17 @@ int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 				((t_obj*)(tmp_list->content)),
 				ray, t, &a);
 	*inter = function(a, b);
-	get_smaller_t(*inter, t);
+	get_smaller_t(*inter, &lol, t);
+	if (lol)
+	{
+		obj->pos = lol->pos;
+		obj->n = lol->n;
+		obj->apex = lol->apex;
+		obj->axis = lol->axis;
+		obj->r = lol->r;
+		obj->angle = lol->angle;
+		obj->inter_type = lol->etat;
+	}
 	if (*inter)
 		return (1);
 	return (0);

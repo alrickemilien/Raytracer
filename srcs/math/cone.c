@@ -26,8 +26,8 @@ int				cone(t_obj *cone, t_ray *ray, double *t, t_list **inter)
 		*t = tmp.x;
 	if (*t < 0)
 		return (0);
-	range.t1 = (t_inter){tmp.x, obj};
-	range.t2 = (t_inter){tmp.y, obj};
+	range.t1 = (t_inter){tmp.x, cone};
+	range.t2 = (t_inter){tmp.y, cone};
 	ft_lstadd(inter, ft_lstnew(&range, sizeof(t_range)));
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/03 13:30:06 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/03 15:35:32 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ typedef struct		s_obj
 	double			transparent;
 	int				intersection;
 	int				type;
+	int				inter_type;
 	t_list			*csg;
 }					t_obj;
 

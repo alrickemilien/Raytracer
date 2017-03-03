@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:45:44 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/02 15:02:43 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/03 15:37:27 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_vector	get_surface_normal(t_vector intersection, t_obj *tmp, t_ray ray)
 	{
 		n = tmp->n;
 		if (acos(dot_product(ray.dir, tmp->n)) < M_PI_2
-			&& acos(dot_product(ray.dir, tmp->n)) > -M_PI_2)
+				&& acos(dot_product(ray.dir, tmp->n)) > -M_PI_2)
 			negative_vec(&n);
 	}
 	else if (tmp->etat == CONE || tmp->etat == CYLINDRE)
@@ -36,6 +36,22 @@ t_vector	get_surface_normal(t_vector intersection, t_obj *tmp, t_ray ray)
 	}
 	else if (tmp->etat == CSG)
 	{
+		if (tmp->inter_type == SPHERE)
+			n = vec_diff(intersection, tmp->pos);
+		else if (tmp->inter_type == PLAN)
+		{
+			n = tmp->n;
+			if (acos(dot_product(ray.dir, tmp->n)) < M_PI_2
+					&& acos(dot_product(ray.dir, tmp->n)) > -M_PI_2)
+				negative_vec(&n);
+		}
+		else if (tmp->inter_type == CONE || tmp->inter_type == CYLINDRE)
+		{
+			n = vec_diff(intersection, tmp->apex);
+			m = dot_product(n, tmp->axis);
+			projection = n_vec(tmp->axis, m);
+			n = vec_diff(n, projection);
+		}
 		n = vec_diff(intersection, tmp->pos);
 	}
 	normalize_vec(&n);

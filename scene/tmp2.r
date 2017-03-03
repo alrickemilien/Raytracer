@@ -16,25 +16,12 @@ plan:
 	normal: (0 1 0)
 }
 
-csg:
-{
-	type: (intersection)
-	sphere:
+	cylinder: 
 	{
-		position: (2 0 0)
-		rayon: (0.5)
-		diffuse: (0.1)
-		specular: (0.1)
+		apex: (2 0 0)
 		color: (0x120aa2)
+		rayon: (0.2)
 	}
-	sphere:
-	{
-		position: (2 -0.3 0)
-		color: (0x120aa2)
-		rayon: (0.6)
-	}
-	color: (0x120aa2)
-}
 	
 sphere:
 { 
