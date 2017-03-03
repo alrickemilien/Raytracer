@@ -19,17 +19,17 @@ plan:
 csg:
 {
 	type: (intersection)
-	cylinder: 
+	plan: 
 	{
-		apex: (2 0 0)
+		position: (2 0 0)
 		color: (0x120aa2)
-		rayon: (0.2)
+		normal: (1 0 0)
 	}
 	sphere:
 	{
-		position: (2 0.2 0)
+		position: (2 0.6 0)
 		color: (0x120aa2)
-		rayon: (0.6)
+		rayon: (1)
 	}
 	color: (0x120aa2)
 }
