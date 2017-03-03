@@ -186,6 +186,7 @@ int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 		obj->axis = lol->axis;
 		obj->r = lol->r;
 		obj->angle = lol->angle;
+		obj->brillance = lol->brillance;
 		obj->inter_type = lol->etat;
 	}
 	if (*inter)
