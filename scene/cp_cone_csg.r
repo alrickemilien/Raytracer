@@ -16,34 +16,31 @@ plan:
 	normal: (0 1 0)
 }
 
-csg:
-{
-	type: (intersection)
 	cylinder:
 	{
 		apex: (2 0.5 0)
 		axis: (0 1 1)
-		color: (0x120aa2)
-		rayon: (1.2)
+	color: (0x800332)
+		rayon: (2.2)
 	}
 	cylinder:
 	{
 		apex: (2 0.5 0)
 		axis: (0 1 0.5)
-		color: (0x120aa2)
-		rayon: (1.5)
-	}
 	color: (0x800332)
-	specular: (0.9)
-	diffuse: (0.1)
-	refraction: (1.9)
-	reflection: (1)
-	transparent: (0.5)
+		rayon: (2.5)
+	}
+
+sphere:
+{ 
+	position: (1 1 1)
+	rayon: (0.1)
+	color: (0x6aa22) 
 }
 
 
 light:
 {
 	position: (-10 8 0)
-	intensity: (30)
+	intensity: (15)
 }

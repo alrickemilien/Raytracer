@@ -106,7 +106,7 @@ t_list	*function(t_list *a, t_list *b)
 	while (a)
 	{
 		tmp_b = b;
-		while(tmp_b)
+		while (tmp_b)
 		{
 			intersection(&ret,
 					*((t_range*)(a->content)),
@@ -129,6 +129,9 @@ static void	get_smaller_t(t_list *lst, t_obj **obj, double *t)
 	*t = 2000000;
 	while (lst)
 	{
+		printf("range : %lf --- %lf\n",
+				((t_range*)(lst->content))->t1.t,
+				((t_range*)(lst->content))->t2.t);
 		if (((t_range*)(lst->content))->t1.t < *t
 			&& ((t_range*)(lst->content))->t1.t > ZERO)
 		{

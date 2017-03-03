@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:45:44 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/03 15:37:27 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:30:36 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ t_vector	get_surface_normal(t_vector intersection, t_obj *tmp, t_ray ray)
 			projection = n_vec(tmp->axis, m);
 			n = vec_diff(n, projection);
 		}
-		n = vec_diff(intersection, tmp->pos);
 	}
 	normalize_vec(&n);
 	return (n);
