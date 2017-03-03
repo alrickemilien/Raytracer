@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:45:58 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/03 13:47:06 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/03 14:28:38 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int		plan(t_obj *p, t_ray *ray, double *t, t_list **inter)
 	}
 	range.t1 = (t_inter){alpha, obj};
 	range.t2 = (t_inter){alpha, obj};
-	ft_lstadd(inter, ft_lstnew(&range, sizeof(double)));
+	ft_lstadd(inter, ft_lstnew(&range, sizeof(t_range)));
 	return (0);
 }

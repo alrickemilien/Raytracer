@@ -28,6 +28,6 @@ int		cylindre(t_obj *cylindre, t_ray *ray, double *t, t_list **inter)
 		return (0);
 	range.t1 = (t_inter){tmp.x, obj};
 	range.t2 = (t_inter){tmp.y, obj};
-	ft_lstadd(inter, ft_lstnew(&range, sizeof(double)));
+	ft_lstadd(inter, ft_lstnew(&range, sizeof(t_range)));
 	return (1);
 }

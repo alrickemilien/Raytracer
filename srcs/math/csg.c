@@ -68,35 +68,35 @@ static void	set_spaces(t_range *a, t_range *b)
 		swap(&a->t2.t, &b->t2.t);
 		swap_object(a, b);
 	}
-	if (a->x > a->y)
-		swap(&a->x, &a->y);
-	if (b->x > b->y)
-		swap(&b->x, &b->y);
+	if (a->t1.t > a->t2.t)
+		swap(&a->t1.t, &a->t2.t);
+	if (b->t1.t > b->t2.t)
+		swap(&b->t1.t, &b->t2.t);
 	//printf("structure a : a.x = %lf --- a.y = %lf\n", a->x, a->y);
 	//printf("structure b : b.x = %lf --- b.y = %lf\n\n", b->x, b->y);
 }
 
 void	intersection(t_list **ret, t_range a, t_range b)
 {
-	t_vector	n;
+	t_range		n;
 	int			k;
 
 	set_spaces(&a, &b);
 	k = 0;
-	n.x = a.x;
-	if (between(b.x, a.x , a.y))
+	n.t1 = a.t1;
+	if (between(b.t1.t, a.t1.t , a.t2.t))
 	{
 		k = 1;
-		n.x = b.x;
+		n.t1 = b.t1;
 	}
-	n.y = a.y;
-	if (between(b.y, a.x, a.y))
+	n.t2 = a.t2;
+	if (between(b.t2.t, a.t1.t, a.t2.t))
 	{
 		k = 1;
-		n.y = b.y;
+		n.t2 = b.t2;
 	}
 	if (k)
-		ft_lstadd(ret, ft_lstnew(&n, sizeof(t_vector)));
+		ft_lstadd(ret, ft_lstnew(&n, sizeof(t_range)));
 }
 
 t_list	*function(t_list *a, t_list *b)
