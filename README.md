@@ -175,7 +175,7 @@ blabla
 
 ### Exemple
 
-```r
+```c
 csg:
 {
     type: ()
