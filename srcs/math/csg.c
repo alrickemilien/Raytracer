@@ -101,7 +101,7 @@ int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 	((t_obj*)(tmp_list->content))->func_obj(
 				((t_obj*)(tmp_list->content)),
 				ray, t, &a);
-	*inter = function_intersection(a, b);
+	*inter = function_difference(a, b);
 	get_smaller_t(*inter, &lol, t);
 	if (lol)
 	{

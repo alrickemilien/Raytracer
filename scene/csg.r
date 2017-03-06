@@ -12,7 +12,7 @@ camera:
 
 plan:
 {
-	position: (5 0 0)
+	position: (5 -2 0)
 	normal: (0 1 0)
 }
 
@@ -32,7 +32,7 @@ csg:
 	{
 		position: (1.5 0 0)
 		color: (0x120aa2)
-		rayon: (1.2)
+		rayon: (0.9)
 	}
 }
 	

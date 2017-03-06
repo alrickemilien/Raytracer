@@ -6,7 +6,7 @@
 /*   By: salibert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 19:37:30 by salibert          #+#    #+#             */
-/*   Updated: 2017/03/01 10:31:01 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/06 13:20:03 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,6 @@ void			ft_putxy(int x, int y);
 double			ft_dabs(double nb);
 int				get_next_line(const int fb, char **line);
 int				get_next_char(const int fb, char **line, char c);
+t_list			*ptr_of(t_list *lst, void *data, int (*cmp)(void *a, void *b));
+t_list			*elem_rm(t_list *head, t_list *to_rm);
 #endif
