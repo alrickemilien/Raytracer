@@ -4,7 +4,6 @@ static void	swap_object(t_range *a, t_range *b)
 {
 	t_obj	*tmp;
 
-//	ft_putendl("swap : a devient spehre et b devien cone");
 	tmp = a->t1.obj;
 	a->t1.obj = b->t1.obj;
 	b->t1.obj = tmp;
@@ -34,8 +33,6 @@ static void	intersection(t_list **ret, t_range a, t_range b)
 
 	set_spaces(&a, &b);
 
-//	printf("structure a : a.t2 = %lf --- a.t2 = %lf\n", a.t1.t, a.t2.t);
-//	printf("structure b : b.t2 = %lf --- b.t2 = %lf\n", b.t1.t, b.t2.t);
 	k = 0;
 	n.t1 = a.t1;
 	if (between(b.t1.t, a.t1.t , a.t2.t))

@@ -18,22 +18,21 @@ plan:
 
 csg:
 {
-	type: (intersection)
-	cone:
-	{
-		apex: (2 0 0)
-		axis: (0.2 1 0)
-		angle: (35)
-		diffuse: (0.1)
-		specular: (0.1)
-		color: (0x120aa2)
-	}
-	sphere:
-	{
-		position: (1.5 0 0)
-		color: (0x120aa2)
-		rayon: (0.9)
-	}
+		type: (intersection)
+	cylinder:
+		{
+			apex: (1.5 0 0)
+			axis: (0 0.5 0.2)
+			color: (0x120aa2)
+			rayon: (0.2)
+		}
+		sphere:
+		{
+			position: (1.5 0 0)
+			color: (0x120aa2)
+			rayon: (0.9)
+		}
+		
 }
 	
 sphere:
@@ -45,6 +44,6 @@ sphere:
 
 light:
 {
-	position: (0 1 -1)
+	position: (0 5 -1)
 	intensity: (5)
 }

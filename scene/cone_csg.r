@@ -36,9 +36,6 @@ csg:
 	color: (0x800332)
 	specular: (0.9)
 	diffuse: (0.1)
-	refraction: (1.9)
-	reflection: (1)
-	transparent: (0.5)
 }
 
 

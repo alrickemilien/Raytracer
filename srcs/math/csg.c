@@ -25,6 +25,15 @@ int		between(double t, double n1, double n2)
 	return (0);
 }
 
+int		betweex(double t, double n1, double n2)
+{
+	if (n1 > n2)
+		swap(&n1, &n2);
+	if (t > n1 && t < n2)
+		return (1);
+	return (0);
+}
+
 double	range(double a, double b)
 {
 	if (a > b)
@@ -51,17 +60,17 @@ static void	get_smaller_t(t_list *lst, t_obj **obj, double *t)
 	*t = 2000000;
 	while (lst)
 	{
-//		printf("range : %lf --- %lf\n",
-//				((t_range*)(lst->content))->t1.t,
-//				((t_range*)(lst->content))->t2.t);
+		//		printf("range : %lf --- %lf\n",
+		//				((t_range*)(lst->content))->t1.t,
+		//				((t_range*)(lst->content))->t2.t);
 		if (((t_range*)(lst->content))->t1.t < *t
-			&& ((t_range*)(lst->content))->t1.t > ZERO)
+				&& ((t_range*)(lst->content))->t1.t > ZERO)
 		{
 			*t = ((t_range*)(lst->content))->t1.t;
 			*obj = ((t_range*)(lst->content))->t1.obj;
 		}
 		if (((t_range*)(lst->content))->t2.t < *t
-			&& ((t_range*)(lst->content))->t2.t > ZERO)
+				&& ((t_range*)(lst->content))->t2.t > ZERO)
 		{
 			*t = ((t_range*)(lst->content))->t2.t;
 			*obj = ((t_range*)(lst->content))->t2.obj;
@@ -95,12 +104,12 @@ int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 	lol  = NULL;
 	tmp_list = obj->csg;
 	((t_obj*)(tmp_list->content))->func_obj(
-				((t_obj*)(tmp_list->content)),
-				ray, t, &b);
+	((t_obj*)(tmp_list->content)),
+	ray, t, &b);
 	tmp_list = tmp_list->next;
 	((t_obj*)(tmp_list->content))->func_obj(
-				((t_obj*)(tmp_list->content)),
-				ray, t, &a);
+	((t_obj*)(tmp_list->content)),
+	ray, t, &a);
 	*inter = function_difference(a, b);
 	get_smaller_t(*inter, &lol, t);
 	if (lol)

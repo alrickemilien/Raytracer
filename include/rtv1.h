@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/06 13:34:51 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/06 14:34:09 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,4 +303,5 @@ int					between(double t, double n1, double n2);
 double				range(double a, double b);
 t_list				*function_intersection(t_list *a, t_list *b);
 t_list				*function_difference(t_list *a, t_list *b);
+int					betweex(double t, double n1, double n2);
 #endif
