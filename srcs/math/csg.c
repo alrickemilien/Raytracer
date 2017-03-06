@@ -92,6 +92,20 @@ int		ft_lstlen(t_list *lst)
 	return (i);
 }
 
+static void	set_caracteristic(t_obj *obj, t_obj *lol)
+{
+	if (!lol)
+		return ;
+	obj->pos = lol->pos;
+	obj->n = lol->n;
+	obj->apex = lol->apex;
+	obj->axis = lol->axis;
+	obj->r = lol->r;
+	obj->angle = lol->angle;
+	obj->brillance = lol->brillance;
+	obj->inter_type = lol->etat;
+}
+
 int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 {
 	t_list			*tmp_list;
@@ -112,17 +126,7 @@ int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 	ray, t, &a);
 	*inter = function_difference(a, b);
 	get_smaller_t(*inter, &lol, t);
-	if (lol)
-	{
-		obj->pos = lol->pos;
-		obj->n = lol->n;
-		obj->apex = lol->apex;
-		obj->axis = lol->axis;
-		obj->r = lol->r;
-		obj->angle = lol->angle;
-		obj->brillance = lol->brillance;
-		obj->inter_type = lol->etat;
-	}
+	set_caracteristic(obj, lol);
 	if (*inter)
 		return (1);
 	return (0);

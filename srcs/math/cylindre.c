@@ -1,12 +1,20 @@
 #include "../include/rtv1.h"
 
+static void		set_range(t_list **inter, t_obj *obj, double t1, double t2)
+{
+	t_range		range;
+
+	range.t1 = (t_inter){t1, obj};
+	range.t2 = (t_inter){t2, obj};
+	ft_lstadd(inter, ft_lstnew(&range, sizeof(t_range)));
+}
+
 int		cylindre(t_obj *cylindre, t_ray *ray, double *t, t_list **inter)
 {
 	t_vector	coeffs;
 	double		delta;
 	t_vector	tmp;
 	t_vector	x;
-	t_range		range;
 
 	x = vec_diff(ray->org, cylindre->apex);
 	coeffs.x = dot_product(ray->dir, ray->dir)
@@ -26,8 +34,6 @@ int		cylindre(t_obj *cylindre, t_ray *ray, double *t, t_list **inter)
 		*t = tmp.x;
 	if (*t < 0)
 		return (0);
-	range.t1 = (t_inter){tmp.x, cylindre};
-	range.t2 = (t_inter){tmp.y, cylindre};
-	ft_lstadd(inter, ft_lstnew(&range, sizeof(t_range)));
+	set_range(inter, cylindre, tmp.x, tmp.y);
 	return (1);
 }
