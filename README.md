@@ -58,16 +58,21 @@ Install the dependencies and devDependencies and start the server. For MacOS env
 
 ```sh
 $ cd RT
-$ git pull
-$ ./RT
+$ git clone https://github.com/alrickemilien/Raytracer.git
+$ cd Rayctracer 
+$ make 
+$ ./rt
 ```
 
 For LinuxOS environments :
 
 ```sh
-$ npm install --production
-$ npm run predeploy
-$ NODE_ENV=production node app
+$ sudo apt-get update
+$ sudo apt-get install pkg-config
+$ git clone https://github.com/alrickemilien/Raytracer.git
+$ cd Rayctracer 
+$ make 
+$ ./rt
 ```
 
 ### Objects
