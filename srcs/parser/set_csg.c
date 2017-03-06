@@ -87,6 +87,7 @@ int				set_csg(t_env *env, t_list **list_obj)
 	ft_bzero(&reference, sizeof(reference));
 	while (get_next_line(env->fd, &line))
 	{
+		ft_putendl(line);
 		recycle(&line, ft_strtrim(line));
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_csg(env, &new, line, &reference))

@@ -37,8 +37,8 @@ double	range(double a, double b)
 	}
 	if (a < b)
 	{
-		if (a > 0 && b < 0)
-			return (a - b);
+		if (a > 0 && b > 0)
+			return (b - a);
 		if (a < 0 && b < 0)
 			return (-a + b);
 		return (b - a);
@@ -51,9 +51,9 @@ static void	get_smaller_t(t_list *lst, t_obj **obj, double *t)
 	*t = 2000000;
 	while (lst)
 	{
-		printf("range : %lf --- %lf\n",
-				((t_range*)(lst->content))->t1.t,
-				((t_range*)(lst->content))->t2.t);
+//		printf("range : %lf --- %lf\n",
+//				((t_range*)(lst->content))->t1.t,
+//				((t_range*)(lst->content))->t2.t);
 		if (((t_range*)(lst->content))->t1.t < *t
 			&& ((t_range*)(lst->content))->t1.t > ZERO)
 		{

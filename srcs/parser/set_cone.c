@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:09 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/01 14:39:35 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/06 11:53:25 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_obj		set_default_cone(t_env *env)
 	new_cone.reflection = 0;
 	new_cone.refraction = 1;
 	new_cone.transparent = 0;
-	new_cone.csg= NULL;
+	new_cone.csg = NULL;
 	return (new_cone);
 }
 
@@ -69,7 +69,7 @@ static int			check_reference(t_pars_object reference)
 	return (1);
 }
 
-static void			join_cone(t_list **list_obj, t_obj cone)
+/*static void			join_cone(t_list **list_obj, t_obj cone)
 {
 	t_obj	obj;
 
@@ -84,7 +84,7 @@ static void			join_cone(t_list **list_obj, t_obj cone)
 	obj.brillance = cone.brillance;
 	obj.func_obj = &cylindre;
 	ft_lstadd(list_obj, ft_lstnew(&obj, (sizeof(t_obj))));
-}
+}*/
 
 int					set_cone(t_env *env, t_list **list_obj)
 {
@@ -110,6 +110,5 @@ int					set_cone(t_env *env, t_list **list_obj)
 	ft_lstadd(list_obj, ft_lstnew(&new_cone, (sizeof(t_obj))));
 	if (!check_reference(reference))
 		return (0);
-	join_cone(list_obj, new_cone);
 	return (1);
 }
