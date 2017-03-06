@@ -175,7 +175,7 @@ blabla
 
 ### Exemple
 
-```json
+```r
 csg:
 {
     type: ()
