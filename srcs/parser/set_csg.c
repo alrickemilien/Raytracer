@@ -77,6 +77,25 @@ static int		check_csg(t_env *env, t_obj *new,
 	return (1);
 }
 
+static void		set_translation_csg(t_vector translation, t_list *csg)
+{
+	t_obj	*obj;
+
+	if (!translation.x && !translation.y && !translation.z)
+		return ;
+	while (csg)
+	{
+		obj = (t_obj*)csg->content;
+		if (obj->etat == CSG)
+			set_translation_csg(translation, obj->csg);
+		else if (obj->etat == CONE || obj->etat == CYLINDRE)
+			obj->apex = vec_add(obj->apex, translation);
+		else
+			obj->pos = vec_add(obj->pos, translation);
+		csg = csg->next;
+	}
+}
+
 int				set_csg(t_env *env, t_list **list_obj)
 {
 	t_obj			new;
@@ -99,6 +118,7 @@ int				set_csg(t_env *env, t_list **list_obj)
 	ft_strdel(&line);
 	if (!check_reference(reference))
 		return (0);
+	set_translation_csg(new.translation, new.csg);
 	ft_lstadd(list_obj, ft_lstnew(&new, (sizeof(t_obj))));
 	return (1);
 }
