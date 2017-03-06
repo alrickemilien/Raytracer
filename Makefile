@@ -41,6 +41,7 @@ SRCS=\
 	srcs/math/cone.c\
 	srcs/math/cylindre.c\
 	srcs/math/csg.c\
+	srcs/math/intersection.c\
 	srcs/math/rotation.c\
 	srcs/parser/init_default_camera.c\
 	srcs/parser/recycle.c\

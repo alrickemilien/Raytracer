@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/03 15:35:32 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/06 11:07:44 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,4 +298,8 @@ void				set_color_coeff(t_env *env, t_surface s,
 									t_obj *tmp, double *t);
 double				fresnel(t_ray ray, t_surface s);
 t_color				beers_law(t_color color, t_obj *obj, t_surface s, t_ray ray);
+void				swap(double *a, double *b);
+int					between(double t, double n1, double n2);
+double				range(double a, double b);
+t_list				*function_intersection(t_list *a, t_list *b);
 #endif

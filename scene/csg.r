@@ -19,21 +19,21 @@ plan:
 csg:
 {
 	type: (intersection)
-	sphere:
+	cone:
 	{
-		position: (2 0 0)
-		rayon: (0.5)
+		apex: (2 0 0)
+		axis: (0.2 1 0)
+		angle: (35)
 		diffuse: (0.1)
 		specular: (0.1)
 		color: (0x120aa2)
 	}
 	sphere:
 	{
-		position: (2 0 0)
+		position: (1.5 0 0)
 		color: (0x120aa2)
-		rayon: (0.4)
+		rayon: (1.2)
 	}
-	color: (0x120aa2)
 }
 	
 sphere:
