@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:17 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/01 14:39:22 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/06 16:45:31 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static t_obj		set_default_cylinder(t_env *env)
 	set_vec(&new.axis, 0, 0, 1);
 	set_vec(&new.apex, 0, 0, 1);
 	set_vec(&new.rotation, 0, 0, 0);
+	set_vec(&new.translation, 0, 0, 0);
 	new.r = 1;
 	new.size = 20000;
 	new.color = split_color(mlx_get_color_value(env->mlx, 0x00FF3421));
@@ -61,10 +62,12 @@ static int			check_reference(t_pars_object reference)
 			|| reference.rayon > 1 || reference.brillance > 1
 			|| reference.rotation > 1 || reference.size > 1
 			|| reference.specular > 1 || reference.diffuse > 1
-			|| reference.reflection > 1 || reference.transparent > 1)
+			|| reference.reflection > 1 || reference.transparent > 1
+			|| reference.translation > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.normal || reference.position
-			|| reference.angle || reference.from || reference.to)
+			|| reference.angle || reference.from
+			|| reference.to || reference.type)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
 }
@@ -92,6 +95,7 @@ int					set_cylinder(t_env *env, t_list **list_obj)
 	if (!check_reference(reference))
 		return (parse_error(INVALID_OBJECT));
 	rotate_object(&new_cylinder, &new_cylinder.axis);
+	new_cylinder.apex = vec_add(new_cylinder.apex, new_cylinder.translation);
 	ft_lstadd(list_obj, ft_lstnew(&new_cylinder, (sizeof(t_obj))));
 	return (1);
 }

@@ -67,6 +67,7 @@ SRCS=\
 	srcs/parser/set_refraction.c\
 	srcs/parser/set_transparent.c\
 	srcs/parser/set_type.c\
+	srcs/parser/set_translation.c\
 	srcs/parser/set_camera.c\
 	srcs/parser/set_light.c\
 	srcs/parser/set_sphere.c\

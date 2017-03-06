@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/28 14:24:26 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/06 16:44:25 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static t_obj		set_default_plan(t_env *env)
 
 	set_vec(&new_plan.n, 0, 1, 0);
 	set_vec(&new_plan.pos, 0, 0, 0);
+	set_vec(&new_plan.translation, 0, 0, 0);
 	set_vec(&new_plan.rotation, 0, 0, 0);
 	new_plan.color = split_color(mlx_get_color_value(env->mlx, 0x00FFFFFF));
 	new_plan.brillance = 10;
@@ -58,10 +59,10 @@ static int			check_reference(t_pars_object reference)
 	if (reference.normal > 1 || reference.position > 1 || reference.color > 1
 			|| reference.brillance > 1 || reference.rotation > 1
 			|| reference.specular > 1 || reference.diffuse > 1
-			|| reference.reflection > 1 || reference.transparent > 1)
+			|| reference.reflection > 1 || reference.transparent > 1 || reference.translation > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.axis || reference.apex || reference.rayon
-			|| reference.angle || reference.to || reference.from || reference.size)
+			|| reference.angle || reference.to || reference.from || reference.size || reference.type)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
 }
@@ -90,6 +91,7 @@ int					set_plan(t_env *env, t_list **list_obj)
 		return (0);
 	normalize_vec(&new_plan.n);
 	rotate_object(&new_plan, &new_plan.n);
+	new_plan.pos = vec_add(new_plan.pos, new_plan.translation);
 	ft_lstadd(list_obj, ft_lstnew(&new_plan, (sizeof(t_obj))));
 	return (1);
 }

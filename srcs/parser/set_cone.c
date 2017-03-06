@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:09 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/06 11:53:25 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/06 16:45:46 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static t_obj		set_default_cone(t_env *env)
 	t_obj			new_cone;
 
 	set_vec(&new_cone.axis, 0, 0, 1);
+	set_vec(&new_cone.translation, 0, 0, 0);
 	set_vec(&new_cone.apex, 0, 0, 1);
 	new_cone.angle = M_PI / 4;
 	new_cone.angle = tan(new_cone.angle / 2) * tan(new_cone.angle / 2);
@@ -61,10 +62,11 @@ static int			check_reference(t_pars_object reference)
 			|| reference.color > 1 || reference.angle > 1
 			|| reference.brillance > 1 || reference.rotation > 1
 			|| reference.specular > 1 || reference.diffuse > 1
-			|| reference.reflection > 1 || reference.transparent > 1)
+			|| reference.reflection > 1 || reference.transparent > 1
+			|| reference.translation > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.normal || reference.position || reference.to
-			|| reference.from || reference.rayon || reference.size)
+			|| reference.from || reference.rayon || reference.size || reference.type)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
 }
@@ -106,9 +108,10 @@ int					set_cone(t_env *env, t_list **list_obj)
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
-	rotate_object(&new_cone, &new_cone.axis);
-	ft_lstadd(list_obj, ft_lstnew(&new_cone, (sizeof(t_obj))));
 	if (!check_reference(reference))
 		return (0);
+	rotate_object(&new_cone, &new_cone.axis);
+	new_cone.apex = vec_add(new_cone.apex, new_cone.translation);
+	ft_lstadd(list_obj, ft_lstnew(&new_cone, (sizeof(t_obj))));
 	return (1);
 }

@@ -104,6 +104,10 @@ static void	set_caracteristic(t_obj *obj, t_obj *lol)
 	obj->angle = lol->angle;
 	obj->brillance = lol->brillance;
 	obj->inter_type = lol->etat;
+	obj->refraction = lol->refraction;
+	obj->reflection = lol->reflection;
+	obj->transparent = lol->transparent;
+	obj->color = lol->color;
 }
 
 int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
@@ -124,7 +128,10 @@ int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 	((t_obj*)(tmp_list->content))->func_obj(
 	((t_obj*)(tmp_list->content)),
 	ray, t, &a);
-	*inter = function_difference(a, b);
+	if (obj->type == DIFFERENCE)
+		*inter = function_difference(a, b);
+	else
+		*inter = function_intersection(a, b);
 	get_smaller_t(*inter, &lol, t);
 	set_caracteristic(obj, lol);
 	if (*inter)

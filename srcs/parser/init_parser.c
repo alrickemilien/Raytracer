@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:08 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/27 16:30:49 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/06 16:35:46 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	init_tab_str_description(t_env *env)
 	env->tab_str_description[13] = ft_strdup(REFRACTION);
 	env->tab_str_description[14] = ft_strdup(TRANSPARENT);
 	env->tab_str_description[15] = ft_strdup(TYPE);
+	env->tab_str_description[16] = ft_strdup(TRANSLATION);
 }
 
 void	init_tab_function_description(t_env *env)
@@ -53,6 +54,7 @@ void	init_tab_function_description(t_env *env)
 	env->check_description[13] = &set_refraction;
 	env->check_description[14] = &set_transparent;
 	env->check_description[15] = &set_type;
+	env->check_description[16] = &set_translation;
 }
 
 void	init_tab_str_object(t_env *env)

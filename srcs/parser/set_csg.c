@@ -45,7 +45,8 @@ static int	check_reference(t_pars_object reference)
 	if (reference.position || reference.color > 1 || reference.rayon
 			|| reference.brillance || reference.rotation
 			|| reference.specular > 1 || reference.diffuse > 1
-			|| reference.reflection > 1 || reference.transparent > 1 || reference.type > 1)
+			|| reference.reflection > 1 || reference.transparent > 1
+			|| reference.type > 1 || reference.translation > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.normal || reference.apex || reference.axis
 			|| reference.angle || reference.from || reference.to || reference.size)

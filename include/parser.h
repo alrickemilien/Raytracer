@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:54:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/27 18:04:26 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/06 16:34:36 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@
 # define REFRACTION "refraction:"
 # define TRANSPARENT "transparent:"
 # define TYPE "type:"
+# define TRANSLATION "translation:"
 
 int				check_indent(char *str, int n);
 int				parse_error(char *str);
@@ -92,6 +93,7 @@ typedef struct	s_pars_object
 	int			refraction;
 	int			transparent;
 	int			type;
+	int			translation;
 }				t_pars_object;
 
 #endif

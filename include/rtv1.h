@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/06 14:34:09 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/06 16:34:59 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define WIN_HEIGHT_OCT 125
 # define B 0x00FFFFFF
 # define NBR_OBJECT 7
-# define NBR_DESCRIPTION 16
+# define NBR_DESCRIPTION 17
 # define ZERO 0.000000001
 # define LIGHT_PTR ((t_light*)(tmp_light->content))
 
@@ -121,6 +121,7 @@ typedef struct		s_obj
 	int				intersection;
 	int				type;
 	int				inter_type;
+	t_vector		translation;
 	t_list			*csg;
 }					t_obj;
 
@@ -239,6 +240,8 @@ int					set_refraction(t_env *env, char *tmp,
 int					set_transparent(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
 int					set_type(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_translation(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
 
 int					set_camera(t_env *env, t_list **list_obj);

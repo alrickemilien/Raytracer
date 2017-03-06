@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:49:28 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/28 10:02:55 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/06 16:43:54 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static t_obj	set_default_sphere(t_env *env)
 	t_obj		new_sphere;
 
 	set_vec(&new_sphere.pos, 0, 0, 0);
+	set_vec(&new_sphere.translation, 0, 0, 0);
 	new_sphere.r = 1;
 	set_vec(&new_sphere.rotation, 0, 0, 0);
 	new_sphere.color = split_color(mlx_get_color_value(env->mlx, 0x0000FF00));
@@ -37,10 +38,12 @@ static int		check_reference(t_pars_object reference)
 	if (reference.position > 1 || reference.color > 1 || reference.rayon > 1
 			|| reference.brillance > 1 || reference.rotation > 1
 			|| reference.specular > 1 || reference.diffuse > 1
-			|| reference.reflection > 1 || reference.transparent > 1)
+			|| reference.reflection > 1 || reference.transparent > 1
+			|| reference.translation > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.normal || reference.apex || reference.axis
-			|| reference.angle || reference.from || reference.to || reference.size)
+			|| reference.angle || reference.from || reference.to 
+			|| reference.size || reference.type)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
 }
@@ -88,6 +91,7 @@ int				set_sphere(t_env *env, t_list **list_obj)
 	ft_strdel(&line);
 	if (!check_reference(reference))
 		return (0);
+	new.pos = vec_add(new.pos, new.translation);
 	ft_lstadd(list_obj, ft_lstnew(&new, (sizeof(t_obj))));
 	return (1);
 }
