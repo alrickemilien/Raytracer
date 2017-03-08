@@ -6,18 +6,26 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:16 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/03 13:40:50 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/08 11:17:04 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/rtv1.h"
+
+static void		set_range(t_list **inter, t_obj *obj, double t1, double t2)
+{
+	t_range		range;
+
+	range.t1 = (t_inter){t1, obj};
+	range.t2 = (t_inter){t2, obj};
+	ft_lstadd(inter, ft_lstnew(&range, sizeof(t_range)));
+}
 
 int		sphere(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 {
 	t_vector	coeffs;
 	double		delta;
 	t_vector	tmp;
-	t_range		range;
 
 	tmp = vec_diff(ray->org, obj->pos);
 	coeffs.x = 1;
@@ -33,8 +41,7 @@ int		sphere(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 		*t = tmp.x;
 	if (*t < ZERO)
 		return (0);
-	range.t1 = (t_inter){tmp.x, obj};
-	range.t2 = (t_inter){tmp.y, obj};
-	ft_lstadd(inter, ft_lstnew(&range, sizeof(t_range)));
+	if (inter)
+		set_range(inter, obj, tmp.x, tmp.y);
 	return (1);
 }

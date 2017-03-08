@@ -32,11 +32,10 @@ static int	check_object(t_env *env, char *line, t_obj *new)
 	get_next_line(env->fd, &crochet);
 	recycle(&crochet, ft_strtrim(crochet));
 	if (ft_strcmp("{", crochet))
-	{
 		return (parse_error(INVALID_FORMAT_FILE));
-	}
 	if (!env->set_object[i](env, &new->csg))
 		return (0);
+	ft_strdel(&crochet);
 	return (1);
 }
 

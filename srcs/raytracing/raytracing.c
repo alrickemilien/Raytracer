@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/03 12:30:07 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/08 11:19:03 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	set_primary_ray(t_env *env, t_ray *ray, int j, int i)
 	ray->coeff = 1;
 }
 
+
 static int	get_intersection(t_env *env, t_ray *ray, t_obj **tmp)
 {
 	double			t;
@@ -44,7 +45,7 @@ static int	get_intersection(t_env *env, t_ray *ray, t_obj **tmp)
 	{
 		if (((t_obj*)(tmp_list->content))->func_obj(
 					(t_obj*)(tmp_list->content), ray,
-					&t, &inter))
+					&t, NULL))
 		{
 			if (ray->t > t && t > ZERO)
 			{

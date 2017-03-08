@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:19 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/08 09:20:52 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/08 11:53:05 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	check_object(t_env *env, char *line)
 		return (parse_error(INVALID_FORMAT_FILE));
 	if (!env->set_object[i](env, &env->list))
 		return (0);
+	ft_strdel(&crochet);
 	return (1);
 }
 

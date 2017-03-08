@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:52:08 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/06 14:05:35 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/20 14:52:09 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ t_limit		ft_limit_thread(int nb)
 	int			modulo_y;
 	int			modulo_x;
 
-	modulo_x = nb ;
-	modulo_y = nb ;
+	modulo_x = nb % 4;
+	modulo_y = (nb % 16) / 4;
 	lim.x = 0;
-	lim.tmp_x = ((WIN_WIDTH * modulo_x)) - 1;
-	lim.y = (WIN_HEIGHT * modulo_y) - 1;
-	lim.max_x = (WIN_WIDTH * (modulo_x + 1)) ;
-	lim.max_y = (WIN_HEIGHT * (modulo_y + 1)) ;
+	lim.tmp_x = ((WIN_WIDTH * modulo_x) / 4) - 1;
+	lim.y = (WIN_HEIGHT * modulo_y / 4) - 1;
+	lim.max_x = (WIN_WIDTH * (modulo_x + 1)) / 4;
+	lim.max_y = (WIN_HEIGHT * (modulo_y + 1)) / 4;
 	return (lim);
 }
 
@@ -35,7 +35,7 @@ void		init_thread(t_env env)
 	int			nb;
 	t_env		*tmp;
 
-	nb_t = 1;
+	nb_t = 16;
 	nb = -1;
 	if (!(t = (pthread_t*)malloc(sizeof(pthread_t) * nb_t)))
 		merror();

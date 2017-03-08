@@ -110,12 +110,19 @@ static void	set_caracteristic(t_obj *obj, t_obj *lol)
 	obj->color = lol->color;
 }
 
+static void	del_range(void *content, size_t size)
+{
+	(void)size;
+	free(content);
+}
+
 int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 {
 	t_list			*tmp_list;
 	t_list			*a; // liste d'intersections pour l'objet a (x et y)
 	t_list			*b;
 	t_obj			*lol;
+	t_list			*list;
 
 	a = NULL;
 	b = NULL;
@@ -129,12 +136,20 @@ int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 	((t_obj*)(tmp_list->content)),
 	ray, t, &a);
 	if (obj->type == DIFFERENCE)
-		*inter = function_difference(a, b);
+		list = function_difference(a, b);
 	else
-		*inter = function_intersection(a, b);
-	get_smaller_t(*inter, &lol, t);
+		list = function_intersection(a, b);
+	get_smaller_t(list, &lol, t);
 	set_caracteristic(obj, lol);
-	if (*inter)
+	ft_lstdel(&a, &del_range);
+	ft_lstdel(&b, &del_range);
+	if (list)
+	{
+		if (!inter)
+			ft_lstdel(&list, &del_range);
+		else
+			*inter= list;
 		return (1);
+	}
 	return (0);
 }

@@ -1,5 +1,17 @@
 #include "../include/rtv1.h"
 
+static void	del_tab(char **tab, int size)
+{
+	int		i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(tab[i]);
+		i++;
+	}
+}
+
 int		check_type(t_obj *new, char *tmp)
 {
 	char	*tab[3];
@@ -19,6 +31,7 @@ int		check_type(t_obj *new, char *tmp)
 	if (i == 3)
 		return (parse_error(INVALID_PARAM_FORMAT));
 	new->type = i;
+	del_tab(tab, 3);
 	return (n);
 }
 

@@ -34,6 +34,7 @@ int		cylindre(t_obj *cylindre, t_ray *ray, double *t, t_list **inter)
 		*t = tmp.x;
 	if (*t < 0)
 		return (0);
-	set_range(inter, cylindre, tmp.x, tmp.y);
+	if (inter)
+		set_range(inter, cylindre, tmp.x, tmp.y);
 	return (1);
 }
