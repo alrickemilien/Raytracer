@@ -1,47 +1,65 @@
 camera:
+{
 	from: (0 0 0)
 	to: (1 0 0)
+}
 
 camera:
+{
 	from: (-2 -1.3 0)
 	to: (1 0 0)
+}
 
 camera:
+{
 	from: (2 4 6)
 	to: (1 0 0)
+}
 
 sphere:
+{
 	rayon: (0.3)
 	color: (0x00FF0000)
 	position: (0 1 0)
+	srcs/parser/set_apex.c\
 
 light:
+{
 	position: (0 0 0)
 	intensity: (3)
+}
 
 sphere:
+{
 	position: (2.5 0 0)
 	specular: (0.1)
 	reflection: (1)
 	refraction: (1)
 	rayon: (0.2)
+}
 
 plan:
+{
 	color: (0xFC9F9B)
 	normal: (-0.5 0.5 0)
 	position: (3 -0.01 0)
 	reflection: (0)
+}
 
 cylinder:
+{
 	color: (0x00FFFF)
 	axis: (0.5 0.5 -0.7)
 	apex: (2.5 0 1)
 	rayon: (0.2)
 	reflection: (1)
 	refraction: (1)
+}
 
 plan:
+{
 	color: (0xFC9F9B)
 	normal: (-0.5 0.5 0)
 	position: (5 9 0)
 	reflection: (0)
+}

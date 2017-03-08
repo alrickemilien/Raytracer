@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:54:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/06 16:34:36 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/08 09:14:17 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@
 # define TRANSPARENT "transparent:"
 # define TYPE "type:"
 # define TRANSLATION "translation:"
+# define AMBIENT "ambient:"
 
 int				check_indent(char *str, int n);
 int				parse_error(char *str);
