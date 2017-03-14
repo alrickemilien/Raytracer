@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/08 11:19:03 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/14 12:53:54 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	set_primary_ray(t_env *env, t_ray *ray, int j, int i)
 	ray->org = product_vec_matrix(env->select->c->matrix,
 			null_vector);
 	ray->coeff = 1;
+	ray->thread = env->nb_t;
 }
 
 
@@ -50,7 +51,7 @@ static int	get_intersection(t_env *env, t_ray *ray, t_obj **tmp)
 			if (ray->t > t && t > ZERO)
 			{
 				ray->t = t;
-				*tmp = (t_obj*)(tmp_list->content);
+				*tmp = ((t_obj*)(tmp_list->content))->pointeur[ray->thread];
 			}
 		}
 		tmp_list = tmp_list->next;

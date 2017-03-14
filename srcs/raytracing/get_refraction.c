@@ -9,6 +9,7 @@ t_ray	get_refraction(t_surface s, t_ray ray)
 	double	original_n;
 	double	new_n;
 
+	t.thread = ray.thread;
 	normalize_vec(&ray.dir);
 	if ((c1 = dot_product(s.n, ray.dir)) > 0) // c'est qu on sort
 	{

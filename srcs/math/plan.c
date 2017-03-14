@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:45:58 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/08 11:16:52 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/14 12:12:05 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		plan(t_obj *p, t_ray *ray, double *t, t_list **inter)
 		dot_product(ray->dir, p->n);
 	if (alpha >= 0)
 	{
+		p->pointeur[ray->thread] = p;
 		*t = alpha;
 		if (inter)
 			set_range(inter, p, alpha);

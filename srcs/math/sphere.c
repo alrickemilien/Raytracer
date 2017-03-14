@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:16 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/08 11:17:04 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/14 12:46:28 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int		sphere(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 		*t = tmp.x;
 	if (*t < ZERO)
 		return (0);
+	obj->pointeur[ray->thread] = obj;
 	if (inter)
 		set_range(inter, obj, tmp.x, tmp.y);
 	return (1);

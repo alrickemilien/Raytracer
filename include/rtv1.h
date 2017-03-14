@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/08 10:55:51 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/14 12:02:54 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct		s_ray
 	t_vector		dir;
 	double			t;
 	double			coeff;
+	int				thread;
 	t_list			*inter;
 }					t_ray;
 
@@ -122,6 +123,7 @@ typedef struct		s_obj
 	int				intersection;
 	int				type;
 	int				inter_type;
+	struct s_obj	*pointeur[16];
 	t_vector		translation;
 	t_list			*csg;
 }					t_obj;

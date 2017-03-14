@@ -35,6 +35,7 @@ int				cone(t_obj *cone, t_ray *ray, double *t, t_list **inter)
 		*t = tmp.x;
 	if (*t < 0)
 		return (0);
+	cone->pointeur[ray->thread] = cone;
 	if (inter)
 		set_range(inter, cone, tmp.x, tmp.y);
 	return (1);

@@ -92,7 +92,7 @@ int		ft_lstlen(t_list *lst)
 	return (i);
 }
 
-static void	set_caracteristic(t_obj *obj, t_obj *lol)
+/*static void	set_caracteristic(t_obj *obj, t_obj *lol)
 {
 	if (!lol)
 		return ;
@@ -108,7 +108,7 @@ static void	set_caracteristic(t_obj *obj, t_obj *lol)
 	obj->reflection = lol->reflection;
 	obj->transparent = lol->transparent;
 	obj->color = lol->color;
-}
+}*/
 
 static void	del_range(void *content, size_t size)
 {
@@ -140,7 +140,8 @@ int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 	else
 		list = function_intersection(a, b);
 	get_smaller_t(list, &lol, t);
-	set_caracteristic(obj, lol);
+	obj->pointeur[ray->thread] = lol;
+	//set_caracteristic(obj, lol);
 	ft_lstdel(&a, &del_range);
 	ft_lstdel(&b, &del_range);
 	if (list)
