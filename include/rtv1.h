@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/14 12:02:54 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/14 16:33:56 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define WIN_WIDTH_OCT 125
 # define WIN_HEIGHT_OCT 125
 # define B 0x00FFFFFF
-# define NBR_OBJECT 8
+# define NBR_OBJECT 9
 # define NBR_DESCRIPTION 17
 # define ZERO 0.000000001
 # define LIGHT_PTR ((t_light*)(tmp_light->content))
@@ -86,7 +86,8 @@ enum {
 	CAMERA,
 	LIGHT,
 	CSG,
-	SCENE
+	SCENE,
+	BOX
 };
 
 enum {
@@ -255,6 +256,7 @@ int					set_cylinder(t_env *env, t_list **list_obj);
 int					set_sphere(t_env *env, t_list **list_obj);
 int					set_plan(t_env *env, t_list **list_obj);
 int					set_csg(t_env *env, t_list **list_obj);
+int					set_box(t_env *env, t_list **list_obj);
 int					parser(t_env *env);
 
 void				init_tab_str_description(t_env *env);
@@ -276,6 +278,7 @@ void				ft_put_pos_select(t_env *env);
 int					sphere(t_obj *sphere, t_ray *ray, double *t, t_list **inter);
 int					hit_light(t_light light, t_ray *ray, double *t);
 int					cylindre(t_obj *cylindre, t_ray *ray, double *t, t_list **inter);
+int					box(t_obj *cylindre, t_ray *ray, double *t, t_list **inter);
 int					plan(t_obj *plan, t_ray *ray, double *t, t_list **inter);
 int					csg(t_obj *csg, t_ray *ray, double *t, t_list **inter);
 void				*raytracing(void *env);

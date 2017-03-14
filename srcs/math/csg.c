@@ -149,7 +149,7 @@ int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 		if (!inter)
 			ft_lstdel(&list, &del_range);
 		else
-			*inter= list;
+			*inter = list;
 		return (1);
 	}
 	return (0);

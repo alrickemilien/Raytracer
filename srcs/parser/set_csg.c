@@ -15,6 +15,7 @@ static t_obj	set_default_csg(t_env *env)
 	new_csg.specular = 0.5;
 	new_csg.reflection = 0;
 	new_csg.refraction = 1;
+	new_csg.csg = NULL;
 	return (new_csg);
 }
 
@@ -85,7 +86,7 @@ static void		set_translation_csg(t_vector translation, t_list *csg)
 	while (csg)
 	{
 		obj = (t_obj*)csg->content;
-		if (obj->etat == CSG)
+		if (obj->etat == CSG || obj->etat == BOX)
 			set_translation_csg(translation, obj->csg);
 		else if (obj->etat == CONE || obj->etat == CYLINDRE)
 			obj->apex = vec_add(obj->apex, translation);

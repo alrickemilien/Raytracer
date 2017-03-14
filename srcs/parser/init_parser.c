@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:08 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/08 09:18:09 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/14 14:35:28 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	init_tab_str_object(t_env *env)
 	env->tab_str_object[LIGHT] = ft_strdup("light:");
 	env->tab_str_object[CSG] = ft_strdup("csg:");
 	env->tab_str_object[SCENE] = ft_strdup("scene:");
+	env->tab_str_object[BOX] = ft_strdup("box:");
 }
 
 void	init_tab_function_object(t_env *env)
@@ -81,4 +82,5 @@ void	init_tab_function_object(t_env *env)
 	env->set_object[LIGHT] = &set_light;
 	env->set_object[CSG] = &set_csg;
 	env->set_object[SCENE] = &set_scene;
+	env->set_object[BOX] = &set_box;
 }

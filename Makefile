@@ -39,6 +39,7 @@ SRCS=\
 	srcs/math/sphere.c\
 	srcs/math/plan.c\
 	srcs/math/cone.c\
+	srcs/math/box.c\
 	srcs/math/cylindre.c\
 	srcs/math/csg.c\
 	srcs/math/intersection.c\
@@ -71,6 +72,7 @@ SRCS=\
 	srcs/parser/set_camera.c\
 	srcs/parser/set_scene.c\
 	srcs/parser/set_light.c\
+	srcs/parser/set_box.c\
 	srcs/parser/set_sphere.c\
 	srcs/parser/set_cone.c\
 	srcs/parser/set_cylinder.c\
