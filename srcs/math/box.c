@@ -24,11 +24,21 @@ int		belong_to_box(double t, t_obj *obj, t_ray *ray)
 	return (0);
 }
 
+int		are_close(double a, double b, double bias)
+{
+
+	if (a >= b - bias && a <= b + bias)
+		return (1);
+	return (0);
+}
+
 int		box(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 {
 	t_inter		plans[2];
 	t_list		*tmp;
 	int			i;
+	int			j;
+	int			k;
 
 	ft_bzero(plans, sizeof(t_inter) * 2);
 	tmp = obj->csg;
@@ -36,12 +46,25 @@ int		box(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 	i = 0;
 	while (tmp)
 	{
-//		ft_putendl("slt");
+		k = 0;
 		if (plan((t_obj*)tmp->content, ray, &plans[i].t, NULL)
 				&& belong_to_box(plans[i].t, obj, ray))
 		{
-			plans[i].obj = (t_obj*)tmp->content;
-			i++;
+			j = 0;
+			while (j < i)
+			{
+				if (are_close(plans[i].t, plans[j].t, 0.001))
+				{
+					k = 1;
+					break ;
+				}
+				j++;
+			}
+			if (!k)
+			{
+				plans[i].obj = (t_obj*)tmp->content;
+				i++;
+			}
 		}
 		if (i > 1)
 			break ;
