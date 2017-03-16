@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:18:23 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/23 11:19:56 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/15 13:02:16 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ void			negative_vec(t_vector *v);
 t_vector		product_vec_matrix(double *m, t_vector v);
 t_vector		product_matrix4x4(double *m, t_vector v);
 int				is_vectornull(t_vector v);
+t_vector		get_vec(double x, double y, double z);
 
 #endif

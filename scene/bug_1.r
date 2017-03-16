@@ -13,40 +13,42 @@ csg:
 		sphere:
 		{
 			rayon: (4)
-			position: (0 0 6)
+			position: (0 0 3)
 			color: (0x8809)
 		}
 		sphere:
 		{
 			rayon: (4)
-			position: (0 0 0)
+			position: (0 0 -3)
 			color: (0x8809)
 		}
 	}
 	sphere:
 	{
 		rayon: (2)
-		position: (0 0 3)
+		position: (0 0 0)
 		color: (0x880009)
 	}
+	translation: (0 0 3)
 }
 
-csg:
-{
-	type: (intersection)
-	sphere:
+	csg:
 	{
-		rayon: (1)
-		position: (0 0 3.3)
-		color: (0x880009)
+		type: (intersection)
+		sphere:
+		{
+			rayon: (0.5)
+			position: (0 0 0)
+			color: (0x880009)
+		}
+		plan:
+		{
+			position: (0 0 0)
+			normal: (0 -0.2 1)
+			color: (0x880009)
+		}
+	translation: (0 0 3)
 	}
-	sphere:
-	{
-		rayon: (1)
-		position: (0 0 3)
-		color: (0x880009)
-	}
-}
 
 plan:
 {

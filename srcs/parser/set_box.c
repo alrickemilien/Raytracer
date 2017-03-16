@@ -6,24 +6,11 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/14 15:56:18 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/15 14:08:08 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/rtv1.h"
-
-t_vector	get_vec(double x, double y, double z)
-{
-	t_vector	v;
-
-	v.x = x;
-	v.y = y;
-	v.z = z;
-	v.norme = sqrt((x * x)
-			  + (y * y)
-			  + (z * z));
-	return (v);
-}
 
 static void			set_boxs_plans(t_list **list, t_obj obj)
 {
@@ -56,6 +43,16 @@ static void			set_boxs_plans(t_list **list, t_obj obj)
 		rotate_object(&plan_tab[i], &plan_tab[i].n);
 		ft_lstadd(list, ft_lstnew(&plan_tab[i], sizeof(t_obj)));
 	}
+}
+void	set_bounds(t_obj *obj)
+{
+	double	size;
+
+	size = obj->size;
+	obj->bounds[0] = vec_add(vec_add(obj->pos, obj->translation), get_vec(-size, -size, -size)); // min
+	rotate_object(obj, &obj->bounds[0]);
+	obj->bounds[1] = vec_add(vec_add(obj->pos, obj->translation), get_vec(size, size, size)); // max
+	rotate_object(obj, &obj->bounds[1]);
 }
 
 static t_obj		set_default_box(t_env *env)
@@ -102,10 +99,10 @@ static int			check_box(t_env *env, t_obj *new,
 static int			check_reference(t_pars_object reference)
 {
 	if (reference.position > 1 || reference.color > 1
-		|| reference.brillance > 1 || reference.rotation > 1
-		|| reference.specular > 1 || reference.diffuse > 1
-		|| reference.reflection > 1 || reference.transparent > 1 
-		|| reference.translation > 1)
+			|| reference.brillance > 1 || reference.rotation > 1
+			|| reference.specular > 1 || reference.diffuse > 1
+			|| reference.reflection > 1 || reference.transparent > 1 
+			|| reference.translation > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.axis || reference.apex || reference.rayon
 			|| reference.angle || reference.to || reference.from 
@@ -137,6 +134,7 @@ int					set_box(t_env *env, t_list **list_obj)
 	if (!check_reference(reference))
 		return (0);
 	set_boxs_plans(&box.csg, box);
+	set_bounds(&box);
 	ft_lstadd(list_obj, ft_lstnew(&box, (sizeof(t_obj))));
 	return (1);
 }

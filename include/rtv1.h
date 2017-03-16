@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/14 16:33:56 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/15 13:53:37 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ typedef struct		s_obj
 	int				inter_type;
 	struct s_obj	*pointeur[16];
 	t_vector		translation;
+	t_vector		bounds[2];
 	t_list			*csg;
 }					t_obj;
 
@@ -314,4 +315,5 @@ double				range(double a, double b);
 t_list				*function_intersection(t_list *a, t_list *b);
 t_list				*function_difference(t_list *a, t_list *b);
 int					betweex(double t, double n1, double n2);
+void				swap(double *a, double *b);
 #endif
