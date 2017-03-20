@@ -7,15 +7,6 @@
  *
  */
 
-void	swap(double *a, double *b)
-{
-	double	tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
 int		between(double t, double n1, double n2)
 {
 	if (n1 > n2)

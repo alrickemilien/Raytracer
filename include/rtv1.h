@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/15 13:53:37 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:18:47 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,17 @@ typedef struct		s_color
 	unsigned char	green;
 	unsigned char	blue;
 }					t_color;
+
+typedef struct		s_pivot_gauss
+{
+	int		i;
+	int		j;
+	int		k;
+	int		pivot;
+	double	pivotsize;
+	double	f;
+	double	tmp;
+}					t_pivot_gauss;
 
 typedef struct		s_ray
 {
@@ -123,6 +134,7 @@ typedef struct		s_obj
 	double			transparent;
 	int				intersection;
 	int				type;
+	double			*matrix;
 	int				inter_type;
 	struct s_obj	*pointeur[16];
 	t_vector		translation;
@@ -315,5 +327,7 @@ double				range(double a, double b);
 t_list				*function_intersection(t_list *a, t_list *b);
 t_list				*function_difference(t_list *a, t_list *b);
 int					betweex(double t, double n1, double n2);
-void				swap(double *a, double *b);
+double				*set_rotation_matrix(double *matrix, double alpha,
+											double beta, double gamma);
+double				*invert_matrix(double *m);
 #endif

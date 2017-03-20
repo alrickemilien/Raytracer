@@ -6,7 +6,7 @@
 /*   By: salibert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 19:37:30 by salibert          #+#    #+#             */
-/*   Updated: 2017/03/06 13:20:03 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/20 13:12:00 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,5 @@ int				get_next_line(const int fb, char **line);
 int				get_next_char(const int fb, char **line, char c);
 t_list			*ptr_of(t_list *lst, void *data, int (*cmp)(void *a, void *b));
 t_list			*elem_rm(t_list *head, t_list *to_rm);
+void			swap(double *a, double *b);
 #endif

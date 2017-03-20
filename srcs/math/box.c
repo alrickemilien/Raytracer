@@ -12,14 +12,15 @@ static int		set_range(t_list **inter, t_inter *plans)
 	return (1);
 }
 
-int		belong_to_box(double t, t_obj *obj, t_ray *ray)
+int		belong_to_box(double t, t_obj obj, t_ray *ray)
 {
 	t_vector	intersection;
 
-	intersection = vec_add(ray->org, n_vec(ray->dir, t));
-	if (intersection.x >= obj->bounds[0].x - 0.0001 && intersection.x <= obj->bounds[1].x + 0.0001 &&
-			intersection.y >= obj->bounds[0].y - 0.0001 && intersection.y <= obj->bounds[1].y + 0.0001 &&
-			intersection.z >= obj->bounds[0].z - 0.0001 && intersection.z <= obj->bounds[1].z + 0.0001)
+	intersection = vec_diff(vec_add(ray->org, n_vec(ray->dir, t)), obj.pos);
+	intersection = product_vec_matrix(obj.matrix, intersection);
+	if (intersection.x >= obj.bounds[0].x - 0.001 && intersection.x <= obj.bounds[1].x + 0.001 &&
+		intersection.y >= obj.bounds[0].y - 0.001 && intersection.y <= obj.bounds[1].y + 0.001 &&
+		intersection.z >= obj.bounds[0].z - 0.001 && intersection.z <= obj.bounds[1].z + 0.001)
 		return (1);
 	return (0);
 }
@@ -48,7 +49,7 @@ int		box(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 	{
 		k = 0;
 		if (plan((t_obj*)tmp->content, ray, &plans[i].t, NULL)
-				&& belong_to_box(plans[i].t, obj, ray))
+				&& belong_to_box(plans[i].t, *obj, ray))
 		{
 			j = 0;
 			while (j < i)

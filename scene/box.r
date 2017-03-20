@@ -10,12 +10,6 @@ camera:
 	to: (0 0 0)
 }
 
-camera:
-{
-	from: (-7 -2 7)
-	to: (0 0 0)
-}
-
 plan:
 {
 	color: (0xb04f89)
@@ -25,6 +19,9 @@ plan:
 box:
 {
 	position: (3 2 0)
+	rotation: (30 10 0)
+	reflection: (1)
+	refraction: (1.1)
 }
 
 light:

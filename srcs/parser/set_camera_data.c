@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:53 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/06 15:01:29 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/20 11:45:17 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ t_vector	set_up_vector(t_camera *camera, t_vector vec_forward)
 	normalize_vec(&rho);
 	param[2] = rho.x;
 	param[3] = sqrt(1 - param[2] * param[2]);
-
 	set_vec(&vec_up, param[0] * param[2], param[0] * param[3], -param[1]);
 	normalize_vec(&vec_up);
 	negative_vec(&vec_up);
