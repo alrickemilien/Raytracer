@@ -19,9 +19,113 @@ plan:
 box:
 {
 	position: (3 2 0)
-	rotation: (30 10 0)
-	reflection: (1)
-	refraction: (1.1)
+	rotation: (0 30 90)
+	size: (0.1)
+}
+
+box:
+{
+	position: (3.5 2 0)
+	rotation: (0 30 90)
+	size: (0.1)
+}
+
+box:
+{
+	position: (2.5 2 0)
+	rotation: (0 30 90)
+	size: (0.1)
+}
+
+box:
+{
+	position: (2.5 2.5 0)
+	rotation: (0 30 90)
+	size: (0.1)
+}
+
+box:
+{
+	position: (2.5 1.5 0)
+	rotation: (0 30 90)
+	size: (0.1)
+}
+
+box:
+{
+	position: (3 2 0.5)
+	rotation: (0 30 90)
+	size: (0.1)
+}
+
+box:
+{
+	position: (3.5 2 0.5)
+	rotation: (0 30 90)
+	size: (0.1)
+}
+
+box:
+{
+	position: (2.5 2 0.5)
+	rotation: (0 30 90)
+	size: (0.1)
+}
+
+box:
+{
+	position: (2.5 2.5 0.5)
+	rotation: (0 30 90)
+	size: (0.1)
+}
+
+box:
+{
+	position: (2.5 1.5 0.5)
+	rotation: (0 30 90)
+	size: (0.1)
+}
+
+box:
+{
+	position: (2.5 1.5 -0.5)
+	rotation: (0 30 90)
+	size: (0.1)
+}
+
+box:
+{
+	position: (3 2 -0.5)
+	rotation: (0 30 90)
+	size: (0.1)
+}
+
+box:
+{
+	position: (3 2.5 -0.5)
+	rotation: (0 30 90)
+	size: (0.1)
+}
+
+box:
+{
+	position: (3 3 -0.5)
+	rotation: (0 30 90)
+	size: (0.1)
+}
+
+box:
+{
+	position: (2.5 2.5 -0.5)
+	rotation: (0 30 90)
+	size: (0.1)
+}
+
+box:
+{
+	position: (2.5 1.5 0.5)
+	rotation: (0 30 90)
+	size: (0.1)
 }
 
 light:

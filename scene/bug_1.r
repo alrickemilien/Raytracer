@@ -32,24 +32,6 @@ csg:
 	translation: (0 0 3)
 }
 
-	csg:
-	{
-		type: (intersection)
-		sphere:
-		{
-			rayon: (0.5)
-			position: (0 0 0)
-			color: (0x880009)
-		}
-		plan:
-		{
-			position: (0 0 0)
-			normal: (0 -0.2 1)
-			color: (0x880009)
-		}
-	translation: (0 0 3)
-	}
-
 plan:
 {
 	position: (0 0 0)

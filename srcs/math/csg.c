@@ -54,13 +54,13 @@ static void	get_smaller_t(t_list *lst, t_obj **obj, double *t)
 		//		printf("range : %lf --- %lf\n",
 		//				((t_range*)(lst->content))->t1.t,
 		//				((t_range*)(lst->content))->t2.t);
-		if (((t_range*)(lst->content))->t1.t < *t
+		if (((t_range*)(lst->content))->t1.t <= *t
 				&& ((t_range*)(lst->content))->t1.t > ZERO)
 		{
 			*t = ((t_range*)(lst->content))->t1.t;
 			*obj = ((t_range*)(lst->content))->t1.obj;
 		}
-		if (((t_range*)(lst->content))->t2.t < *t
+		if (((t_range*)(lst->content))->t2.t <= *t
 				&& ((t_range*)(lst->content))->t2.t > ZERO)
 		{
 			*t = ((t_range*)(lst->content))->t2.t;

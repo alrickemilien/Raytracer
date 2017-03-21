@@ -18,9 +18,9 @@ int		belong_to_box(double t, t_obj obj, t_ray *ray)
 
 	intersection = vec_diff(vec_add(ray->org, n_vec(ray->dir, t)), obj.pos);
 	intersection = product_vec_matrix(obj.matrix, intersection);
-	if (intersection.x >= obj.bounds[0].x - 0.001 && intersection.x <= obj.bounds[1].x + 0.001 &&
-		intersection.y >= obj.bounds[0].y - 0.001 && intersection.y <= obj.bounds[1].y + 0.001 &&
-		intersection.z >= obj.bounds[0].z - 0.001 && intersection.z <= obj.bounds[1].z + 0.001)
+	if (intersection.x >= obj.bounds[0].x - 0.0001 && intersection.x <= obj.bounds[1].x + 0.0001 &&
+		intersection.y >= obj.bounds[0].y - 0.0001 && intersection.y <= obj.bounds[1].y + 0.0001 &&
+		intersection.z >= obj.bounds[0].z - 0.0001 && intersection.z <= obj.bounds[1].z + 0.0001)
 		return (1);
 	return (0);
 }

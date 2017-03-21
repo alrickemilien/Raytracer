@@ -29,7 +29,7 @@ static void split_range(t_list **ret, t_range a, t_range b, t_range *n)
 	*ret = elem_rm(*ret, ptr_of(*ret, &a, &cmp_range));
 }
 
-static void		difference(t_list **ret, t_range a, t_range b)
+static int		difference(t_list **ret, t_range a, t_range b)
 {
 	t_range	n;
 
@@ -37,22 +37,31 @@ static void		difference(t_list **ret, t_range a, t_range b)
 	n.t1 = a.t1;
 	n.t2 = a.t2;
 	if (betweex(b.t1.t, a.t1.t , a.t2.t) && betweex(b.t2.t, a.t1.t , a.t2.t))
+	{
 		split_range(ret, a, b, &n);
+		return (1);
+	}
 	if (betweex(b.t1.t, a.t1.t , a.t2.t) && !betweex(b.t2.t, a.t1.t , a.t2.t))
 	{
 		n.t2 = b.t1;
 		ft_lstadd(ret, ft_lstnew(&n, sizeof(t_range)));
 		*ret = elem_rm(*ret, ptr_of(*ret, &a, &cmp_range));
+		return (1);
 	}
 	if (!betweex(b.t1.t, a.t1.t , a.t2.t) && betweex(b.t2.t, a.t1.t , a.t2.t))
 	{
 		n.t1 = b.t2;
 		ft_lstadd(ret, ft_lstnew(&n, sizeof(t_range)));
 		*ret = elem_rm(*ret, ptr_of(*ret, &a, &cmp_range));
+		return (1);
 	}
 	if (!betweex(b.t1.t, a.t1.t , a.t2.t) && !betweex(b.t2.t, a.t1.t , a.t2.t))
 		if (b.t1.t < a.t1.t && b.t2.t > a.t2.t)
+		{
 			*ret = elem_rm(*ret, ptr_of(*ret, &a, &cmp_range));
+			return (1);
+		}
+	return (0);
 }
 
 t_list	*function_difference(t_list *a, t_list *b)
@@ -71,10 +80,12 @@ t_list	*function_difference(t_list *a, t_list *b)
 		tmp_ret = ret;
 		while (tmp_ret)
 		{
-			difference(&ret,
+			if (!difference(&ret,
 					*((t_range*)(tmp_ret->content)),
-					*((t_range*)(b->content)));
-			tmp_ret = tmp_ret->next;
+					*((t_range*)(b->content))))
+				tmp_ret = tmp_ret->next;
+			else
+				tmp_ret = ret;
 		}
 		b = b->next;
 	}

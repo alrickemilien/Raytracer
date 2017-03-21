@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/14 13:24:16 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/21 11:47:01 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,8 @@ t_color				raycast(t_env *env, t_ray ray, int depth)
 	t_surface		s;
 	t_color			color;
 	t_color			ret;
-	int				lol;
 
 	t = 0;
-	lol = 0;
 	tmp = NULL;
 	ft_memset(&color, 0, sizeof(color));
 	if (get_intersection(env, &ray, &tmp))
@@ -90,7 +88,6 @@ t_color				raycast(t_env *env, t_ray ray, int depth)
 		color = add_color(color, tmp->color, t);
 		if (depth < 5 && (ray.coeff = fresnel(ray, s)) < 1 && tmp->refraction > 1)
 		{
-			lol = 1;
 			ret = raycast(env, get_refraction(s, ray), depth + 1);
 			color = add_color(color, ret, (1 - ray.coeff));
 		}

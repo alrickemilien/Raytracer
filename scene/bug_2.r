@@ -7,21 +7,11 @@ camera:
 csg:
 {
 	type: (difference)
-	csg:
+	sphere:
 	{
-		type: (intersection)
-		sphere:
-		{
-			rayon: (4)
-			position: (0 0 6)
-			color: (0x8809)
-		}
-		sphere:
-		{
-			rayon: (4)
-			position: (0 0 0)
-			color: (0x8809)
-		}
+		rayon: (4)
+		position: (0 0 6)
+		color: (0x8809)
 	}
 	sphere:
 	{
