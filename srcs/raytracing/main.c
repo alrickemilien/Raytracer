@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:38 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/08 11:59:28 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/22 17:12:31 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ int		main(int ac, char **av)
 	t_env	*env;
 
 	if (ac != 2)
-		return (parse_error(USAGE));
+	return (parse_error(USAGE));
 	if (!(env = (t_env*)malloc(sizeof(t_env))))
-		error(env, "error malloc in main");
+	error(env, "error malloc in main");
 	env->mlx = mlx_init();
 	init_env_values(env);
 	if ((env->fd = open(av[1], O_RDWR)) == -1)
-		error(env, INVALID_FILE);
+	error(env, INVALID_FILE);
 	if (!parser(env))
-		end_program(env);
+	end_program(env);
 	if (!env->camera)
-		init_default_camera(env);
+	init_default_camera(env);
 	else
-		sort_camera(env);
+	sort_camera(env);
 	init_thread(*env);
 	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 	mlx_hook(env->win, 2, 1L << 0 | 1 << 1, &key_press, env);
