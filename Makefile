@@ -80,7 +80,7 @@ SRCS=\
 	srcs/parser/set_plan.c\
 	srcs/parser/func_parse.c\
 	srcs/parser/parser.c\
-	invert_matrix.c\
+	srcs/math/invert_matrix.c\
 
 OBJ=$(SRCS:.c=.o)
 

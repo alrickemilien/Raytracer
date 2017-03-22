@@ -12,7 +12,7 @@ static void	del_tab(char **tab, int size)
 	}
 }
 
-int		check_type(t_obj *new, char *tmp)
+static int		check_type(t_obj *new, char *tmp)
 {
 	char	*tab[3];
 	int		i;

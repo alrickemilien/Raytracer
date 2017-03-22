@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:52:08 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/16 11:53:21 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/22 18:05:13 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "rtv1.h"
 
 t_limit		ft_limit_thread(int nb)
 {
@@ -18,13 +18,12 @@ t_limit		ft_limit_thread(int nb)
 	int			modulo_y;
 	int			modulo_x;
 
-	modulo_x = nb % 4;
-	modulo_y = (nb % 16) / 4;
-	lim.x = 0;
+	modulo_x = (nb % 8) / 2;
+	modulo_y = (nb % 2);
 	lim.tmp_x = ((WIN_WIDTH * modulo_x) / 4) - 1;
-	lim.y = (WIN_HEIGHT * modulo_y / 4) - 1;
+	lim.y = (WIN_HEIGHT * modulo_y / 2) - 1;
 	lim.max_x = (WIN_WIDTH * (modulo_x + 1)) / 4;
-	lim.max_y = (WIN_HEIGHT * (modulo_y + 1)) / 4;
+	lim.max_y = (WIN_HEIGHT * (modulo_y + 1)) / 2;
 	return (lim);
 }
 
