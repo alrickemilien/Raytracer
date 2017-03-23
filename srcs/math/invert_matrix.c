@@ -5,8 +5,7 @@ double	*invert_matrix(double *t)
 	t_pivot_gauss	tools;
 	double			*s;
 
-	s = (double*)malloc(sizeof(double) * 16);
-	ft_bzero(s, sizeof(double) * 16);
+	s = (double*)ft_memalloc(sizeof(double) * 16);
 	s[0] = 1;
 	s[5] = 1;
 	s[10] = 1;

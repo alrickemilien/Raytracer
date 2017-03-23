@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/21 11:47:01 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/23 17:19:57 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static void	set_primary_ray(t_env *env, t_ray *ray, int j, int i)
 	t_vector	null_vector;
 
 	ray->dir.x = ((double)2 * (((double)j + 0.5) /
-				(double)env->width) - (double)1)
+				(double)env->image->width) - (double)1)
 		* env->scale * env->image_aspect_ratio;
 	ray->dir.y = ((double)1 - (double)2 * (((double)i + 0.5) /
-				(double)env->height)) * env->scale;
+				(double)env->image->height)) * env->scale;
 	ray->dir.z = -1;
 	ray->dir = product_matrix4x4(env->select->c->matrix, ray->dir);
 	normalize_vec(&ray->dir);
@@ -28,7 +28,7 @@ static void	set_primary_ray(t_env *env, t_ray *ray, int j, int i)
 	ray->org = product_vec_matrix(env->select->c->matrix,
 			null_vector);
 	ray->coeff = 1;
-	ray->thread = env->nb_t;
+	ray->thread = env->nb_thread;
 }
 
 
@@ -80,12 +80,15 @@ t_color				raycast(t_env *env, t_ray ray, int depth)
 
 	t = 0;
 	tmp = NULL;
-	ft_memset(&color, 0, sizeof(color));
+	ft_bzero(&color, sizeof(color));
 	if (get_intersection(env, &ray, &tmp))
 	{
 		s = get_surface_caracter(ray, tmp);
 		set_color_coeff(env, s, tmp, &t);
-		color = add_color(color, tmp->color, t);
+		if ((tmp->etat == SPHERE || tmp->etat == PLAN) && tmp->texture)
+			color = add_color(color, mapping(*(tmp), s), t);
+		else
+			color = add_color(color, tmp->color, t);
 		if (depth < 5 && (ray.coeff = fresnel(ray, s)) < 1 && tmp->refraction > 1)
 		{
 			ret = raycast(env, get_refraction(s, ray), depth + 1);
@@ -106,9 +109,11 @@ void		*raytracing(void *params)
 	t_limit		l;
 	t_env		*env;
 	t_color		color;
+	char		*data;
 
 	env = (t_env*)(params);
-	l = ft_limit_thread(env->nb_t);
+	l = ft_limit_thread(env->nb_thread);
+	data = env->image->data;
 	while (++l.y < l.max_y)
 	{
 		l.x = l.tmp_x;
@@ -117,7 +122,10 @@ void		*raytracing(void *params)
 			index = (l.y * WIN_HEIGHT + l.x);
 			set_primary_ray(env, env->tab_ray + index, l.x, l.y);
 			color = raycast(env, *(env->tab_ray + index), 0);
-			mlx_put_pixel_to_image(env, l.x, l.y, color);
+			index = (l.x * (env->image->bpp)) + (l.y * env->image->sizeline);
+			data[index] = color.blue;
+			data[index + 1] = color.green;
+			data[index + 2] = color.red;
 		}
 	}
 	return (NULL);

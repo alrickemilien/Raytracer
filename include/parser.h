@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:54:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/08 09:14:17 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/23 15:00:00 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@
 # define INVALID_NO_OBJ "List object null"
 # define INVALID_LOOKAT "Camera matrix looking straight up/down : not defined"
 # define INVALID_CSG "More than 2 objects in CSG object"
+# define INVALID_TEXTURE "Error : Texture not found or not valid"	
+# define INVALID_RESIZE_TEXTURE "Error : resize_texture invalid, resize_texture: (0.1 to 1000)"
+# define INVALID_XPM_EXTENTION "WARNING : Invalid extention texture.xpm"
 
 # define POSITION "position:"
 # define RAYON "rayon:"
@@ -61,6 +64,8 @@
 # define TYPE "type:"
 # define TRANSLATION "translation:"
 # define AMBIENT "ambient:"
+# define TEXTURE "texture:"
+# define RESIZE "resize_texture:"
 
 int				check_indent(char *str, int n);
 int				parse_error(char *str);
@@ -95,6 +100,8 @@ typedef struct	s_pars_object
 	int			transparent;
 	int			type;
 	int			translation;
+	int			resize_texture;
+	int			texture;
 }				t_pars_object;
 
 #endif

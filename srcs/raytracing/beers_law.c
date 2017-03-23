@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-double	get_absorb_distance(t_ray ray, t_obj *obj, t_surface s)
+static double	get_absorb_distance(t_ray ray, t_obj *obj, t_surface s)
 {
 	double	back;
 	double	front;

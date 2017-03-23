@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cylinder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:17 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/06 16:45:31 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/22 20:01:02 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_obj		set_default_cylinder(t_env *env)
 	set_vec(&new.translation, 0, 0, 0);
 	new.r = 1;
 	new.size = 20000;
-	new.color = split_color(mlx_get_color_value(env->mlx, 0x00FF3421));
+	new.color = split_color(mlx_get_color_value(env->addr_mlx, 0x00FF3421));
 	new.brillance = 10;
 	new.specular = 1;
 	new.diffuse = 1;

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:49:28 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/06 16:43:54 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/23 16:09:02 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "rtv1.h"
 
 static t_obj	set_default_sphere(t_env *env)
 {
@@ -20,7 +20,7 @@ static t_obj	set_default_sphere(t_env *env)
 	set_vec(&new_sphere.translation, 0, 0, 0);
 	new_sphere.r = 1;
 	set_vec(&new_sphere.rotation, 0, 0, 0);
-	new_sphere.color = split_color(mlx_get_color_value(env->mlx, 0x0000FF00));
+	new_sphere.color = split_color(mlx_get_color_value(env->addr_mlx, 0x0000FF00));
 	new_sphere.etat = SPHERE;
 	new_sphere.brillance = 10;
 	new_sphere.specular = 1;
@@ -30,6 +30,8 @@ static t_obj	set_default_sphere(t_env *env)
 	new_sphere.transparent = 0;
 	new_sphere.func_obj = &sphere;
 	new_sphere.csg = NULL;
+	new_sphere.texture = NULL;
+	new_sphere.resize_texture = 1;
 	return (new_sphere);
 }
 

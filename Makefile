@@ -18,7 +18,8 @@ SRCS=\
 	srcs/raytracing/split_color.c\
 	srcs/raytracing/thread.c\
 	srcs/raytracing/shadow.c\
-	srcs/raytracing/main.c\
+	srcs/init/main.c\
+	srcs/init/init_func.c\
 	srcs/raytracing/get_specularity.c\
 	srcs/raytracing/get_diffuse.c\
 	srcs/raytracing/get_surface_caracter.c\
@@ -45,11 +46,11 @@ SRCS=\
 	srcs/math/intersection.c\
 	srcs/math/difference.c\
 	srcs/math/rotation.c\
-	srcs/parser/init_default_camera.c\
+	srcs/init/init_default_camera.c\
 	srcs/parser/recycle.c\
 	srcs/parser/error.c\
 	srcs/parser/sort_camera.c\
-	srcs/parser/init_parser.c\
+	srcs/init/init_parser.c\
 	srcs/parser/func_nbr_parse.c\
 	srcs/parser/set_camera_data.c\
 	srcs/parser/set_apex.c\
@@ -81,6 +82,9 @@ SRCS=\
 	srcs/parser/func_parse.c\
 	srcs/parser/parser.c\
 	srcs/math/invert_matrix.c\
+	srcs/parser/set_resize.c\
+	srcs/parser/set_texture.c\
+	srcs/math/mapping_uv.c\
 
 OBJ=$(SRCS:.c=.o)
 

@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_put_pixel_to_image.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:43 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:51:44 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/23 15:29:19 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "rtv1.h"
 
-void	mlx_put_pixel_to_image(t_env *env, int x, int y, t_color color)
+void	mlx_put_pixel_to_image(t_image *image, int x, int y, t_color color)
 {
 	int		tmp;
 
-	tmp = (x * (env->bpp / 8)) + (y * env->sizeline);
-	env->data[tmp] = color.blue;
-	env->data[tmp + 1] = color.green;
-	env->data[tmp + 2] = color.red;
+	tmp = (x * (image->bpp)) + (y * image->sizeline);
+	image->data[tmp] = color.blue;
+	image->data[tmp + 1] = color.green;
+	image->data[tmp + 2] = color.red;
 }

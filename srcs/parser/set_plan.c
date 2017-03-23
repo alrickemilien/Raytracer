@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_plan.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/14 15:02:55 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/23 16:07:23 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_obj		set_default_plan(t_env *env)
 	set_vec(&new_plan.pos, 0, 0, 0);
 	set_vec(&new_plan.translation, 0, 0, 0);
 	set_vec(&new_plan.rotation, 0, 0, 0);
-	new_plan.color = split_color(mlx_get_color_value(env->mlx, 0x00FFFFFF));
+	new_plan.color = split_color(mlx_get_color_value(env->addr_mlx, 0x00FFFFFF));
 	new_plan.brillance = 10;
 	new_plan.diffuse = 1;
 	new_plan.specular = 1;
@@ -28,6 +28,8 @@ static t_obj		set_default_plan(t_env *env)
 	new_plan.func_obj = &plan;
 	new_plan.reflection = 0;
 	new_plan.refraction = 1;
+	new_plan.resize_texture = 100;
+	new_plan.texture = NULL;
 	new_plan.transparent = 0;
 	new_plan.csg = NULL;
 	return (new_plan);

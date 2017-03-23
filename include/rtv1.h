@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/20 15:18:47 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/23 17:20:03 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@
 # define WIN_HEIGHT_OCT 125
 # define B 0x00FFFFFF
 # define NBR_OBJECT 9
-# define NBR_DESCRIPTION 17
+# define NBR_DESCRIPTION 19
 # define ZERO 0.000000001
 # define LIGHT_PTR ((t_light*)(tmp_light->content))
+# define NB_THREAD 8
 
 typedef struct		s_color
 {
@@ -55,6 +56,17 @@ typedef struct		s_pivot_gauss
 	double	f;
 	double	tmp;
 }					t_pivot_gauss;
+
+typedef	struct		s_image
+{
+	void		*image;
+	char		*data;
+	int			bpp;
+	int			sizeline;
+	int			endian;
+	int			width;
+	int			height;
+}				t_image;
 
 typedef struct		s_ray
 {
@@ -107,9 +119,10 @@ enum {
 	DIFFERENCE,
 };
 
-
 typedef struct		s_obj
 {
+	t_image			*texture;
+	double			resize_texture;
 	t_vector		pos;
 	double			r;
 	int				mat;
@@ -136,12 +149,11 @@ typedef struct		s_obj
 	int				type;
 	double			*matrix;
 	int				inter_type;
-	struct s_obj	*pointeur[16];
+	struct s_obj	*pointeur[8];
 	t_vector		translation;
 	t_vector		bounds[2];
 	t_list			*csg;
 }					t_obj;
-
 
 typedef struct	s_inter
 {
@@ -191,8 +203,12 @@ typedef struct		s_surface
 
 typedef	struct		s_env
 {
-	void			*mlx;
-	void			*win;
+	int				nb_thread;
+	pthread_t		*tab_thread;
+	void			*tab_env;	
+	void			*addr_mlx;
+	void			*addr_win;
+	t_image			*image;
 	t_vector		cursor;
 	int				fd;
 	int				thread_index;
@@ -200,15 +216,8 @@ typedef	struct		s_env
 	double			scale;
 	int				command;
 	int				lock;
-	int				bpp;
-	int				sizeline;
-	int				endian;
-	int				width;
 	int				reflection;
-	int				height;
 	double			zoom;
-	void			*img;
-	char			*data;
 	t_list			*light;
 	double			k;
 	t_ray			*tab_ray;
@@ -223,7 +232,6 @@ typedef	struct		s_env
 	int				nbr_cam;
 	double			fov;
 	t_select		*select;
-	int				nb_t;
 }					t_env;
 
 int					set_color(t_env *env, char *tmp,
@@ -272,6 +280,10 @@ int					set_csg(t_env *env, t_list **list_obj);
 int					set_box(t_env *env, t_list **list_obj);
 int					parser(t_env *env);
 
+void				init_default_camera(t_env *env);
+pthread_t			*init_thread(int nb_thread);
+t_image		*init_image(void *mlx, int width, int height);
+void				init_env_values(t_env *env);
 void				init_tab_str_description(t_env *env);
 void				init_tab_function_description(t_env *env);
 void				init_tab_str_object(t_env *env);
@@ -282,10 +294,9 @@ void				free_tab(char ***tab, size_t size);
 t_vector			get_surface_normal(t_vector intersection,
 		t_obj *tmp, t_ray ray);
 void				rotate_object(t_obj *object, t_vector *vector);
-void				init_default_camera(t_env *env);
 void				sort_camera(t_env *env);
 void				recycle(char **old_ptr, char *new_ptr);
-void				init_thread(t_env env);
+
 t_limit				ft_limit_thread(int nb);
 void				ft_put_pos_select(t_env *env);
 int					sphere(t_obj *sphere, t_ray *ray, double *t, t_list **inter);
@@ -297,7 +308,7 @@ int					csg(t_obj *csg, t_ray *ray, double *t, t_list **inter);
 void				*raytracing(void *env);
 int					cone(t_obj *cone, t_ray *ray, double *t, t_list **inter);
 t_color				split_color(unsigned long color);
-void				mlx_put_pixel_to_image(t_env *env, int x, int y,
+void				mlx_put_pixel_to_image(t_image *image, int x, int y,
 		t_color color);
 int					hit_light(t_light light, t_ray *ray, double *t);
 int					error(t_env *env, char *str);
@@ -330,4 +341,9 @@ int					betweex(double t, double n1, double n2);
 double				*set_rotation_matrix(double *matrix, double alpha,
 											double beta, double gamma);
 double				*invert_matrix(double *m);
+void				thread(pthread_t *t, void *(*funct)(void*), void *params, int size);
+int					set_resize_texture(t_env *env, char *tmp, t_obj *new, t_pars_object *index);
+int					set_texture(t_env *env, char *tmp, t_obj *new, t_pars_object *index);
+t_color mapping(t_obj obj, t_surface s);
+
 #endif

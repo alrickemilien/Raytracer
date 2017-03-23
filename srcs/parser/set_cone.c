@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cone.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:09 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/06 16:45:46 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/22 20:01:44 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_obj		set_default_cone(t_env *env)
 	new_cone.angle = M_PI / 4;
 	new_cone.angle = tan(new_cone.angle / 2) * tan(new_cone.angle / 2);
 	set_vec(&new_cone.rotation, 0, 0, 0);
-	new_cone.color = split_color(mlx_get_color_value(env->mlx, 0x00FF0000));
+	new_cone.color = split_color(mlx_get_color_value(env->addr_mlx, 0x00FF0000));
 	new_cone.brillance = 50;
 	new_cone.diffuse = 0.5;
 	new_cone.specular = 0.5;

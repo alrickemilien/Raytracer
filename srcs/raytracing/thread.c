@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:52:08 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/22 18:05:13 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:27:53 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,14 @@ t_limit		ft_limit_thread(int nb)
 	return (lim);
 }
 
-void		init_thread(t_env env)
+void		thread(pthread_t *t, void *(*funct)(void*), void *params, int size)
 {
-	pthread_t	*t;
-	int			nb_t;
-	int			nb;
-	t_env		*tmp;
+	int		nb;
 
-	nb_t = 16;
 	nb = -1;
-	if (!(t = (pthread_t*)malloc(sizeof(pthread_t) * nb_t)))
-		merror();
-	if (!(tmp = (t_env*)malloc(sizeof(t_env) * nb_t)))
-		merror();
-	while (++nb < nb_t)
-	{
-		tmp[nb] = env;
-		tmp[nb].nb_t = nb;
-		pthread_create(&t[nb], NULL, &raytracing, &tmp[nb]);
-	}
+	while (++nb < NB_THREAD)
+		pthread_create(&t[nb], NULL, funct, &params[size * nb]);
 	nb = -1;
-	while (++nb < nb_t)
+	while (++nb < NB_THREAD)
 		pthread_join(t[nb], NULL);
-	ft_memdel((void**)&t);
-	ft_memdel((void**)&tmp);
 }

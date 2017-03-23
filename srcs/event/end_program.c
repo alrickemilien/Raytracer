@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   end_program.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:44:37 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:44:41 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:51:01 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	end_program(t_env *env)
 {
-	mlx_destroy_image(env->mlx, env->img);
-	mlx_destroy_window(env->mlx, env->win);
+	mlx_destroy_image(env->addr_mlx, env->image->image);
+	mlx_destroy_window(env->addr_mlx, env->addr_win);
 	if (env->tab_ray)
 		free(env->tab_ray);
 	if (env->tab_str_object)

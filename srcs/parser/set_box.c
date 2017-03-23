@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_plan.c                                         :+:      :+:    :+:   */
+/*   set_box.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/20 15:54:19 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:54:17 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static t_obj		set_default_box(t_env *env)
 
 	set_vec(&obj.translation, 0, 0, 0);
 	set_vec(&obj.rotation, 0, 0, 0);
-	obj.color = split_color(mlx_get_color_value(env->mlx, 0x00FF0000));
+	obj.color = split_color(mlx_get_color_value(env->addr_mlx, 0x00FF0000));
 	obj.brillance = 10;
 	obj.diffuse = 1;
 	obj.specular = 1;

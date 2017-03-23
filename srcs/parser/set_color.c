@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:59 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/22 18:27:16 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:53:19 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		set_color(t_env *env, char *tmp, t_obj *new, t_pars_object *index)
 	printf("str_color-> %s\n", tmp);
 	printf("int_color-> %d\n", i_tmp);
 	new->color = split_color(
-			mlx_get_color_value(env->mlx, i_tmp));
+			mlx_get_color_value(env->addr_mlx, i_tmp));
 	new->absorbtion.x = ((double)new->color.red / 255);
 	new->absorbtion.y = ((double)new->color.green / 255);
 	new->absorbtion.z = ((double)new->color.blue / 255);

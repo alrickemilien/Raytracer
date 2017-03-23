@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:44:44 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:44:45 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:52:12 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			ft_put_pos_select(t_env *env)
 	if (env->select->c)
 	{
 		recycle(&str, ft_itoa((env->select->c->num) + 1));
-		mlx_string_put(env->mlx, env->win, 45, 50, B, str);
+		mlx_string_put(env->addr_mlx, env->addr_win, 45, 50, B, str);
 	}
 	recycle(&str, NULL);
 }
@@ -59,8 +59,8 @@ static int		switch_cam(t_env *env, int keycode)
 			env->select->c = cam;
 		tmp = tmp->next;
 	}
-	init_thread(*env);
-	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
+	thread(env->tab_thread, &raytracing, env->tab_env, sizeof(t_env));
+	mlx_put_image_to_window(env->addr_mlx, env->addr_win, env->image->image, 0, 0);
 	return (0);
 }
 
@@ -84,8 +84,8 @@ int				key_press(int keycode, t_env *env)
 			env->k -= 0.1;
 		else
 			env->k += 0.1;
-		init_thread(*env);
-		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
+		thread(env->tab_thread, &raytracing, env->tab_env, sizeof(t_env));
+		mlx_put_image_to_window(env->addr_mlx, env->addr_win, env->image->image, 0, 0);
 	}
 	if (keycode == KEY_ESC)
 		end_program(env);

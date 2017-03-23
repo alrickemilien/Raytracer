@@ -48,23 +48,21 @@ double	range(double a, double b)
 
 static void	get_smaller_t(t_list *lst, t_obj **obj, double *t)
 {
+	t_range *tmp;
+
 	*t = 2000000;
 	while (lst)
 	{
-		//		printf("range : %lf --- %lf\n",
-		//				((t_range*)(lst->content))->t1.t,
-		//				((t_range*)(lst->content))->t2.t);
-		if (((t_range*)(lst->content))->t1.t <= *t
-				&& ((t_range*)(lst->content))->t1.t > ZERO)
+		tmp = (t_range*)(lst->content);
+		if ((tmp->t1.t <= *t) && (tmp->t1.t > ZERO))
 		{
-			*t = ((t_range*)(lst->content))->t1.t;
-			*obj = ((t_range*)(lst->content))->t1.obj;
+			*t = tmp->t1.t;
+			*obj = tmp->t1.obj;
 		}
-		if (((t_range*)(lst->content))->t2.t <= *t
-				&& ((t_range*)(lst->content))->t2.t > ZERO)
+		if ((tmp->t2.t <= *t) && (tmp->t2.t > ZERO))
 		{
-			*t = ((t_range*)(lst->content))->t2.t;
-			*obj = ((t_range*)(lst->content))->t2.obj;
+			*t = tmp->t2.t;
+			*obj = tmp->t2.obj;
 		}
 		lst = lst->next;
 	}
@@ -112,27 +110,23 @@ int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 	t_list			*tmp_list;
 	t_list			*a; // liste d'intersections pour l'objet a (x et y)
 	t_list			*b;
-	t_obj			*lol;
+	t_obj			*obj_thread;
 	t_list			*list;
 
 	a = NULL;
 	b = NULL;
-	lol  = NULL;
 	tmp_list = obj->csg;
-	((t_obj*)(tmp_list->content))->func_obj(
-	((t_obj*)(tmp_list->content)),
-	ray, t, &b);
+	obj_thread = (t_obj*)tmp_list->content;
+	obj_thread->func_obj(obj_thread, ray, t, &b);
 	tmp_list = tmp_list->next;
-	((t_obj*)(tmp_list->content))->func_obj(
-	((t_obj*)(tmp_list->content)),
-	ray, t, &a);
+	obj_thread = (t_obj*)tmp_list->content;
+	obj_thread->func_obj(obj_thread, ray, t, &a);
 	if (obj->type == DIFFERENCE)
 		list = function_difference(a, b);
 	else
 		list = function_intersection(a, b);
-	get_smaller_t(list, &lol, t);
-	obj->pointeur[ray->thread] = lol;
-	//set_caracteristic(obj, lol);
+	get_smaller_t(list, &obj_thread, t);
+	obj->pointeur[ray->thread] = obj_thread;
 	ft_lstdel(&a, &del_range);
 	ft_lstdel(&b, &del_range);
 	if (list)
