@@ -18,7 +18,7 @@ camera:
 
 camera:
 {
-	from: (-5 2 0)
+	from: (-100 100 0)
 	to: (1 0 0)
 }
 
@@ -67,6 +67,12 @@ light:
 light: 
 {
 	position: (0 1.5 0)
+	intensity: (4)
+}
+
+light: 
+{
+	position: (1 0 0)
 	intensity: (4)
 }
 

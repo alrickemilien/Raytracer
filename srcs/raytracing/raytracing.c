@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/23 17:19:57 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/28 18:34:59 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,35 @@ t_color				raycast(t_env *env, t_ray ray, int depth)
 	return (color);
 }
 
+void		shining(t_env *env, t_list *lights, char *data, int x, int y, t_ray *ray)
+{
+	double			d;
+	t_color			color;
+	int				index;
+	t_vector		light_vec;
+	double			norme;
+
+	ft_bzero(&color, sizeof(t_color));
+	index = (x * (env->image->bpp)) + (y * env->image->sizeline);
+	while (lights)
+	{
+		light_vec = vec_diff(((t_light*)(lights->content))->org, ray->org);
+		norme = light_vec.norme;
+		normalize_vec(&light_vec);
+		if (!(d = fabs(dot_product(light_vec, ray->dir))))
+			d = 0.000001;
+		d = exp(-((norme / d ) ));
+//		printf("%lf\n", d);
+		color.blue += (unsigned char)(ft_dtrim(0, 255 - color.blue, 255 * d));
+		color.red += (unsigned char)(ft_dtrim(0, 255 - color.red, 255 * d));
+		color.green += (unsigned char)(ft_dtrim(0, 255 - color.green, 255 * d));
+		data[index] = color.blue;
+		data[index + 1] = color.green;
+		data[index + 2] = color.red;
+		lights = lights->next;
+	}
+}
+
 void		*raytracing(void *params)
 {
 	int			index;
@@ -114,6 +143,7 @@ void		*raytracing(void *params)
 	env = (t_env*)(params);
 	l = ft_limit_thread(env->nb_thread);
 	data = env->image->data;
+	ft_bzero(&color, sizeof(t_color));
 	while (++l.y < l.max_y)
 	{
 		l.x = l.tmp_x;
@@ -121,11 +151,14 @@ void		*raytracing(void *params)
 		{
 			index = (l.y * WIN_HEIGHT + l.x);
 			set_primary_ray(env, env->tab_ray + index, l.x, l.y);
+			shining(env, env->light, data, l.x, l.y, env->tab_ray + index);
 			color = raycast(env, *(env->tab_ray + index), 0);
 			index = (l.x * (env->image->bpp)) + (l.y * env->image->sizeline);
-			data[index] = color.blue;
-			data[index + 1] = color.green;
-			data[index + 2] = color.red;
+			data[index] += (unsigned char)ft_dtrim(0, 255 - data[index], color.blue);
+			data[index+1] += (unsigned char)ft_dtrim(0, 255 - data[index+1], color.green);
+			data[index+2] += (unsigned char)ft_dtrim(0, 255 - data[index+2], color.red);
+			/*data[index + 1] += color.green;
+			data[index + 2] += color.red;*/
 		}
 	}
 	return (NULL);

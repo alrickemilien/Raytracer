@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/28 13:14:22 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/28 13:53:26 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "vector.h"
 # include <stdio.h>
 # include "parser.h"
+# include <time.h>
 # define WIN_WIDTH 1000
 # define WIN_HEIGHT 1000
 # define WIN_WIDTH_HALF 500

@@ -33,8 +33,6 @@ sphere:
 	position: (1.5 0 0)
 	rayon: (0.1)
 	color: (0x58A4B0)
-	reflection: (1)
-	perturbation: (sinus)
 }
 
 plan:
@@ -49,6 +47,7 @@ plan:
 	color: (0xFC9F5B)
 	normal: (0 1.5 -0.7)
 	position: (1.5 -0.5 0)
+	perturbation: (sinus)
 }
 
 cone:
