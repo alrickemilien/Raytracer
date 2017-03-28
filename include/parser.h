@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:54:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/23 15:00:00 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/28 12:12:14 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@
 # define AMBIENT "ambient:"
 # define TEXTURE "texture:"
 # define RESIZE "resize_texture:"
+# define PERTURBATION "perturbation:"
 
 int				check_indent(char *str, int n);
 int				parse_error(char *str);
@@ -102,6 +103,7 @@ typedef struct	s_pars_object
 	int			translation;
 	int			resize_texture;
 	int			texture;
+	int			perturbation;
 }				t_pars_object;
 
 #endif

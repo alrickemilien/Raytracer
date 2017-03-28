@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/23 17:20:03 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/28 13:14:22 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define WIN_HEIGHT_OCT 125
 # define B 0x00FFFFFF
 # define NBR_OBJECT 9
-# define NBR_DESCRIPTION 19
+# define NBR_DESCRIPTION 20
 # define ZERO 0.000000001
 # define LIGHT_PTR ((t_light*)(tmp_light->content))
 # define NB_THREAD 8
@@ -114,6 +114,12 @@ enum {
 };
 
 enum {
+	SIN,
+	TAN,
+	NO_PERTURBATION
+};
+
+enum {
 	UNION,
 	INTERSECTION,
 	DIFFERENCE,
@@ -147,6 +153,7 @@ typedef struct		s_obj
 	double			transparent;
 	int				intersection;
 	int				type;
+	int				perturbation;
 	double			*matrix;
 	int				inter_type;
 	struct s_obj	*pointeur[8];
@@ -268,6 +275,9 @@ int					set_type(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
 int					set_translation(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
+int					set_perturbation(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_resize_texture(t_env *env, char *tmp, t_obj *new, t_pars_object *index);
 
 int					set_camera(t_env *env, t_list **list_obj);
 int					set_scene(t_env *env, t_list **list_obj);
@@ -279,6 +289,7 @@ int					set_plan(t_env *env, t_list **list_obj);
 int					set_csg(t_env *env, t_list **list_obj);
 int					set_box(t_env *env, t_list **list_obj);
 int					parser(t_env *env);
+int					set_texture(t_env *env, char *tmp, t_obj *new, t_pars_object *index);
 
 void				init_default_camera(t_env *env);
 pthread_t			*init_thread(int nb_thread);
@@ -342,8 +353,6 @@ double				*set_rotation_matrix(double *matrix, double alpha,
 											double beta, double gamma);
 double				*invert_matrix(double *m);
 void				thread(pthread_t *t, void *(*funct)(void*), void *params, int size);
-int					set_resize_texture(t_env *env, char *tmp, t_obj *new, t_pars_object *index);
-int					set_texture(t_env *env, char *tmp, t_obj *new, t_pars_object *index);
 t_color mapping(t_obj obj, t_surface s);
 
 #endif

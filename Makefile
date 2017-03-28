@@ -54,6 +54,7 @@ SRCS=\
 	srcs/parser/func_nbr_parse.c\
 	srcs/parser/set_camera_data.c\
 	srcs/parser/set_apex.c\
+	srcs/parser/set_perturbation.c\
 	srcs/parser/set_angle.c\
 	srcs/parser/set_axis.c\
 	srcs/parser/set_color.c\

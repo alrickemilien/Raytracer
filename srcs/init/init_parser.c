@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:08 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/23 16:09:13 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/28 12:11:05 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	init_tab_str_description(t_env *env)
 	env->tab_str_description[16] = ft_strdup(TRANSLATION);
 	env->tab_str_description[17] = ft_strdup(TEXTURE);
 	env->tab_str_description[18] = ft_strdup(RESIZE);
+	env->tab_str_description[19] = ft_strdup(PERTURBATION);
 }
 
 void	init_tab_function_description(t_env *env)
@@ -59,6 +60,7 @@ void	init_tab_function_description(t_env *env)
 	env->check_description[16] = &set_translation;
 	env->check_description[17] = &set_texture;
 	env->check_description[18] = &set_resize_texture;
+	env->check_description[19] = &set_perturbation;
 }
 
 void	init_tab_str_object(t_env *env)
@@ -92,7 +94,6 @@ void	init_tab_function_object(t_env *env)
 void	init_env_values(t_env *env)
 {
 	env->k = 0.2;
-	
 	env->fov = M_PI_4;
 	env->scale = tan(M_PI_4 * 0.5);
 	env->select = (t_select*)ft_memalloc(sizeof(t_select));
