@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:45:48 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:45:49 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/24 18:49:18 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "vector.h"
 
 int				hit_light(t_light light, t_ray *ray, double *t)
 {

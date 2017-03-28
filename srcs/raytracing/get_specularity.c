@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_specularity.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:27 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/21 10:53:21 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/24 18:29:28 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "vector.h"
 
 static double	rec_spec(int max, double spec, double angle)
 {

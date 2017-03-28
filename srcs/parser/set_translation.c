@@ -1,4 +1,4 @@
-#include "../include/rtv1.h"
+#include "parser.h"
 
 int		set_translation(t_env *env, char *tmp, t_obj *new, t_pars_object *index)
 {

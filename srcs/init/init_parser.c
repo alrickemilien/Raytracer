@@ -6,13 +6,16 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:08 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/23 16:09:13 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/28 17:35:50 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "parser.h"
+#include "init.h"
+#include "menu.h"
+#include <math.h>
 
-void	init_tab_str_description(t_env *env)
+static void	init_tab_str_description(t_env *env)
 {
 	if (!(env->tab_str_description = (
 					char**)malloc(sizeof(char*) * NBR_DESCRIPTION)))
@@ -38,7 +41,7 @@ void	init_tab_str_description(t_env *env)
 	env->tab_str_description[18] = ft_strdup(RESIZE);
 }
 
-void	init_tab_function_description(t_env *env)
+static void	init_tab_function_description(t_env *env)
 {
 	env->check_description[0] = &set_position;
 	env->check_description[1] = &set_rayon;
@@ -61,7 +64,7 @@ void	init_tab_function_description(t_env *env)
 	env->check_description[18] = &set_resize_texture;
 }
 
-void	init_tab_str_object(t_env *env)
+static void	init_tab_str_object(t_env *env)
 {
 	if (!(env->tab_str_object = (char**)malloc(sizeof(char*) * NBR_OBJECT)))
 		merror();
@@ -76,7 +79,7 @@ void	init_tab_str_object(t_env *env)
 	env->tab_str_object[BOX] = ft_strdup("box:");
 }
 
-void	init_tab_function_object(t_env *env)
+static void	init_tab_function_object(t_env *env)
 {
 	env->set_object[SPHERE] = &set_sphere;
 	env->set_object[CONE] = &set_cone;
@@ -89,19 +92,19 @@ void	init_tab_function_object(t_env *env)
 	env->set_object[BOX] = &set_box;
 }
 
-void	init_env_values(t_env *env)
+void	init_env(t_env *env)
 {
+	env->addr_mlx = mlx_init();
 	env->k = 0.2;
-	
 	env->fov = M_PI_4;
 	env->scale = tan(M_PI_4 * 0.5);
 	env->select = (t_select*)ft_memalloc(sizeof(t_select));
-	if (!(env->image = init_image(env->addr_mlx, WIN_WIDTH, WIN_HEIGHT)))
-		merror();
-	env->tab_ray = (t_ray*)malloc(sizeof(t_ray) * env->image->width * env->image->height);
-	env->image_aspect_ratio = env->image->width / env->image->height;
+//	if (!(env->image = init_image(env->addr_mlx, WIN_WIDTH, WIN_HEIGHT)))
+//		merror();
+//	env->tab_ray = (t_ray*)malloc(sizeof(t_ray) * 400 * 200);
+//	env->image_aspect_ratio = 400 / 200;
 	env->addr_win = mlx_new_window(env->addr_mlx, WIN_WIDTH, WIN_HEIGHT, "RT");
-	env->tab_thread = init_thread(NB_THREAD);
+	env->tab_thread = init_thread(1);
 	init_tab_str_object(env);
 	init_tab_function_object(env);
 	init_tab_str_description(env);

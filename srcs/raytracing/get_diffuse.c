@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_diffuse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:23 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 17:04:24 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/24 18:34:46 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "vector.h"
 
 double	get_diffuse(t_vector n, t_vector light_dir)
 {

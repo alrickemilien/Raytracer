@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "parser.h"
 
 static int	init_texture(t_env *env, t_obj *obj, char *path)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_camera_data.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:53 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/20 11:45:17 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/25 14:08:22 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "vector.h"
 
 /*
  * param[0] --> cos_teta
@@ -18,6 +18,13 @@
  * param[2] --> cos_phi
  * param[3] --> sin_phi
  */
+ 
+void			set_default_camera(t_camera *new)
+{
+	set_vec(&new->pos, 0, 0, 0);
+	set_vec(&new->to, 0, 0, 1);
+	new->num = 0;
+}
 
 t_vector	set_up_vector(t_camera *camera, t_vector vec_forward)
 {

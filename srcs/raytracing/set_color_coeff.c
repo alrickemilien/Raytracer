@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "vector.h"
 
 void	set_color_coeff(t_env *env, t_surface s,
 		t_obj *tmp, double *t)

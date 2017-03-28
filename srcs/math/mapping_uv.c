@@ -1,10 +1,10 @@
-#include "rtv1.h"
+#include "vector.h"
 
-static t_color	mlx_put_xpm(int u, int v, t_image texture)
+t_color		mlx_put_xpm(int u, int v, t_image texture)
 {
 	t_color color;
 	int tmp;
-	
+
 	if (u >= texture.width && v >= texture.height)
 	{
 		u = (u >= texture.width ? texture.width - 1 : u);
@@ -26,7 +26,7 @@ static t_color mapping_plan(t_image texture, t_surface s, double zoom)
 	t_color color;
 
 	u = s.intersection.x * zoom;
-	v = -s.intersection.z * zoom;	
+	v = -s.intersection.z * zoom;
 
 	tmp = v / texture.height;
 	div = floor(v / texture.height);

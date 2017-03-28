@@ -6,11 +6,13 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/22 19:54:17 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/28 10:41:16 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "parser.h"
+#include "vector.h"
+#include "rtv1.h"
 
 static void			set_boxs_plans(t_list **list, t_obj obj)
 {
@@ -27,6 +29,7 @@ static void			set_boxs_plans(t_list **list, t_obj obj)
 		plan_tab[i].etat = PLAN;
 		plan_tab[i].func_obj = &plan;
 		plan_tab[i].csg = NULL;
+		plan_tab[i].texture = NULL;
 	}
 	new_x = get_vec(obj.size, 0, 0);
 	new_y = get_vec(0, obj.size, 0);

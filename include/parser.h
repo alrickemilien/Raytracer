@@ -6,12 +6,19 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:54:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/23 15:00:00 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/28 16:51:27 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
+# include "commun_struct.h"
+# include <stdlib.h>
+# include <fcntl.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <errno.h>
+# include <stdio.h>
 
 # define INVALID_SIZE_NBR "Invalid number, number must be less than 17 digit"
 # define INVALID_DECIMAL "RT_v1 doesn't not support precison more than 4 digit"
@@ -39,7 +46,7 @@
 # define INVALID_NO_OBJ "List object null"
 # define INVALID_LOOKAT "Camera matrix looking straight up/down : not defined"
 # define INVALID_CSG "More than 2 objects in CSG object"
-# define INVALID_TEXTURE "Error : Texture not found or not valid"	
+# define INVALID_TEXTURE "Error : Texture not found or not valid"
 # define INVALID_RESIZE_TEXTURE "Error : resize_texture invalid, resize_texture: (0.1 to 1000)"
 # define INVALID_XPM_EXTENTION "WARNING : Invalid extention texture.xpm"
 
@@ -67,6 +74,7 @@
 # define TEXTURE "texture:"
 # define RESIZE "resize_texture:"
 
+t_color	split_color(unsigned long color);
 int				check_indent(char *str, int n);
 int				parse_error(char *str);
 int				fill_data(char *tmp, double *data);
@@ -77,31 +85,55 @@ int				check_data_type_nbr(char *str, int k);
 int				error_file(char *file);
 int				fill_int_data(char *str, int *data);
 int				check_end_data(char *str);
-
-typedef struct	s_pars_object
-{
-	int			to;
-	int			from;
-	int			position;
-	int			brillance;
-	int			angle;
-	int			rayon;
-	int			color;
-	int			apex;
-	int			axis;
-	int			normal;
-	int			rotation;
-	int			intensity;
-	int			size;
-	int			diffuse;
-	int			specular;
-	int			reflection;
-	int			refraction;
-	int			transparent;
-	int			type;
-	int			translation;
-	int			resize_texture;
-	int			texture;
-}				t_pars_object;
+int					set_color(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_axis(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_apex(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_position(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_angle(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_brillance(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_rayon(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_normal(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_rotation(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_size(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_diffuse(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_specular(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_reflection(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_refraction(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_transparent(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_type(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_translation(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_resize_texture(t_env *env, char *tmp, t_obj *new, t_pars_object *index);
+int					set_texture(t_env *env, char *tmp, t_obj *new, t_pars_object *index);
+int					set_camera(t_env *env, t_list **list_obj);
+int					set_scene(t_env *env, t_list **list_obj);
+int					set_light(t_env *env, t_list **list_obj);
+int					set_cone(t_env *env, t_list **list_obj);
+int					set_cylinder(t_env *env, t_list **list_obj);
+int					set_sphere(t_env *env, t_list **list_obj);
+int					set_plan(t_env *env, t_list **list_obj);
+int					set_csg(t_env *env, t_list **list_obj);
+int					set_box(t_env *env, t_list **list_obj);
+void				set_camera_data(t_camera *camera);
+int					parser(t_env *env);
+int					error(t_env *env, char *str);
+void				recycle(char **old_ptr, char *new_ptr);
+void			set_default_camera(t_camera *new);
 
 #endif

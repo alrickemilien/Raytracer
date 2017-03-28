@@ -6,10 +6,12 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:49:28 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/23 16:09:02 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/25 14:10:48 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "parser.h"
+#include "vector.h"
 #include "rtv1.h"
 
 static t_obj	set_default_sphere(t_env *env)

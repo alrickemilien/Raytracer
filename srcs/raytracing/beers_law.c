@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "vector.h"
 
 static double	get_absorb_distance(t_ray ray, t_obj *obj, t_surface s)
 {
@@ -13,10 +13,7 @@ static double	get_absorb_distance(t_ray ray, t_obj *obj, t_surface s)
 	if (back > 0 && front < 0)
 		return (back - front);
 	if (back > 0 && front > 0)
-	{
-		printf("diff %lf\n", back - front);
 		return (back - front);
-	}
 	return (-back + front);
 }
 

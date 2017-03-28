@@ -6,11 +6,11 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:59 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/22 19:53:19 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/25 12:12:56 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "parser.h"
 
 int		set_color(t_env *env, char *tmp, t_obj *new, t_pars_object *index)
 {
@@ -26,13 +26,10 @@ int		set_color(t_env *env, char *tmp, t_obj *new, t_pars_object *index)
 		return (0);
 	tmp += 2;
 	int i_tmp = ft_atoi_base(tmp, 16);
-	printf("str_color-> %s\n", tmp);
-	printf("int_color-> %d\n", i_tmp);
 	new->color = split_color(
 			mlx_get_color_value(env->addr_mlx, i_tmp));
 	new->absorbtion.x = ((double)new->color.red / 255);
 	new->absorbtion.y = ((double)new->color.green / 255);
 	new->absorbtion.z = ((double)new->color.blue / 255);
-	printf("red -> %u green -> %u blue -> %u\n", new->color.red, new->color.green, new->color.blue);
 	return (1);
 }

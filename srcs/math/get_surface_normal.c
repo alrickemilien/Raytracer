@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_surface_normal.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:45:44 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/03 19:19:25 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/24 18:48:54 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "vector.h"
 
 t_vector	get_surface_normal(t_vector intersection, t_obj *tmp, t_ray ray)
 {

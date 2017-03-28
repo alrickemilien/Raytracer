@@ -31,7 +31,6 @@ SRCS=\
 	srcs/event/end_program.c\
 	srcs/event/free_data.c\
 	srcs/event/free_tab.c\
-	srcs/event/event.c\
 	srcs/math/light.c\
 	srcs/math/vector_1.c\
 	srcs/math/vector_2.c\
@@ -85,6 +84,11 @@ SRCS=\
 	srcs/parser/set_resize.c\
 	srcs/parser/set_texture.c\
 	srcs/math/mapping_uv.c\
+	srcs/menu/draw_menu.c\
+	srcs/menu/data_draw.c\
+	srcs/menu/set_menu.c\
+	srcs/event/event_mouse.c\
+	srcs/event/event.c\
 
 OBJ=$(SRCS:.c=.o)
 

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_apex.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:30 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:47:31 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/25 12:20:16 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "parser.h"
 
 int		set_apex(t_env *env, char *tmp, t_obj *new, t_pars_object *index)
 {

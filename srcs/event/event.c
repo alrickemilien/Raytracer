@@ -1,16 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   event.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/20 14:44:44 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/22 19:52:12 by salibert         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../include/rtv1.h"
+#include "rtv1.h"
+#include "parser.h"
 
 void			ft_put_pos_select(t_env *env)
 {
@@ -59,17 +48,8 @@ static int		switch_cam(t_env *env, int keycode)
 			env->select->c = cam;
 		tmp = tmp->next;
 	}
-	thread(env->tab_thread, &raytracing, env->tab_env, sizeof(t_env));
+	thread(env->tab_thread, raytracing, env->tab_env, sizeof(t_env));
 	mlx_put_image_to_window(env->addr_mlx, env->addr_win, env->image->image, 0, 0);
-	return (0);
-}
-
-int				red_cross(void *param)
-{
-	t_env		*env;
-
-	env = (t_env*)param;
-	end_program(env);
 	return (0);
 }
 
@@ -84,7 +64,7 @@ int				key_press(int keycode, t_env *env)
 			env->k -= 0.1;
 		else
 			env->k += 0.1;
-		thread(env->tab_thread, &raytracing, env->tab_env, sizeof(t_env));
+		thread(env->tab_thread, raytracing, env->tab_env,sizeof(t_env));
 		mlx_put_image_to_window(env->addr_mlx, env->addr_win, env->image->image, 0, 0);
 	}
 	if (keycode == KEY_ESC)

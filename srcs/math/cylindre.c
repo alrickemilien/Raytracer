@@ -1,4 +1,4 @@
-#include "../include/rtv1.h"
+#include "vector.h"
 
 static void		set_range(t_list **inter, t_obj *obj, double t1, double t2)
 {

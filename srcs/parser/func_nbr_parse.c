@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   func_nbr_parse.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/27 18:01:20 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/25 12:11:30 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/rtv1.h"
+#include "parser.h"
 
 int				check_floating_number(char *str)
 {
