@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:09 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/29 14:30:31 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/29 17:07:38 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,23 +73,6 @@ static int			check_reference(t_pars_object reference)
 	return (1);
 }
 
-/*static void			join_cone(t_list **list_obj, t_obj cone)
-{
-	t_obj	obj;
-
-	obj.r = 0.00105;
-	obj.etat = CYLINDRE;
-	obj.color = cone.color;
-	obj.apex = cone.apex;
-	obj.axis = cone.axis;
-	obj.specular = cone.specular;
-	obj.diffuse = cone.diffuse;
-	obj.rotation = cone.rotation;
-	obj.brillance = cone.brillance;
-	obj.func_obj = &cylindre;
-	ft_lstadd(list_obj, ft_lstnew(&obj, (sizeof(t_obj))));
-}*/
-
 int					set_cone(t_env *env, t_list **list_obj)
 {
 	t_obj			new_cone;
@@ -104,7 +87,7 @@ int					set_cone(t_env *env, t_list **list_obj)
 		recycle(&line, ft_strtrim(line));
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_cone(env, &new_cone, line, &reference))
-				return (0);
+				return (clean_error(&line));
 		if(line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);

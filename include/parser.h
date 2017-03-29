@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:54:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/28 16:51:27 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/29 16:57:07 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,8 @@ void				set_camera_data(t_camera *camera);
 int					parser(t_env *env);
 int					error(t_env *env, char *str);
 void				recycle(char **old_ptr, char *new_ptr);
-void			set_default_camera(t_camera *new);
+void				set_default_camera(t_camera *new);
+int					clean_error(char **str);
+
 
 #endif

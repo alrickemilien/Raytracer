@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:51 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/24 18:56:47 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/29 16:56:37 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,11 @@ int		merror(void)
 {
 	perror("");
 	exit(0);
+	return (0);
+}
+
+int		clean_error(char **str)
+{
+	ft_strdel(str);
 	return (0);
 }

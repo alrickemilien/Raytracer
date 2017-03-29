@@ -63,10 +63,7 @@ int		set_texture(t_env *env, char *tmp, t_obj *new, t_pars_object *index)
 	(void)env;
 	index->texture++;
 	if (!(fill_path(tmp, &path)))
-    {
-        ft_strdel(&path);
-		return (0);
-    }
+		return (clean_error(&path));
     if (!(init_texture(env, new, path)))
     {
         ft_strdel(&path);

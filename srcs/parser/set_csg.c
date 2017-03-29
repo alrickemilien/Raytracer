@@ -116,7 +116,7 @@ int				set_csg(t_env *env, t_list **list_obj)
 	}
 	ft_strdel(&line);
 	if (!check_reference(reference))
-		return (0);
+		return (clean_error(&line));
 	set_translation_csg(new.translation, new.csg);
 	ft_lstadd(list_obj, ft_lstnew(&new, (sizeof(t_obj))));
 	return (1);
