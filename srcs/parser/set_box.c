@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/28 10:41:16 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/29 15:24:34 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static t_obj		set_default_box(t_env *env)
 {
 	t_obj			obj;
 
+	ft_bzero(&obj, (sizeof(t_obj)));
 	set_vec(&obj.translation, 0, 0, 0);
 	set_vec(&obj.rotation, 0, 0, 0);
 	obj.color = split_color(mlx_get_color_value(env->addr_mlx, 0x00FF0000));

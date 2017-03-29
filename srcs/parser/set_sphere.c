@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:49:28 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/25 14:10:48 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/29 14:40:50 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static t_obj	set_default_sphere(t_env *env)
 {
 	t_obj		new_sphere;
 
+	ft_bzero(&new_sphere, sizeof(t_obj));
 	set_vec(&new_sphere.pos, 0, 0, 0);
 	set_vec(&new_sphere.translation, 0, 0, 0);
 	new_sphere.r = 1;
@@ -27,12 +28,8 @@ static t_obj	set_default_sphere(t_env *env)
 	new_sphere.brillance = 10;
 	new_sphere.specular = 1;
 	new_sphere.diffuse = 1;
-	new_sphere.reflection = 0;
 	new_sphere.refraction = 1;
-	new_sphere.transparent = 0;
 	new_sphere.func_obj = &sphere;
-	new_sphere.csg = NULL;
-	new_sphere.texture = NULL;
 	new_sphere.resize_texture = 1;
 	return (new_sphere);
 }

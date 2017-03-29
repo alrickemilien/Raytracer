@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:17 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/25 14:14:06 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/29 14:39:17 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static t_obj		set_default_cylinder(t_env *env)
 {
 	t_obj			new;
 
+	ft_bzero(&new, (sizeof(t_obj)));
 	set_vec(&new.axis, 0, 0, 1);
 	set_vec(&new.apex, 0, 0, 1);
 	set_vec(&new.rotation, 0, 0, 0);
@@ -30,10 +31,7 @@ static t_obj		set_default_cylinder(t_env *env)
 	new.diffuse = 1;
 	new.etat = CYLINDRE;
 	new.func_obj = &cylindre;
-	new.reflection = 0;
 	new.refraction = 1;
-	new.transparent = 0;
-	new.csg = NULL;
 	return (new);
 }
 

@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:09 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/25 14:12:49 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/29 14:30:31 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static t_obj		set_default_cone(t_env *env)
 {
 	t_obj			new_cone;
 
+	ft_bzero(&new_cone, (sizeof(t_obj)));
 	set_vec(&new_cone.axis, 0, 0, 1);
 	set_vec(&new_cone.translation, 0, 0, 0);
 	set_vec(&new_cone.apex, 0, 0, 1);
@@ -30,10 +31,9 @@ static t_obj		set_default_cone(t_env *env)
 	new_cone.specular = 0.5;
 	new_cone.etat = CONE;
 	new_cone.func_obj = &cone;
-	new_cone.reflection = 0;
 	new_cone.refraction = 1;
-	new_cone.transparent = 0;
 	new_cone.csg = NULL;
+	new_cone.texture = NULL;
 	return (new_cone);
 }
 
