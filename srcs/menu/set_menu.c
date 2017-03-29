@@ -49,6 +49,7 @@ static int     set_menu(t_menu *menu)
         merror();
 	new_button = params_data_draw(menu);
 	ft_lstadd(&menu->button, ft_lstnew(&new_button, (sizeof(t_data_draw))));
+	closedir(dir);
 	return (nb_data_draw);
 }
 

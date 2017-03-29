@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/29 15:24:34 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/29 15:40:27 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,11 +125,11 @@ static int			check_reference(t_pars_object reference)
 	if (reference.position > 1 || reference.color > 1
 			|| reference.brillance > 1 || reference.rotation > 1
 			|| reference.specular > 1 || reference.diffuse > 1
-			|| reference.reflection > 1 || reference.transparent > 1 
+			|| reference.reflection > 1 || reference.transparent > 1
 			|| reference.translation > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.axis || reference.apex || reference.rayon
-			|| reference.angle || reference.to || reference.from 
+			|| reference.angle || reference.to || reference.from
 			|| reference.type || reference.normal)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
