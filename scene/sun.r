@@ -60,19 +60,7 @@ sphere:
 
 light: 
 {
-	position: (-1.5 1.2 0)
-	intensity: (4)
-}
-
-light: 
-{
-	position: (0 1.5 0)
-	intensity: (4)
-}
-
-light: 
-{
-	position: (1 0 0)
+	position: (1 1 2)
 	intensity: (4)
 }
 

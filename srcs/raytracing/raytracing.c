@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/29 12:27:53 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/29 13:21:15 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ static t_color		shining(t_env *env, t_list *lights, t_ray *ray, double *norme)
 	t_color			color;
 	t_vector		light_vec;
 	double			tmp;
+	double			f[4];
 
+	(void)env;
 	ft_bzero(&color, sizeof(t_color));
 	*norme = 2000000;
 	while (lights)
@@ -88,7 +90,9 @@ static t_color		shining(t_env *env, t_list *lights, t_ray *ray, double *norme)
 		normalize_vec(&light_vec);
 		if (!(d = fabs(dot_product(light_vec, ray->dir))))
 			d = 0.000001;
-		d = (9.2 * 0.9) / (d * d) + env->k;
+		d = acos(d);
+		f[0] = 2.61 * exp(-pow(((d / (0.2 * (1 / tmp)))), 2));
+		d = 0.478 * f[0];
 		//printf("%lf\n", d);
 		color.blue += (unsigned char)(ft_dtrim(0, 255 - color.blue, 255 * d));
 		color.red += (unsigned char)(ft_dtrim(0, 255 - color.red, 255 * d));
