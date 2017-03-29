@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/29 12:27:53 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/29 10:11:18 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,34 +70,6 @@ static t_color	add_color(t_color current, t_color to_add, double t)
 	return (current);
 }
 
-static t_color		shining(t_env *env, t_list *lights, t_ray *ray, double *norme)
-{
-	double			d;
-	t_color			color;
-	t_vector		light_vec;
-	double			tmp;
-
-	ft_bzero(&color, sizeof(t_color));
-	*norme = 2000000;
-	while (lights)
-	{
-		light_vec = vec_diff(((t_light*)(lights->content))->org, ray->org);
-		if (light_vec.norme < *norme)
-			*norme = light_vec.norme;
-		tmp = light_vec.norme;
-		normalize_vec(&light_vec);
-		if (!(d = fabs(dot_product(light_vec, ray->dir))))
-			d = 0.000001;
-		d = (9.2 * 0.9) / (d * d) + env->k;
-		//printf("%lf\n", d);
-		color.blue += (unsigned char)(ft_dtrim(0, 255 - color.blue, 255 * d));
-		color.red += (unsigned char)(ft_dtrim(0, 255 - color.red, 255 * d));
-		color.green += (unsigned char)(ft_dtrim(0, 255 - color.green, 255 * d));
-		lights = lights->next;
-	}
-	return (color);
-}
-
 t_color				raycast(t_env *env, t_ray ray, int depth)
 {
 	t_obj			*tmp;
@@ -105,16 +77,13 @@ t_color				raycast(t_env *env, t_ray ray, int depth)
 	t_surface		s;
 	t_color			color;
 	t_color			ret;
-	double			lightnorme;
 
 	t = 0;
-	lightnorme = 0;
 	tmp = NULL;
-	color = shining(env, env->light, &ray, &lightnorme);
+	shining(env, env->light, data, l.x, l.y, env->tab_ray + index);
 	if (get_intersection(env, &ray, &tmp))
 	{
-		if (lightnorme > ray.t)
-			ft_bzero(&color, sizeof(color));
+		ft_bzero(&color, sizeof(color));
 		s = get_surface_caracter(ray, tmp);
 		set_color_coeff(env, s, tmp, &t);
 		if ((tmp->etat == SPHERE || tmp->etat == PLAN) && tmp->texture)
@@ -133,6 +102,34 @@ t_color				raycast(t_env *env, t_ray ray, int depth)
 		}
 	}
 	return (color);
+}
+
+void		shining(t_env *env, t_list *lights, char *data, int x, int y, t_ray *ray)
+{
+	double			d;
+	t_color			color;
+	int				index;
+	t_vector		light_vec;
+	double			norme;
+
+	ft_bzero(&color, sizeof(t_color));
+	index = (x * (env->image->bpp)) + (y * env->image->sizeline);
+	while (lights)
+	{
+		light_vec = vec_diff(((t_light*)(lights->content))->org, ray->org);
+		norme = light_vec.norme;
+		normalize_vec(&light_vec);
+		if (!(d = fabs(dot_product(light_vec, ray->dir))))
+			d = 0.000001;
+		d = exp(-((norme / d ) ));
+		color.blue += (unsigned char)(ft_dtrim(0, 255 - color.blue, 255 * d));
+		color.red += (unsigned char)(ft_dtrim(0, 255 - color.red, 255 * d));
+		color.green += (unsigned char)(ft_dtrim(0, 255 - color.green, 255 * d));
+		data[index] = color.blue;
+		data[index + 1] = color.green;
+		data[index + 2] = color.red;
+		lights = lights->next;
+	}
 }
 
 void		*raytracing(void *params)
@@ -156,9 +153,11 @@ void		*raytracing(void *params)
 			set_primary_ray(env, env->tab_ray + index, l.x, l.y);
 			color = raycast(env, *(env->tab_ray + index), 0);
 			index = (l.x * (env->image->bpp)) + (l.y * env->image->sizeline);
-			data[index] = color.blue;
-			data[index+1] = color.green;
-			data[index+2] = color.red;
+			data[index] += (unsigned char)ft_dtrim(0, 255 - data[index], color.blue);
+			data[index+1] += (unsigned char)ft_dtrim(0, 255 - data[index+1], color.green);
+			data[index+2] += (unsigned char)ft_dtrim(0, 255 - data[index+2], color.red);
+			/*data[index + 1] += color.green;
+			data[index + 2] += color.red;*/
 		}
 	}
 	return (NULL);
