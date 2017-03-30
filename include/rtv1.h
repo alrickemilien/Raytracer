@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/28 13:53:26 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/30 13:00:52 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ typedef struct		s_light
 	int				(*hit_light)(
 			struct s_light light,
 			t_ray *ray, double *t);
+	int				type;
+	double			angle;
 }					t_light;
 
 typedef struct		s_matrix_rot
@@ -118,6 +120,11 @@ enum {
 	SIN,
 	TAN,
 	NO_PERTURBATION
+};
+
+enum {
+	SPHERICAL_LIGHT,
+	CONE_LIGHT
 };
 
 enum {
@@ -294,7 +301,7 @@ int					set_texture(t_env *env, char *tmp, t_obj *new, t_pars_object *index);
 
 void				init_default_camera(t_env *env);
 pthread_t			*init_thread(int nb_thread);
-t_image		*init_image(void *mlx, int width, int height);
+t_image				*init_image(void *mlx, int width, int height);
 void				init_env_values(t_env *env);
 void				init_tab_str_description(t_env *env);
 void				init_tab_function_description(t_env *env);
@@ -354,6 +361,6 @@ double				*set_rotation_matrix(double *matrix, double alpha,
 											double beta, double gamma);
 double				*invert_matrix(double *m);
 void				thread(pthread_t *t, void *(*funct)(void*), void *params, int size);
-t_color mapping(t_obj obj, t_surface s);
+t_color				mapping(t_obj obj, t_surface s);
 
 #endif

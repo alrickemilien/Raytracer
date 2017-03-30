@@ -6,20 +6,24 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:32 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/21 11:53:12 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/30 13:06:43 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static int			check_reference(t_pars_object reference)
+static int			check_reference(t_pars_object reference, int light_type)
 {
 	if (reference.position > 1 || reference.intensity > 1
-			|| reference.specular > 1 || reference.diffuse > 1)
+			|| reference.specular > 1 || reference.diffuse > 1
+			|| reference.type > 1 || reference.angle > 1)
+		return (parse_error(INVALID_OBJECT));
+	if (light_type == SPHERICAL_LIGHT && reference.angle)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.normal || reference.apex || reference.axis
-			|| reference.angle || reference.from || reference.to
-			|| reference.rayon || reference.brillance || reference.rotation || reference.reflection || reference.transparent)
+		|| reference.from || reference.to
+		|| reference.rayon || reference.brillance || reference.rotation 
+		|| reference.reflection || reference.transparent)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
 }
@@ -30,6 +34,8 @@ static void			set_default_light(t_light *new)
 	new->intensity = 5.5;
 	new->specular = 0.5;
 	new->diffuse = 0.5;
+	new->type = SPHERICAL_LIGHT;
+	new->angle = M_PI_4;
 	new->hit_light = &hit_light;
 }
 
@@ -55,6 +61,16 @@ static int			check_light(t_light *new, char *tmp, t_pars_object *index)
 	else if (!ft_strncmp(DIFFUSE, tmp, (n = ft_strlen(DIFFUSE))))
 	{
 		if ((!fill_data(tmp + n, &new->diffuse)) && !(index->diffuse)++)
+			return (parse_error(INVALID_PARAM_FORMAT));
+	}
+	else if (!ft_strncmp(TYPE, tmp, (n = ft_strlen(TYPE))))
+	{
+		if ((!fill_int_data(tmp + n, &new->type)) && !(index->type)++)
+			return (parse_error(INVALID_PARAM_FORMAT));
+	}
+	else if (!ft_strncmp(ANGLE, tmp, (n = ft_strlen(ANGLE))))
+	{
+		if ((!fill_data(tmp + n, &new->angle)) && !(index->angle)++)
 			return (parse_error(INVALID_PARAM_FORMAT));
 	}
 	else
@@ -83,7 +99,7 @@ int					set_light(t_env *env, t_list **list_obj)
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
-	if (!check_reference(reference))
+	if (!check_reference(reference, new_light.type))
 		return (0);
 	if (new_light.diffuse + new_light.specular > 1)
 		return (parse_error(INVALID_LIGHT));
