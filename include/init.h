@@ -8,6 +8,6 @@ void				init_default_camera(t_env *env);
 pthread_t			*init_thread(int nb_thread);
 t_image				*init_image(void *mlx, int width, int height);
 void				init_env(t_env *env);
-t_menu              *creat_menu(void *addr_mlx);
+t_menu              *creat_menu(void);
 
 #endif

@@ -1,4 +1,6 @@
 #include "rtv1.h"
+#include "menu.h"
+#include <stdio.h>
 
 int				red_cross(void *param)
 {
@@ -9,9 +11,8 @@ int				red_cross(void *param)
 	return (0);
 }
 
-int ft_mouse(int clic, int x, int y, t_menu *menu)
+static void scroll_menu(int clic, t_menu *menu)
 {
-	x = y;
 	int size_scroll;
 	int	size_y;
 
@@ -29,5 +30,35 @@ int ft_mouse(int clic, int x, int y, t_menu *menu)
 			mlx_put_image_to_window(menu->addr_mlx, menu->addr_win,
 			menu->page->image, 0, menu->y_scroll -= size_scroll);
 	}
+}
+
+static void	 select_scene(int x, int y, t_menu *menu)
+{
+	t_list *button;
+	t_data_draw *data;
+	t_env		*env;
+
+	button = menu->button->next;
+	env = menu->env;
+	 while (button)
+	 {
+		 data = (t_data_draw*)(button->content);
+		 if (data->tmp_x <= x && data->limit_x >= x
+		 && (data->tmp_y + menu->y_scroll) <= y
+		 && (data->limit_y + menu->y_scroll) >= y)
+		{
+			init_scene(env, data->path);
+			break;
+		}
+		 button = button->next;
+	 }
+}
+
+int ft_mouse(int clic, int x, int y, t_menu *menu)
+{
+	if (clic == 4 || clic == 5)
+		scroll_menu(clic, menu);
+	if (clic == 1)
+		select_scene(x , y, menu);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/28 13:57:07 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/30 11:07:58 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	set_primary_ray(t_env *env, t_ray *ray, int j, int i)
 	ray->org = product_vec_matrix(env->select->c->matrix,
 			null_vector);
 	ray->coeff = 1;
-//	ray->thread = env->nb_thread;
+	ray->thread = env->nb_thread;
 }
 
 
@@ -72,7 +72,7 @@ static t_color	add_color(t_color current, t_color to_add, double t)
 	return (current);
 }
 
-t_color				raycast(t_env *env, t_ray ray, int depth)
+static t_color				raycast(t_env *env, t_ray ray, int depth)
 {
 	t_obj			*tmp;
 	double			t;
@@ -114,15 +114,15 @@ void		*raytracing(void *params)
 	char		*data;
 
 	env = (t_env*)(params);
-	if (env->nb_thread)
-		l = ft_limit_thread(env->nb_thread, env->image->width, env->image->height);
+	if (env->nb_thread == 9)
+	{
+		l.y = -1;
+		l.max_y = 200;
+		l.max_x = 400;
+		l.tmp_x = -1;
+	}
 	else
-		{
-			l.y = -1;
-			l.max_y = 200;
-			l.max_x = 400;
-			l.tmp_x = -1;
-		}
+		l = ft_limit_thread(env->nb_thread, env->image->width, env->image->height);
 	data = env->image->data;
 
 	while (++l.y < l.max_y)

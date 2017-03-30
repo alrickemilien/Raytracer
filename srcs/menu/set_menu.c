@@ -43,7 +43,7 @@ static int     set_menu(t_menu *menu)
 		if(!(check_stat(ft_strjoin(
 			"scene/", file->d_name), &nb_data_draw, &marge, menu)))
 			continue;
-	marge = 100 + 130 * nb_data_draw;
+	marge = 100 + 135 * nb_data_draw;
 	if (!(menu->page = init_image(menu->addr_mlx, WIN_WIDTH,
 		(WIN_HEIGHT < marge ? marge : WIN_HEIGHT))))
         merror();
@@ -53,7 +53,7 @@ static int     set_menu(t_menu *menu)
 	return (nb_data_draw);
 }
 
-t_menu	*creat_menu(void *addr_mlx)
+t_menu	*creat_menu()
 {
 	t_menu *new_menu;
     int     nb_data_draw;
@@ -61,9 +61,9 @@ t_menu	*creat_menu(void *addr_mlx)
     nb_data_draw = 0;
 	if (!(new_menu = (t_menu*)ft_memalloc(sizeof(t_menu))))
 		return (NULL);
-	new_menu->addr_mlx = addr_mlx;
+	new_menu->addr_mlx = mlx_init();
 	if (!(nb_data_draw = set_menu(new_menu)))
         merror();
-    new_menu->addr_win = mlx_new_window(addr_mlx, WIN_WIDTH, WIN_HEIGHT, "Menu_RT");
+    new_menu->addr_win = mlx_new_window(new_menu->addr_mlx, WIN_WIDTH, WIN_HEIGHT, "Menu_RT");
 	return (new_menu);
 }

@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:54:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/29 16:57:07 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/29 17:55:17 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ int					error(t_env *env, char *str);
 void				recycle(char **old_ptr, char *new_ptr);
 void				set_default_camera(t_camera *new);
 int					clean_error(char **str);
+void	free_list(t_list **obj, t_list **camera, t_list **t_3, t_env *env);
 
 
 #endif

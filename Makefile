@@ -89,6 +89,7 @@ SRCS=\
 	srcs/menu/set_menu.c\
 	srcs/event/event_mouse.c\
 	srcs/event/event.c\
+	srcs/event/free_all_list.c\
 
 OBJ=$(SRCS:.c=.o)
 

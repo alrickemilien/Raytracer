@@ -15,7 +15,6 @@
 # define NBR_DESCRIPTION 19
 # define ZERO 0.000000001
 # define LIGHT_PTR ((t_light*)(tmp_light->content))
-# define NB_THREAD 0 
 
 typedef struct	s_vector
 {
@@ -53,17 +52,6 @@ typedef	struct		s_image
 	int			width;
 	int			height;
 }				t_image;
-
-
-typedef struct s_menu
-{
-    void    *addr_mlx;
-    void    *addr_win;
-	t_image *page;
-	t_list	*button;
-	int		y_scroll;
-	int		etat;
-}				t_menu;
 
 typedef struct		s_ray
 {
@@ -257,6 +245,17 @@ typedef	struct		s_env
 	double			fov;
 	t_select		*select;
 }					t_env;
+
+typedef struct s_menu
+{
+    void    *addr_mlx;
+    void    *addr_win;
+	t_env	*env;
+	t_image *page;
+	t_list	*button;
+	int		y_scroll;
+	int		etat;
+}				t_menu;
 
 int					merror(void);
 

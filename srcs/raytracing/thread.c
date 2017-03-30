@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:52:08 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/29 10:46:43 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/30 15:05:11 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		thread(pthread_t *t, void *(*funct)(void*), void *params, int size)
 {
 	int		nb;
 
-	nb =  0;
+	nb =  -1;
 	while (++nb < 8)
 	{
 		pthread_create(&t[nb], NULL, funct, &params[size * nb]);
