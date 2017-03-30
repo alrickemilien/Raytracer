@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/29 13:21:15 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/30 11:51:03 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,12 @@ static t_color		shining(t_env *env, t_list *lights, t_ray *ray, double *norme)
 		if (!(d = fabs(dot_product(light_vec, ray->dir))))
 			d = 0.000001;
 		d = acos(d);
-		f[0] = 2.61 * exp(-pow(((d / (0.2 * (1 / tmp)))), 2));
-		d = 0.478 * f[0];
+		f[0] = ((t_light*)(lights->content))->intensity * exp(-pow(((d / (0.2 * (1 / tmp)))), 2));
+		d = f[0];
 		//printf("%lf\n", d);
-		color.blue += (unsigned char)(ft_dtrim(0, 255 - color.blue, 255 * d));
-		color.red += (unsigned char)(ft_dtrim(0, 255 - color.red, 255 * d));
-		color.green += (unsigned char)(ft_dtrim(0, 255 - color.green, 255 * d));
+		color.blue += (unsigned char)(ft_dtrim(0, 255 - color.blue, 255 * d * (10 / tmp)));
+		color.red += (unsigned char)(ft_dtrim(0, 255 - color.red, 255 * d * (10 / tmp)));
+		color.green += (unsigned char)(ft_dtrim(0, 255 - color.green, 255 * d * (10 / tmp)));
 		lights = lights->next;
 	}
 	return (color);

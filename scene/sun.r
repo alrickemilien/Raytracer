@@ -18,7 +18,7 @@ camera:
 
 camera:
 {
-	from: (-100 100 0)
+	from: (-70 70 0)
 	to: (1 0 0)
 }
 
@@ -61,7 +61,7 @@ sphere:
 light: 
 {
 	position: (1 1 2)
-	intensity: (4)
+	intensity: (10)
 }
 
 cylinder:
