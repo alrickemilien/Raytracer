@@ -6,20 +6,12 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:51 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/29 16:56:37 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/31 16:45:46 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "parser.h"
-
-int		error(t_env *env, char *str)
-{
-	if (str)
-		ft_putendl_fd(str, 2);
-	end_program(env);
-	return (0);
-}
 
 int		parse_error(char *str)
 {

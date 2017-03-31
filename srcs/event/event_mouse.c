@@ -2,12 +2,18 @@
 #include "menu.h"
 #include <stdio.h>
 
-int				red_cross(void *param)
+int				red_cross(t_menu *menu)
 {
-	t_env		*env;
+	end_menu(menu, menu->addr_mlx, menu->addr_win, menu->page->addr_img);
+	return (0);
+}
 
-	env = (t_env*)param;
-	end_program(env);
+int				red_cross_env(t_menu *menu)
+{
+	t_env *env;
+
+	env = menu->env;
+	end_scene(menu, env->addr_mlx, env->addr_win, env->image->addr_img);
 	return (0);
 }
 
@@ -22,13 +28,13 @@ static void scroll_menu(int clic, t_menu *menu)
 	{
 		if (menu->y_scroll + size_scroll < 0)
 			mlx_put_image_to_window(menu->addr_mlx, menu->addr_win,
-			menu->page->image, 0, menu->y_scroll += size_scroll);
+			menu->page->addr_img, 0, menu->y_scroll += size_scroll);
 	}
 	else if (clic == 5)
 	{
 		if (menu->y_scroll - size_scroll >= -(size_y - 1000))
 			mlx_put_image_to_window(menu->addr_mlx, menu->addr_win,
-			menu->page->image, 0, menu->y_scroll -= size_scroll);
+			menu->page->addr_img, 0, menu->y_scroll -= size_scroll);
 	}
 }
 
@@ -45,9 +51,11 @@ static void	 select_scene(int x, int y, t_menu *menu)
 		 data = (t_data_draw*)(button->content);
 		 if (data->tmp_x <= x && data->limit_x >= x
 		 && (data->tmp_y + menu->y_scroll) <= y
-		 && (data->limit_y + menu->y_scroll) >= y)
+		 && (data->limit_y + menu->y_scroll) >= y
+		 && !env->etat)
 		{
-			init_scene(env, data->path);
+			env->etat = 1;
+			init_scene(menu, data->path);
 			break;
 		}
 		 button = button->next;

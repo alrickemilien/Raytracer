@@ -44,7 +44,7 @@ typedef struct		s_pivot_gauss
 
 typedef	struct		s_image
 {
-	void		*image;
+	void		*addr_img;
 	char		*data;
 	int			bpp;
 	int			sizeline;
@@ -244,6 +244,7 @@ typedef	struct		s_env
 	int				nbr_cam;
 	double			fov;
 	t_select		*select;
+	int				etat;
 }					t_env;
 
 typedef struct s_menu

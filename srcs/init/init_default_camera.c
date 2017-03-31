@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:03 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/24 18:10:22 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/31 17:03:00 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_default_camera(t_env *env)
 	t_obj		*obj;
 
 	if (!env->list)
-		error(env, INVALID_NO_OBJ);
+		merror();
 	obj = ((t_obj*)(env->list->content));
 	if (!(new = (t_camera*)malloc(sizeof(t_camera))))
 		return ;

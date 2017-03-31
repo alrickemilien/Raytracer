@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:38 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/30 14:23:17 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/31 17:02:31 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,15 @@ void	ray_draw_data(t_menu *menu, t_env *env)
 		tmp = tmp->next;
 		close(env->fd);
 	}
+	mlx_destroy_image(env->addr_mlx, env->image->addr_img);
 	free_list(&env->list, &env->camera, &env->light, env);
 }
 
-void init_scene(t_env *env, char *path)
+void init_scene(t_menu *menu, char *path)
 {
+	t_env *env;
+
+	env = menu->env;
 	env->addr_mlx = mlx_init();
 	if (!(env->image = init_image(env->addr_mlx, WIN_WIDTH, WIN_HEIGHT)))
 		merror();
@@ -69,6 +73,7 @@ void init_scene(t_env *env, char *path)
 	env->addr_win = mlx_new_window(env->addr_mlx, WIN_WIDTH, WIN_HEIGHT, "RT");
 	env->tab_thread = init_thread(8);
 	env->nb_thread = 0;
+	free_list(&env->list, &env->camera, &env->light, env);
 	env->fd = open(path, O_RDWR);
 	if (!parser(env))
 		exit(0);
@@ -78,9 +83,18 @@ void init_scene(t_env *env, char *path)
 		sort_camera(env);
 	env->tab_env = init_data_tab_thread((void*)env, (sizeof(t_env)), 8);
 	thread(env->tab_thread, &raytracing, env->tab_env, sizeof(t_env));
-	mlx_put_image_to_window(env->addr_mlx, env->addr_win, env->image->image, 0, 0);
-	free_list(&env->list, &env->camera, &env->light, env);
+	mlx_put_image_to_window(env->addr_mlx, env->addr_win, env->image->addr_img, 0, 0);
+	mlx_hook(env->addr_win, 2, 1L << 0 | 1 << 1, &key_press, menu);
+	mlx_hook(env->addr_win, 17, 0L, &red_cross_env, env);
 	mlx_loop(env->addr_mlx);
+}
+
+void 	loop_menu(t_menu *menu)
+{
+	mlx_hook(menu->addr_win, 2, 1L << 0 | 1 << 1, &key_press, menu);
+	mlx_mouse_hook(menu->addr_win, ft_mouse, menu);
+	mlx_hook(menu->addr_win, 17, 0L, &red_cross, menu);
+	mlx_loop(menu->addr_mlx);
 }
 
 int		main()
@@ -89,17 +103,13 @@ int		main()
 	t_menu	*menu;
 
 	if (!(env = (t_env*)ft_memalloc(sizeof(t_env))))
-		error(env, "error malloc in main");
+		merror();
 	init_env(env);
 	if (!(menu = creat_menu()))
 		merror();
 	ray_draw_data(menu, env);
 	menu->env = env;
-	mlx_put_image_to_window(menu->addr_mlx, menu->addr_win, menu->page->image, 0, 0);
-//	mlx_hook(env->addr_win, 2, 1L << 0 | 1 << 1, &key_press, env);
-	mlx_hook(menu->addr_win, 2, 1L << 0 | 1 << 1, &key_press, env);
-	mlx_mouse_hook(menu->addr_win, ft_mouse, menu);
-//	mlx_hook(env->addr_win, 17, 0L, &red_cross, env);
-	mlx_loop(menu->addr_mlx);
+	mlx_put_image_to_window(menu->addr_mlx, menu->addr_win, menu->page->addr_img, 0, 0);
+	loop_menu(menu);
 	return (0);
 }
