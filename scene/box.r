@@ -1,13 +1,13 @@
 camera:
 {
-	from: (7 2 7)
+	from: (0 1 7)
 	to: (0 0 0)
 }
 
 camera:
 {
-	from: (-7 2 7)
-	to: (0 0 0)
+	from: (0 1 7)
+	to: (3 2 0)
 }
 
 plan:

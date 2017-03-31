@@ -12,7 +12,7 @@ static void	del_tab(char **tab, int size)
 	}
 }
 
-static int		check_type(t_obj *new, char *tmp)
+static int		check_type(t_light *new, char *tmp)
 {
 	char	*tab[2];
 	int		i;
@@ -34,11 +34,10 @@ static int		check_type(t_obj *new, char *tmp)
 	return (n);
 }
 
-int		set_type_light(t_env *env, char *tmp, t_obj *new, t_pars_object *index)
+int		set_type_light(char *tmp, t_light *new, t_pars_object *index)
 {
 	int		n;
 
-	(void)env;
 	index->type++;
 	while (*tmp == ' ' || *tmp == '\t')
 		tmp++;
@@ -49,7 +48,7 @@ int		set_type_light(t_env *env, char *tmp, t_obj *new, t_pars_object *index)
 	if (!(n = check_type(new, tmp)))
 		return (0);
 	tmp += n;
-	while(ft_isalpha(*tmp))
+	while (ft_isalpha(*tmp))
 		tmp++;
 	while (*tmp == ' ' || *tmp == '\t')
 		tmp++;

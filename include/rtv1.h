@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/30 13:00:52 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/31 09:59:51 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct		s_light
 			t_ray *ray, double *t);
 	int				type;
 	double			angle;
+	t_vector		axis;
 }					t_light;
 
 typedef struct		s_matrix_rot
@@ -285,7 +286,9 @@ int					set_translation(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
 int					set_perturbation(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
-int					set_resize_texture(t_env *env, char *tmp, t_obj *new, t_pars_object *index);
+int					set_resize_texture(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_type_light(char *tmp, t_light *new, t_pars_object *index);
 
 int					set_camera(t_env *env, t_list **list_obj);
 int					set_scene(t_env *env, t_list **list_obj);

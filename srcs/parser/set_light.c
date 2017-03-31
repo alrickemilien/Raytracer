@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:32 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/30 13:06:43 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/31 10:25:04 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,29 @@
 static int			check_reference(t_pars_object reference, int light_type)
 {
 	if (reference.position > 1 || reference.intensity > 1
-			|| reference.specular > 1 || reference.diffuse > 1
-			|| reference.type > 1 || reference.angle > 1)
+		|| reference.specular > 1 || reference.diffuse > 1
+		|| reference.type > 1 || reference.angle > 1 || reference.axis > 1)
 		return (parse_error(INVALID_OBJECT));
-	if (light_type == SPHERICAL_LIGHT && reference.angle)
+	if (light_type == SPHERICAL_LIGHT && (reference.angle || reference.axis))
 		return (parse_error(INVALID_OBJECT));
-	if (reference.normal || reference.apex || reference.axis
+	if (reference.normal || reference.apex 
 		|| reference.from || reference.to
-		|| reference.rayon || reference.brillance || reference.rotation 
-		|| reference.reflection || reference.transparent)
+		|| reference.rayon || reference.brillance 
+		|| reference.rotation || reference.reflection 
+		|| reference.transparent)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
 }
 
 static void			set_default_light(t_light *new)
 {
-	set_vec(&new->org, 0, 0, 1);
+	set_vec(&new->org, 0, 0, 3);
+	set_vec(&new->axis, 0, 0, -1);
 	new->intensity = 5.5;
 	new->specular = 0.5;
 	new->diffuse = 0.5;
 	new->type = SPHERICAL_LIGHT;
-	new->angle = M_PI_4;
+	new->angle = M_PI_2 - (M_PI_4 / 2);
 	new->hit_light = &hit_light;
 }
 
@@ -65,12 +67,17 @@ static int			check_light(t_light *new, char *tmp, t_pars_object *index)
 	}
 	else if (!ft_strncmp(TYPE, tmp, (n = ft_strlen(TYPE))))
 	{
-		if ((!fill_int_data(tmp + n, &new->type)) && !(index->type)++)
+		if (!set_type_light(tmp + n, new, index))
 			return (parse_error(INVALID_PARAM_FORMAT));
 	}
 	else if (!ft_strncmp(ANGLE, tmp, (n = ft_strlen(ANGLE))))
 	{
 		if ((!fill_data(tmp + n, &new->angle)) && !(index->angle)++)
+			return (parse_error(INVALID_PARAM_FORMAT));
+	}
+	else if (!ft_strncmp(AXIS, tmp, (n = ft_strlen(AXIS))))
+	{
+		if ((!fill_data_vec(tmp + n, &new->axis)) && !(index->axis)++)
 			return (parse_error(INVALID_PARAM_FORMAT));
 	}
 	else
