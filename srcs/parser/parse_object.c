@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_object.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/31 11:33:43 by aemilien          #+#    #+#             */
+/*   Updated: 2017/03/31 11:34:05 by aemilien         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 
-int		parse_object(t_env *env, t_obj *obj, 
-						int (*check_object)(t_env *env, t_obj *obj, 
+int		parse_object(t_env *env, t_obj *obj,
+						int (*check_object)(t_env *env, t_obj *obj,
 								char *line, void *reference),
 						void *reference)
 {

@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:19 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/08 11:53:05 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/31 12:24:51 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,13 @@ static int	check_object(t_env *env, char *line)
 	return (1);
 }
 
-int		parser(t_env *env)
+int			parser(t_env *env)
 {
 	char	*line;
 
 	line = 0;
 	while (get_next_line(env->fd, &line))
 	{
-		ft_putendl(line);
 		recycle(&line, ft_strtrim(line));
 		if (ft_strcmp(line, ""))
 			if (!check_object(env, line))

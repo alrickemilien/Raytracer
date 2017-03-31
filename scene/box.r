@@ -150,8 +150,6 @@ light:
 {
 	position: (1.2 0.2 0)
 	intensity: (20)
-	specular: (0.7)
-	diffuse: (0.3)
 }
 
 light:

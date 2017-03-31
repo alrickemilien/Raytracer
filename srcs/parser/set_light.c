@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:32 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/31 10:25:04 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/31 12:45:02 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,52 +37,34 @@ static void			set_default_light(t_light *new)
 	new->specular = 0.5;
 	new->diffuse = 0.5;
 	new->type = SPHERICAL_LIGHT;
-	new->angle = M_PI_2 - (M_PI_4 / 2);
+	new->angle = M_PI_4;
 	new->hit_light = &hit_light;
 }
 
 static int			check_light(t_light *new, char *tmp, t_pars_object *index)
 {
 	int				n;
+	int				t;
 
-	if (!ft_strncmp(POSITION, tmp, (n = ft_strlen(POSITION))))
-	{
-		if ((!fill_data_vec(tmp + n, &new->org)) && !(index->position)++)
-			return (parse_error(INVALID_PARAM_FORMAT));
-	}
-	else if (!ft_strncmp(INTENSITY, tmp, (n = ft_strlen(INTENSITY))))
-	{
-		if ((!fill_data(tmp + n, &new->intensity)) && !(index->intensity)++)
-			return (parse_error(INVALID_PARAM_FORMAT));
-	}
-	else if (!ft_strncmp(SPECULAR, tmp, (n = ft_strlen(SPECULAR))))
-	{
-		if ((!fill_data(tmp + n, &new->specular)) && !(index->specular)++)
-			return (parse_error(INVALID_PARAM_FORMAT));
-	}
-	else if (!ft_strncmp(DIFFUSE, tmp, (n = ft_strlen(DIFFUSE))))
-	{
-		if ((!fill_data(tmp + n, &new->diffuse)) && !(index->diffuse)++)
-			return (parse_error(INVALID_PARAM_FORMAT));
-	}
-	else if (!ft_strncmp(TYPE, tmp, (n = ft_strlen(TYPE))))
-	{
-		if (!set_type_light(tmp + n, new, index))
-			return (parse_error(INVALID_PARAM_FORMAT));
-	}
-	else if (!ft_strncmp(ANGLE, tmp, (n = ft_strlen(ANGLE))))
-	{
-		if ((!fill_data(tmp + n, &new->angle)) && !(index->angle)++)
-			return (parse_error(INVALID_PARAM_FORMAT));
-	}
-	else if (!ft_strncmp(AXIS, tmp, (n = ft_strlen(AXIS))))
-	{
-		if ((!fill_data_vec(tmp + n, &new->axis)) && !(index->axis)++)
-			return (parse_error(INVALID_PARAM_FORMAT));
-	}
-	else
-		return (parse_error(INVALID_DESCRIPTION));
-	return (1);
+	t = 1;
+	if ((!ft_strncmp(POSITION, tmp, (n = ft_strlen(POSITION))))
+			&& fill_data_vec(tmp + n, &new->org))
+		t = 0;
+	if ((!ft_strncmp(INTENSITY, tmp, (n = ft_strlen(INTENSITY))))
+			&& fill_data(tmp + n, &new->intensity))
+		t = 0;
+	if ((!ft_strncmp(TYPE, tmp, (n = ft_strlen(TYPE))))
+			&& set_type_light(tmp + n, new, index))
+		t = 0;
+	if ((!ft_strncmp(ANGLE, tmp, (n = ft_strlen(ANGLE))))
+			&& fill_data(tmp + n, &new->angle))
+		t = 0;
+	if ((!ft_strncmp(AXIS, tmp, (n = ft_strlen(AXIS))))
+			&& fill_data_vec(tmp + n, &new->axis))
+		t = 0;
+	if (!t)
+		return (1);
+	return (parse_error(INVALID_DESCRIPTION));
 }
 
 int					set_light(t_env *env, t_list **list_obj)
@@ -97,6 +79,7 @@ int					set_light(t_env *env, t_list **list_obj)
 	line = NULL;
 	while (get_next_line(env->fd, &line))
 	{
+		ft_putendl(line);
 		recycle(&line, ft_strtrim(line));
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_light(&new_light, line, &reference))
