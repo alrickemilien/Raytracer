@@ -20,6 +20,7 @@ plan:
 {
 	color: (0xb04f89)
 	normal: (0 1 0)
+	texture: (plan/error.xpm)
 }
 
 cylinder:

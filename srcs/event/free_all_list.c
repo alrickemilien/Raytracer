@@ -12,7 +12,10 @@ static	void ft_objdel_s(t_list **obj, void *addr_mlx)
 		if ((tmp_obj = (t_obj*)(list->content)))
 		{
 			if (tmp_obj->texture)
+			{
 				mlx_destroy_image(addr_mlx, tmp_obj->texture->addr_img);
+				free(tmp_obj->texture);
+			}
 			if (tmp_obj->csg)
 				ft_objdel_s(&tmp_obj->csg, addr_mlx);
 			if (tmp_obj->matrix)

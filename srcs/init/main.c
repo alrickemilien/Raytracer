@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:38 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/01 18:02:37 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/01 18:39:16 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@ void	ray_draw_data(t_menu *menu, t_env *env)
 	data = (t_data_draw*)(tmp->content);
 	draw_menu(*data, menu->page);
     tmp = menu->button->next;
-	env->image = init_image(menu->addr_mlx, 400, 200);
-	env->tab_ray = (t_ray*)malloc(sizeof(t_ray) * 400 * 600);
-	env->image_aspect_ratio = 400 / 200;
-	env->nb_thread = 9;
 	while (tmp)
     {
 		free_list(&env->list, &env->camera, &env->light, env);
@@ -59,8 +55,7 @@ void	ray_draw_data(t_menu *menu, t_env *env)
 	mlx_destroy_image(env->addr_mlx, env->image->addr_img);
 	free(env->tab_ray);
 	free_list(&env->list, &env->camera, &env->light, env);
-	if (env->select)
-		ft_bzero(env->select, sizeof(t_select));
+	ft_bzero(env->select, sizeof(t_select));
 }
 
 void init_scene(t_menu *menu, char *path)

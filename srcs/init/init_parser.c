@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:08 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/01 16:38:12 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/01 18:39:35 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,10 @@ void	init_env(t_env *env)
 	env->fov = M_PI_4;
 	env->scale = tan(M_PI_4 * 0.5);
 	env->select = (t_select*)ft_memalloc(sizeof(t_select));
+	env->image = init_image(env->addr_mlx, 400, 200);
+	env->tab_ray = (t_ray*)malloc(sizeof(t_ray) * 400 * 600);
+	env->image_aspect_ratio = 400 / 200;
+	env->nb_thread = 9;
 	init_tab_str_object(env);
 	init_tab_function_object(env);
 	init_tab_str_description(env);

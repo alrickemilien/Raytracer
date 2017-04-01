@@ -79,7 +79,7 @@ int				key_press(int keycode, t_menu *menu)
 		end_menu(menu, menu->addr_mlx, menu->addr_win, menu->page->addr_img);
 	if ((keycode == KEY_OPEN_BRACKET || keycode == KEY_CLOSE_BRACKET) && (env->etat))
 		switch_cam(env, keycode);
-	if (env->select->o || env->select->c)
+	if ((env->select->o || env->select->c) && (env->etat))
 		ft_put_pos_select(env);
 	return (0);
 }
