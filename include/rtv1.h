@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:17:22 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/31 16:34:43 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/01 14:25:08 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void				thread(pthread_t *t, void *(*funct)(void*), void *params, int size);
 int ft_mouse(int clic, int x, int y, t_menu *menu);
 t_color mapping(t_obj obj, t_surface s);
 void 	loop_menu(t_menu *menu);
-void	end_scene(t_menu *menu, void *addr_mlx, void *addr_win, void *addr_img);
+void	end_scene(t_menu *menu, void *addr_mlx, void *addr_win);
 void	end_menu(t_menu *menu, void *addr_mlx, void *addr_win, void *addr_img);
 
 

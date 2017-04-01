@@ -62,20 +62,22 @@ int				key_press(int keycode, t_menu *menu)
 
 	env = menu->env;
 	list = env->list;
-	if (keycode == KEY_PAD_SUB || keycode == KEY_PAD_ADD)
+	if ((keycode == KEY_PAD_SUB || keycode == KEY_PAD_ADD) && env->etat)
 	{
 		if ((env->k > 0.1) && (keycode == KEY_PAD_SUB))
 			env->k -= 0.1;
 		else
 			env->k += 0.1;
+		free(env->tab_env);
+		env->tab_env = init_data_tab_thread((void*)env, sizeof(t_env), 8);
 		thread(env->tab_thread, raytracing, env->tab_env,sizeof(t_env));
 		mlx_put_image_to_window(env->addr_mlx, env->addr_win, env->image->addr_img, 0, 0);
 	}
 	if ((keycode == KEY_ESC) && (env->etat))
-		end_scene(menu, env->addr_mlx, env->addr_win, env->image->addr_img);
+		end_scene(menu, env->addr_mlx, env->addr_win);
 	else if ((keycode == KEY_ESC) && !(env->etat))
 		end_menu(menu, menu->addr_mlx, menu->addr_win, menu->page->addr_img);
-	if (keycode == KEY_OPEN_BRACKET || keycode == KEY_CLOSE_BRACKET)
+	if ((keycode == KEY_OPEN_BRACKET || keycode == KEY_CLOSE_BRACKET) && (env->etat))
 		switch_cam(env, keycode);
 	if (env->select->o || env->select->c)
 		ft_put_pos_select(env);

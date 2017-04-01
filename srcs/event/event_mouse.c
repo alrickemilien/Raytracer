@@ -4,16 +4,13 @@
 
 int				red_cross(t_menu *menu)
 {
-	end_menu(menu, menu->addr_mlx, menu->addr_win, menu->page->addr_img);
-	return (0);
-}
-
-int				red_cross_env(t_menu *menu)
-{
 	t_env *env;
 
 	env = menu->env;
-	end_scene(menu, env->addr_mlx, env->addr_win, env->image->addr_img);
+	if (env->etat)
+		end_scene(menu, env->addr_mlx, env->addr_win);
+	else
+		end_menu(menu, menu->addr_mlx, menu->addr_win, menu->page->addr_img);
 	return (0);
 }
 

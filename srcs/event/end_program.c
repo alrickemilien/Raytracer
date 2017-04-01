@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:44:37 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/31 16:21:28 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/01 18:11:32 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 #include "parser.h"
 
 
- void	end_scene(t_menu *menu, void *addr_mlx, void *addr_win, void *addr_img)
+ void	end_scene(t_menu *menu, void *addr_mlx, void *addr_win)
 {
 	t_env *env;
 
 	env = menu->env;
-	mlx_destroy_image(addr_mlx, addr_img);
 	mlx_destroy_window(addr_mlx, addr_win);
 	ft_bzero(env->tab_ray, sizeof(t_ray) * 1000 * 1000);
 	free_list(&env->list, &env->camera, &env->light, env);
@@ -31,8 +30,9 @@
 {
 	t_env *env;
 
+	(void)addr_img;
 	env = menu->env;
-	mlx_destroy_image(addr_mlx, addr_img);
+	mlx_destroy_image(env->addr_mlx, env->image->addr_img);
 	mlx_destroy_window(addr_mlx, addr_win);
 	if (env->tab_ray)
 		free(env->tab_ray);
