@@ -4,7 +4,7 @@
 
 typedef struct s_data_draw
 {
-	int		nb_scene;
+	int		error;
 	int 	x;
 	int		size_x;
 	int		size_y;

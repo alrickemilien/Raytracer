@@ -12,6 +12,24 @@ pthread_t	*init_thread(int nb_thread)
 	return (tab_thread);
 }
 
+t_image	*init_texture(void *addr_mlx, char *path)
+{
+    t_image     *texture;
+
+	if (!(texture = (t_image*)ft_memalloc(sizeof(t_image))))
+		return(NULL);
+	if (!(texture->addr_img = mlx_xpm_file_to_image(addr_mlx,
+	path, &(texture->width), &(texture->height))))
+    {
+        free(texture);
+		return(NULL);
+    }
+    texture->data = mlx_get_data_addr(
+		texture->addr_img, &(texture->bpp), &(texture->sizeline), &(texture->endian));
+    texture->bpp = texture->bpp / 8;
+    return (texture);
+}
+
 t_image		*init_image(void *addr_mlx, int width, int height)
 {
 	t_image *image;

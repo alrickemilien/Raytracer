@@ -32,7 +32,6 @@ t_data_draw		params_data_draw_scene(t_menu *menu, int pos, int marge, char *path
     (void)menu;
 	ft_bzero(&draw, (sizeof(t_data_draw)));
 	draw.path = path;
-	draw.nb_scene = pos;
 	draw.tmp_x = (pos % 2) * 500 + 49;
 	draw.tmp_y = marge * 250 + 99;
 	draw.edge = 2;

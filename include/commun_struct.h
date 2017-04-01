@@ -253,9 +253,9 @@ typedef struct s_menu
     void    *addr_win;
 	t_env	*env;
 	t_image *page;
+	t_image *error;
 	t_list	*button;
 	int		y_scroll;
-	int		etat;
 }				t_menu;
 
 int					merror(void);

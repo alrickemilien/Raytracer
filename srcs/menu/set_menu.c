@@ -64,6 +64,7 @@ t_menu	*creat_menu()
 	new_menu->addr_mlx = mlx_init();
 	if (!(nb_data_draw = set_menu(new_menu)))
         merror();
+	new_menu->error = init_texture(new_menu->addr_mlx, "srcs/textures/plan/error.xpm");
     new_menu->addr_win = mlx_new_window(new_menu->addr_mlx, WIN_WIDTH, WIN_HEIGHT, "Menu_RT");
 	return (new_menu);
 }

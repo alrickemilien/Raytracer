@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:38 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/01 18:39:16 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/01 19:24:43 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	ray_draw_data(t_menu *menu, t_env *env)
 		}
 		if (!parser(env))
 		{
-
+			data->error = 1;
+			data->picture = menu->error;
 			draw_menu(*data, menu->page);
 			tmp = tmp->next;
 			continue;
