@@ -4,10 +4,23 @@ camera:
 	to: (0 0 0)
 }
 
+camera:
+{
+	from: (-10 2 7)
+	to: (0 0 0)
+}
+
+camera:
+{
+	from: (0 21 10)
+	to: (0 0 0)
+}
+
 plan:
 {
 	color: (0xb04f89)
 	normal: (0 1 0)
+	texture: (plan/error.xpm)
 }
 
 cylinder:

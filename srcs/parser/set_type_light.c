@@ -1,4 +1,5 @@
-#include "../include/rtv1.h"
+#include "rtv1.h"
+#include "parser.h"
 
 static void	del_tab(char **tab, int size)
 {

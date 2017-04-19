@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "vector.h"
 
 static int	check_light(t_light *light, t_vector dir)
 {

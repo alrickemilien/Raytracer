@@ -6,16 +6,19 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/31 11:36:50 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/19 16:03:16 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "parser.h"
+#include "vector.h"
+#include "rtv1.h"
 
 static t_obj		set_default_plan(t_env *env)
 {
 	t_obj			new_plan;
 
+	ft_bzero(&new_plan, (sizeof(t_obj)));
 	set_vec(&new_plan.n, 0, 1, 0);
 	set_vec(&new_plan.pos, 0, 0, 0);
 	set_vec(&new_plan.translation, 0, 0, 0);
@@ -26,12 +29,8 @@ static t_obj		set_default_plan(t_env *env)
 	new_plan.specular = 1;
 	new_plan.etat = PLAN;
 	new_plan.func_obj = &plan;
-	new_plan.reflection = 0;
 	new_plan.refraction = 1;
 	new_plan.resize_texture = 100;
-	new_plan.texture = NULL;
-	new_plan.transparent = 0;
-	new_plan.csg = NULL;
 	return (new_plan);
 }
 
@@ -86,7 +85,7 @@ int					set_plan(t_env *env, t_list **list_obj)
 		recycle(&line, ft_strtrim(line));
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_plan(env, &new_plan, line, &reference))
-				return (0);
+				return (clean_error(&line));
 		if(line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);

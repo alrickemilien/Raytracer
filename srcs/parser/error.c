@@ -3,22 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:51 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/27 19:27:48 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/31 16:45:46 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
-
-int		error(t_env *env, char *str)
-{
-	if (str)
-		ft_putendl_fd(str, 2);
-	end_program(env);
-	return (0);
-}
+#include "rtv1.h"
+#include "parser.h"
 
 int		parse_error(char *str)
 {
@@ -39,5 +32,11 @@ int		merror(void)
 {
 	perror("");
 	exit(0);
+	return (0);
+}
+
+int		clean_error(char **str)
+{
+	ft_strdel(str);
 	return (0);
 }

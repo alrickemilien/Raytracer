@@ -7,5 +7,4 @@ int		light_obj(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 
 	light_dist = vec_diff(light->pos, ray->org);
 	coeff = exp(-dot_product(ray->dir, light_dist)) * light->intensity;
-	if ()
 }

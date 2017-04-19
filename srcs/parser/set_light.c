@@ -3,13 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   set_light.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:32 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/31 12:58:25 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/19 16:03:28 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "parser.h"
+#include "vector.h"
 #include "rtv1.h"
 
 static int			check_reference(t_pars_object reference, int light_type)
@@ -83,7 +85,7 @@ int					set_light(t_env *env, t_list **list_obj)
 		recycle(&line, ft_strtrim(line));
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_light(&new_light, line, &reference))
-				return (0);
+				return (clean_error(&line));
 		if(line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);

@@ -6,11 +6,13 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/31 18:22:10 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/19 16:02:29 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include "vector.h"
+#include "stdio.h"
 
 static void	set_primary_ray(t_env *env, t_ray *ray, int j, int i)
 {
@@ -100,7 +102,7 @@ static t_color		shining(t_env *env, t_list *lights, t_ray *ray, double *norme)
 	return (color);
 }
 
-t_color				raycast(t_env *env, t_ray ray, int depth)
+static t_color				raycast(t_env *env, t_ray ray, int depth)
 {
 	t_obj			*tmp;
 	double			t;
@@ -146,7 +148,15 @@ void		*raytracing(void *params)
 	char		*data;
 
 	env = (t_env*)(params);
-	l = ft_limit_thread(env->nb_thread);
+	if (env->nb_thread == 9)
+	{
+		l.y = -1;
+		l.max_y = 200;
+		l.max_x = 400;
+		l.tmp_x = -1;
+	}
+	else
+		l = ft_limit_thread(env->nb_thread, env->image->width, env->image->height);
 	data = env->image->data;
 	ft_bzero(&color, sizeof(t_color));
 	while (++l.y < l.max_y)

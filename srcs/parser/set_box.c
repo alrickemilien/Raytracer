@@ -1,16 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   set_box.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/20 14:48:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/01 14:14:08 by aemilien         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../include/rtv1.h"
+#include "parser.h"
+#include "vector.h"
+#include "rtv1.h"
 
 static void			set_boxs_plans(t_list **list, t_obj obj)
 {
@@ -27,6 +17,7 @@ static void			set_boxs_plans(t_list **list, t_obj obj)
 		plan_tab[i].etat = PLAN;
 		plan_tab[i].func_obj = &plan;
 		plan_tab[i].csg = NULL;
+		plan_tab[i].texture = NULL;
 	}
 	new_x = get_vec(obj.size, 0, 0);
 	new_y = get_vec(0, obj.size, 0);
@@ -71,7 +62,7 @@ static t_obj		set_default_box(t_env *env)
 {
 	t_obj			obj;
 
-	ft_bzero(&obj, sizeof(t_obj));
+	ft_bzero(&obj, (sizeof(t_obj)));
 	set_vec(&obj.translation, 0, 0, 0);
 	set_vec(&obj.rotation, 0, 0, 0);
 	obj.color = split_color(mlx_get_color_value(env->addr_mlx, 0x00FF0000));
@@ -114,11 +105,11 @@ static int			check_reference(t_pars_object reference)
 	if (reference.position > 1 || reference.color > 1
 			|| reference.brillance > 1 || reference.rotation > 1
 			|| reference.specular > 1 || reference.diffuse > 1
-			|| reference.reflection > 1 || reference.transparent > 1 
+			|| reference.reflection > 1 || reference.transparent > 1
 			|| reference.translation > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.axis || reference.apex || reference.rayon
-			|| reference.angle || reference.to || reference.from 
+			|| reference.angle || reference.to || reference.from
 			|| reference.type || reference.normal)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
@@ -140,7 +131,7 @@ int					set_box(t_env *env, t_list **list_obj)
 		recycle(&line, ft_strtrim(line));
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_box(env, &box, line, &reference))
-				return (0);
+				return (clean_error(&line));
 		if(line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);

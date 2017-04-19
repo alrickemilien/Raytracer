@@ -6,11 +6,11 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:11 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/23 15:02:07 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/24 18:52:12 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "vector.h"
 
 double	*set_rotation_matrix(double *matrix,
 							double alpha, double beta, double gamma)

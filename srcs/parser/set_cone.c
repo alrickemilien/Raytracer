@@ -1,21 +1,12 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   set_cone.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/20 14:48:09 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/19 13:37:14 by aemilien         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../include/rtv1.h"
+#include "parser.h"
+#include "vector.h"
+#include "rtv1.h"
 
 static t_obj		set_default_cone(t_env *env)
 {
 	t_obj			new_cone;
 
+	ft_bzero(&new_cone, (sizeof(t_obj)));
 	set_vec(&new_cone.axis, 0, 0, 1);
 	set_vec(&new_cone.translation, 0, 0, 0);
 	set_vec(&new_cone.apex, 0, 0, 1);
@@ -28,10 +19,7 @@ static t_obj		set_default_cone(t_env *env)
 	new_cone.specular = 0.5;
 	new_cone.etat = CONE;
 	new_cone.func_obj = &cone;
-	new_cone.reflection = 0;
 	new_cone.refraction = 1;
-	new_cone.transparent = 0;
-	new_cone.csg = NULL;
 	new_cone.size = 20000;
 	return (new_cone);
 }
@@ -103,7 +91,7 @@ int					set_cone(t_env *env, t_list **list_obj)
 		recycle(&line, ft_strtrim(line));
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_cone(env, &new_cone, line, &reference))
-				return (0);
+				return (clean_error(&line));
 		if(line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);

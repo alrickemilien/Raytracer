@@ -1,21 +1,12 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   set_cylinder.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/20 14:48:17 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/19 10:03:58 by aemilien         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../include/rtv1.h"
+#include "parser.h"
+#include "vector.h"
+#include "rtv1.h"
 
 static t_obj		set_default_cylinder(t_env *env)
 {
 	t_obj			new;
 
+	ft_bzero(&new, (sizeof(t_obj)));
 	set_vec(&new.axis, 0, 0, 1);
 	set_vec(&new.apex, 0, 0, 1);
 	set_vec(&new.rotation, 0, 0, 0);
@@ -28,10 +19,7 @@ static t_obj		set_default_cylinder(t_env *env)
 	new.diffuse = 1;
 	new.etat = CYLINDRE;
 	new.func_obj = &cylindre;
-	new.reflection = 0;
 	new.refraction = 1;
-	new.transparent = 0;
-	new.csg = NULL;
 	return (new);
 }
 
@@ -104,7 +92,7 @@ int					set_cylinder(t_env *env, t_list **list_obj)
 		recycle(&line, ft_strtrim(line));
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_cylinder(env, &new_cylinder, line, &reference))
-				return (0);
+				return (clean_error(&line));
 		if(line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);

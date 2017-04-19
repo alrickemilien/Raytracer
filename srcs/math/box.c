@@ -1,5 +1,5 @@
-#include "../include/rtv1.h"
-
+#include "vector.h"
+#include "rtv1.h"
 static int		set_range(t_list **inter, t_inter *plans)
 {
 	t_range		range;

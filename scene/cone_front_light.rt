@@ -1,6 +1,10 @@
 camera:
+<<<<<<< HEAD
 {
 	from: (0 0 0)
+=======
+	from: (1 99999 0)
+>>>>>>> origin/menuv4
 	to: (1 0 0)
 }
 

@@ -1,4 +1,6 @@
-#include "../include/rtv1.h"
+#include "parser.h"
+#include "vector.h"
+#include "rtv1.h"
 
 static t_obj	set_default_csg(t_env *env)
 {
@@ -12,9 +14,7 @@ static t_obj	set_default_csg(t_env *env)
 	new_csg.color = split_color(mlx_get_color_value(env->addr_mlx, 0xFF0000));
 	new_csg.diffuse = 0.5;
 	new_csg.specular = 0.5;
-	new_csg.reflection = 0;
 	new_csg.refraction = 1;
-	new_csg.csg = NULL;
 	return (new_csg);
 }
 
@@ -116,7 +116,7 @@ int				set_csg(t_env *env, t_list **list_obj)
 	}
 	ft_strdel(&line);
 	if (!check_reference(reference))
-		return (0);
+		return (clean_error(&line));
 	set_translation_csg(new.translation, new.csg);
 	ft_lstadd(list_obj, ft_lstnew(&new, (sizeof(t_obj))));
 	return (1);

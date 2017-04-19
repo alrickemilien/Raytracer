@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   shadow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:55 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/30 13:36:00 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/19 16:01:03 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "vector.h"
 
 double			shadow(t_env *env, t_ray ray, double norme)
 {

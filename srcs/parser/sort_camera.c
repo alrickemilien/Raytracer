@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   sort_camera.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:50:51 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:50:52 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/28 17:37:14 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "commun_struct.h"
+#include <stdio.h>
 
 void	sort_camera(t_env *env)
 {

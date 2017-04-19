@@ -1,10 +1,10 @@
-#include "rtv1.h"
+#include "vector.h"
 
-static t_color	mlx_put_xpm(int u, int v, t_image texture)
+t_color		mlx_put_xpm(int u, int v, t_image texture)
 {
 	t_color color;
 	int tmp;
-	
+
 	if (u >= texture.width && v >= texture.height)
 	{
 		u = (u >= texture.width ? texture.width - 1 : u);
@@ -26,7 +26,7 @@ static t_color mapping_plan(t_image texture, t_surface s, double zoom)
 	t_color color;
 
 	u = s.intersection.x * zoom;
-	v = -s.intersection.z * zoom;	
+	v = -s.intersection.z * zoom;
 
 	tmp = v / texture.height;
 	div = floor(v / texture.height);
@@ -44,7 +44,7 @@ static t_color	mapping_sphere(t_image texture, t_surface s, double zoom)
 	double u;
 	t_color color;
 
-	normalize_vec(&s.intersection);	
+	normalize_vec(&s.intersection);
 	u = (0.5 + atan2(s.intersection.z, s.intersection.x) / (M_PI + M_PI)) * (double)texture.width * zoom;
 	v = (0.5 - asin(s.intersection.y) / M_PI) * (double)texture.height * zoom;
 	color = mlx_put_xpm((int)u, (int)v, texture);
@@ -56,6 +56,6 @@ t_color			mapping(t_obj obj, t_surface s)
 
 	if (obj.etat == SPHERE)
 		return (mapping_sphere(*(obj.texture), s, obj.resize_texture));
-	else	
+	else
 		return (mapping_plan(*(obj.texture), s, obj.resize_texture));
 }

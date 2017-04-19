@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_position.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:53 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:48:54 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/25 13:51:41 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "parser.h"
 
 int		set_position(t_env *env, char *tmp, t_obj *new, t_pars_object *index)
 {
