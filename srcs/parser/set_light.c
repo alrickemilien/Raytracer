@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:32 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/31 12:45:02 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/31 12:58:25 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void			set_default_light(t_light *new)
 	new->specular = 0.5;
 	new->diffuse = 0.5;
 	new->type = SPHERICAL_LIGHT;
-	new->angle = M_PI_4;
+	new->angle = M_PI_4 / 2;
 	new->hit_light = &hit_light;
 }
 

@@ -21,9 +21,9 @@ cylinder:
 light:
 {
 	type: (cone)
-	position: (5 5 0)
+	position: (2 2 0)
 	intensity: (4)
-	axis: (0 1 0)
+	axis: (9 -2 0)
 }
 
 sphere:

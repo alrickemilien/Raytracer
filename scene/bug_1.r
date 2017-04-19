@@ -6,10 +6,10 @@ camera:
 
 csg:
 {
-	type: (difference)
+	type: (intersection)
 	csg:
 	{
-		type: (intersection)
+		type: (difference)
 		sphere:
 		{
 			rayon: (4)
@@ -21,15 +21,26 @@ csg:
 			rayon: (4)
 			position: (0 0 -3)
 			color: (0x8809)
+			specular: (0.1)
 		}
 	}
-	sphere:
+	csg:
 	{
-		rayon: (2)
-		position: (0 0 0)
-		color: (0x880009)
+		type: (intersection)
+		sphere:
+		{
+			rayon: (2)
+			position: (0 0 1)
+			color: (0x880009)
+		}
+		sphere:
+		{
+			rayon: (2)
+			position: (0 0 -1)
+			color: (0x880009)
+		}
+		translation: ()
 	}
-	translation: (0 0 3)
 }
 
 plan:

@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:17 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/22 20:01:02 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/19 10:03:58 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_obj		set_default_cylinder(t_env *env)
 	set_vec(&new.rotation, 0, 0, 0);
 	set_vec(&new.translation, 0, 0, 0);
 	new.r = 1;
-	new.size = 20000;
+	new.size = 2000000;
 	new.color = split_color(mlx_get_color_value(env->addr_mlx, 0x00FF3421));
 	new.brillance = 10;
 	new.specular = 1;
@@ -54,6 +54,24 @@ static int			check_cylinder(t_env *env, t_obj *new,
 	if (!env->check_description[i](env, tmp + n, new, index))
 		return (0);
 	return (1);
+}
+
+static void			set_limits(t_obj *obj)
+{
+	t_obj	le_plan;
+
+	if (obj->size == 2000000)
+		return ;
+	le_plan = *obj;;
+	le_plan.csg = NULL;
+	le_plan.etat = PLAN;
+	le_plan.n = obj->axis;
+	le_plan.pos = vec_add(obj->pos, n_vec(obj->axis, obj->size));
+	ft_lstadd(&obj->csg, ft_lstnew(&le_plan, sizeof(t_obj)));
+
+	negative_vec(&le_plan.n);
+	le_plan.pos = vec_add(obj->pos, n_vec(obj->axis, -obj->size));
+	ft_lstadd(&obj->csg, ft_lstnew(&le_plan, sizeof(t_obj)));
 }
 
 static int			check_reference(t_pars_object reference)
@@ -96,6 +114,7 @@ int					set_cylinder(t_env *env, t_list **list_obj)
 		return (parse_error(INVALID_OBJECT));
 	rotate_object(&new_cylinder, &new_cylinder.axis);
 	new_cylinder.apex = vec_add(new_cylinder.apex, new_cylinder.translation);
-	ft_lstadd(list_obj, ft_lstnew(&new_cylinder, (sizeof(t_obj))));
+	set_limits(&new_cylinder);
+	ft_lstadd(list_obj, ft_lstnew(&new_cylinder, sizeof(t_obj)));
 	return (1);
 }

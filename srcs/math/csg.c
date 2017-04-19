@@ -81,24 +81,6 @@ int		ft_lstlen(t_list *lst)
 	return (i);
 }
 
-/*static void	set_caracteristic(t_obj *obj, t_obj *lol)
-{
-	if (!lol)
-		return ;
-	obj->pos = lol->pos;
-	obj->n = lol->n;
-	obj->apex = lol->apex;
-	obj->axis = lol->axis;
-	obj->r = lol->r;
-	obj->angle = lol->angle;
-	obj->brillance = lol->brillance;
-	obj->inter_type = lol->etat;
-	obj->refraction = lol->refraction;
-	obj->reflection = lol->reflection;
-	obj->transparent = lol->transparent;
-	obj->color = lol->color;
-}*/
-
 static void	del_range(void *content, size_t size)
 {
 	(void)size;

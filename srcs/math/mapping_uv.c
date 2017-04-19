@@ -38,7 +38,7 @@ static t_color mapping_plan(t_image texture, t_surface s, double zoom)
 	return(color);
 }
 
-static t_color mapping_sphere(t_image texture, t_surface s, double zoom)
+static t_color	mapping_sphere(t_image texture, t_surface s, double zoom)
 {
 	double v;
 	double u;
@@ -51,7 +51,7 @@ static t_color mapping_sphere(t_image texture, t_surface s, double zoom)
 	return (color);
 }
 
-t_color mapping(t_obj obj, t_surface s)
+t_color			mapping(t_obj obj, t_surface s)
 {
 
 	if (obj.etat == SPHERE)

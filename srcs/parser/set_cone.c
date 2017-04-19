@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:09 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/22 20:01:44 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/19 11:08:38 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static t_obj		set_default_cone(t_env *env)
 	new_cone.refraction = 1;
 	new_cone.transparent = 0;
 	new_cone.csg = NULL;
+	new_cone.size = 20000;
 	return (new_cone);
 }
 
@@ -63,30 +64,30 @@ static int			check_reference(t_pars_object reference)
 			|| reference.brillance > 1 || reference.rotation > 1
 			|| reference.specular > 1 || reference.diffuse > 1
 			|| reference.reflection > 1 || reference.transparent > 1
-			|| reference.translation > 1)
+			|| reference.translation > 1 || reference.size > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.normal || reference.position || reference.to
-			|| reference.from || reference.rayon || reference.size || reference.type)
+		|| reference.from || reference.rayon || reference.type)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
 }
 
-/*static void			join_cone(t_list **list_obj, t_obj cone)
+static void			set_limits(t_obj *obj)
 {
-	t_obj	obj;
+	t_obj	le_plan;
 
-	obj.r = 0.00105;
-	obj.etat = CYLINDRE;
-	obj.color = cone.color;
-	obj.apex = cone.apex;
-	obj.axis = cone.axis;
-	obj.specular = cone.specular;
-	obj.diffuse = cone.diffuse;
-	obj.rotation = cone.rotation;
-	obj.brillance = cone.brillance;
-	obj.func_obj = &cylindre;
-	ft_lstadd(list_obj, ft_lstnew(&obj, (sizeof(t_obj))));
-}*/
+	if (obj->size == 2000000)
+		return ;
+	le_plan = *obj;;
+	le_plan.csg = NULL;
+	le_plan.etat = PLAN;
+	le_plan.n = obj->axis;
+	le_plan.pos = vec_add(obj->pos, n_vec(obj->axis, obj->size));
+	ft_lstadd(&obj->csg, ft_lstnew(&le_plan, sizeof(t_obj)));
+	negative_vec(&le_plan.n);
+	le_plan.pos = vec_add(obj->pos, n_vec(obj->axis, -obj->size));
+	ft_lstadd(&obj->csg, ft_lstnew(&le_plan, sizeof(t_obj)));
+}
 
 int					set_cone(t_env *env, t_list **list_obj)
 {
@@ -112,6 +113,7 @@ int					set_cone(t_env *env, t_list **list_obj)
 		return (0);
 	rotate_object(&new_cone, &new_cone.axis);
 	new_cone.apex = vec_add(new_cone.apex, new_cone.translation);
+	set_limits(&new_cone);
 	ft_lstadd(list_obj, ft_lstnew(&new_cone, (sizeof(t_obj))));
 	return (1);
 }

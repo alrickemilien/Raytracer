@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:49:28 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/28 13:14:41 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/31 13:28:55 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static t_obj	set_default_sphere(t_env *env)
 {
 	t_obj		new_sphere;
 
+	ft_bzero(&new_sphere, sizeof(t_obj));
 	set_vec(&new_sphere.pos, 0, 0, 0);
 	set_vec(&new_sphere.translation, 0, 0, 0);
 	new_sphere.r = 1;
