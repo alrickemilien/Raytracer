@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:09 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/19 11:08:38 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/19 13:37:14 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ static void			set_limits(t_obj *obj)
 	le_plan.csg = NULL;
 	le_plan.etat = PLAN;
 	le_plan.n = obj->axis;
-	le_plan.pos = vec_add(obj->pos, n_vec(obj->axis, obj->size));
+	le_plan.pos = vec_add(obj->apex, n_vec(obj->axis, obj->size));
 	ft_lstadd(&obj->csg, ft_lstnew(&le_plan, sizeof(t_obj)));
 	negative_vec(&le_plan.n);
-	le_plan.pos = vec_add(obj->pos, n_vec(obj->axis, -obj->size));
+	le_plan.pos = vec_add(obj->apex, n_vec(obj->axis, -obj->size));
 	ft_lstadd(&obj->csg, ft_lstnew(&le_plan, sizeof(t_obj)));
 }
 
@@ -114,6 +114,6 @@ int					set_cone(t_env *env, t_list **list_obj)
 	rotate_object(&new_cone, &new_cone.axis);
 	new_cone.apex = vec_add(new_cone.apex, new_cone.translation);
 	set_limits(&new_cone);
-	ft_lstadd(list_obj, ft_lstnew(&new_cone, (sizeof(t_obj))));
+	ft_lstadd(list_obj, ft_lstnew(&new_cone, sizeof(t_obj)));
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:49:28 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/31 13:28:55 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/19 11:21:15 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ int				set_sphere(t_env *env, t_list **list_obj)
 	if (!check_reference(reference))
 		return (0);
 	new.pos = vec_add(new.pos, new.translation);
-	ft_lstadd(list_obj, ft_lstnew(&new, (sizeof(t_obj))));
+	ft_lstadd(list_obj, ft_lstnew(&new, sizeof(t_obj)));
 	return (1);
 }
