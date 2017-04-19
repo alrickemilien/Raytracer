@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   set_angle.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:26 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:47:27 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/25 12:21:24 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "parser.h"
+#include <math.h>
 
 int		set_angle(t_env *env, char *tmp, t_obj *new, t_pars_object *index)
 {

@@ -3,28 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   set_plan.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:48:48 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/19 16:03:16 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "parser.h"
+#include "vector.h"
+#include "rtv1.h"
 
 static t_obj		set_default_plan(t_env *env)
 {
 	t_obj			new_plan;
 
+	ft_bzero(&new_plan, (sizeof(t_obj)));
 	set_vec(&new_plan.n, 0, 1, 0);
 	set_vec(&new_plan.pos, 0, 0, 0);
+	set_vec(&new_plan.translation, 0, 0, 0);
 	set_vec(&new_plan.rotation, 0, 0, 0);
-	new_plan.color = split_color(mlx_get_color_value(env->mlx, 0x00FFFFFF));
+	new_plan.color = split_color(mlx_get_color_value(env->addr_mlx, 0x00FFFFFF));
 	new_plan.brillance = 10;
 	new_plan.diffuse = 1;
 	new_plan.specular = 1;
 	new_plan.etat = PLAN;
 	new_plan.func_obj = &plan;
+	new_plan.refraction = 1;
+	new_plan.resize_texture = 100;
 	return (new_plan);
 }
 
@@ -38,7 +44,7 @@ static int			check_plan(t_env *env, t_obj *new,
 	while (i < NBR_DESCRIPTION)
 	{
 		if (!ft_strncmp(env->tab_str_description[i],
-				tmp, (n = ft_strlen(env->tab_str_description[i]))))
+					tmp, (n = ft_strlen(env->tab_str_description[i]))))
 			break ;
 		i++;
 	}
@@ -52,16 +58,20 @@ static int			check_plan(t_env *env, t_obj *new,
 static int			check_reference(t_pars_object reference)
 {
 	if (reference.normal > 1 || reference.position > 1 || reference.color > 1
-		|| reference.brillance > 1 || reference.rotation > 1
-		|| reference.specular > 1 || reference.diffuse > 1)
+			|| reference.brillance > 1 || reference.rotation > 1
+			|| reference.specular > 1 || reference.diffuse > 1
+			|| reference.reflection > 1 || reference.transparent > 1
+			|| reference.translation > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.axis || reference.apex || reference.rayon
-		|| reference.angle || reference.to || reference.from || reference.size)
+			|| reference.angle || reference.to
+			|| reference.from || reference.size
+			|| reference.type)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
 }
 
-int					set_plan(t_env *env)
+int					set_plan(t_env *env, t_list **list_obj)
 {
 	t_obj			new_plan;
 	char			*line;
@@ -72,13 +82,12 @@ int					set_plan(t_env *env)
 	line = NULL;
 	while (get_next_line(env->fd, &line))
 	{
-		if (!ft_strcmp(line, ""))
-			break ;
-		if (!check_indent(line, 1))
-			return (parse_error(BAD_INDENT));
 		recycle(&line, ft_strtrim(line));
-		if (!check_plan(env, &new_plan, line, &reference))
-			return (0);
+		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
+			if (!check_plan(env, &new_plan, line, &reference))
+				return (clean_error(&line));
+		if(line[ft_strlen(line) - 1] == '}')
+			break ;
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
@@ -86,6 +95,7 @@ int					set_plan(t_env *env)
 		return (0);
 	normalize_vec(&new_plan.n);
 	rotate_object(&new_plan, &new_plan.n);
-	ft_lstadd(&env->list, ft_lstnew(&new_plan, (sizeof(t_obj))));
+	new_plan.pos = vec_add(new_plan.pos, new_plan.translation);
+	ft_lstadd(list_obj, ft_lstnew(&new_plan, (sizeof(t_obj))));
 	return (1);
 }

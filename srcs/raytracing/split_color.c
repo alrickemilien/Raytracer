@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   split_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:52:02 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:52:03 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/25 14:22:26 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "commun_struct.h"
 
 t_color	split_color(unsigned long color)
 {

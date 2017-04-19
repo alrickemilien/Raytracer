@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   func_nbr_parse.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:46:48 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/25 12:11:30 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/rtv1.h"
+#include "parser.h"
 
 int				check_floating_number(char *str)
 {
@@ -91,9 +91,7 @@ int				check_number_int(char *str)
 		if (str[i++] == ')')
 			break ;
 	}
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-	if (str[i])
+	if (!check_end_data(str + i))
 		return (parse_error(INVALID_PARAM_FORMAT));
 	if (!check_size(str))
 		return (parse_error(INVALID_INT));

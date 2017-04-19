@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:11 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:46:11 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/24 18:52:12 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "vector.h"
 
 double	*set_rotation_matrix(double *matrix,
 							double alpha, double beta, double gamma)
@@ -25,7 +25,6 @@ double	*set_rotation_matrix(double *matrix,
 	coeffs.f = sin(gamma);
 	coeffs.ad = coeffs.a * coeffs.d;
 	coeffs.bd = coeffs.b * coeffs.d;
-	ft_memset(matrix, 0, sizeof(double) * 16);
 	matrix[0] = coeffs.c * coeffs.e;
 	matrix[1] = -coeffs.c * coeffs.f;
 	matrix[2] = coeffs.d;
@@ -43,7 +42,7 @@ void	rotate_object(t_obj *object, t_vector *vector)
 {
 	double	*m;
 
-	m = (double*)malloc(sizeof(double) * 16);
+	m = (double*)ft_memalloc(sizeof(double) * 16);
 	m = set_rotation_matrix(m, object->rotation.x,
 					object->rotation.y, object->rotation.z);
 	*vector = product_vec_matrix(m, *vector);

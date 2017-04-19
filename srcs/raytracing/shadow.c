@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   shadow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:55 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:51:56 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/19 16:01:03 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "vector.h"
 
 double			shadow(t_env *env, t_ray ray, double norme)
 {
@@ -25,10 +25,10 @@ double			shadow(t_env *env, t_ray ray, double norme)
 	while (tmp_list)
 	{
 		if ((ret = ((t_obj*)(tmp_list->content))->func_obj(
-					*((t_obj*)(tmp_list->content)), &ray, &t)))
+					((t_obj*)(tmp_list->content)), &ray, &t, NULL)))
 		{
 			if (t <= norme && t >= 0)
-				return (0);
+				return (((t_obj*)(tmp_list->content))->transparent);
 		}
 		tmp_list = tmp_list->next;
 	}

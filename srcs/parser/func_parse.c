@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   func_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:59 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:47:00 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/25 14:20:07 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/rtv1.h"
+#include "parser.h"
+#include "vector.h"
+
+int			check_end_data(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] == ' ' && str[i] == '	')
+		i++;
+	if (str[i])
+		return (0);
+	return (1);
+}
 
 int			check_data_type_color(char *str)
 {
@@ -33,7 +46,7 @@ int			check_data_type_color(char *str)
 		i++;
 	if (str[i] != ')')
 		return (parse_error(INVALID_PARAM_FORMAT));
-	if (str[i + 1])
+	if (!check_end_data(str + i + 1))
 		return (parse_error(INVALID_PARAM_FORMAT));
 	return (1);
 }
@@ -58,9 +71,7 @@ int			check_data_type_nbr(char *str, int k)
 		if (str[i++] == ')')
 			break ;
 	}
-	while (str[i] == ' ' || str[i] == '	')
-		i++;
-	if (str[i])
+	if (!check_end_data(str + i))
 		return (parse_error(INVALID_PARAM_FORMAT));
 	if (k)
 		return (parse_error(INVALID_NBR_OF_PARAM));

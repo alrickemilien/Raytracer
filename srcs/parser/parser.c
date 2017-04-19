@@ -1,39 +1,40 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/20 14:47:19 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:50:37 by aemilien         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "parser.h"
 
-#include "../include/rtv1.h"
+static int	check_object(t_env *env, char *line)
+{
+	int		i;
+	char	*crochet;
 
-int		parser(t_env *env)
+	i = -1;
+	while (++i < NBR_OBJECT)
+		if (!ft_strcmp(line, env->tab_str_object[i]))
+			break ;
+	if (i == NBR_OBJECT)
+		return (parse_error(INVALID_FORMAT_FILE));
+	get_next_line(env->fd, &crochet);
+	recycle(&crochet, ft_strtrim(crochet));
+	if (ft_strcmp("{", crochet))
+	{
+		ft_strdel(&crochet);
+		return (parse_error(INVALID_FORMAT_FILE));
+	}
+	if (!env->set_object[i](env, &env->list))
+		return (clean_error(&crochet));
+	ft_strdel(&crochet);
+	return (1);
+}
+
+int			parser(t_env *env)
 {
 	char	*line;
-	int		i;
 
 	line = 0;
 	while (get_next_line(env->fd, &line))
 	{
-		if (!check_indent(line, 0))
-			return (parse_error(BAD_INDENT));
 		recycle(&line, ft_strtrim(line));
-		i = -1;
-		while (++i < 6)
-			if (!ft_strcmp(line, env->tab_str_object[i]))
-				break ;
 		if (ft_strcmp(line, ""))
-		{
-			if (i == 6)
-				return (parse_error(INVALID_FORMAT_FILE));
-			if (!env->set_object[i](env))
-				return (0);
-		}
+			if (!check_object(env, line))
+				return (clean_error(&line));
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);

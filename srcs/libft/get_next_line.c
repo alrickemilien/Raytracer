@@ -6,13 +6,13 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 13:43:30 by aemilien          #+#    #+#             */
-/*   Updated: 2016/12/12 09:29:19 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/02/27 10:05:19 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_list	*ft_create_file(int fd)
+static t_list	*ft_create_file(int fd)
 {
 	t_file	new_file;
 
@@ -21,7 +21,7 @@ t_list	*ft_create_file(int fd)
 	return (ft_lstnew(&new_file, sizeof(t_file)));
 }
 
-t_list	*ft_lstsearch(t_list *list, int fd)
+static t_list	*ft_lstsearch(t_list *list, int fd)
 {
 	if (!list)
 		return (NULL);
@@ -36,7 +36,7 @@ t_list	*ft_lstsearch(t_list *list, int fd)
 	return (NULL);
 }
 
-int		ft_buf(t_list *tmp, char **line)
+static int		ft_buf(t_list *tmp, char **line)
 {
 	char			*buf_tmp;
 
@@ -62,7 +62,7 @@ int		ft_buf(t_list *tmp, char **line)
 	return (1);
 }
 
-void	ft_addtobuf(t_list *tmp, char *read_buf)
+static void	ft_addtobuf(t_list *tmp, char *read_buf)
 {
 	char			*buf_tmp;
 

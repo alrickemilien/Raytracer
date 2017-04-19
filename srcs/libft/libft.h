@@ -6,7 +6,7 @@
 /*   By: salibert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 19:37:30 by salibert          #+#    #+#             */
-/*   Updated: 2017/02/08 19:37:55 by salibert         ###   ########.fr       */
+/*   Updated: 2017/03/20 13:12:00 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void			ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
 void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstadd(t_list **alst, t_list *new);
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
+void			ft_lstsort(t_list *lst, int (*cmp)(void *a, void *b));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void			ft_putstrtab(char **s);
 void			ft_push_back(t_list **alst, t_list *new);
@@ -103,5 +104,10 @@ char			*ft_strjoinf(char const *s1, char const *s2, char c);
 int				ft_trim(int min, int max, int nb);
 void			ft_freetab(char ***tab);
 void			ft_putxy(int x, int y);
+double			ft_dabs(double nb);
 int				get_next_line(const int fb, char **line);
+int				get_next_char(const int fb, char **line, char c);
+t_list			*ptr_of(t_list *lst, void *data, int (*cmp)(void *a, void *b));
+t_list			*elem_rm(t_list *head, t_list *to_rm);
+void			swap(double *a, double *b);
 #endif

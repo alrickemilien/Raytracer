@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   set_axis.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:36 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:47:37 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/25 12:22:38 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include "parser.h"
+#include "vector.h"
 
 int		set_axis(t_env *env, char *tmp, t_obj *new, t_pars_object *index)
 {

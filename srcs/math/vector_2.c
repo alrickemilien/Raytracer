@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:30 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:46:31 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/03/15 13:01:56 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,24 @@ void			negative_vec(t_vector *v)
 	v->x = -v->x;
 	v->y = -v->y;
 	v->z = -v->z;
+}
+
+int				is_vectornull(t_vector v)
+{
+	if (!v.x && !v.y && !v.z)
+		return (1);
+	return (0);
+}
+
+t_vector	get_vec(double x, double y, double z)
+{
+	t_vector	v;
+
+	v.x = x;
+	v.y = y;
+	v.z = z;
+	v.norme = sqrt((x * x)
+			+ (y * y)
+			+ (z * z));
+	return (v);
 }
