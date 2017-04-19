@@ -13,7 +13,6 @@ void	draw_menu(t_data_draw draw, t_image *image)
 	int tmp;
 
 	draw.y = draw.tmp_y;
-	printf("image->width %d  image->height %d\n", draw.limit_y, draw.limit_x);
 	while (++draw.y < draw.limit_y)
 	{
 		draw.x = draw.tmp_x;

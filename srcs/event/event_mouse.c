@@ -58,12 +58,39 @@ static void	 select_scene(int x, int y, t_menu *menu)
 		 button = button->next;
 	 }
 }
+static void	 build_scene(int x, int y, t_menu *menu)
+{
+	t_list *button;
+	t_data_draw *data;
+	t_env		*env;
+	char		*tmp;
+
+	button = menu->button->next;
+	env = menu->env;
+	 while (button)
+	 {
+		 data = (t_data_draw*)(button->content);
+		 if (data->tmp_x <= x && data->limit_x >= x
+		 && (data->tmp_y + menu->y_scroll) <= y
+		 && (data->limit_y + menu->y_scroll) >= y
+		 && !env->etat)
+		{
+			tmp = ft_strjoin("atom ", data->path);
+			system(tmp);
+			ft_strdel(&tmp);
+			break;
+		}
+		 button = button->next;
+	 }
+}
 
 int ft_mouse(int clic, int x, int y, t_menu *menu)
 {
 	if (clic == 4 || clic == 5)
 		scroll_menu(clic, menu);
 	if (clic == 1)
-		select_scene(x , y, menu);
+		select_scene(x, y, menu);
+	if (clic == 2)
+		build_scene(x, y, menu);
 	return (1);
 }

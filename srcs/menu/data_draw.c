@@ -21,7 +21,7 @@ t_data_draw		params_data_draw(t_menu *menu)
 	draw.tmp_y = -1;
 	draw.limit_x = menu->page->width;
 	draw.limit_y = menu->page->height;
-	draw.color1 = split_color_s(0x00555555);
+	draw.picture = init_texture(menu->addr_mlx, "srcs/textures/plan/parquet.xpm");
 	return (draw);
 }
 
