@@ -1,7 +1,7 @@
 #ifndef COMMUN_STRUCT_H
 # define COMMUN_STRUCT_H
 # include "../srcs/libft/libft.h"
-# include "../srcs/minilibx_macos/mlx.h"
+# include "../minilibx_macos/mlx.h"
 # define WIN_WIDTH 1000
 # define WIN_HEIGHT 1000
 # define WIN_WIDTH_HALF 500

@@ -6,7 +6,7 @@ LIBFT= -lft -L srcs/libft -I srcs/libft
 
 LPTHREAD= -lpthread
 
-LIBMLX= -lmlx -L srcs/minilibx_macos -I srcs/minilibx_macos
+LIBMLX= -lmlx -L minilibx_macos -I minilibx_macos
 
 INCLUDE= -I include
 
@@ -101,7 +101,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C ./srcs/libft
-	@make -C ./srcs/minilibx_macos
+	@make -C minilibx_macos
 	@gcc -o $@ $^ $(INCLUDE) $(LIBFT) $(LIBMLX) $(LPTHREAD) $(FRAMEWORK) $(CCFLAGS)
 
 %.o: %.c
