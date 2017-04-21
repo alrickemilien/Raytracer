@@ -5,11 +5,8 @@ t_color		mlx_put_xpm(int u, int v, t_image texture)
 	t_color color;
 	int tmp;
 
-	if (u >= texture.width && v >= texture.height)
-	{
-		u = (u >= texture.width ? texture.width - 1 : u);
-		v = (v >= texture.height ? texture.height - 1 : v);
-	}
+	u = u % texture.width;
+	v = v % texture.height;
 	tmp = (u * (texture.bpp)) + (v * texture.sizeline);
 	color.blue = (unsigned char)(texture.data[tmp]);
 	color.green = (unsigned char)(texture.data[tmp + 1]);
@@ -27,7 +24,6 @@ static t_color mapping_plan(t_image texture, t_surface s, double zoom)
 
 	u = s.intersection.x * zoom;
 	v = -s.intersection.z * zoom;
-
 	tmp = v / texture.height;
 	div = floor(v / texture.height);
 	v = (tmp - div) * texture.height;

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/20 14:51:38 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/19 12:56:58 by salibert         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "rtv1.h"
 #include "init.h"
 #include "parser.h"
@@ -39,7 +27,7 @@ void	ray_draw_data(t_menu *menu, t_env *env)
 		{
 			data->error = 1;
 			data->picture = menu->error;
-			draw_menu(*data, menu->page);
+			draw_menu(*data, menu->page);			
 			tmp = tmp->next;
 			continue;
 		}
@@ -50,13 +38,14 @@ void	ray_draw_data(t_menu *menu, t_env *env)
 		raytracing((void*)env);
 		data->picture = env->image;
 		draw_menu(*data, menu->page);
+		ft_bzero(env->select, sizeof(t_select));		
 		tmp = tmp->next;
 		close(env->fd);
 	}
 	mlx_destroy_image(env->addr_mlx, env->image->addr_img);
 	free(env->tab_ray);
 	free_list(&env->list, &env->camera, &env->light, env);
-	ft_bzero(env->select, sizeof(t_select));
+	// ft_bzero(env->select, sizeof(t_select));
 }
 
 void init_scene(t_menu *menu, char *path)
@@ -64,15 +53,20 @@ void init_scene(t_menu *menu, char *path)
 	t_env *env;
 
 	env = menu->env;
-	env->addr_win = mlx_new_window(env->addr_mlx, WIN_WIDTH, WIN_HEIGHT, path);
 	free_list(&env->list, &env->camera, &env->light, env);
 	env->fd = open(path, O_RDWR);
 	if (!parser(env))
-		exit(0);
+	{
+		close(env->fd);
+		env->etat = 0;
+		free_list(&env->list, &env->camera, &env->light, env);		
+		return;
+	}
 	if (!env->camera)
 		init_default_camera(env);
 	else
 		sort_camera(env);
+	env->addr_win = mlx_new_window(env->addr_mlx, WIN_WIDTH, WIN_HEIGHT, path);
 	env->tab_env = init_data_tab_thread((void*)env, (sizeof(t_env)), 8);
 	thread(env->tab_thread, &raytracing, env->tab_env, sizeof(t_env));
 	mlx_put_image_to_window(env->addr_mlx, env->addr_win, env->image->addr_img, 0, 0);
