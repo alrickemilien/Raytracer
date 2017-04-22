@@ -3,7 +3,7 @@
 #include "menu.h"
 #include <math.h>
 
-static void	init_tab_str_description(t_env *env)
+static void		init_tab_str_description(t_env *env)
 {
 	if (!(env->tab_str_description = (
 					char**)malloc(sizeof(char*) * NBR_DESCRIPTION)))
@@ -30,7 +30,7 @@ static void	init_tab_str_description(t_env *env)
 	env->tab_str_description[19] = ft_strdup(PERTURBATION);
 }
 
-static void	init_tab_function_description(t_env *env)
+static void		init_tab_function_description(t_env *env)
 {
 	env->check_description[0] = &set_position;
 	env->check_description[1] = &set_rayon;
@@ -54,7 +54,7 @@ static void	init_tab_function_description(t_env *env)
 	env->check_description[19] = &set_perturbation;
 }
 
-static void	init_tab_str_object(t_env *env)
+static void		init_tab_str_object(t_env *env)
 {
 	if (!(env->tab_str_object = (char**)malloc(sizeof(char*) * NBR_OBJECT)))
 		merror();
@@ -69,7 +69,7 @@ static void	init_tab_str_object(t_env *env)
 	env->tab_str_object[BOX] = ft_strdup("box:");
 }
 
-static void	init_tab_function_object(t_env *env)
+static void		init_tab_function_object(t_env *env)
 {
 	env->set_object[SPHERE] = &set_sphere;
 	env->set_object[CONE] = &set_cone;
@@ -82,7 +82,7 @@ static void	init_tab_function_object(t_env *env)
 	env->set_object[BOX] = &set_box;
 }
 
-void	init_env(t_env *env)
+void			init_env(t_env *env)
 {
 	env->addr_mlx = mlx_init();
 	env->k = 0.2;

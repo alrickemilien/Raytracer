@@ -3,9 +3,9 @@
 #include "parser.h"
 #include "menu.h"
 
-void init_scene(t_menu *menu, char *path)
+void			init_scene(t_menu *menu, char *path)
 {
-	t_env *env;
+	t_env		*env;
 
 	env = menu->env;
 	free_list(&env->list, &env->camera, &env->light, env);
@@ -15,7 +15,7 @@ void init_scene(t_menu *menu, char *path)
 		close(env->fd);
 		env->etat = 0;
 		free_list(&env->list, &env->camera, &env->light, env);
-		return;
+		return ;
 	}
 	if (!env->camera)
 		init_default_camera(env);
@@ -24,15 +24,16 @@ void init_scene(t_menu *menu, char *path)
 	env->addr_win = mlx_new_window(env->addr_mlx, WIN_WIDTH, WIN_HEIGHT, path);
 	env->tab_env = init_data_tab_thread((void*)env, (sizeof(t_env)), 8);
 	thread(env->tab_thread, &raytracing, env->tab_env, sizeof(t_env));
-	mlx_put_image_to_window(env->addr_mlx, env->addr_win, env->image->addr_img, 0, 0);
+	mlx_put_image_to_window(
+			env->addr_mlx, env->addr_win, env->image->addr_img, 0, 0);
 	mlx_hook(env->addr_win, 2, 1L << 0 | 1 << 1, &key_press, menu);
 	mlx_hook(env->addr_win, 17, 0L, &red_cross, menu);
 	mlx_loop(env->addr_mlx);
 }
 
-static void 	loop_menu(t_menu *menu)
+static void		loop_menu(t_menu *menu)
 {
-	t_env *env;
+	t_env		*env;
 
 	env = menu->env;
 	if (!(env->image = init_image(env->addr_mlx, WIN_WIDTH, WIN_HEIGHT)))
@@ -47,9 +48,9 @@ static void 	loop_menu(t_menu *menu)
 	mlx_loop(menu->addr_mlx);
 }
 
-int		main()
+int				main(void)
 {
-	t_menu	*menu;
+	t_menu		*menu;
 
 	if (!(menu = creat_menu()))
 		merror();
@@ -57,7 +58,8 @@ int		main()
 		merror();
 	init_env(menu->env);
 	ray_draw_data(menu, menu->env);
-	mlx_put_image_to_window(menu->addr_mlx, menu->addr_win, menu->page->addr_img, 0, 0);
+	mlx_put_image_to_window(
+			menu->addr_mlx, menu->addr_win, menu->page->addr_img, 0, 0);
 	loop_menu(menu);
 	return (0);
 }
