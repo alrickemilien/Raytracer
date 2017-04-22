@@ -51,17 +51,16 @@ static int		switch_cam(t_env *env, int keycode)
 	}
 	env->tab_env = init_data_tab_thread((void*)env, sizeof(t_env), 8);
 	thread(env->tab_thread, raytracing, env->tab_env, sizeof(t_env));
-	mlx_put_image_to_window(env->addr_mlx, env->addr_win, env->image->addr_img, 0, 0);
+	mlx_put_image_to_window(
+		env->addr_mlx, env->addr_win, env->image->addr_img, 0, 0);
 	return (0);
 }
 
 int				key_press(int keycode, t_menu *menu)
 {
-	t_list		*list;
 	t_env		*env;
 
 	env = menu->env;
-	list = env->list;
 	if ((keycode == KEY_PAD_SUB || keycode == KEY_PAD_ADD) && env->etat)
 	{
 		if ((env->k > 0.1) && (keycode == KEY_PAD_SUB))
@@ -70,14 +69,16 @@ int				key_press(int keycode, t_menu *menu)
 			env->k += 0.1;
 		free(env->tab_env);
 		env->tab_env = init_data_tab_thread((void*)env, sizeof(t_env), 8);
-		thread(env->tab_thread, raytracing, env->tab_env,sizeof(t_env));
-		mlx_put_image_to_window(env->addr_mlx, env->addr_win, env->image->addr_img, 0, 0);
+		thread(env->tab_thread, raytracing, env->tab_env, sizeof(t_env));
+		mlx_put_image_to_window(
+			env->addr_mlx, env->addr_win, env->image->addr_img, 0, 0);
 	}
 	if ((keycode == KEY_ESC) && (env->etat))
 		end_scene(menu, env->addr_mlx, env->addr_win);
 	else if ((keycode == KEY_ESC) && !(env->etat))
 		end_menu(menu, menu->addr_mlx, menu->addr_win, menu->page->addr_img);
-	if ((keycode == KEY_OPEN_BRACKET || keycode == KEY_CLOSE_BRACKET) && (env->etat))
+	if ((keycode == KEY_OPEN_BRACKET || keycode == KEY_CLOSE_BRACKET)
+		&& (env->etat))
 		switch_cam(env, keycode);
 	if ((env->select->o || env->select->c) && (env->etat))
 		ft_put_pos_select(env);
