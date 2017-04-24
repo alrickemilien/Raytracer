@@ -7,48 +7,9 @@
  *
  */
 
-int		between(double t, double n1, double n2)
+static void		get_smaller_t(t_list *lst, t_obj **obj, double *t)
 {
-	if (n1 > n2)
-		swap(&n1, &n2);
-	if (t >= n1 && t <= n2)
-		return (1);
-	return (0);
-}
-
-int		betweex(double t, double n1, double n2)
-{
-	if (n1 > n2)
-		swap(&n1, &n2);
-	if (t > n1 && t < n2)
-		return (1);
-	return (0);
-}
-
-double	range(double a, double b)
-{
-	if (a > b)
-	{
-		if (a > 0 && b > 0)
-			return (a - b);
-		if (a < 0 && b < 0)
-			return (-b + a);
-		return (a - b);
-	}
-	if (a < b)
-	{
-		if (a > 0 && b > 0)
-			return (b - a);
-		if (a < 0 && b < 0)
-			return (-a + b);
-		return (b - a);
-	}
-	return (0);
-}
-
-static void	get_smaller_t(t_list *lst, t_obj **obj, double *t)
-{
-	t_range *tmp;
+	t_range		*tmp;
 
 	*t = 2000000;
 	while (lst)
@@ -68,32 +29,19 @@ static void	get_smaller_t(t_list *lst, t_obj **obj, double *t)
 	}
 }
 
-int		ft_lstlen(t_list *lst)
-{
-	int		i;
-
-	i = 0;
-	while (lst)
-	{
-		i++;
-		lst = lst->next;
-	}
-	return (i);
-}
-
-static void	del_range(void *content, size_t size)
+static void		del_range(void *content, size_t size)
 {
 	(void)size;
 	free(content);
 }
 
-int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
+int				csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 {
-	t_list			*tmp_list;
-	t_list			*a; // liste d'intersections pour l'objet a (x et y)
-	t_list			*b;
-	t_obj			*obj_thread;
-	t_list			*list;
+	t_list		*tmp_list;
+	t_list		*a;
+	t_list		*b;
+	t_obj		*obj_thread;
+	t_list		*list;
 
 	a = NULL;
 	b = NULL;
@@ -103,20 +51,14 @@ int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 	tmp_list = tmp_list->next;
 	obj_thread = (t_obj*)tmp_list->content;
 	obj_thread->func_obj(obj_thread, ray, t, &a);
-	if (obj->type == DIFFERENCE)
-		list = function_difference(a, b);
-	else
-		list = function_intersection(a, b);
+	list = (obj->type == DIFFERENCE) ? (f_d(a, b)) : (f_i(a, b));
 	get_smaller_t(list, &obj_thread, t);
 	obj->pointeur[ray->thread] = obj_thread;
 	ft_lstdel(&a, &del_range);
 	ft_lstdel(&b, &del_range);
 	if (list)
 	{
-		if (!inter)
-			ft_lstdel(&list, &del_range);
-		else
-			*inter = list;
+		(!inter) ? ft_lstdel(&list, &del_range) : (*inter = list);
 		return (1);
 	}
 	return (0);

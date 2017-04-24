@@ -64,13 +64,11 @@
 # define PERTURBATION "perturbation:"
 
 t_color	split_color(unsigned long color);
-int				check_indent(char *str, int n);
 int				parse_error(char *str);
 int				fill_data(char *tmp, double *data);
 int				check_floating_number(char *str);
 int				fill_data_vec(char *str, t_vector *vec);
 int				check_data_type_color(char *str);
-int				check_data_type_nbr(char *str, int k);
 int				error_file(char *file);
 int				fill_int_data(char *str, int *data);
 int				check_end_data(char *str);

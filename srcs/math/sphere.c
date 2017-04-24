@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:16 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/24 18:52:00 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/22 15:42:02 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		set_range(t_list **inter, t_obj *obj, double t1, double t2)
 	ft_lstadd(inter, ft_lstnew(&range, sizeof(t_range)));
 }
 
-int		sphere(t_obj *obj, t_ray *ray, double *t, t_list **inter)
+int				sphere(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 {
 	t_vector	coeffs;
 	double		delta;

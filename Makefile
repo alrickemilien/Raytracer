@@ -33,6 +33,7 @@ SRCS=\
 	srcs/event/free_tab.c\
 	srcs/math/light.c\
 	srcs/math/vector_1.c\
+	srcs/math/func_csg.c\
 	srcs/math/vector_2.c\
 	srcs/math/matrix_func.c\
 	srcs/math/get_surface_normal.c\

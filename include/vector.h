@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:18:23 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/24 18:55:57 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/24 11:12:06 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "commun_struct.h"
 # include <math.h>
 
+void				set_spaces_diff(t_range *a, t_range *b);
 t_vector			cross_product(t_vector a, t_vector b);
 double				dot_product(t_vector a, t_vector b);
 void				set_vec(t_vector *v, double x, double y, double z);
@@ -27,10 +28,10 @@ t_vector			product_vec_matrix(double *m, t_vector v);
 t_vector			product_matrix4x4(double *m, t_vector v);
 int					is_vectornull(t_vector v);
 t_vector			get_vec(double x, double y, double z);
-int					betweex(double t, double n1, double n2);
+int					betwx(double t, double n1, double n2);
 double				*invert_matrix(double *m);
 void				swap(double *a, double *b);
-int					between(double t, double n1, double n2);
+int					betwn(double t, double n1, double n2);
 double				fresnel(t_ray ray, t_surface s);
 t_color				beers_law(t_color color, t_obj *obj, t_surface s, t_ray ray);
 double				*set_rotation_matrix(double *matrix, double alpha,

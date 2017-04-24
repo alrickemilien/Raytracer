@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:45:58 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/24 18:52:41 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/22 15:41:24 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		set_range(t_list **inter, t_obj *obj, double t)
 	ft_lstadd(inter, ft_lstnew(&range, sizeof(t_range)));
 }
 
-int		plan(t_obj *p, t_ray *ray, double *t, t_list **inter)
+int				plan(t_obj *p, t_ray *ray, double *t, t_list **inter)
 {
 	double		alpha;
 
