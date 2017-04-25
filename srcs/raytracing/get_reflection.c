@@ -1,6 +1,6 @@
 #include "vector.h"
 
-t_ray	get_reflection(t_surface s, t_ray ray)
+t_ray		get_reflection(t_surface s, t_ray ray)
 {
 	t_ray	r;
 

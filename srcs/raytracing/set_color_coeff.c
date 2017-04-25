@@ -1,8 +1,8 @@
 #include "vector.h"
 
-static int	check_light(t_light *light, t_vector dir)
+static int		check_light(t_light *light, t_vector dir)
 {
-	double	angle;
+	double		angle;
 
 	if (light->type == SPHERICAL_LIGHT)
 		return (1);
@@ -14,8 +14,17 @@ static int	check_light(t_light *light, t_vector dir)
 	return (1);
 }
 
-void	set_color_coeff(t_env *env, t_surface s,
-		t_obj *tmp, double *t)
+static void		arth_color_coeff(t_vector *light_dir, t_surface *s,
+				t_list *tmp_light, t_ray *ray)
+{
+	*light_dir = vec_diff(LIGHT_PTR->org, s->intersection);
+	s->diffuse = get_diffuse(s->n, *light_dir) * LIGHT_PTR->diffuse;
+	ray->org = vec_add(s->intersection, n_vec(s->n, 0.0001));
+	ray->dir = vec_diff(LIGHT_PTR->org, ray->org);
+}
+
+void			set_color_coeff(t_env *env, t_surface s,
+				t_obj *tmp, double *t)
 {
 	t_vector	light_dir;
 	t_list		*tmp_light;
@@ -25,13 +34,10 @@ void	set_color_coeff(t_env *env, t_surface s,
 	tmp_light = env->light;
 	while (tmp_light)
 	{
-		light_dir = vec_diff(LIGHT_PTR->org, s.intersection);
-		s.diffuse =  get_diffuse(s.n, light_dir) * LIGHT_PTR->diffuse;
-		ray.org = vec_add(s.intersection, n_vec(s.n, 0.0001));
-		ray.dir = vec_diff(LIGHT_PTR->org, ray.org);
+		arth_color_coeff(&light_dir, &s, tmp_light, &ray);
+		s.spec = get_specularity(s.intersection, s.n, light_dir, tmp)
+		* LIGHT_PTR->specular;
 		ray.thread = env->nb_thread;
-		s.spec =  get_specularity(s.intersection, s.n, light_dir, tmp)
-			* LIGHT_PTR->specular;
 		shadow_ret = shadow(env, ray, light_dir.norme);
 		s.spec *= shadow_ret;
 		s.diffuse *= shadow_ret;

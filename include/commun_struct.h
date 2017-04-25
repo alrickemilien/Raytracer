@@ -118,6 +118,17 @@ enum {
 	DIFFERENCE,
 };
 
+enum {
+	R0,
+	ORIG_N,
+	NEW_N,
+	N,
+	SIN_T,
+	COS_X,
+	X,
+	RET
+};
+
 typedef struct		s_obj
 {
 	t_image			*texture;
@@ -238,6 +249,7 @@ typedef	struct		s_env
 	void			*addr_win;
 	t_image			*image;
 	t_vector		cursor;
+	int				a_a;
 	int				fd;
 	int				thread_index;
 	double			image_aspect_ratio;

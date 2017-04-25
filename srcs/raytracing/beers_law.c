@@ -2,9 +2,9 @@
 
 static double	get_absorb_distance(t_ray ray, t_obj *obj, t_surface s)
 {
-	double	back;
-	double	front;
-	t_list	*inter;
+	double		back;
+	double		front;
+	t_list		*inter;
 
 	front = ray.t;
 	ray.org = vec_add(s.intersection, n_vec(ray.dir, 0.001));
@@ -17,7 +17,7 @@ static double	get_absorb_distance(t_ray ray, t_obj *obj, t_surface s)
 	return (-back + front);
 }
 
-t_color	beers_law(t_color color, t_obj *obj, t_surface s, t_ray ray) // applied when dot_product(ray.dir, n) > 0
+t_color			beers_law(t_color color, t_obj *obj, t_surface s, t_ray ray)
 {
 	color.red = (unsigned char)((double)color.red *
 			exp(-obj->absorbtion.x

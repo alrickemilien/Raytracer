@@ -6,13 +6,13 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:23 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/24 18:34:46 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/25 10:53:29 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
-double	get_diffuse(t_vector n, t_vector light_dir)
+double		get_diffuse(t_vector n, t_vector light_dir)
 {
 	double	diffuse;
 

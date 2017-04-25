@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/19 16:02:29 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/25 16:33:10 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "vector.h"
 #include "stdio.h"
 
-static void	set_primary_ray(t_env *env, t_ray *ray, int j, int i)
+static void		set_primary_ray(t_env *env, t_ray *ray, int j, int i)
 {
 	t_vector	null_vector;
 
@@ -33,10 +33,10 @@ static void	set_primary_ray(t_env *env, t_ray *ray, int j, int i)
 	ray->thread = env->nb_thread;
 }
 
-static int	get_intersection(t_env *env, t_ray *ray, t_obj **tmp)
+static int		get_intersection(t_env *env, t_ray *ray, t_obj **tmp)
 {
-	double			t;
-	t_list			*tmp_list;
+	double		t;
+	t_list		*tmp_list;
 
 	ray->t = 2000000;
 	t = 0;
@@ -60,7 +60,7 @@ static int	get_intersection(t_env *env, t_ray *ray, t_obj **tmp)
 	return (0);
 }
 
-static t_color	add_color(t_color current, t_color to_add, double t)
+static t_color		add_color(t_color current, t_color to_add, double t)
 {
 	current.red += (unsigned char)(ft_dtrim(0, 255 - current.red,
 						((double)to_add.red * t)));
@@ -92,7 +92,6 @@ static t_color		shining(t_env *env, t_list *lights, t_ray *ray, double *norme)
 		{
 			d = acos(d);
 			d = ((t_light*)(lights->content))->intensity * exp(-pow(((d / (0.2 * (1 / tmp)))), 2));
-			//printf("%lf\n", d);
 			color.blue += (unsigned char)(ft_dtrim(0, 255 - color.blue, 255 * d * (10 / tmp)));
 			color.red += (unsigned char)(ft_dtrim(0, 255 - color.red, 255 * d * (10 / tmp)));
 			color.green += (unsigned char)(ft_dtrim(0, 255 - color.green, 255 * d * (10 / tmp)));
@@ -102,7 +101,7 @@ static t_color		shining(t_env *env, t_list *lights, t_ray *ray, double *norme)
 	return (color);
 }
 
-static t_color				raycast(t_env *env, t_ray ray, int depth)
+static t_color		raycast(t_env *env, t_ray ray, int depth)
 {
 	t_obj			*tmp;
 	double			t;
@@ -139,13 +138,13 @@ static t_color				raycast(t_env *env, t_ray ray, int depth)
 	return (color);
 }
 
-void		*raytracing(void *params)
+void				*raytracing(void *params)
 {
-	int			index;
-	t_limit		l;
-	t_env		*env;
-	t_color		color;
-	char		*data;
+	int				index;
+	t_limit			l;
+	t_env			*env;
+	t_color			*color;
+	char			*data;
 
 	env = (t_env*)(params);
 	if (env->nb_thread == 9)
@@ -158,7 +157,7 @@ void		*raytracing(void *params)
 	else
 		l = ft_limit_thread(env->nb_thread, env->image->width, env->image->height);
 	data = env->image->data;
-	ft_bzero(&color, sizeof(t_color));
+	ft_bzero(&color, sizeof(t_color)* env->a_a);
 	while (++l.y < l.max_y)
 	{
 		l.x = l.tmp_x;

@@ -1,5 +1,6 @@
 #include "vector.h"
 #include "rtv1.h"
+
 /*
  *
  * t_list *a ---> liste d'intersections de l'objet a
