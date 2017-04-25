@@ -28,7 +28,7 @@ int					check_ref_camera(t_pars_object ref, t_camera new)
 {
 	if (ref.from > 1 || ref.to > 1 || ref.position || ref.brillance || ref.angle
 			|| ref.rayon || ref.color || ref.apex || ref.axis || ref.normal
-			|| ref.rotation || ref.intensity || ref.size || ref.diffuse
+			|| ref.rot || ref.intensity || ref.size || ref.diffuse
 			|| ref.specular || ref.transparent || ref.translation)
 		return (parse_error(INVALID_OBJECT));
 	if (new.pos.x == new.to.x && new.pos.z == new.to.z && new.pos.y == new.to.y)
@@ -52,7 +52,7 @@ int					set_camera(t_env *env, t_list **list_obj)
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_camera(env, &new, line, &reference))
 				return (clean_error(&line));
-		if(line[ft_strlen(line) - 1] == '}')
+		if (line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);
 	}

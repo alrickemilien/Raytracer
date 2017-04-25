@@ -6,19 +6,12 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:53 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/25 14:08:22 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/25 09:50:13 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
-/*
- * param[0] --> cos_teta
- * param[1] --> sin_teta
- * param[2] --> cos_phi
- * param[3] --> sin_phi
- */
- 
 void			set_default_camera(t_camera *new)
 {
 	set_vec(&new->pos, 0, 0, 0);
@@ -26,7 +19,7 @@ void			set_default_camera(t_camera *new)
 	new->num = 0;
 }
 
-t_vector	set_up_vector(t_camera *camera, t_vector vec_forward)
+t_vector		set_up_vector(t_camera *camera, t_vector vec_forward)
 {
 	t_vector	vec_up;
 	double		param[4];
@@ -47,9 +40,9 @@ t_vector	set_up_vector(t_camera *camera, t_vector vec_forward)
 	return (vec_up);
 }
 
-double	*set_camera_matrix(
-		t_vector vec_forward, t_vector vec_up,
-		t_vector vec_right, t_vector from)
+double			*set_camera_matrix(
+				t_vector vec_forward, t_vector vec_up,
+				t_vector vec_right, t_vector from)
 {
 	double		*matrix;
 

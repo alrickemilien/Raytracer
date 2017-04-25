@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotation.c                                         :+:      :+:    :+:   */
+/*   rot.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "vector.h"
 
-double	*set_rotation_matrix(double *matrix,
+double	*set_rot_m(double *matrix,
 							double alpha, double beta, double gamma)
 {
 	t_matrix_rot	coeffs;
@@ -43,8 +43,8 @@ void	rotate_object(t_obj *object, t_vector *vector)
 	double	*m;
 
 	m = (double*)ft_memalloc(sizeof(double) * 16);
-	m = set_rotation_matrix(m, object->rotation.x,
-					object->rotation.y, object->rotation.z);
+	m = set_rot_m(m, object->rot.x,
+					object->rot.y, object->rot.z);
 	*vector = product_vec_matrix(m, *vector);
 	free(m);
 }

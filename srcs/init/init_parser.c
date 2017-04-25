@@ -40,7 +40,7 @@ static void		init_tab_function_description(t_env *env)
 	env->check_description[5] = &set_axis;
 	env->check_description[6] = &set_brillance;
 	env->check_description[7] = &set_angle;
-	env->check_description[8] = &set_rotation;
+	env->check_description[8] = &set_rot;
 	env->check_description[9] = &set_size;
 	env->check_description[10] = &set_diffuse;
 	env->check_description[11] = &set_specular;

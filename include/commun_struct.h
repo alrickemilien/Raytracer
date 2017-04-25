@@ -133,7 +133,7 @@ typedef struct		s_obj
 	int				etat;
 	t_vector		axis;
 	t_vector		apex;
-	t_vector		rotation;
+	t_vector		rot;
 	double			angle;
 	double			height;
 	int				brillance;
@@ -204,7 +204,7 @@ typedef struct	s_pars_object
 	int			apex;
 	int			axis;
 	int			normal;
-	int			rotation;
+	int			rot;
 	int			intensity;
 	int			size;
 	int			diffuse;

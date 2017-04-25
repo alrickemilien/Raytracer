@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-double	*invert_matrix(double *t)
+double	*inv_m(double *t)
 {
 	t_pivot_gauss	tools;
 	double			*s;

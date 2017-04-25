@@ -13,7 +13,7 @@ static void	del_tab(char **tab, int size)
 	}
 }
 
-static int		check_type(t_light *new, char *tmp)
+static int	check_type(t_light *new, char *tmp)
 {
 	char	*tab[2];
 	int		i;
@@ -35,7 +35,7 @@ static int		check_type(t_light *new, char *tmp)
 	return (n);
 }
 
-int		set_type_light(char *tmp, t_light *new, t_pars_object *index)
+int			set_type_light(char *tmp, t_light *new, t_pars_object *index)
 {
 	int		n;
 

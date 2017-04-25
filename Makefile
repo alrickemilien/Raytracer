@@ -51,6 +51,7 @@ SRCS=\
 	srcs/parser/error.c\
 	srcs/parser/sort_camera.c\
 	srcs/init/init_parser.c\
+	srcs/parser/set_arth_box.c\
 	srcs/parser/func_nbr_parse.c\
 	srcs/parser/set_camera_data.c\
 	srcs/parser/set_apex.c\
