@@ -66,7 +66,7 @@ static void			set_limits(t_obj *obj)
 
 	if (obj->size == 2000000)
 		return ;
-	le_plan = *obj;;
+	le_plan = *obj;
 	le_plan.csg = NULL;
 	le_plan.etat = PLAN;
 	le_plan.n = obj->axis;

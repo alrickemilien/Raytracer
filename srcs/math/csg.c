@@ -1,4 +1,5 @@
 #include "vector.h"
+#include <stdio.h>
 #include "rtv1.h"
 /*
  *
@@ -100,13 +101,16 @@ int		csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 	tmp_list = obj->csg;
 	obj_thread = (t_obj*)tmp_list->content;
 	obj_thread->func_obj(obj_thread, ray, t, &b);
+//	printf("Longueur de liste b : %d\n", ft_lstlen(b));
 	tmp_list = tmp_list->next;
 	obj_thread = (t_obj*)tmp_list->content;
 	obj_thread->func_obj(obj_thread, ray, t, &a);
+//	printf("Longueur de liste a : %d\n", ft_lstlen(a));
 	if (obj->type == DIFFERENCE)
 		list = function_difference(a, b);
 	else
 		list = function_intersection(a, b);
+//	printf("Longueur de liste ret : %d\n", ft_lstlen(list));
 	get_smaller_t(list, &obj_thread, t);
 	obj->pointeur[ray->thread] = obj_thread;
 	ft_lstdel(&a, &del_range);

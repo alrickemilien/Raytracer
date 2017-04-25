@@ -1,4 +1,5 @@
 #include "vector.h"
+#include <stdio.h>
 
 static void	set_spaces_diff(t_range *a, t_range *b)
 {
@@ -29,6 +30,37 @@ static void split_range(t_list **ret, t_range a, t_range b, t_range *n)
 	*ret = elem_rm(*ret, ptr_of(*ret, &a, &cmp_range));
 }
 
+/*static int		ft_lstlen(t_list *lst)
+{
+	int		i;
+
+	i = 0;
+	while (lst)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
+}*/
+
+/*static void		print_range(t_range r)
+{
+	printf("t1 : %lf\nt2 : %lf\n", r.t1.t, r.t2.t);
+}
+
+static void		print_list_range(t_list *list)
+{
+	ft_putnbr(ft_lstlen(list));
+	ft_putchar('\n');
+	while(list)
+	{
+		ft_putchar('\t');
+		print_range(*(t_range*)(list->content));
+		list = list->next;
+		ft_putchar('\n');
+	}
+}*/
+
 static int		difference(t_list **ret, t_range a, t_range b)
 {
 	t_range	n;
@@ -36,6 +68,17 @@ static int		difference(t_list **ret, t_range a, t_range b)
 	set_spaces_diff(&a, &b);
 	n.t1 = a.t1;
 	n.t2 = a.t2;
+//	printf("Longueur de liste ret : %d\n", ft_lstlen(*ret));
+
+	/*ft_putendl("range de n :");
+	print_range(n);
+	ft_putendl("range de a :");
+	print_range(a);
+	ft_putendl("range de b :");
+	print_range(b);
+	printf("List range :\n");
+	print_list_range(*ret);*/
+
 	if (betweex(b.t1.t, a.t1.t , a.t2.t) && betweex(b.t2.t, a.t1.t , a.t2.t))
 	{
 		split_range(ret, a, b, &n);
@@ -56,11 +99,14 @@ static int		difference(t_list **ret, t_range a, t_range b)
 		return (1);
 	}
 	else if (!betweex(b.t1.t, a.t1.t , a.t2.t) && !betweex(b.t2.t, a.t1.t , a.t2.t))
+	{
 		if (b.t1.t < a.t1.t && b.t2.t > a.t2.t)
 		{
 			*ret = elem_rm(*ret, ptr_of(*ret, &a, &cmp_range));
 			return (1);
 		}
+	}
+//	usleep(50000);
 	return (0);
 }
 
@@ -75,15 +121,17 @@ t_list		*function_difference(t_list *a, t_list *b)
 		ft_lstadd(&ret, ft_lstnew(a->content, sizeof(t_range)));
 		a = a->next;
 	}
+	tmp_ret = ret;
 	while (b)
 	{
-		tmp_ret = ret;
 		while (tmp_ret)
 		{
 			if (!difference(&ret,
 					*((t_range*)(tmp_ret->content)),
 					*((t_range*)(b->content))))
+			{
 				tmp_ret = tmp_ret->next;
+			}
 			else
 				tmp_ret = ret;
 		}

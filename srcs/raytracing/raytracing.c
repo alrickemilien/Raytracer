@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/19 16:02:29 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/24 13:19:37 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 #include "vector.h"
 #include "stdio.h"
 
-static void	set_primary_ray(t_env *env, t_ray *ray, int j, int i)
+static void	set_primary_ray(t_env *env, t_ray *ray, double j, double i)
 {
 	t_vector	null_vector;
 
-	ray->dir.x = ((double)2 * (((double)j + 0.5) /
+	ray->dir.x = ((double)2 * ((j + 0.5) /
 				(double)env->image->width) - (double)1)
 		* env->scale * env->image_aspect_ratio;
-	ray->dir.y = ((double)1 - (double)2 * (((double)i + 0.5) /
+	ray->dir.y = ((double)1 - (double)2 * ((i + 0.5) /
 				(double)env->image->height)) * env->scale;
 	ray->dir.z = -1;
 	ray->dir = product_matrix4x4(env->select->c->matrix, ray->dir);
@@ -139,15 +139,41 @@ static t_color				raycast(t_env *env, t_ray ray, int depth)
 	return (color);
 }
 
+t_color		moyenne(t_color *tab, int size)
+{
+	int			color[3];
+	t_color		ret;
+	int			i;
+
+	ft_bzero(&color, sizeof(int) * 3);
+	i = 0;
+	while (i < size)
+	{
+		color[0] += tab[i].blue;
+		color[1] += tab[i].green;
+		color[2] += tab[i].red;
+		i++;
+	}
+	ret.blue = (unsigned char)(color[0] / size);
+	ret.green = (unsigned char)(color[1] / size);
+	ret.red = (unsigned char)(color[2] / size);
+	return (ret);
+}
+
 void		*raytracing(void *params)
 {
 	int			index;
 	t_limit		l;
 	t_env		*env;
-	t_color		color;
+	t_color		*color;
+	t_color		final_color;
 	char		*data;
+	int			i;
+	double		ty;
+	double		tx;
 
 	env = (t_env*)(params);
+	color = (t_color*)malloc(sizeof(t_color) * 4);
 	if (env->nb_thread == 9)
 	{
 		l.y = -1;
@@ -158,19 +184,32 @@ void		*raytracing(void *params)
 	else
 		l = ft_limit_thread(env->nb_thread, env->image->width, env->image->height);
 	data = env->image->data;
-	ft_bzero(&color, sizeof(t_color));
 	while (++l.y < l.max_y)
 	{
 		l.x = l.tmp_x;
 		while (++l.x < l.max_x)
 		{
 			index = (l.y * WIN_HEIGHT + l.x);
-			set_primary_ray(env, env->tab_ray + index, l.x, l.y);
-			color = raycast(env, *(env->tab_ray + index), 0);
+			ty = (double)l.y - 0.25;
+			i = 0;
+			//printf("%lf\n");
+			while ( ty <= (double)l.y + 0.5)
+			{
+				tx = (double)l.x - 0.25;
+				while ( tx <= (double)l.x + 0.5)
+				{
+					set_primary_ray(env, env->tab_ray + index, tx, ty);
+					color[i] = raycast(env, *(env->tab_ray + index), 0);
+					i++;
+					tx += 0.5;
+				}
+				ty += 0.5;
+			}
 			index = (l.x * (env->image->bpp)) + (l.y * env->image->sizeline);
-			data[index] = color.blue;
-			data[index+1] = color.green;
-			data[index+2] = color.red;
+			final_color = moyenne(color, 4);
+			data[index] = final_color.blue;
+			data[index+1] = final_color.green;
+			data[index+2] = final_color.red;
 		}
 	}
 	return (NULL);
