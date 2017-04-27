@@ -23,7 +23,7 @@ box:
 	position: (0 0 1)
 	size: (1)
 	color: (0xFF960A)
-	rotation: (0 10 90)
+	rotation: (60 10 90)
 }
 
 

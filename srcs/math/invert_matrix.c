@@ -6,13 +6,13 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 10:13:18 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/27 10:32:42 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/27 10:34:33 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	operate(double *t, double *s, t_pivot_gauss *tools)
+static void		operate(double *t, double *s, t_pivot_gauss *tools)
 {
 	tools->k = 0;
 	while (tools->k < 4)
@@ -23,7 +23,7 @@ void	operate(double *t, double *s, t_pivot_gauss *tools)
 	}
 }
 
-int		backward_substitution(double *t, double *s)
+static int		backward_substitution(double *t, double *s)
 {
 	t_pivot_gauss	tools;
 
@@ -51,7 +51,7 @@ int		backward_substitution(double *t, double *s)
 	return (1);
 }
 
-double	*init_matrix(void)
+static double	*init_matrix(void)
 {
 	double			*s;
 
@@ -63,7 +63,7 @@ double	*init_matrix(void)
 	return (s);
 }
 
-int		forward_substitution(double *t, double *s, t_pivot_gauss *tools)
+static int		forward_substitution(double *t, double *s, t_pivot_gauss *tools)
 {
 	tools->j = tools->i + 1;
 	while (tools->j < 4)
@@ -92,7 +92,7 @@ int		forward_substitution(double *t, double *s, t_pivot_gauss *tools)
 	return (1);
 }
 
-double	*invert_matrix(double *t)
+double			*invert_matrix(double *t)
 {
 	t_pivot_gauss	tools;
 	double			*s;
