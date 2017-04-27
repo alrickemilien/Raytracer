@@ -1,4 +1,16 @@
 #include "parser.h"
+#include <math.h>
+#include "vector.h"
+
+static int			rotate_camera(char *tmp, t_camera *new)
+{
+	if (!fill_data_vec(tmp, &new->rotation))
+		return (0);
+	new->rotation.x = new->rotation.x * M_PI / (double)180;
+	new->rotation.y = new->rotation.y * M_PI / (double)180;
+	new->rotation.z = new->rotation.z * M_PI / (double)180;
+	return (1);
+}
 
 static int			check_camera(
 		t_env *env, t_camera *new,
@@ -19,6 +31,12 @@ static int			check_camera(
 		if (!fill_data_vec(tmp + n, &new->to))
 			return (0);
 	}
+	else if (!ft_strncmp(ROTATION, tmp, (n = ft_strlen(ROTATION))))
+	{
+		(index->rotation)++;
+		if (!rotate_camera(tmp + n, new))
+			return (0);
+	}
 	else
 		return (parse_error(INVALID_DESCRIPTION));
 	return (1);
@@ -28,8 +46,8 @@ int					check_ref_camera(t_pars_object ref, t_camera new)
 {
 	if (ref.from > 1 || ref.to > 1 || ref.position || ref.brillance || ref.angle
 			|| ref.rayon || ref.color || ref.apex || ref.axis || ref.normal
-			|| ref.rotation || ref.intensity || ref.size || ref.diffuse
-			|| ref.specular || ref.transparent || ref.translation)
+			|| ref.intensity || ref.size || ref.diffuse || ref.specular
+			|| ref.transparent || ref.translation)
 		return (parse_error(INVALID_OBJECT));
 	if (new.pos.x == new.to.x && new.pos.z == new.to.z && new.pos.y == new.to.y)
 		return (parse_error(INVALID_CAMERA));

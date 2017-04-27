@@ -35,6 +35,7 @@ SRCS=\
 	srcs/math/vector_1.c\
 	srcs/math/vector_2.c\
 	srcs/math/matrix_func.c\
+	srcs/math/rotate_vec.c\
 	srcs/math/get_surface_normal.c\
 	srcs/math/sphere.c\
 	srcs/math/plan.c\

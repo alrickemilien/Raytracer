@@ -2,6 +2,7 @@ camera:
 {
 	from: (1 5 5)
 	to: (0 0 0)
+	rotation: (0 0 0)
 }
 
 

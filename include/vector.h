@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:18:23 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/24 18:55:57 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/27 11:06:14 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ t_ray				get_refraction(t_surface s, t_ray ray);
 t_vector			get_surface_normal(t_vector intersection,
 		t_obj *tmp, t_ray ray);
 void				rotate_object(t_obj *object, t_vector *vector);
+void				rotate_vec(t_vector rot, t_vector *vector);
 double				range(double a, double b);
 #endif

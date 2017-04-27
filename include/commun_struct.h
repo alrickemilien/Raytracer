@@ -180,6 +180,7 @@ typedef struct		s_limit
 typedef struct		s_camera
 {
 	int				num;
+	t_vector		rotation;
 	t_vector		pos;
 	t_vector		to;
 	double			*matrix;
