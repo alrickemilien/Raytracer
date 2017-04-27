@@ -70,17 +70,14 @@ csg:
 	translation: (0 3 0)
 }
 
-light:
-{
-	position: (0 60 50)
-	intensity: (7)
-}
-
 sphere:
 {
 	rayon: (2.5)
 	color: (0x0f6b56)
 	translation: (0 3 0)
+	refraction: (1.1)
+	reflection: (1.1)
+	transparent: (0.3)
 }
 
 light:
@@ -94,9 +91,6 @@ sphere:
 	rayon: (0.5)
 	position: (-3 -2 3)
 	color: (0x738187)
-	refraction: (1.05)
-	reflection: (1.05)
-	transparent: (0.9)
 }
 
 plan: 
@@ -147,9 +141,6 @@ csg:
 		{
 			normal: (6 3 2)
 			color: (0x6D0610)
-		refraction: (1.2)
-			reflection: (1.2)
-		transparent: (0.9)
 		}
 	}
 	sphere:
@@ -212,11 +203,6 @@ sphere:
 
 sphere:
 {
-	position: (11 9 9)
-}
 
-light:
-{
-	position: (-3 -5 4)
-	intensity: (0.5)
+	position: (11 9 9)
 }

@@ -5,11 +5,8 @@ t_color		mlx_put_xpm(int u, int v, t_image texture)
 	t_color color;
 	int tmp;
 
-	if (u >= texture.width && v >= texture.height)
-	{
-		u = (u >= texture.width ? texture.width - 1 : u);
-		v = (v >= texture.height ? texture.height - 1 : v);
-	}
+	u = u % texture.width;
+	v = v % texture.height;
 	tmp = (u * (texture.bpp)) + (v * texture.sizeline);
 	color.blue = (unsigned char)(texture.data[tmp]);
 	color.green = (unsigned char)(texture.data[tmp + 1]);

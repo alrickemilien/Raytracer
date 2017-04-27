@@ -62,8 +62,9 @@
 # define TEXTURE "texture:"
 # define RESIZE "resize_texture:"
 # define PERTURBATION "perturbation:"
+# define SHINING "shining:"
 
-t_color	split_color(unsigned long color);
+t_color			split_color(unsigned long color);
 int				check_indent(char *str, int n);
 int				parse_error(char *str);
 int				fill_data(char *tmp, double *data);
@@ -74,6 +75,7 @@ int				check_data_type_nbr(char *str, int k);
 int				error_file(char *file);
 int				fill_int_data(char *str, int *data);
 int				check_end_data(char *str);
+
 int					set_color(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
 int					set_axis(t_env *env, char *tmp,
@@ -110,7 +112,10 @@ int					set_translation(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
 int					set_perturbation(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
+
 int					set_type_light(char *tmp, 
+		t_light *new, t_pars_object *index);
+int					set_shining(char *tmp, 
 		t_light *new, t_pars_object *index);
 
 int					set_resize_texture(t_env *env, char *tmp, t_obj *new, t_pars_object *index);

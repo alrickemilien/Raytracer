@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:32 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/19 16:03:28 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/27 09:15:50 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void			set_default_light(t_light *new)
 	new->intensity = 5.5;
 	new->specular = 0.5;
 	new->diffuse = 0.5;
+	new->shining = 0;
 	new->type = SPHERICAL_LIGHT;
 	new->angle = M_PI_4 / 2;
 	new->hit_light = &hit_light;
@@ -63,6 +64,9 @@ static int			check_light(t_light *new, char *tmp, t_pars_object *index)
 		t = 0;
 	if ((!ft_strncmp(AXIS, tmp, (n = ft_strlen(AXIS))))
 			&& fill_data_vec(tmp + n, &new->axis))
+		t = 0;
+	if ((!ft_strncmp(SHINING, tmp, (n = ft_strlen(SHINING))))
+			&& set_shining(tmp + n, new, index))
 		t = 0;
 	if (!t)
 		return (1);
@@ -95,6 +99,6 @@ int					set_light(t_env *env, t_list **list_obj)
 		return (0);
 	if (new_light.diffuse + new_light.specular > 1)
 		return (parse_error(INVALID_LIGHT));
-	ft_lstadd(&env->light, ft_lstnew(&new_light, (sizeof(t_light))));
+	ft_lstadd(&env->light, ft_lstnew(&new_light, sizeof(t_light)));
 	return (1);
 }

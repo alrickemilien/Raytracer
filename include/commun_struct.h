@@ -75,6 +75,7 @@ typedef struct		s_light
 	int				type;
 	double			angle;
 	t_vector		axis;
+	int				shining;
 }					t_light;
 
 typedef struct		s_matrix_rot
@@ -217,6 +218,7 @@ typedef struct	s_pars_object
 	int			resize_texture;
 	int			texture;
 	int			perturbation;
+	int			shining;
 }				t_pars_object;
 
 typedef struct		s_surface

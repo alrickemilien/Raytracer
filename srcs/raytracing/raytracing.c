@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/24 13:19:37 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/27 09:19:00 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,19 +83,21 @@ static t_color		shining(t_env *env, t_list *lights, t_ray *ray, double *norme)
 	*norme = 2000000;
 	while (lights)
 	{
-		light_vec = vec_diff(((t_light*)(lights->content))->org, ray->org);
-		if (light_vec.norme < *norme)
-			*norme = light_vec.norme;
-		tmp = light_vec.norme;
-		normalize_vec(&light_vec);
-		if ((d = dot_product(light_vec, ray->dir))>0)
+		if (((t_light*)(lights->content))->shining)
 		{
-			d = acos(d);
-			d = ((t_light*)(lights->content))->intensity * exp(-pow(((d / (0.2 * (1 / tmp)))), 2));
-			//printf("%lf\n", d);
-			color.blue += (unsigned char)(ft_dtrim(0, 255 - color.blue, 255 * d * (10 / tmp)));
-			color.red += (unsigned char)(ft_dtrim(0, 255 - color.red, 255 * d * (10 / tmp)));
-			color.green += (unsigned char)(ft_dtrim(0, 255 - color.green, 255 * d * (10 / tmp)));
+			light_vec = vec_diff(((t_light*)(lights->content))->org, ray->org);
+			if (light_vec.norme < *norme)
+				*norme = light_vec.norme;
+			tmp = light_vec.norme;
+			normalize_vec(&light_vec);
+			if ((d = dot_product(light_vec, ray->dir))>0)
+			{
+				d = acos(d);
+				d = ((t_light*)(lights->content))->intensity * exp(-pow(((d / (0.2 * (1 / tmp)))), 2));
+				color.blue += (unsigned char)(ft_dtrim(0, 255 - color.blue, 255 * d * (10 / tmp)));
+				color.red += (unsigned char)(ft_dtrim(0, 255 - color.red, 255 * d * (10 / tmp)));
+				color.green += (unsigned char)(ft_dtrim(0, 255 - color.green, 255 * d * (10 / tmp)));
+			}
 		}
 		lights = lights->next;
 	}
