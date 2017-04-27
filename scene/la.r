@@ -1,8 +1,8 @@
 camera:
 {
-	from: (1 5 5)
+	from: (30 -2 0)
 	to: (0 0 0)
-	rotation: (0 0 0)
+	rotation: (0 0 -20)
 }
 
 

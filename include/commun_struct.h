@@ -143,7 +143,7 @@ typedef struct		s_obj
 	double			diffuse;
 	double			refraction;
 	int				perturbation;
-	int				reflection;
+	double			reflection;
 	t_vector		absorbtion;
 	double			transparent;
 	int				intersection;
@@ -229,6 +229,7 @@ typedef struct		s_surface
 	double			spec;
 	double			diffuse;
 	double			refraction;
+	double			reflection;
 	double			transparent;
 }					t_surface;
 

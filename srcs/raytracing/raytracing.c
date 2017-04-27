@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/27 09:19:00 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/27 16:27:20 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,14 @@ static t_color		shining(t_env *env, t_list *lights, t_ray *ray, double *norme)
 	return (color);
 }
 
+static t_color				scale_color(t_color color, double k)
+{
+	color.red = (unsigned char)((double)color.red * k);
+	color.blue = (unsigned char)((double)color.blue * k);
+	color.green = (unsigned char)((double)color.green * k);
+	return (color);
+}
+
 static t_color				raycast(t_env *env, t_ray ray, int depth)
 {
 	t_obj			*tmp;
@@ -134,8 +142,9 @@ static t_color				raycast(t_env *env, t_ray ray, int depth)
 		}
 		if (depth < 5 && tmp->reflection)
 		{
+//			printf("reflection: %lf\n");
 			ret = raycast(env, get_reflection(s, ray), depth + 1);
-			color = add_color(color, ret, (ray.coeff));
+			color = add_color(color, scale_color(ret, s.reflection), (ray.coeff));
 		}
 	}
 	return (color);
