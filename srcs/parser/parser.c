@@ -33,6 +33,11 @@ int			parser(t_env *env)
 	{
 		recycle(&line, ft_strtrim(line));
 		if (ft_strcmp(line, ""))
+		{
+			ft_putendl("Voici la ligne juste en dessous : ");
+			ft_putendl(line);
+		}
+		if (ft_strcmp(line, ""))
 			if (!check_object(env, line))
 				return (clean_error(&line));
 		ft_strdel(&line);

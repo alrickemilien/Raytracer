@@ -60,6 +60,6 @@ int					set_camera(t_env *env, t_list **list_obj)
 	if (!(check_ref_camera(reference, new)))
 		return (0);
 	set_camera_data(&new);
-	ft_lstadd(&env->camera, ft_lstnew(&new, (sizeof(t_camera))));
+	ft_lstadd(&env->camera, ft_lstnew(&new, sizeof(t_camera)));
 	return (1);
 }

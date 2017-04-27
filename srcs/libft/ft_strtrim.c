@@ -3,37 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salibert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/08 12:43:10 by salibert          #+#    #+#             */
-/*   Updated: 2016/11/13 17:31:55 by salibert         ###   ########.fr       */
+/*   Created: 2016/11/16 17:39:32 by aemilien          #+#    #+#             */
+/*   Updated: 2016/11/23 12:59:05 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strtrim(char const *s)
+static	size_t	ft_strlentrim(char const *s)
 {
-	size_t	i;
-	char	*new;
-	size_t	a;
-	size_t	z;
+	size_t		i;
 
-	if (!s)
-		return (NULL);
-	if (ft_strlen(s) == 0)
-		return ((char*)malloc(sizeof(*new) * (0)));
+	if (*s == '\0')
+		return (0);
 	i = 0;
-	while (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
+	while (*s == ' ' || *s == '\t' || *s == '\n')
+		s++;
+	while (*s != '\0')
+	{
 		i++;
-	if (s[i] == '\0')
-		return ((ft_strsub(s, 0, 0)));
-	a = i;
-	while (s[i])
-		i++;
-	while (s[i] == ' ' || s[i] == '\0' || s[i] == '\t' || s[i] == '\n')
+		s++;
+	}
+	s--;
+	while ((*s == ' ' || *s == '\t' || *s == '\n') && i)
+	{
+		s--;
 		i--;
-	z = i;
-	new = ft_strsub(s, a, (z - a + 1));
-	return (new);
+	}
+	return (i);
+}
+
+static	int		ft_strstart(const char *s)
+{
+	int		i;
+
+	i = 0;
+	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
+		i++;
+	return (i);
+}
+
+char			*ft_strtrim(char const *s)
+{
+	char	*str;
+
+	if (s)
+	{
+		str = ft_strsub(s, ft_strstart(s), ft_strlentrim(s));
+		return (str);
+	}
+	return (NULL);
 }
