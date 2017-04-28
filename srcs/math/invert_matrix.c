@@ -6,7 +6,7 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 10:13:18 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/28 10:46:13 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/28 11:09:34 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int		forward_substitution(double *t, double *s, t_pivot_gauss *tools)
 	return (1);
 }
 
-double			*invert_matrix(double *t)
+double			*inv_m(double *t)
 {
 	t_pivot_gauss	tools;
 	double			*s;

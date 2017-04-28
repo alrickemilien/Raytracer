@@ -33,7 +33,7 @@ static int			check_camera(
 	}
 	else if (!ft_strncmp(ROTATION, tmp, (n = ft_strlen(ROTATION))))
 	{
-		(index->rotation)++;
+		(index->rot)++;
 		if (!rotate_camera(tmp + n, new))
 			return (0);
 	}

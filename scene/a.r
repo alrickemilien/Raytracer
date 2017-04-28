@@ -1,7 +1,7 @@
 camera:
 {
 	from: (10 10 8)
-	to: (0 0 0 )
+	to: (0 0 0)
 }
 
 csg:
@@ -75,8 +75,8 @@ sphere:
 	rayon: (2.5)
 	color: (0x0f6b56)
 	translation: (0 3 0)
-	refraction: (1.1)
-	reflection: (1.1)
+	refraction: (1)
+	reflection: (0.2)
 	transparent: (0.3)
 }
 
@@ -97,8 +97,6 @@ plan:
 {
 	normal: (1 1 1)
 	position: (-150 -150 -150)
-	texture: (void.xpm)
-	resize_texture: (10)
 }
 
 csg:
@@ -115,8 +113,8 @@ csg:
 		{
 			normal: (6 3 2)
 			color: (0x6D0610)
-		refraction: (1.2)
-			reflection: (1.2)
+			refraction: (1)
+			reflection: (0.2)
 		transparent: (0.9)
 		}
 	}

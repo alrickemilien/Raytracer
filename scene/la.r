@@ -2,7 +2,7 @@ camera:
 {
 	from: (30 -2 0)
 	to: (0 0 0)
-	rotation: (0 0 -20)
+	rotation: (0 0 0)
 }
 
 
@@ -26,5 +26,4 @@ box:
 	color: (0xFF960A)
 	rotation: (60 10 90)
 }
-
 

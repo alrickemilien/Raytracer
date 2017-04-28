@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:18:23 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/28 10:57:32 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/28 11:19:20 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <math.h>
 
 t_vector			*arthmetic_box(t_obj obj, t_obj *plan_tab);
-void				set_spaces_diff(t_range *a, t_range *b);
 t_vector			cross_product(t_vector a, t_vector b);
 double				dot_product(t_vector a, t_vector b);
 void				set_vec(t_vector *v, double x, double y, double z);
