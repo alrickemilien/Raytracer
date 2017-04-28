@@ -16,11 +16,25 @@ light:
 	intensity: (7)
 }
 
+light:
+{
+	position: (-2 1 3)
+	intensity: (3)
+}
+
 sphere:
 {
 	rayon: (0.2)
 	position: (0.5 -0.5 1.6)
 	color: (0xffffff)
+	reflection: (1)
+}
+
+plan:
+{
+	position: (0 0 40)
+	normal: (0 0 1)
+	color: (0x00)
 }
 
 sphere:
@@ -38,6 +52,10 @@ csg:
 		position: (1 0 1)
 		rayon: (1)
 		color: (0xead13b)
+		brillance: (1)
+		specular: (1)
+		reflection: (0.1)
+
 	}
 	box:
 	{
@@ -89,7 +107,7 @@ cylinder:
 sphere:
 {
 	position: (-3 2 1)
-	color: (0x982ac9)
+	color: (0xFF0000)
 	rayon: (0.5)
 }
 

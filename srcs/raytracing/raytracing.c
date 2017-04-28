@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/28 10:42:22 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/28 14:19:50 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,5 +221,6 @@ void		*raytracing(void *params)
 			data[index+2] = final_color.red;
 		}
 	}
+	free(color);
 	return (NULL);
 }
