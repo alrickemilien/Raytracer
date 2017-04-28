@@ -10,65 +10,69 @@ static void		set_range(t_list **inter, t_obj *obj, double t1, double t2)
 	ft_lstadd(inter, ft_lstnew(&range, sizeof(t_range)));
 }
 
-static int	check_size(t_obj *cylindre, t_ray *ray, t_vector inter, t_obj **ptr)
+static int		check_size(t_obj *cylindre, t_ray *ray, t_vector i, t_obj **ptr)
 {
-	double	inter_plan[2];
-	int		ret[2];
+	double		ip[2];
+	int			ret[2];
 
-	ft_bzero(inter_plan, 2 * sizeof(double));
-	if (cylindre->size > 20000)	
+	ft_bzero(ip, 2 * sizeof(double));
+	if (cylindre->size > 20000)
 		return (1);
-	ret[0] = plan(cylindre->csg->next->content, ray, &inter_plan[0], NULL);
-	ret[1] = plan(cylindre->csg->content, ray, &inter_plan[1], NULL);
-	if ((inter.x <= inter_plan[0] && inter.x >= inter_plan[1])
-		|| (inter.x <= inter_plan[1] && inter.x >= inter_plan[0]))
+	ret[0] = plan(cylindre->csg->next->content, ray, &ip[0], NULL);
+	ret[1] = plan(cylindre->csg->content, ray, &ip[1], NULL);
+	if ((i.x <= ip[0] && i.x >= ip[1]) || (i.x <= ip[1] && i.x >= ip[0]))
 	{
-		if ((inter_plan[0] <= inter.x && inter_plan[0] >= inter.y)
-		|| (inter_plan[0] >= inter.x && inter_plan[0] <= inter.y))
+		if ((ip[0] <= i.x && ip[0] >= i.y) || (ip[0] >= i.x && ip[0] <= i.y))
 			*ptr = (t_obj*)cylindre->csg->next->content;
-		if (inter.x > inter.y && ret[0] >= ret[1])
+		if (i.x > i.y && ret[0] >= ret[1])
 			*ptr = (t_obj*)cylindre->csg->content;
 		return (1);
 	}
-	if ((inter.y <= inter_plan[0] && inter.y >= inter_plan[1])
-		|| (inter.y <= inter_plan[1] && inter.y >= inter_plan[0]))
+	if ((i.y <= ip[0] && i.y >= ip[1]) || (i.y <= ip[1] && i.y >= ip[0]))
 	{
-		if (inter.y > inter.x && ret[0] < ret[1])
+		if (i.y > i.x && ret[0] < ret[1])
 			*ptr = (t_obj*)cylindre->csg->next->content;
-		if (inter.y > inter.x && ret[0] >= ret[1])
+		if (i.y > i.x && ret[0] >= ret[1])
 			*ptr = (t_obj*)cylindre->csg->content;
 		return (1);
 	}
 	return (0);
 }
 
-int		cylindre(t_obj *cylindre, t_ray *ray, double *t, t_list **inter)
+static t_vector	arithmetic_cylindre(t_obj *cylindre, t_ray *ray)
 {
 	t_vector	coeffs;
-	double		delta;
-	t_vector	tmp;
 	t_vector	x;
 
 	x = vec_diff(ray->org, cylindre->apex);
 	coeffs.x = dot_product(ray->dir, ray->dir)
 		- dot_product(ray->dir, cylindre->axis)
 		* dot_product(ray->dir, cylindre->axis);
-	delta = dot_product(ray->dir, x);
-	coeffs.y = (delta + delta) - dot_product(ray->dir, cylindre->axis)
+	coeffs.z = dot_product(ray->dir, x);
+	coeffs.y = (coeffs.z + coeffs.z) - dot_product(ray->dir, cylindre->axis)
 		* dot_product(x, cylindre->axis) * (double)2;
 	coeffs.z = dot_product(x, x) - dot_product(x, cylindre->axis)
 		* dot_product(x, cylindre->axis) - cylindre->r * cylindre->r;
-	if ((delta = (coeffs.y * coeffs.y) - ((double)4 * coeffs.x * coeffs.z)) < 0)
+	return (coeffs);
+}
+
+int				cylindre(t_obj *cylindre, t_ray *ray, double *t, t_list **inter)
+{
+	t_vector	coeffs;
+	t_vector	tmp;
+
+	coeffs = arithmetic_cylindre(cylindre, ray);
+	if ((tmp.z = (coeffs.y * coeffs.y) - ((double)4 * coeffs.x * coeffs.z)) < 0)
 		return (0);
-	tmp.x = ((double)((-coeffs.y - sqrt(delta)) / (coeffs.x + coeffs.x)));
-	tmp.y = ((double)((-coeffs.y + sqrt(delta)) / (coeffs.x + coeffs.x)));
+	tmp.x = ((double)((-coeffs.y - sqrt(tmp.z)) / (coeffs.x + coeffs.x)));
+	tmp.y = ((double)((-coeffs.y + sqrt(tmp.z)) / (coeffs.x + coeffs.x)));
 	*t = tmp.y;
 	if (tmp.x < tmp.y && tmp.x >= 0)
 		*t = tmp.x;
 	if (*t < 0)
 		return (0);
 	cylindre->pointeur[ray->thread] = cylindre;
-	if (!check_size(cylindre, ray, tmp, cylindre->pointeur + ray->thread ))
+	if (!check_size(cylindre, ray, tmp, cylindre->pointeur + ray->thread))
 		return (0);
 	if (inter)
 		set_range(inter, cylindre, tmp.x, tmp.y);

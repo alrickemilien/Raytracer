@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/27 16:27:20 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/28 10:42:22 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ static void	set_primary_ray(t_env *env, t_ray *ray, double j, double i)
 	ray->thread = env->nb_thread;
 }
 
-static int	get_intersection(t_env *env, t_ray *ray, t_obj **tmp)
+static int		get_intersection(t_env *env, t_ray *ray, t_obj **tmp)
 {
-	double			t;
-	t_list			*tmp_list;
+	double		t;
+	t_list		*tmp_list;
 
 	ray->t = 2000000;
 	t = 0;
@@ -60,7 +60,7 @@ static int	get_intersection(t_env *env, t_ray *ray, t_obj **tmp)
 	return (0);
 }
 
-static t_color	add_color(t_color current, t_color to_add, double t)
+static t_color		add_color(t_color current, t_color to_add, double t)
 {
 	current.red += (unsigned char)(ft_dtrim(0, 255 - current.red,
 						((double)to_add.red * t)));
@@ -112,7 +112,7 @@ static t_color				scale_color(t_color color, double k)
 	return (color);
 }
 
-static t_color				raycast(t_env *env, t_ray ray, int depth)
+static t_color		raycast(t_env *env, t_ray ray, int depth)
 {
 	t_obj			*tmp;
 	double			t;
@@ -142,7 +142,6 @@ static t_color				raycast(t_env *env, t_ray ray, int depth)
 		}
 		if (depth < 5 && tmp->reflection)
 		{
-//			printf("reflection: %lf\n");
 			ret = raycast(env, get_reflection(s, ray), depth + 1);
 			color = add_color(color, scale_color(ret, s.reflection), (ray.coeff));
 		}
@@ -203,7 +202,6 @@ void		*raytracing(void *params)
 			index = (l.y * WIN_HEIGHT + l.x);
 			ty = (double)l.y - 0.25;
 			i = 0;
-			//printf("%lf\n");
 			while ( ty <= (double)l.y + 0.5)
 			{
 				tx = (double)l.x - 0.25;

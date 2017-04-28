@@ -71,7 +71,6 @@ int				fill_data(char *tmp, double *data);
 int				check_floating_number(char *str);
 int				fill_data_vec(char *str, t_vector *vec);
 int				check_data_type_color(char *str);
-int				check_data_type_nbr(char *str, int k);
 int				error_file(char *file);
 int				fill_int_data(char *str, int *data);
 int				check_end_data(char *str);
@@ -92,7 +91,7 @@ int					set_rayon(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
 int					set_normal(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
-int					set_rotation(t_env *env, char *tmp,
+int					set_rot(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
 int					set_size(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
@@ -112,14 +111,16 @@ int					set_translation(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
 int					set_perturbation(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
-
 int					set_type_light(char *tmp, 
 		t_light *new, t_pars_object *index);
 int					set_shining(char *tmp, 
 		t_light *new, t_pars_object *index);
+int					set_resize_texture(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
+int					set_texture(t_env *env, char *tmp,
+		t_obj *new, t_pars_object *index);
 
-int					set_resize_texture(t_env *env, char *tmp, t_obj *new, t_pars_object *index);
-int					set_texture(t_env *env, char *tmp, t_obj *new, t_pars_object *index);
+void				set_translation_csg(t_vector translation, t_list *csg);
 int					set_camera(t_env *env, t_list **list_obj);
 int					set_scene(t_env *env, t_list **list_obj);
 int					set_light(t_env *env, t_list **list_obj);
@@ -130,11 +131,12 @@ int					set_plan(t_env *env, t_list **list_obj);
 int					set_csg(t_env *env, t_list **list_obj);
 int					set_box(t_env *env, t_list **list_obj);
 void				set_camera_data(t_camera *camera);
+void				set_boxs_plans(t_list **list, t_obj obj);
 int					parser(t_env *env);
 int					error(t_env *env, char *str);
 void				recycle(char **old_ptr, char *new_ptr);
 void				set_default_camera(t_camera *new);
 int					clean_error(char **str);
-void	free_list(t_list **obj, t_list **camera, t_list **t_3, t_env *env);
+void				free_list(t_list **obj, t_list **camera, t_list **t_3, t_env *env);
 
 #endif

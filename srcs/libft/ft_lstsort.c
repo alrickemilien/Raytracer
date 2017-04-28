@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstsort.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: salibert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/22 07:45:57 by salibert          #+#    #+#             */
+/*   Updated: 2017/04/22 07:47:13 by salibert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-//du plus petit au plus grand
-void	ft_lstsort(t_list *lst, int	(*cmp)(void *a, void *b))
+void		ft_lstsort(t_list *lst, int (*cmp)(void *a, void *b))
 {
-	t_list		*cur1;
-	t_list		*cur2;
-	void		*tmp;
+	t_list	*cur1;
+	t_list	*cur2;
+	void	*tmp;
 
 	tmp = NULL;
 	cur1 = lst;

@@ -6,13 +6,13 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:32 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/27 16:12:03 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/28 10:43:01 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
-t_surface			get_surface_caracter(t_ray ray, t_obj *tmp)
+t_surface		get_surface_caracter(t_ray ray, t_obj *tmp)
 {
 	t_surface	s;
 

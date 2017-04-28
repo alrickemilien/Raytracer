@@ -6,11 +6,11 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:45:03 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:45:04 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/22 07:13:09 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include <stdlib.h>
 
 void	free_tab(char ***tab, size_t size)
 {

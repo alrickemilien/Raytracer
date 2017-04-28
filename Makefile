@@ -33,6 +33,7 @@ SRCS=\
 	srcs/event/free_tab.c\
 	srcs/math/light.c\
 	srcs/math/vector_1.c\
+	srcs/math/func_csg.c\
 	srcs/math/vector_2.c\
 	srcs/math/matrix_func.c\
 	srcs/math/rotate_vec.c\
@@ -51,6 +52,7 @@ SRCS=\
 	srcs/parser/error.c\
 	srcs/parser/sort_camera.c\
 	srcs/init/init_parser.c\
+	srcs/parser/set_arth_box.c\
 	srcs/parser/func_nbr_parse.c\
 	srcs/parser/set_camera_data.c\
 	srcs/parser/set_apex.c\
@@ -94,6 +96,7 @@ SRCS=\
 	srcs/event/event_mouse.c\
 	srcs/event/event.c\
 	srcs/event/free_all_list.c\
+	srcs/menu/menu_all_scene.c\
 
 OBJ=$(SRCS:.c=.o)
 

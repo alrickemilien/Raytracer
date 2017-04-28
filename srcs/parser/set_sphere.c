@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:49:28 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/19 16:02:57 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/25 09:51:48 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static t_obj	set_default_sphere(t_env *env)
 	set_vec(&new_sphere.pos, 0, 0, 0);
 	set_vec(&new_sphere.translation, 0, 0, 0);
 	new_sphere.r = 1;
-	set_vec(&new_sphere.rotation, 0, 0, 0);
-	new_sphere.color = split_color(mlx_get_color_value(env->addr_mlx, 0x0000FF00));
+	set_vec(&new_sphere.rot, 0, 0, 0);
+	new_sphere.color = split_color(mlx_get_color_value(env->addr_mlx, 0x00FF));
 	new_sphere.etat = SPHERE;
 	new_sphere.brillance = 10;
 	new_sphere.specular = 1;
@@ -38,13 +38,13 @@ static t_obj	set_default_sphere(t_env *env)
 static int		check_reference(t_pars_object reference)
 {
 	if (reference.position > 1 || reference.color > 1 || reference.rayon > 1
-			|| reference.brillance > 1 || reference.rotation > 1
+			|| reference.brillance > 1 || reference.rot > 1
 			|| reference.specular > 1 || reference.diffuse > 1
 			|| reference.reflection > 1 || reference.transparent > 1
 			|| reference.translation > 1)
 		return (parse_error(INVALID_OBJECT));
 	if (reference.normal || reference.apex || reference.axis
-			|| reference.angle || reference.from || reference.to 
+			|| reference.angle || reference.from || reference.to
 			|| reference.size || reference.type)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
@@ -86,7 +86,7 @@ int				set_sphere(t_env *env, t_list **list_obj)
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_sphere(env, &new, line, &reference))
 				return (clean_error(&line));
-		if(line[ft_strlen(line) - 1] == '}')
+		if (line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);
 	}

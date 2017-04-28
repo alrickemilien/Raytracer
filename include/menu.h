@@ -25,8 +25,11 @@ typedef struct s_data_draw
 	t_image		*picture;
 }				t_data_draw;
 
+void		reset_menu(t_menu *menu);
+void		loop_menu(t_menu *menu);
+void			reset_scene(t_menu *menu, char *path);
 t_data_draw		params_data_draw(t_menu *menu);
-t_data_draw		params_data_draw_scene(t_menu *menu, int pos, int marge, char *path);
+t_data_draw		params_draw_scene(t_menu *menu, int pos, int marge, char *path);
 void			draw_list(t_menu *menu);
 t_color			mlx_put_xpm(int u, int v, t_image texture);
 void			draw_menu(t_data_draw draw, t_image *image);

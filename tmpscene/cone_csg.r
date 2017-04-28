@@ -1,12 +1,12 @@
 camera:
 {
-	from:(-20 2 0)
+	from:(-20 20 0)
 	to: (1 0 0)
 }
 
 camera:
 {
-	from:(30 30 6)
+	from:(60 60 0)
 	to: (1 0 0)
 }
 

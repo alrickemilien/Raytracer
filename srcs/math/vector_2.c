@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:30 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/15 13:01:56 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/22 15:42:30 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int				is_vectornull(t_vector v)
 	return (0);
 }
 
-t_vector	get_vec(double x, double y, double z)
+t_vector		get_vec(double x, double y, double z)
 {
 	t_vector	v;
 

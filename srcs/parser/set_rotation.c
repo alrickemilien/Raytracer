@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_rotation.c                                     :+:      :+:    :+:   */
+/*   set_rot.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,14 +13,14 @@
 #include "parser.h"
 #include <math.h>
 
-int		set_rotation(t_env *env, char *tmp, t_obj *new, t_pars_object *index)
+int		set_rot(t_env *env, char *tmp, t_obj *new, t_pars_object *index)
 {
 	(void)env;
-	index->rotation++;
-	if (!fill_data_vec(tmp, &new->rotation))
+	index->rot++;
+	if (!fill_data_vec(tmp, &new->rot))
 		return (0);
-	new->rotation.x = new->rotation.x * M_PI / (double)180;
-	new->rotation.y = new->rotation.y * M_PI / (double)180;
-	new->rotation.z = new->rotation.z * M_PI / (double)180;
+	new->rot.x = new->rot.x * M_PI / (double)180;
+	new->rot.y = new->rot.y * M_PI / (double)180;
+	new->rot.z = new->rot.z * M_PI / (double)180;
 	return (1);
 }

@@ -6,11 +6,11 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:44:55 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:44:57 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/22 07:12:31 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/rtv1.h"
+#include <stdlib.h>
 
 void	free_data(void *content, size_t size)
 {

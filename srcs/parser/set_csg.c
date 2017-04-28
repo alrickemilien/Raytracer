@@ -2,9 +2,9 @@
 #include "vector.h"
 #include "rtv1.h"
 
-static t_obj	set_default_csg(t_env *env)
+static t_obj		set_default_csg(t_env *env)
 {
-	t_obj		new_csg;
+	t_obj			new_csg;
 
 	(void)env;
 	ft_bzero(&new_csg, sizeof(t_obj));
@@ -18,10 +18,10 @@ static t_obj	set_default_csg(t_env *env)
 	return (new_csg);
 }
 
-static int	check_object(t_env *env, char *line, t_obj *new)
+static int			check_object(t_env *env, char *line, t_obj *new)
 {
-	int		i;
-	char	*crochet;
+	int			i;
+	char		*crochet;
 
 	i = -1;
 	while (++i < NBR_OBJECT)
@@ -39,25 +39,25 @@ static int	check_object(t_env *env, char *line, t_obj *new)
 	return (1);
 }
 
-static int	check_reference(t_pars_object reference)
+static int			check_reference(t_pars_object ref)
 {
-	if (reference.position || reference.color > 1 || reference.rayon
-			|| reference.brillance || reference.rotation
-			|| reference.specular > 1 || reference.diffuse > 1
-			|| reference.reflection > 1 || reference.transparent > 1
-			|| reference.type > 1 || reference.translation > 1)
+	if (ref.position || ref.color > 1 || ref.rayon
+			|| ref.brillance || ref.rot
+			|| ref.specular > 1 || ref.diffuse > 1
+			|| ref.reflection > 1 || ref.transparent > 1
+			|| ref.type > 1 || ref.translation > 1)
 		return (parse_error(INVALID_OBJECT));
-	if (reference.normal || reference.apex || reference.axis
-			|| reference.angle || reference.from || reference.to || reference.size)
+	if (ref.normal || ref.apex || ref.axis
+			|| ref.angle || ref.from || ref.to || ref.size)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
 }
 
-static int		check_csg(t_env *env, t_obj *new,
-		char *tmp, t_pars_object *index)
+static int			check_csg(t_env *env, t_obj *new,
+					char *tmp, t_pars_object *index)
 {
-	int		n;
-	int		i;
+	int				n;
+	int				i;
 
 	i = 0;
 	while (i < NBR_DESCRIPTION)
@@ -76,26 +76,7 @@ static int		check_csg(t_env *env, t_obj *new,
 	return (1);
 }
 
-static void		set_translation_csg(t_vector translation, t_list *csg)
-{
-	t_obj	*obj;
-
-	if (!translation.x && !translation.y && !translation.z)
-		return ;
-	while (csg)
-	{
-		obj = (t_obj*)csg->content;
-		if (obj->etat == CSG || obj->etat == BOX)
-			set_translation_csg(translation, obj->csg);
-		else if (obj->etat == CONE || obj->etat == CYLINDRE)
-			obj->apex = vec_add(obj->apex, translation);
-		else
-			obj->pos = vec_add(obj->pos, translation);
-		csg = csg->next;
-	}
-}
-
-int				set_csg(t_env *env, t_list **list_obj)
+int					set_csg(t_env *env, t_list **list_obj)
 {
 	t_obj			new;
 	char			*line;

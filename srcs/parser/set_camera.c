@@ -70,7 +70,7 @@ int					set_camera(t_env *env, t_list **list_obj)
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_camera(env, &new, line, &reference))
 				return (clean_error(&line));
-		if(line[ft_strlen(line) - 1] == '}')
+		if (line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);
 	}

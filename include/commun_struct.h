@@ -119,6 +119,17 @@ enum {
 	DIFFERENCE,
 };
 
+enum {
+	R0,
+	ORIG_N,
+	NEW_N,
+	N,
+	SIN_T,
+	COS_X,
+	X,
+	RET
+};
+
 typedef struct		s_obj
 {
 	t_image			*texture;
@@ -130,11 +141,13 @@ typedef struct		s_obj
 	t_vector		n;
 	t_color			color;
 	int				(*func_obj)(struct s_obj *tmp,
-			t_ray *ray, double *t, t_list **inter);
+								t_ray *ray,
+								double *t,
+								t_list **inter);
 	int				etat;
 	t_vector		axis;
 	t_vector		apex;
-	t_vector		rotation;
+	t_vector		rot;
 	double			angle;
 	double			height;
 	int				brillance;
@@ -206,7 +219,7 @@ typedef struct	s_pars_object
 	int			apex;
 	int			axis;
 	int			normal;
-	int			rotation;
+	int			rot;
 	int			intensity;
 	int			size;
 	int			diffuse;
@@ -242,6 +255,7 @@ typedef	struct		s_env
 	void			*addr_win;
 	t_image			*image;
 	t_vector		cursor;
+	int				a_a;
 	int				fd;
 	int				thread_index;
 	double			image_aspect_ratio;
@@ -265,6 +279,7 @@ typedef	struct		s_env
 	double			fov;
 	t_select		*select;
 	int				etat;
+	char			*reset;
 }					t_env;
 
 typedef struct s_menu

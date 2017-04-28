@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/19 16:03:16 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/25 10:42:35 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static t_obj		set_default_plan(t_env *env)
 	set_vec(&new_plan.n, 0, 1, 0);
 	set_vec(&new_plan.pos, 0, 0, 0);
 	set_vec(&new_plan.translation, 0, 0, 0);
-	set_vec(&new_plan.rotation, 0, 0, 0);
-	new_plan.color = split_color(mlx_get_color_value(env->addr_mlx, 0x00FFFFFF));
+	set_vec(&new_plan.rot, 0, 0, 0);
+	new_plan.color = split_color(mlx_get_color_value(env->addr_mlx, 0xFFFFFF));
 	new_plan.brillance = 10;
 	new_plan.diffuse = 1;
 	new_plan.specular = 1;
@@ -58,7 +58,7 @@ static int			check_plan(t_env *env, t_obj *new,
 static int			check_reference(t_pars_object reference)
 {
 	if (reference.normal > 1 || reference.position > 1 || reference.color > 1
-			|| reference.brillance > 1 || reference.rotation > 1
+			|| reference.brillance > 1 || reference.rot > 1
 			|| reference.specular > 1 || reference.diffuse > 1
 			|| reference.reflection > 1 || reference.transparent > 1
 			|| reference.translation > 1)
@@ -86,7 +86,7 @@ int					set_plan(t_env *env, t_list **list_obj)
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_plan(env, &new_plan, line, &reference))
 				return (clean_error(&line));
-		if(line[ft_strlen(line) - 1] == '}')
+		if (line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);
 	}

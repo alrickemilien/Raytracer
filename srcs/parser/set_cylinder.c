@@ -9,7 +9,7 @@ static t_obj		set_default_cylinder(t_env *env)
 	ft_bzero(&new, (sizeof(t_obj)));
 	set_vec(&new.axis, 0, 0, 1);
 	set_vec(&new.apex, 0, 0, 1);
-	set_vec(&new.rotation, 0, 0, 0);
+	set_vec(&new.rot, 0, 0, 0);
 	set_vec(&new.translation, 0, 0, 0);
 	new.r = 1;
 	new.size = 2000000;
@@ -50,13 +50,12 @@ static void			set_limits(t_obj *obj)
 
 	if (obj->size == 2000000)
 		return ;
-	le_plan = *obj;;
+	le_plan = *obj;
 	le_plan.csg = NULL;
 	le_plan.etat = PLAN;
 	le_plan.n = obj->axis;
 	le_plan.pos = vec_add(obj->pos, n_vec(obj->axis, obj->size));
 	ft_lstadd(&obj->csg, ft_lstnew(&le_plan, sizeof(t_obj)));
-
 	negative_vec(&le_plan.n);
 	le_plan.pos = vec_add(obj->pos, n_vec(obj->axis, -obj->size));
 	ft_lstadd(&obj->csg, ft_lstnew(&le_plan, sizeof(t_obj)));
@@ -66,7 +65,7 @@ static int			check_reference(t_pars_object reference)
 {
 	if (reference.apex > 1 || reference.axis > 1 || reference.color > 1
 			|| reference.rayon > 1 || reference.brillance > 1
-			|| reference.rotation > 1 || reference.size > 1
+			|| reference.rot > 1 || reference.size > 1
 			|| reference.specular > 1 || reference.diffuse > 1
 			|| reference.reflection > 1 || reference.transparent > 1
 			|| reference.translation > 1)
@@ -93,7 +92,7 @@ int					set_cylinder(t_env *env, t_list **list_obj)
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_cylinder(env, &new_cylinder, line, &reference))
 				return (clean_error(&line));
-		if(line[ft_strlen(line) - 1] == '}')
+		if (line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);
 	}

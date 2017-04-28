@@ -32,16 +32,15 @@ static void	intersection(t_list **ret, t_range a, t_range b)
 	int			k;
 
 	set_spaces(&a, &b);
-
 	k = 0;
 	n.t1 = a.t1;
-	if (between(b.t1.t, a.t1.t , a.t2.t))
+	if (betwn(b.t1.t, a.t1.t, a.t2.t))
 	{
 		k = 1;
 		n.t1 = b.t1;
 	}
 	n.t2 = a.t2;
-	if (between(b.t2.t, a.t1.t, a.t2.t))
+	if (betwn(b.t2.t, a.t1.t, a.t2.t))
 	{
 		k = 1;
 		n.t2 = b.t2;
@@ -50,10 +49,10 @@ static void	intersection(t_list **ret, t_range a, t_range b)
 		ft_lstadd(ret, ft_lstnew(&n, sizeof(t_range)));
 }
 
-t_list	*function_intersection(t_list *a, t_list *b)
+t_list		*f_i(t_list *a, t_list *b)
 {
 	t_list	*ret;
-	t_list *tmp_b;
+	t_list	*tmp_b;
 
 	ret = NULL;
 	while (a)

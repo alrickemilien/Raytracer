@@ -23,14 +23,13 @@ int					key_press(int keycode, t_menu *menu);
 int				red_cross(t_menu *menu);
 int				red_cross_env(t_menu *menu);
 void				end_program(t_menu *menu);
-t_list				*function_intersection(t_list *a, t_list *b);
-t_list				*function_difference(t_list *a, t_list *b);
+t_list				*f_i(t_list *a, t_list *b);
+t_list				*f_d(t_list *a, t_list *b);
 void				thread(pthread_t *t, void *(*funct)(void*), void *params, int size);
-int ft_mouse(int clic, int x, int y, t_menu *menu);
-t_color mapping(t_obj obj, t_surface s);
-void 	loop_menu(t_menu *menu);
-void	end_scene(t_menu *menu, void *addr_mlx, void *addr_win);
-void	end_menu(t_menu *menu, void *addr_mlx, void *addr_win, void *addr_img);
-
+int 			ft_mouse(int clic, int x, int y, t_menu *menu);
+t_color 		mapping(t_obj obj, t_surface s);
+void			end_scene(t_menu *menu, void *addr_mlx, void *addr_win);
+void			end_menu(t_menu *menu, void *addr_mlx, void *addr_win, void *addr_img);
+void			ray_draw_data(t_menu *menu, t_env *env);
 
 #endif

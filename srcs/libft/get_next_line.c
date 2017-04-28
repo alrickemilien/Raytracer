@@ -6,22 +6,22 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 13:43:30 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/27 10:05:19 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/22 07:54:59 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static t_list	*ft_create_file(int fd)
+static t_list		*ft_create_file(int fd)
 {
-	t_file	new_file;
+	t_file			new_file;
 
 	new_file.fd = fd;
 	new_file.buf = NULL;
 	return (ft_lstnew(&new_file, sizeof(t_file)));
 }
 
-static t_list	*ft_lstsearch(t_list *list, int fd)
+static t_list		*ft_lstsearch(t_list *list, int fd)
 {
 	if (!list)
 		return (NULL);
@@ -36,7 +36,7 @@ static t_list	*ft_lstsearch(t_list *list, int fd)
 	return (NULL);
 }
 
-static int		ft_buf(t_list *tmp, char **line)
+static int			ft_buf(t_list *tmp, char **line)
 {
 	char			*buf_tmp;
 
@@ -62,7 +62,7 @@ static int		ft_buf(t_list *tmp, char **line)
 	return (1);
 }
 
-static void	ft_addtobuf(t_list *tmp, char *read_buf)
+static void			ft_addtobuf(t_list *tmp, char *read_buf)
 {
 	char			*buf_tmp;
 
@@ -77,7 +77,7 @@ static void	ft_addtobuf(t_list *tmp, char *read_buf)
 	}
 }
 
-int		get_next_line(const int fd, char **line)
+int					get_next_line(const int fd, char **line)
 {
 	static t_list	*list = NULL;
 	t_list			*tmp;

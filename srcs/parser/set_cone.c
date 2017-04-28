@@ -12,8 +12,8 @@ static t_obj		set_default_cone(t_env *env)
 	set_vec(&new_cone.apex, 0, 0, 1);
 	new_cone.angle = M_PI / 4;
 	new_cone.angle = tan(new_cone.angle / 2) * tan(new_cone.angle / 2);
-	set_vec(&new_cone.rotation, 0, 0, 0);
-	new_cone.color = split_color(mlx_get_color_value(env->addr_mlx, 0x00FF0000));
+	set_vec(&new_cone.rot, 0, 0, 0);
+	new_cone.color = split_color(mlx_get_color_value(env->addr_mlx, 0x00FF));
 	new_cone.brillance = 50;
 	new_cone.diffuse = 0.5;
 	new_cone.specular = 0.5;
@@ -49,7 +49,7 @@ static int			check_reference(t_pars_object reference)
 {
 	if (reference.apex > 1 || reference.axis > 1
 			|| reference.color > 1 || reference.angle > 1
-			|| reference.brillance > 1 || reference.rotation > 1
+			|| reference.brillance > 1 || reference.rot > 1
 			|| reference.specular > 1 || reference.diffuse > 1
 			|| reference.reflection > 1 || reference.transparent > 1
 			|| reference.translation > 1 || reference.size > 1)
@@ -92,7 +92,7 @@ int					set_cone(t_env *env, t_list **list_obj)
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_cone(env, &new_cone, line, &reference))
 				return (clean_error(&line));
-		if(line[ft_strlen(line) - 1] == '}')
+		if (line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);
 	}

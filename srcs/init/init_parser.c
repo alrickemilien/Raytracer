@@ -3,7 +3,7 @@
 #include "menu.h"
 #include <math.h>
 
-static void	init_tab_str_description(t_env *env)
+static void		init_tab_str_description(t_env *env)
 {
 	if (!(env->tab_str_description = (
 					char**)malloc(sizeof(char*) * NBR_DESCRIPTION)))
@@ -30,7 +30,7 @@ static void	init_tab_str_description(t_env *env)
 	env->tab_str_description[19] = ft_strdup(PERTURBATION);
 }
 
-static void	init_tab_function_description(t_env *env)
+static void		init_tab_function_description(t_env *env)
 {
 	env->check_description[0] = &set_position;
 	env->check_description[1] = &set_rayon;
@@ -40,7 +40,7 @@ static void	init_tab_function_description(t_env *env)
 	env->check_description[5] = &set_axis;
 	env->check_description[6] = &set_brillance;
 	env->check_description[7] = &set_angle;
-	env->check_description[8] = &set_rotation;
+	env->check_description[8] = &set_rot;
 	env->check_description[9] = &set_size;
 	env->check_description[10] = &set_diffuse;
 	env->check_description[11] = &set_specular;
@@ -54,7 +54,7 @@ static void	init_tab_function_description(t_env *env)
 	env->check_description[19] = &set_perturbation;
 }
 
-static void	init_tab_str_object(t_env *env)
+static void		init_tab_str_object(t_env *env)
 {
 	if (!(env->tab_str_object = (char**)malloc(sizeof(char*) * NBR_OBJECT)))
 		merror();
@@ -69,7 +69,7 @@ static void	init_tab_str_object(t_env *env)
 	env->tab_str_object[BOX] = ft_strdup("box:");
 }
 
-static void	init_tab_function_object(t_env *env)
+static void		init_tab_function_object(t_env *env)
 {
 	env->set_object[SPHERE] = &set_sphere;
 	env->set_object[CONE] = &set_cone;
@@ -82,7 +82,7 @@ static void	init_tab_function_object(t_env *env)
 	env->set_object[BOX] = &set_box;
 }
 
-void	init_env(t_env *env)
+void			init_env(t_env *env)
 {
 	env->addr_mlx = mlx_init();
 	env->k = 0.2;
@@ -90,7 +90,7 @@ void	init_env(t_env *env)
 	env->scale = tan(M_PI_4 * 0.5);
 	env->select = (t_select*)ft_memalloc(sizeof(t_select));
 	env->image = init_image(env->addr_mlx, 400, 200);
-	env->tab_ray = (t_ray*)malloc(sizeof(t_ray) * 400 * 600);
+	env->tab_ray = (t_ray*)ft_memalloc(sizeof(t_ray) * 1000 * 1000);
 	env->image_aspect_ratio = 400 / 200;
 	env->nb_thread = 9;
 	init_tab_str_object(env);

@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:46:59 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/25 14:20:07 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/24 15:00:54 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int			check_end_data(char *str)
 	int		i;
 
 	i = 0;
-	while (str[i] == ' ' && str[i] == '	')
+	while (str[i] == ' ' && str[i] == '\t')
 		i++;
 	if (str[i])
 		return (0);
@@ -51,7 +51,7 @@ int			check_data_type_color(char *str)
 	return (1);
 }
 
-int			check_data_type_nbr(char *str, int k)
+static int	check_data_type_nbr(char *str, int k)
 {
 	int		i;
 
@@ -83,7 +83,7 @@ int			fill_data_vec(char *str, t_vector *vec)
 	double	tab[3];
 	int		j;
 
-	while (*str == '	' || *str == ' ')
+	while (*str == '\t' || *str == ' ')
 		str++;
 	if (*str != '(')
 		return (parse_error(INVALID_PARAM_FORMAT));
@@ -106,33 +106,16 @@ int			fill_data_vec(char *str, t_vector *vec)
 	return (1);
 }
 
-int			check_indent(char *str, int n)
-{
-	int		i;
-
-	i = 0;
-	while (*str == '	')
-	{
-		i++;
-		str++;
-	}
-	if (i != n)
-		return (0);
-	if (*str == ' ')
-		return (0);
-	return (1);
-}
-
 int			fill_data(char *str, double *data)
 {
-	while (*str == '	' || *str == ' ')
+	while (*str == '\t' || *str == ' ')
 		str++;
 	if (*str != '(')
 		return (parse_error(INVALID_PARAM_FORMAT));
 	str++;
 	if (!check_data_type_nbr(str, 1))
 		return (0);
-	while (*str == ' ' || *str == '	')
+	while (*str == ' ' || *str == '\t')
 		str++;
 	*data = ft_atod(&str);
 	return (1);

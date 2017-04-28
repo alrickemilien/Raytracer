@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_char.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: salibert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/22 07:48:38 by salibert          #+#    #+#             */
+/*   Updated: 2017/04/22 07:50:46 by salibert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-static t_list	*ft_create_file(int fd)
+static t_list		*ft_create_file(int fd)
 {
-	t_file	new_file;
+	t_file			new_file;
 
 	new_file.fd = fd;
 	new_file.buf = NULL;
 	return (ft_lstnew(&new_file, sizeof(t_file)));
 }
 
-static t_list	*ft_lstsearch(t_list *list, int fd)
+static t_list		*ft_lstsearch(t_list *list, int fd)
 {
 	if (!list)
 		return (NULL);
@@ -24,7 +36,7 @@ static t_list	*ft_lstsearch(t_list *list, int fd)
 	return (NULL);
 }
 
-static int		ft_buf(t_list *tmp, char **line, char c)
+static int			ft_buf(t_list *tmp, char **line, char c)
 {
 	char			*buf_tmp;
 
@@ -50,7 +62,7 @@ static int		ft_buf(t_list *tmp, char **line, char c)
 	return (1);
 }
 
-static void	ft_addtobuf(t_list *tmp, char *read_buf)
+static void			ft_addtobuf(t_list *tmp, char *read_buf)
 {
 	char			*buf_tmp;
 
@@ -65,7 +77,7 @@ static void	ft_addtobuf(t_list *tmp, char *read_buf)
 	}
 }
 
-int		get_next_char(const int fd, char **line, char c)
+int					get_next_char(const int fd, char **line, char c)
 {
 	static t_list	*list = NULL;
 	t_list			*tmp;

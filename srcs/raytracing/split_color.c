@@ -6,13 +6,13 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:52:02 by aemilien          #+#    #+#             */
-/*   Updated: 2017/03/25 14:22:26 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/25 12:42:43 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "commun_struct.h"
 
-t_color	split_color(unsigned long color)
+t_color		split_color(unsigned long color)
 {
 	t_color	color_split;
 
