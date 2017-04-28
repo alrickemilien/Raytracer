@@ -273,6 +273,7 @@ typedef	struct		s_env
 	double			fov;
 	t_select		*select;
 	int				etat;
+	char			*reset;
 }					t_env;
 
 typedef struct s_menu

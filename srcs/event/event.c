@@ -1,6 +1,7 @@
 #include "rtv1.h"
 #include "parser.h"
 #include "init.h"
+#include "menu.h"
 
 void			ft_put_pos_select(t_env *env)
 {
@@ -56,6 +57,12 @@ static int		switch_cam(t_env *env, int keycode)
 	return (0);
 }
 
+static void		reset(int keycode, t_menu *menu)
+{
+	if (keycode == KEY_R)
+		menu->env->reset ? reset_scene(menu, menu->env->reset) : reset_menu(menu);
+}
+
 int				key_press(int keycode, t_menu *menu)
 {
 	t_env		*env;
@@ -82,5 +89,6 @@ int				key_press(int keycode, t_menu *menu)
 		switch_cam(env, keycode);
 	if ((env->select->o || env->select->c) && (env->etat))
 		ft_put_pos_select(env);
+	reset(keycode, menu);
 	return (0);
 }

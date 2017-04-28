@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/25 16:33:10 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/28 10:35:41 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void				*raytracing(void *params)
 	int				index;
 	t_limit			l;
 	t_env			*env;
-	t_color			*color;
+	t_color			color;
 	char			*data;
 
 	env = (t_env*)(params);
@@ -157,7 +157,7 @@ void				*raytracing(void *params)
 	else
 		l = ft_limit_thread(env->nb_thread, env->image->width, env->image->height);
 	data = env->image->data;
-	ft_bzero(&color, sizeof(t_color)* env->a_a);
+	ft_bzero(&color, sizeof(t_color));
 	while (++l.y < l.max_y)
 	{
 		l.x = l.tmp_x;

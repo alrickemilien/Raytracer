@@ -4,6 +4,22 @@
 #include <sys/stat.h>
 #include "init.h"
 #include "parser.h"
+#include "rtv1.h"
+
+void		reset_menu(t_menu *menu)
+{
+	t_env *env;
+
+	env = menu->env;
+	mlx_destroy_image(env->addr_mlx, env->image->addr_img);
+	ft_bzero(env->tab_ray, sizeof(t_ray) * 1000 * 1000);
+	free_list(&env->list, &env->camera, &env->light, env);
+	init_env(menu->env);
+	ray_draw_data(menu, menu->env);
+	mlx_put_image_to_window(
+			menu->addr_mlx, menu->addr_win, menu->page->addr_img, 0, 0);
+	loop_menu(menu);
+}
 
 static int			check_stat(char *path, int *nb, int *marge, t_menu *menu)
 {

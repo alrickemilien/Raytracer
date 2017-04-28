@@ -3,6 +3,33 @@
 #include "parser.h"
 #include "menu.h"
 
+void			reset_scene(t_menu *menu, char *path)
+{
+	t_env		*env;
+
+	env = menu->env;
+	free_list(&env->list, &env->camera, &env->light, env);
+	env->fd = open(path, O_RDWR);
+	if (!parser(env))
+	{
+		close(env->fd);
+		env->etat = 0;
+		free_list(&env->list, &env->camera, &env->light, env);
+		return ;
+	}
+	if (!env->camera)
+		init_default_camera(env);
+	else
+		sort_camera(env);
+	env->tab_env = init_data_tab_thread((void*)env, (sizeof(t_env)), 8);
+	thread(env->tab_thread, &raytracing, env->tab_env, sizeof(t_env));
+	mlx_put_image_to_window(
+			env->addr_mlx, env->addr_win, env->image->addr_img, 0, 0);
+	mlx_hook(env->addr_win, 2, 1L << 0 | 1 << 1, &key_press, menu);
+	mlx_hook(env->addr_win, 17, 0L, &red_cross, menu);
+	mlx_loop(env->addr_mlx);
+}
+
 void			init_scene(t_menu *menu, char *path)
 {
 	t_env		*env;
@@ -31,16 +58,16 @@ void			init_scene(t_menu *menu, char *path)
 	mlx_loop(env->addr_mlx);
 }
 
-static void		loop_menu(t_menu *menu)
+void		loop_menu(t_menu *menu)
 {
 	t_env		*env;
 
 	env = menu->env;
 	if (!(env->image = init_image(env->addr_mlx, WIN_WIDTH, WIN_HEIGHT)))
 		merror();
-	env->tab_ray = (t_ray*)malloc(sizeof(t_ray) * 1000 * 1000);
 	env->image_aspect_ratio = 1000 / 1000;
-	env->tab_thread = init_thread(8);
+	if (!env->tab_thread)
+		env->tab_thread = init_thread(8);
 	env->nb_thread = 0;
 	mlx_hook(menu->addr_win, 2, 1L << 0 | 1 << 1, &key_press, menu);
 	mlx_mouse_hook(menu->addr_win, ft_mouse, menu);

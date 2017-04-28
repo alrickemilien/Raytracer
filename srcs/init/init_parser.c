@@ -90,7 +90,7 @@ void			init_env(t_env *env)
 	env->scale = tan(M_PI_4 * 0.5);
 	env->select = (t_select*)ft_memalloc(sizeof(t_select));
 	env->image = init_image(env->addr_mlx, 400, 200);
-	env->tab_ray = (t_ray*)malloc(sizeof(t_ray) * 400 * 600);
+	env->tab_ray = (t_ray*)ft_memalloc(sizeof(t_ray) * 1000 * 1000);
 	env->image_aspect_ratio = 400 / 200;
 	env->nb_thread = 9;
 	init_tab_str_object(env);

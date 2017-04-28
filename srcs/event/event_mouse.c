@@ -52,6 +52,7 @@ static void		select_scene(int x, int y, t_menu *menu)
 		&& !env->etat)
 		{
 			env->etat = 1;
+			env->reset = data->path;
 			init_scene(menu, data->path);
 			break ;
 		}
