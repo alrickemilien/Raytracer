@@ -1,3 +1,9 @@
+scene:
+{
+	ambient: (0.5)
+	antialiasing: (no)
+}
+
 camera:
 {
 	from: (10 10 8)

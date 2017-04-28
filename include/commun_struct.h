@@ -235,6 +235,12 @@ typedef struct	s_pars_object
 	int			shining;
 }				t_pars_object;
 
+typedef struct	s_pars_scene
+{
+	int			k;
+	int			msaa;
+}				t_pars_scene;
+
 typedef struct		s_surface
 {
 	t_vector		intersection;
@@ -280,6 +286,7 @@ typedef	struct		s_env
 	t_select		*select;
 	int				etat;
 	char			*reset;
+	int				msaa;
 }					t_env;
 
 typedef struct s_menu

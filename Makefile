@@ -66,6 +66,7 @@ SRCS=\
 	srcs/parser/set_brillance.c\
 	srcs/parser/set_rotation.c\
 	srcs/parser/set_size.c\
+	srcs/parser/set_msaa.c\
 	srcs/parser/set_diffuse.c\
 	srcs/parser/set_specular.c\
 	srcs/parser/set_reflection.c\

@@ -6,15 +6,18 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:32 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/25 10:37:59 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/28 14:58:11 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int			check_reference(int k)
+
+static int			check_reference(t_pars_scene index)
 {
-	if (k > 1)
+	if (index.k > 1)
+		return (parse_error(INVALID_OBJECT));
+	if (index.msaa > 1)
 		return (parse_error(INVALID_OBJECT));
 	return (1);
 }
@@ -22,15 +25,22 @@ static int			check_reference(int k)
 static void			set_default_scene(t_env *env)
 {
 	env->k = 0.1;
+	env->msaa = 0;
 }
 
-static int			check_scene(t_env *env, char *tmp, int *k)
+static int			check_scene(t_env *env, char *tmp, t_pars_scene *index)
 {
 	int				n;
 
 	if (!ft_strncmp(AMBIENT, tmp, (n = ft_strlen(AMBIENT))))
 	{
-		if ((!fill_data(tmp + n, &env->k)) && !(k)++)
+		if ((!fill_data(tmp + n, &env->k)) && !(index->k)++)
+			return (parse_error(INVALID_PARAM_FORMAT));
+		return (1);
+	}
+	if (!ft_strncmp(MSAA, tmp, (n = ft_strlen(MSAA))))
+	{
+		if (!set_msaa(tmp + n, env, index))
 			return (parse_error(INVALID_PARAM_FORMAT));
 		return (1);
 	}
@@ -41,9 +51,9 @@ static int			check_scene(t_env *env, char *tmp, int *k)
 int					set_scene(t_env *env, t_list **list_obj)
 {
 	char			*line;
-	int				k;
+	t_pars_scene	index;
 
-	k = 0;
+	ft_bzero(&index, sizeof(t_pars_scene));
 	(void)list_obj;
 	set_default_scene(env);
 	line = NULL;
@@ -51,14 +61,14 @@ int					set_scene(t_env *env, t_list **list_obj)
 	{
 		recycle(&line, ft_strtrim(line));
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
-			if (!check_scene(env, line, &k))
+			if (!check_scene(env, line, &index))
 				return (clean_error(&line));
 		if (line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
-	if (!check_reference(k))
+	if (!check_reference(index))
 		return (0);
 	return (1);
 }
