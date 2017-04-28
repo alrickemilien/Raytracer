@@ -35,7 +35,7 @@
 # define INVALID_LOOKAT "Camera matrix looking straight up/down : not defined"
 # define INVALID_CSG "More than 2 objects in CSG object"
 # define INVALID_TEXTURE "Error : Texture not found or not valid"
-# define INVALID_RESIZE_TEXTURE "Error : resize_texture invalid, resize_texture: (0.1 to 1000)"
+# define INVALID_RESIZE_TEXTURE "Error : R_T invalid, R_T (0.1 to 1000)"
 # define INVALID_XPM_EXTENTION "WARNING : Invalid extention texture.xpm"
 
 # define POSITION "position:"
@@ -64,16 +64,16 @@
 # define PERTURBATION "perturbation:"
 # define SHINING "shining:"
 
-t_color			split_color(unsigned long color);
-int				check_indent(char *str, int n);
-int				parse_error(char *str);
-int				fill_data(char *tmp, double *data);
-int				check_floating_number(char *str);
-int				fill_data_vec(char *str, t_vector *vec);
-int				check_data_type_color(char *str);
-int				error_file(char *file);
-int				fill_int_data(char *str, int *data);
-int				check_end_data(char *str);
+t_color				split_color(unsigned long color);
+int					check_indent(char *str, int n);
+int					parse_error(char *str);
+int					fill_data(char *tmp, double *data);
+int					check_floating_number(char *str);
+int					fill_data_vec(char *str, t_vector *vec);
+int					check_data_type_color(char *str);
+int					error_file(char *file);
+int					fill_int_data(char *str, int *data);
+int					check_end_data(char *str);
 
 int					set_color(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
@@ -111,9 +111,9 @@ int					set_translation(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
 int					set_perturbation(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
-int					set_type_light(char *tmp, 
+int					set_type_light(char *tmp,
 		t_light *new, t_pars_object *index);
-int					set_shining(char *tmp, 
+int					set_shining(char *tmp,
 		t_light *new, t_pars_object *index);
 int					set_resize_texture(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
@@ -137,6 +137,7 @@ int					error(t_env *env, char *str);
 void				recycle(char **old_ptr, char *new_ptr);
 void				set_default_camera(t_camera *new);
 int					clean_error(char **str);
-void				free_list(t_list **obj, t_list **camera, t_list **t_3, t_env *env);
+void				free_list(
+					t_list **obj, t_list **camera, t_list **t_3, t_env *env);
 
 #endif
