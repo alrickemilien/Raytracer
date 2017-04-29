@@ -21,7 +21,7 @@ t_data_draw		params_data_draw(t_menu *menu)
 	draw.tmp_y = -1;
 	draw.limit_x = menu->page->width;
 	draw.limit_y = menu->page->height;
-	draw.picture = init_texture(menu->addr_mlx, "textures/plan/parquet.xpm");
+	draw.picture = menu->background;
 	return (draw);
 }
 
@@ -43,8 +43,7 @@ t_data_draw		params_draw_scene(t_menu *menu, int pos, int marge, char *path)
 	draw.edge_y1 = draw.limit_y - draw.edge;
 	draw.edge_x2 = draw.tmp_x + draw.edge;
 	draw.edge_y2 = draw.tmp_y + draw.edge;
-	draw.color1 = split_color_s(0x00666666);
-	draw.color2 = split_color_s(0x00888888);
-	draw.color3 = split_color_s(0x00AAAAAA);
+	draw.color2 = split_color_s(0xffff1a);
+	draw.color3 = split_color_s(0xcccc00);
 	return (draw);
 }

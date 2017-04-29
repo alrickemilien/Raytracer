@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:44:37 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/28 08:50:04 by salibert         ###   ########.fr       */
+/*   Updated: 2017/04/29 14:01:47 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,10 @@ void		end_menu(t_menu *menu,
 		free(env->select);
 	free_list(&env->list, &env->camera, &env->light, env);
 	free(env);
+	free_button(&menu->button, menu);
+	if (menu->error)
+		mlx_destroy_image(addr_mlx, menu->error->addr_img);
+	if (menu->background)
+		mlx_destroy_image(addr_mlx, menu->background->addr_img);
 	exit(0);
 }

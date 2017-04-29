@@ -6,26 +6,14 @@
 #include "parser.h"
 #include "rtv1.h"
 
-void		reset_menu(t_menu *menu)
-{
-	t_env *env;
-
-	env = menu->env;
-	mlx_destroy_image(env->addr_mlx, env->image->addr_img);
-	ft_bzero(env->tab_ray, sizeof(t_ray) * 1000 * 1000);
-	free_list(&env->list, &env->camera, &env->light, env);
-	init_env(menu->env);
-	ray_draw_data(menu, menu->env);
-	mlx_put_image_to_window(
-			menu->addr_mlx, menu->addr_win, menu->page->addr_img, 0, 0);
-	loop_menu(menu);
-}
-
 static int			check_stat(char *path, int *nb, int *marge, t_menu *menu)
 {
 	struct stat		filestat;
 	t_data_draw		new_button;
 
+	if (*path == '.')
+		return (0);
+	path = ft_strjoin("scene/", path);
 	lstat(path, &filestat);
 	if (!S_ISREG(filestat.st_mode))
 	{
@@ -56,8 +44,7 @@ static int			set_menu(t_menu *menu)
 		exit(-1);
 	}
 	while ((file = readdir(dir)) && (nb_data_draw < 10000))
-		if (!(check_stat(ft_strjoin(
-			"scene/", file->d_name), &nb_data_draw, &marge, menu)))
+		if (!(check_stat(file->d_name, &nb_data_draw, &marge, menu)))
 			continue;
 	marge = 100 + 135 * nb_data_draw;
 	if (!(menu->page = init_image(menu->addr_mlx, WIN_WIDTH,
@@ -69,6 +56,29 @@ static int			set_menu(t_menu *menu)
 	return (nb_data_draw);
 }
 
+void		reset_menu(t_menu *menu)
+{
+	t_env	*env;
+	int		index;
+
+	env = menu->env;
+	index = 0;
+	free_button(&menu->button, menu);
+	if (!(index = set_menu(menu)))
+		merror();
+	env->k = 0.2;
+	mlx_destroy_image(env->addr_mlx, env->image->addr_img);
+	env->image = init_image(env->addr_mlx, 400, 200);
+	ft_bzero(env->tab_ray, sizeof(t_ray) * 1000 * 1000);
+	env->image_aspect_ratio = 400 / 200;
+	env->nb_thread = 9;
+	free_list(&env->list, &env->camera, &env->light, env);
+	ray_draw_data(menu, env);
+	mlx_put_image_to_window(
+			menu->addr_mlx, menu->addr_win, menu->page->addr_img, 0, 0);
+	loop_menu(menu);
+}
+
 t_menu				*creat_menu(void)
 {
 	t_menu			*new_menu;
@@ -78,6 +88,8 @@ t_menu				*creat_menu(void)
 	if (!(new_menu = (t_menu*)ft_memalloc(sizeof(t_menu))))
 		return (NULL);
 	new_menu->addr_mlx = mlx_init();
+	new_menu->background = init_texture(
+		new_menu->addr_mlx, "textures/skybox/the_universe.xpm");
 	if (!(nb_data_draw = set_menu(new_menu)))
 		merror();
 	new_menu->error = init_texture(

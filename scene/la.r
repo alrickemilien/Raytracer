@@ -21,9 +21,8 @@ plan:
 
 box:
 {
-	position: (0 0 1)
+	position: (0 0 2)
 	size: (1)
-	color: (0xFF960A)
+	color: (0xFFFFFF)
 	rotation: (60 10 90)
 }
-
