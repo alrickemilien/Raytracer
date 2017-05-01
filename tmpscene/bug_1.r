@@ -18,9 +18,9 @@ csg:
 		}
 		sphere:
 		{
-			rayon: (4)
-			position: (0 0 -3)
-			color: (0x8809)
+			rayon: (2)
+			position: (0 1 0)
+			color: (0xff00ff)
 			specular: (0.1)
 		}
 	}
@@ -39,7 +39,7 @@ csg:
 			position: (0 0 -1)
 			color: (0x880009)
 		}
-		translation: ()
+		translation: (0 3 0)
 	}
 }
 

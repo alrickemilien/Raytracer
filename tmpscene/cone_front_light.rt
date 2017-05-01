@@ -1,17 +1,13 @@
 camera:
-<<<<<<< HEAD
 {
-	from: (0 0 0)
-=======
-	from: (1 99999 0)
->>>>>>> origin/menuv4
+	from: (1 9 0)
 	to: (1 0 0)
 }
 
 light:
 {
 	position: (0 0 0)
-	intensity: (3)
+	intensity: (7)
 }
 
 cone:

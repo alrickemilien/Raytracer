@@ -68,6 +68,8 @@ void		reset_menu(t_menu *menu)
 		merror();
 	env->k = 0.2;
 	mlx_destroy_image(env->addr_mlx, env->image->addr_img);
+	free(env->image);
+	env->image = NULL;
 	env->image = init_image(env->addr_mlx, 400, 200);
 	ft_bzero(env->tab_ray, sizeof(t_ray) * 1000 * 1000);
 	env->image_aspect_ratio = 400 / 200;

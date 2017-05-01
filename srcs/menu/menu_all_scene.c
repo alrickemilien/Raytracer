@@ -8,7 +8,6 @@ static void		data_while(t_data_draw *data,
 {
 	while (tmp)
 	{
-		ft_putendl("A\n");
 		free_list(&env->list, &env->camera, &env->light, env);
 		data = (t_data_draw*)(tmp->content);
 		ft_bzero(env->tab_ray, sizeof(t_ray) * 600 * 400);
@@ -45,6 +44,8 @@ void			ray_draw_data(t_menu *menu, t_env *env)
 	tmp = menu->button->next;
 	data_while(data, tmp, env, menu);
 	mlx_destroy_image(env->addr_mlx, env->image->addr_img);
+	free(env->image);
+	env->image = NULL;
 	ft_bzero(env->tab_ray, sizeof(t_ray) * 600 * 400);
 	free_list(&env->list, &env->camera, &env->light, env);
 	ft_bzero(env->select, sizeof(t_select));
