@@ -5,9 +5,9 @@ int			set_translation(t_env *env, char *s, t_obj *new, t_pars_object *i)
 {
 	(void)env;
 	i->translation++;
-	if (!fill_data_vec(s, &new->translation))
-		return (0);
-	return (1);
+	if (fill_data_vec(s, &new->translation))
+		return (1);
+	return (0);
 }
 
 void		set_translation_csg(t_vector translation, t_list *csg)

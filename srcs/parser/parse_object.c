@@ -13,10 +13,11 @@ int		parse_object(t_env *env, t_obj *obj,
 		recycle(&line, ft_strtrim(line));
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_object(env, obj, line, reference))
-				return (0);
+				return (clean_error(&line));
 		if (line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);
 	}
+	free(line);
 	return (1);
 }

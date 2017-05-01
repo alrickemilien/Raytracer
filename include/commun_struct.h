@@ -296,6 +296,7 @@ typedef struct		s_menu
 	t_env			*env;
 	t_image			*page;
 	t_image			*error;
+	t_image			*background;
 	t_list			*button;
 	int				y_scroll;
 }					t_menu;

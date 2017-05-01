@@ -74,8 +74,7 @@ static void		build_scene(int x, int y, t_menu *menu)
 		data = (t_data_draw*)(button->content);
 		if (data->tmp_x <= x && data->limit_x >= x
 		&& (data->tmp_y + menu->y_scroll) <= y
-		&& (data->limit_y + menu->y_scroll) >= y
-		&& !env->etat)
+		&& (data->limit_y + menu->y_scroll) >= y)
 		{
 			tmp = ft_strjoin("atom ", data->path);
 			system(tmp);

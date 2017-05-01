@@ -33,7 +33,7 @@ cone:
 plan:
 {
 	position: (0 0 50)
-	color: (0xff00ff)
+	color: (0xff0056)
 	normal: (0 0 1)
 }
 

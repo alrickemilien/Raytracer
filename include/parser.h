@@ -141,5 +141,6 @@ void				set_default_camera(t_camera *new);
 int					clean_error(char **str);
 void				free_list(
 					t_list **obj, t_list **camera, t_list **t_3, t_env *env);
+void				free_button(t_list **button, t_menu *menu);
 
 #endif

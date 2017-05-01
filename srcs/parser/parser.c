@@ -29,6 +29,7 @@ int			parser(t_env *env)
 	char	*line;
 
 	line = 0;
+	
 	while (get_next_line(env->fd, &line))
 	{
 		recycle(&line, ft_strtrim(line));
