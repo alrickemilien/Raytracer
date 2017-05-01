@@ -63,6 +63,7 @@
 # define RESIZE "resize_texture:"
 # define PERTURBATION "perturbation:"
 # define SHINING "shining:"
+# define MSAA "antialiasing:"
 
 t_color				split_color(unsigned long color);
 int					check_indent(char *str, int n);
@@ -119,6 +120,7 @@ int					set_resize_texture(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
 int					set_texture(t_env *env, char *tmp,
 		t_obj *new, t_pars_object *index);
+int     			set_msaa(char *tmp, t_env *env, t_pars_scene *index);
 
 void				set_translation_csg(t_vector translation, t_list *csg);
 int					set_camera(t_env *env, t_list **list_obj);

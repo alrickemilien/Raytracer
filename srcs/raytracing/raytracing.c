@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   raytracing.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/20 14:51:50 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/28 14:19:50 by salibert         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "rtv1.h"
 #include "vector.h"
 #include "stdio.h"
@@ -170,57 +158,74 @@ t_color		moyenne(t_color *tab, int size)
 	return (ret);
 }
 
+static t_color	get_ray_color(t_env *env, int x, int y)
+{
+	int			index;
+
+	index = (y * WIN_HEIGHT + x);
+	set_primary_ray(env, env->tab_ray + index, x, y);
+	return (raycast(env, *(env->tab_ray + index), 0));
+}
+
+static t_color	get_ray_color_msa(t_env *env, int x, int y, int i)
+{
+	t_color		color[4];
+	double		ty;
+	double		tx;
+	int			index;
+
+	ty = (double)y - 0.25;
+	i = 0;
+	while ( ty <= (double)y + 0.5)
+	{
+		tx = (double)x - 0.25;
+		while ( tx <= (double)x + 0.5)
+		{
+			index = (y * WIN_HEIGHT + x);
+			set_primary_ray(env, env->tab_ray + index, tx, ty);
+			color[i] = raycast(env, *(env->tab_ray + index), 0);
+			i++;
+			tx += 0.5;
+		}
+		ty += 0.5;
+	}
+	return (moyenne(color, 4));
+}
+
+static void set_vignette_dimensions(t_limit *l)
+{
+	l->y = -1;
+	l->max_y = 200;
+	l->max_x = 400;
+	l->tmp_x = -1;
+}
+
 void		*raytracing(void *params)
 {
 	int			index;
 	t_limit		l;
-	t_env		*env;
-	t_color		*color;
-	t_color		final_color;
-	char		*data;
-	int			i;
-	double		ty;
-	double		tx;
+	t_env		*e;
+	t_color		color;
 
-	env = (t_env*)(params);
-	color = (t_color*)malloc(sizeof(t_color) * 4);
-	if (env->nb_thread == 9)
-	{
-		l.y = -1;
-		l.max_y = 200;
-		l.max_x = 400;
-		l.tmp_x = -1;
-	}
+	e = (t_env*)(params);
+	if (e->nb_thread == 9)
+		set_vignette_dimensions(&l);
 	else
-		l = ft_limit_thread(env->nb_thread, env->image->width, env->image->height);
-	data = env->image->data;
+		l = ft_limit_thread(e->nb_thread, e->image->width, e->image->height);
 	while (++l.y < l.max_y)
 	{
 		l.x = l.tmp_x;
 		while (++l.x < l.max_x)
 		{
-			index = (l.y * WIN_HEIGHT + l.x);
-			ty = (double)l.y - 0.25;
-			i = 0;
-			while ( ty <= (double)l.y + 0.5)
-			{
-				tx = (double)l.x - 0.25;
-				while ( tx <= (double)l.x + 0.5)
-				{
-					set_primary_ray(env, env->tab_ray + index, tx, ty);
-					color[i] = raycast(env, *(env->tab_ray + index), 0);
-					i++;
-					tx += 0.5;
-				}
-				ty += 0.5;
-			}
-			index = (l.x * (env->image->bpp)) + (l.y * env->image->sizeline);
-			final_color = moyenne(color, 4);
-			data[index] = final_color.blue;
-			data[index+1] = final_color.green;
-			data[index+2] = final_color.red;
+			if (e->msaa)
+				color = get_ray_color_msa(e, l.x, l.y, 0);
+			else
+				color = get_ray_color(e, l.x, l.y);
+			index = (l.x * (e->image->bpp)) + (l.y * e->image->sizeline);
+			e->image->data[index] = color.blue;
+			e->image->data[index + 1] = color.green;
+			e->image->data[index + 2] = color.red;
 		}
 	}
-	free(color);
 	return (NULL);
 }
