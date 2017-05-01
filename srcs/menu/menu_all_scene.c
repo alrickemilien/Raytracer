@@ -19,7 +19,6 @@ static void		data_while(t_data_draw *data,
 		}
 		if (!parser(env))
 		{
-			system("leaks rt");
 			data->error = 1;
 			data->picture = menu->error;
 			draw_menu(*data, menu->page);

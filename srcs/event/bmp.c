@@ -6,19 +6,20 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:46:15 by aemilien          #+#    #+#             */
-/*   Updated: 2017/02/20 14:44:31 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/05/01 17:21:18 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "commun_struct.h"
 
-static void			set_bitmapfileheader(int fd, t_image *image)
+static int			set_bitmapfileheader(int fd, t_image *image)
 {
 	unsigned char	*header;
 	unsigned char	*tmp;
 	int				len;
 
-	header = (unsigned char*)malloc(14);
+	if (!(header = (unsigned char*)malloc(14)))
+		return (0);
 	ft_bzero(header, 14);
 	header[0] = 0x42;
 	header[1] = 0x4D;
@@ -32,16 +33,22 @@ static void			set_bitmapfileheader(int fd, t_image *image)
 	header[4] = tmp[2];
 	header[5] = tmp[3];
 	header[10] = 0x36;
-	if ((len = write(fd, header, 14)) == -1)
-		ft_putendl_fd("Error creating screenshot", 2);
+	if ((len = write(fd, header, 14)) < 0)
+	{
+		free(header);
+		return (0);
+	}
+	free(header);
+	return (1);
 }
 
-void				set_bitmapinfoheader(int fd, t_image *image)
+static int			set_bitmapinfoheader(int fd, t_image *image)
 {
 	unsigned char	*header;
 	unsigned int	n;
 
-	header = (unsigned char*)malloc(40);
+	if (!(header = (unsigned char*)malloc(40)))
+		return (0);
 	ft_bzero(header, 40);
 	header[0] = 0x28;
 	n = image->width;
@@ -56,7 +63,13 @@ void				set_bitmapinfoheader(int fd, t_image *image)
 	header[25] = 0x0E;
 	header[28] = 0xC3;
 	header[29] = 0x0E;
-	write(fd, header, 40);
+	if (write(fd, header, 40) < 0)
+	{
+		free(header);
+		return (0);
+	}
+	free(header);
+	return (1);
 }
 
 void				data_to_bitmap(char *bitmap, t_image *image, int i)
@@ -69,11 +82,11 @@ void				data_to_bitmap(char *bitmap, t_image *image, int i)
 	y = image->height - 1;
 	while (y >= 0)
 	{
-		line = y * image->size_line;
+		line = y * image->sizeline;
 		x = 0;
 		while (x < image->width)
 		{
-			colonne = x * image->bpp / 8;
+			colonne = x * image->bpp;
 			bitmap[i] = image->data[line + colonne];
 			bitmap[i + 1] = image->data[line + colonne + 1];
 			bitmap[i + 2] = image->data[line + colonne + 2];
@@ -84,7 +97,7 @@ void				data_to_bitmap(char *bitmap, t_image *image, int i)
 	}
 }
 
-void				set_bitmapdata(int fd, t_image *image)
+static int			set_bitmapdata(int fd, t_image *image)
 {
 	char			*bitmap;
 	int				len;
@@ -93,11 +106,16 @@ void				set_bitmapdata(int fd, t_image *image)
 	while (len % 4)
 		len++;
 	if (!(bitmap = (char*)malloc(sizeof(char) * len)))
-		error("error alloc in func set_bitmapdata");
+		return (0);
 	ft_bzero(bitmap, sizeof(char) * len);
 	data_to_bitmap(bitmap, image, 0);
-	write(fd, bitmap, len);
+	if (write(fd, bitmap, len) < 0)
+	{
+		free(bitmap);
+		return (0);
+	}
 	free(bitmap);
+	return (1);
 }
 
 void				ft_bitmap(t_image *image)
@@ -106,9 +124,18 @@ void				ft_bitmap(t_image *image)
 
 	fd = open("screenshot.bmp", O_RDWR | O_CREAT
 			| O_NONBLOCK, S_IRUSR | S_IWUSR);
-	set_bitmapfileheader(fd, image);
-	set_bitmapinfoheader(fd, image);
-	set_bitmapdata(fd, image);
-	close(fd);
+	if (fd < 0 
+		|| !set_bitmapfileheader(fd, image)
+		|| !set_bitmapinfoheader(fd, image)
+		|| !set_bitmapdata(fd, image))
+	{
+		ft_putendl_fd("error appeared creating the screenshot", 2);
+		return ;
+	}
+	if (close(fd) < 0)
+	{
+		ft_putendl_fd("error appeared creating the screenshot", 2);
+		return ;
+	}
 	ft_putendl("screenshot.bmp has been created");
 }

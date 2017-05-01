@@ -32,5 +32,6 @@ void		end_scene(t_menu *menu, void *addr_mlx, void *addr_win);
 void		end_menu(
 			t_menu *menu, void *addr_mlx, void *addr_win, void *addr_img);
 void		ray_draw_data(t_menu *menu, t_env *env);
+void		ft_bitmap(t_image *image);
 
 #endif

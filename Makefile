@@ -99,6 +99,7 @@ SRCS=\
 	srcs/event/event.c\
 	srcs/event/free_all_list.c\
 	srcs/menu/menu_all_scene.c\
+	srcs/event/bmp.c\
 
 OBJ=$(SRCS:.c=.o)
 

@@ -14,6 +14,10 @@ static void		del_button(void *data, size_t size)
 
 void			free_button(t_list **button, t_menu *menu)
 {
+
+	system("leaks rt");
 	ft_lstdel(button, &del_button);
+	if (*button)
 	mlx_destroy_image(menu->addr_mlx, menu->page->addr_img);
+	system("leaks rt");
 }
