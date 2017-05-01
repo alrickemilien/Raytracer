@@ -16,13 +16,13 @@
 # define ZERO 0.000000001
 # define LIGHT_PTR ((t_light*)(tmp_light->content))
 
-typedef struct	s_vector
+typedef struct		s_vector
 {
-	double		x;
-	double		y;
-	double		z;
-	double		norme;
-}				t_vector;
+	double			x;
+	double			y;
+	double			z;
+	double			norme;
+}					t_vector;
 
 typedef struct		s_color
 {
@@ -33,25 +33,25 @@ typedef struct		s_color
 
 typedef struct		s_pivot_gauss
 {
-	int		i;
-	int		j;
-	int		k;
-	int		pivot;
-	double	pivotsize;
-	double	f;
-	double	tmp;
+	int				i;
+	int				j;
+	int				k;
+	int				pivot;
+	double			pivotsize;
+	double			f;
+	double			tmp;
 }					t_pivot_gauss;
 
 typedef	struct		s_image
 {
-	void		*addr_img;
-	char		*data;
-	int			bpp;
-	int			sizeline;
-	int			endian;
-	int			width;
-	int			height;
-}				t_image;
+	void			*addr_img;
+	char			*data;
+	int				bpp;
+	int				sizeline;
+	int				endian;
+	int				width;
+	int				height;
+}					t_image;
 
 typedef struct		s_ray
 {
@@ -70,8 +70,8 @@ typedef struct		s_light
 	double			specular;
 	double			diffuse;
 	int				(*hit_light)(
-			struct s_light light,
-			t_ray *ray, double *t);
+					struct s_light light,
+					t_ray *ray, double *t);
 	int				type;
 	double			angle;
 	t_vector		axis;
@@ -169,17 +169,17 @@ typedef struct		s_obj
 	t_list			*csg;
 }					t_obj;
 
-typedef struct	s_inter
+typedef struct		s_inter
 {
-	double		t;
-	t_obj		*obj;
-}				t_inter;
+	double			t;
+	t_obj			*obj;
+}					t_inter;
 
-typedef struct	s_range
+typedef struct		s_range
 {
-	t_inter		t1;
-	t_inter		t2;
-}				t_range;
+	t_inter			t1;
+	t_inter			t2;
+}					t_range;
 
 typedef struct		s_limit
 {
@@ -206,34 +206,33 @@ typedef struct		s_select
 	t_camera		*c;
 }					t_select;
 
-
-typedef struct	s_pars_object
+typedef struct		s_pars_object
 {
-	int			to;
-	int			from;
-	int			position;
-	int			brillance;
-	int			angle;
-	int			rayon;
-	int			color;
-	int			apex;
-	int			axis;
-	int			normal;
-	int			rot;
-	int			intensity;
-	int			size;
-	int			diffuse;
-	int			specular;
-	int			reflection;
-	int			refraction;
-	int			transparent;
-	int			type;
-	int			translation;
-	int			resize_texture;
-	int			texture;
-	int			perturbation;
-	int			shining;
-}				t_pars_object;
+	int				to;
+	int				from;
+	int				position;
+	int				brillance;
+	int				angle;
+	int				rayon;
+	int				color;
+	int				apex;
+	int				axis;
+	int				normal;
+	int				rot;
+	int				intensity;
+	int				size;
+	int				diffuse;
+	int				specular;
+	int				reflection;
+	int				refraction;
+	int				transparent;
+	int				type;
+	int				translation;
+	int				resize_texture;
+	int				texture;
+	int				perturbation;
+	int				shining;
+}					t_pars_object;
 
 typedef struct	s_pars_scene
 {
@@ -274,11 +273,12 @@ typedef	struct		s_env
 	double			k;
 	t_ray			*tab_ray;
 	char			**tab_str_object;
-	int				(*set_object[NBR_OBJECT])(struct s_env *env, t_list **list_obj);
+	int				(*set_object[NBR_OBJECT])(
+					struct s_env *env, t_list **list_obj);
 	char			**tab_str_description;
 	int				(*check_description[NBR_DESCRIPTION])(
-			struct s_env *env, char *str,
-			t_obj *new, t_pars_object *index);
+					struct s_env *env, char *str,
+					t_obj *new, t_pars_object *index);
 	t_list			*list;
 	t_list			*camera;
 	int				nbr_cam;
@@ -289,16 +289,16 @@ typedef	struct		s_env
 	int				msaa;
 }					t_env;
 
-typedef struct s_menu
+typedef struct		s_menu
 {
-	void    *addr_mlx;
-	void    *addr_win;
-	t_env	*env;
-	t_image *page;
-	t_image *error;
-	t_list	*button;
-	int		y_scroll;
-}				t_menu;
+	void			*addr_mlx;
+	void			*addr_win;
+	t_env			*env;
+	t_image			*page;
+	t_image			*error;
+	t_list			*button;
+	int				y_scroll;
+}					t_menu;
 
 int					merror(void);
 

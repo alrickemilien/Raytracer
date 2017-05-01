@@ -42,4 +42,5 @@ plan:
 	position: (0 50 0)
 	color: (0xabdf52)
 	normal: (0 1 1)
+	texture: (plan/damier.xpm)
 }

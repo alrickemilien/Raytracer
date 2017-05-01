@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:18:23 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/28 11:19:20 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/04/28 13:41:01 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,24 @@ double				*inv_m(double *m);
 void				swap(double *a, double *b);
 int					betwn(double t, double n1, double n2);
 double				fresnel(t_ray ray, t_surface s);
-t_color				beers_law(t_color color, t_obj *obj, t_surface s, t_ray ray);
+t_color				beers_law(
+					t_color color, t_obj *obj, t_surface s, t_ray ray);
 double				*set_rot_m(double *matrix, double alpha,
 											double beta, double gamma);
-double  			*set_camera_matrix(
+double				*set_camera_matrix(
 							t_vector vec_forward, t_vector vec_up,
 							t_vector vec_right, t_vector from);
 void				set_color_coeff(t_env *env, t_surface s,
 									t_obj *tmp, double *t);
 double				shadow(t_env *env, t_ray ray, double norme);
 double				get_specularity(t_vector intersection, t_vector n,
-		t_vector light_dir, t_obj *obj);
+									t_vector light_dir, t_obj *obj);
 double				get_diffuse(t_vector n, t_vector light_dir);
 t_surface			get_surface_caracter(t_ray ray, t_obj *tmp);
 t_ray				get_reflection(t_surface s, t_ray ray);
 t_ray				get_refraction(t_surface s, t_ray ray);
 t_vector			get_surface_normal(t_vector intersection,
-		t_obj *tmp, t_ray ray);
+										t_obj *tmp, t_ray ray);
 void				rotate_object(t_obj *object, t_vector *vector);
 void				rotate_vec(t_vector rot, t_vector *vector);
 double				range(double a, double b);
