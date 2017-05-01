@@ -90,14 +90,14 @@ int					set_csg(t_env *env, t_list **list_obj)
 		recycle(&line, ft_strtrim(line));
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_csg(env, &new, line, &reference))
-				return (0);
+				return (clean_error(&line));
 		if (line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
 	if (!check_reference(reference))
-		return (clean_error(&line));
+		return (0);
 	set_translation_csg(new.translation, new.csg);
 	ft_lstadd(list_obj, ft_lstnew(&new, (sizeof(t_obj))));
 	return (1);

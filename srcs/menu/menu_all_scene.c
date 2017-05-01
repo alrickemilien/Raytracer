@@ -8,6 +8,7 @@ static void		data_while(t_data_draw *data,
 {
 	while (tmp)
 	{
+		ft_putendl("A\n");
 		free_list(&env->list, &env->camera, &env->light, env);
 		data = (t_data_draw*)(tmp->content);
 		ft_bzero(env->tab_ray, sizeof(t_ray) * 600 * 400);
@@ -18,6 +19,7 @@ static void		data_while(t_data_draw *data,
 		}
 		if (!parser(env))
 		{
+			system("leaks rt");
 			data->error = 1;
 			data->picture = menu->error;
 			draw_menu(*data, menu->page);
