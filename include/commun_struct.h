@@ -183,11 +183,11 @@ typedef struct	s_range
 
 typedef struct		s_limit
 {
-	int				x;
-	int				y;
-	int				max_x;
-	int				max_y;
-	int				tmp_x;
+	double				x;
+	double				y;
+	double				max_x;
+	double				max_y;
+	double				tmp_x;
 }					t_limit;
 
 typedef struct		s_camera
@@ -285,8 +285,12 @@ typedef	struct		s_env
 	double			fov;
 	t_select		*select;
 	int				etat;
+<<<<<<< Updated upstream
 	char			*reset;
 	int				msaa;
+=======
+	int				a_a;
+>>>>>>> Stashed changes
 }					t_env;
 
 typedef struct s_menu
