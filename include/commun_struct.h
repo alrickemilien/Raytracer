@@ -285,12 +285,8 @@ typedef	struct		s_env
 	double			fov;
 	t_select		*select;
 	int				etat;
-<<<<<<< Updated upstream
 	char			*reset;
 	int				msaa;
-=======
-	int				a_a;
->>>>>>> Stashed changes
 }					t_env;
 
 typedef struct s_menu

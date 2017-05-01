@@ -79,17 +79,10 @@ t_menu				*creat_menu(void)
 		return (NULL);
 	new_menu->addr_mlx = mlx_init();
 	if (!(nb_data_draw = set_menu(new_menu)))
-<<<<<<< Updated upstream
 		merror();
 	new_menu->error = init_texture(
 		new_menu->addr_mlx, "textures/plan/error.xpm");
 	new_menu->addr_win = mlx_new_window(
 		new_menu->addr_mlx, WIN_WIDTH, WIN_HEIGHT, "Menu_RT");
-=======
-        merror();
-	new_menu->error = init_texture(new_menu->addr_mlx, "srcs/textures/plan/error.xpm");
-
-    new_menu->addr_win = mlx_new_window(new_menu->addr_mlx, WIN_WIDTH, WIN_HEIGHT, "Menu_RT");
->>>>>>> Stashed changes
 	return (new_menu);
 }
