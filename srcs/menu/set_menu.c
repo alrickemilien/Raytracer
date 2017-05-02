@@ -59,14 +59,10 @@ static int			set_menu(t_menu *menu)
 void		reset_menu(t_menu *menu)
 {
 	t_env	*env;
-	int		index;
 
 	env = menu->env;
-	index = 0;
 	free_button(&menu->button, menu);
-	if (!(index = set_menu(menu)))
-		merror();
-	env->k = 0.2;
+	set_menu(menu);
 	mlx_destroy_image(env->addr_mlx, env->image->addr_img);
 	free(env->image);
 	env->image = NULL;
@@ -92,8 +88,7 @@ t_menu				*creat_menu(void)
 	new_menu->addr_mlx = mlx_init();
 	new_menu->background = init_texture(
 		new_menu->addr_mlx, "textures/skybox/the_universe.xpm");
-	if (!(nb_data_draw = set_menu(new_menu)))
-		merror();
+	set_menu(new_menu);
 	new_menu->error = init_texture(
 		new_menu->addr_mlx, "textures/plan/error.xpm");
 	new_menu->addr_win = mlx_new_window(

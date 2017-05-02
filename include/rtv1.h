@@ -5,7 +5,6 @@
 
 void		free_data(void *content, size_t size);
 void		free_tab(char ***tab, size_t size);
-void		sort_camera(t_env *env);
 t_limit		ft_limit_thread(int nb, int width, int height);
 void		ft_put_pos_select(t_env *env);
 int			sphere(t_obj *sphere, t_ray *ray, double *t, t_list **inter);
@@ -32,6 +31,6 @@ void		end_scene(t_menu *menu, void *addr_mlx, void *addr_win);
 void		end_menu(
 			t_menu *menu, void *addr_mlx, void *addr_win, void *addr_img);
 void		ray_draw_data(t_menu *menu, t_env *env);
-void		ft_bitmap(t_image *image);
+void		ft_bitmap(t_image *image, char *path);
 
 #endif

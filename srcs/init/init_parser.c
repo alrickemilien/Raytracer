@@ -85,7 +85,6 @@ static void		init_tab_function_object(t_env *env)
 void			init_env(t_env *env)
 {
 	env->addr_mlx = mlx_init();
-	env->k = 0.2;
 	env->fov = M_PI_4;
 	env->scale = tan(M_PI_4 * 0.5);
 	env->select = (t_select*)ft_memalloc(sizeof(t_select));

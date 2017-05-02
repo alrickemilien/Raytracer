@@ -16,15 +16,15 @@ static void		data_while(t_data_draw *data,
 			tmp = tmp->next;
 			continue;
 		}
-		if (!parser(env))
+		if (!parser(env) || !init_default_camera(env))
 		{
 			data->error = 1;
 			data->picture = menu->error;
 			draw_menu(*data, menu->page);
 			tmp = tmp->next;
+			close(env->fd);			
 			continue;
 		}
-		(!env->camera) ? init_default_camera(env) : sort_camera(env);
 		raytracing((void*)env);
 		data->picture = env->image;
 		draw_menu(*data, menu->page);
