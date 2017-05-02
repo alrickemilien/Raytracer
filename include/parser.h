@@ -142,5 +142,7 @@ int					clean_error(char **str);
 void				free_list(
 					t_list **obj, t_list **camera, t_list **t_3, t_env *env);
 void				free_button(t_list **button, t_menu *menu);
+void				ft_objdel(t_list **obj, void *addr_mlx);
+void				free_image(void *addr_mlx, t_image **image, void *addr_img);
 
 #endif

@@ -6,12 +6,11 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:32 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/28 14:58:11 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/05/02 13:51:06 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
 
 static int			check_reference(t_pars_scene index)
 {

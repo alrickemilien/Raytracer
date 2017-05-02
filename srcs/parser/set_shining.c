@@ -1,7 +1,7 @@
 #include "rtv1.h"
 #include "parser.h"
 
-static int		check_shining(t_light *new, char *tmp)
+static int	check_shining(t_light *new, char *tmp)
 {
 	int		n;
 
@@ -18,7 +18,7 @@ static int		check_shining(t_light *new, char *tmp)
 	return (parse_error(INVALID_PARAM_FORMAT));
 }
 
-int		set_shining(char *tmp, t_light *new, t_pars_object *index)
+int			set_shining(char *tmp, t_light *new, t_pars_object *index)
 {
 	int		n;
 

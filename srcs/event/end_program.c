@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:44:37 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/29 14:01:47 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/02 14:48:23 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		end_scene(t_menu *menu, void *addr_mlx, void *addr_win)
 	t_env	*env;
 
 	env = menu->env;
-	mlx_destroy_window(addr_mlx, addr_win);
+	free_image(env->addr_mlx, &env->image, env->image->addr_img);
 	ft_bzero(env->tab_ray, sizeof(t_ray) * 1000 * 1000);
 	free_list(&env->list, &env->camera, &env->light, env);
 	env->reset = NULL;
@@ -35,7 +35,7 @@ void		end_menu(t_menu *menu,
 	(void)addr_img;
 	env = menu->env;
 	if (env->image)
-		mlx_destroy_image(env->addr_mlx, env->image->addr_img);
+		free_image(addr_mlx, &env->image, env->image->addr_img);
 	if (addr_win)
 		mlx_destroy_window(addr_mlx, addr_win);
 	if (env->tab_ray)
@@ -50,8 +50,8 @@ void		end_menu(t_menu *menu,
 	free(env);
 	free_button(&menu->button, menu);
 	if (menu->error)
-		mlx_destroy_image(addr_mlx, menu->error->addr_img);
+		free_image(addr_mlx, &menu->error, menu->error->addr_img);
 	if (menu->background)
-		mlx_destroy_image(addr_mlx, menu->background->addr_img);
+		free_image(addr_mlx, &menu->background, menu->background->addr_img);
 	exit(0);
 }

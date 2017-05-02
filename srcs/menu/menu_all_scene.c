@@ -43,9 +43,7 @@ void			ray_draw_data(t_menu *menu, t_env *env)
 	draw_menu(*data, menu->page);
 	tmp = menu->button->next;
 	data_while(data, tmp, env, menu);
-	mlx_destroy_image(env->addr_mlx, env->image->addr_img);
-	free(env->image);
-	env->image = NULL;
+	free_image(env->addr_mlx, &env->image, env->image->addr_img);
 	ft_bzero(env->tab_ray, sizeof(t_ray) * 600 * 400);
 	free_list(&env->list, &env->camera, &env->light, env);
 	ft_bzero(env->select, sizeof(t_select));
