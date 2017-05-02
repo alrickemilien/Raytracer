@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:44:37 by aemilien          #+#    #+#             */
-/*   Updated: 2017/05/02 14:48:23 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/02 16:45:52 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void		end_scene(t_menu *menu, void *addr_mlx, void *addr_win)
 
 	env = menu->env;
 	free_image(env->addr_mlx, &env->image, env->image->addr_img);
+	mlx_destroy_window(addr_mlx, addr_win);
 	ft_bzero(env->tab_ray, sizeof(t_ray) * 1000 * 1000);
 	free_list(&env->list, &env->camera, &env->light, env);
 	env->reset = NULL;

@@ -63,8 +63,6 @@ void		reset_menu(t_menu *menu)
 	env = menu->env;
 	free_button(&menu->button, menu);
 	set_menu(menu);
-		ft_putendl("salut1");
-
 	free_image(env->addr_mlx, &env->image, env->image->addr_img);
 	env->image = init_image(env->addr_mlx, 400, 200);
 	ft_bzero(env->tab_ray, sizeof(t_ray) * 1000 * 1000);

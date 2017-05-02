@@ -16,7 +16,5 @@ static void		del_button(void *data, size_t size)
 void			free_button(t_list **button, t_menu *menu)
 {
 	ft_lstdel(button, &del_button);
-		ft_putendl("salut2");
-
 	free_image(menu->addr_mlx, &menu->page, menu->page->addr_img);
 }
