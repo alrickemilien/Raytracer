@@ -6,11 +6,12 @@
 /*   By: aemilien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:46:15 by aemilien          #+#    #+#             */
-/*   Updated: 2017/05/01 17:21:18 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/05/03 14:20:24 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "commun_struct.h"
+#include "parser.h"
 
 static int			set_bitmapfileheader(int fd, t_image *image)
 {
@@ -34,10 +35,7 @@ static int			set_bitmapfileheader(int fd, t_image *image)
 	header[5] = tmp[3];
 	header[10] = 0x36;
 	if ((len = write(fd, header, 14)) < 0)
-	{
-		free(header);
-		return (0);
-	}
+		return (clean_error((char**)&header));
 	free(header);
 	return (1);
 }
@@ -64,10 +62,7 @@ static int			set_bitmapinfoheader(int fd, t_image *image)
 	header[28] = 0xC3;
 	header[29] = 0x0E;
 	if (write(fd, header, 40) < 0)
-	{
-		free(header);
-		return (0);
-	}
+		return (clean_error((char**)&header));
 	free(header);
 	return (1);
 }
