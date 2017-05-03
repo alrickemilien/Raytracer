@@ -100,6 +100,10 @@ SRCS=\
 	srcs/menu/menu_all_scene.c\
 	srcs/event/bmp.c\
 	srcs/event/set_sepia.c\
+	srcs/raytracing/set_primary_ray.c\
+	srcs/raytracing/colors.c\
+	srcs/raytracing/shining.c\
+	srcs/init/init_vignettes_dimensions.c\
 
 OBJ=$(SRCS:.c=.o)
 

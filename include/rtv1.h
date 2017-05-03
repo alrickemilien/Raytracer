@@ -3,6 +3,12 @@
 # include "macro_key_mlx.h"
 # include "commun_struct.h"
 
+void		set_vignette_dimensions(t_env *e, t_limit *l);
+t_color		shining(t_list *lights, t_ray *ray, double *norme);
+t_color		moyenne(t_color *tab, int size);
+t_color		scolor(t_color color, double k);
+t_color		add_color(t_color current, t_color to_add, double t);
+void		set_primary_ray(t_env *env, t_ray *ray, double j, double i);
 void		free_data(void *content, size_t size);
 void		free_tab(char ***tab, size_t size);
 t_limit		ft_limit_thread(int nb, int width, int height);
