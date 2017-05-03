@@ -59,17 +59,11 @@ static int			set_menu(t_menu *menu)
 void		reset_menu(t_menu *menu)
 {
 	t_env	*env;
-	int		index;
 
 	env = menu->env;
-	index = 0;
 	free_button(&menu->button, menu);
-	if (!(index = set_menu(menu)))
-		merror();
-	env->k = 0.2;
-	mlx_destroy_image(env->addr_mlx, env->image->addr_img);
-	free(env->image);
-	env->image = NULL;
+	set_menu(menu);
+	free_image(env->addr_mlx, &env->image, env->image->addr_img);
 	env->image = init_image(env->addr_mlx, 400, 200);
 	ft_bzero(env->tab_ray, sizeof(t_ray) * 1000 * 1000);
 	env->image_aspect_ratio = 400 / 200;
@@ -92,8 +86,7 @@ t_menu				*creat_menu(void)
 	new_menu->addr_mlx = mlx_init();
 	new_menu->background = init_texture(
 		new_menu->addr_mlx, "textures/skybox/the_universe.xpm");
-	if (!(nb_data_draw = set_menu(new_menu)))
-		merror();
+	set_menu(new_menu);
 	new_menu->error = init_texture(
 		new_menu->addr_mlx, "textures/plan/error.xpm");
 	new_menu->addr_win = mlx_new_window(

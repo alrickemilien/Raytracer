@@ -5,7 +5,7 @@
 
 void				*init_data_tab_thread(
 					const char *params, size_t size, int nb_thread);
-void				init_default_camera(t_env *env);
+int					init_default_camera(t_env *env);
 pthread_t			*init_thread(int nb_thread);
 t_image				*init_image(void *addr_mlx, int width, int height);
 t_image				*init_texture(void *addr_mlx, char *path);

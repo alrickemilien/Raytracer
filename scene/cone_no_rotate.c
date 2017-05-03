@@ -1,10 +1,23 @@
 camera:
+<<<<<<< HEAD
 	from: (0 0 0)
 	to: (1 0 0)
 
 light:
 	position: (0 0 0)
 	intensity: (3)
+=======
+{
+	from: (0 0 0)
+	to: (1 0 0)
+}
+
+light:
+{
+	position: (0 0 0)
+	intensity: (3)
+}
+>>>>>>> c0a99ba245166d1266767ce9f4d6b20a82e0bf8d
 
 cone:
 	apex: (2.5 0 0)
@@ -15,3 +28,7 @@ plan:
 	color: (0xFC9F5B)
 	normal: (-0.5 0.5 0)
 	position: (3 -0.01 0)
+<<<<<<< HEAD
+=======
+}
+>>>>>>> c0a99ba245166d1266767ce9f4d6b20a82e0bf8d

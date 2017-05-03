@@ -59,12 +59,15 @@ static int		switch_cam(t_env *env, int keycode)
 
 static void		reset(int keycode, t_menu *menu)
 {
+	t_env *env;
+
+	env = menu->env;
 	if (keycode == KEY_R)
-		menu->env->reset ? reset_scene(menu, menu->env->reset) : reset_menu(menu);
-	if (keycode == KEY_S)
-		ft_bitmap(menu->env->image);
-	if (keycode == KEY_Q && menu->env->etat)
-		set_sepia(menu->env, menu->env->image);
+		env->reset ? reset_scene(menu, env->reset) : reset_menu(menu);
+	if (keycode == KEY_S && env->etat)
+		ft_bitmap(env->image, env->reset);
+	if (keycode == KEY_Q && env->etat)
+		set_sepia(env, env->image);
 }
 
 int				key_press(int keycode, t_menu *menu)
@@ -77,9 +80,11 @@ int				key_press(int keycode, t_menu *menu)
 		if ((env->k > 0.1) && (keycode == KEY_PAD_SUB))
 			env->k -= 0.1;
 		else
-			env->k += 0.1;
-		free(env->tab_env);
+			env->k += 0.1;			
+//		free(env->tab_env);
 		env->tab_env = init_data_tab_thread((void*)env, sizeof(t_env), 8);
+		system("leaks rt");		
+		
 		thread(env->tab_thread, raytracing, env->tab_env, sizeof(t_env));
 		mlx_put_image_to_window(
 			env->addr_mlx, env->addr_win, env->image->addr_img, 0, 0);

@@ -10,17 +10,13 @@ void			reset_scene(t_menu *menu, char *path)
 	env = menu->env;
 	free_list(&env->list, &env->camera, &env->light, env);
 	env->fd = open(path, O_RDWR);
-	if (!parser(env))
+	if (!parser(env) || !init_default_camera(env))
 	{
 		close(env->fd);
 		env->etat = 0;
 		free_list(&env->list, &env->camera, &env->light, env);
 		return ;
 	}
-	if (!env->camera)
-		init_default_camera(env);
-	else
-		sort_camera(env);
 	env->tab_env = init_data_tab_thread((void*)env, (sizeof(t_env)), 8);
 	thread(env->tab_thread, &raytracing, env->tab_env, sizeof(t_env));
 	mlx_put_image_to_window(
@@ -38,17 +34,13 @@ void			init_scene(t_menu *menu, char *path)
 	env = menu->env;
 	free_list(&env->list, &env->camera, &env->light, env);
 	env->fd = open(path, O_RDWR);
-	if (!parser(env))
+	if (!parser(env) || !init_default_camera(env))
 	{
 		close(env->fd);
 		env->etat = 0;
 		free_list(&env->list, &env->camera, &env->light, env);
 		return ;
 	}
-	if (!env->camera)
-		init_default_camera(env);
-	else
-		sort_camera(env);
 	env->addr_win = mlx_new_window(env->addr_mlx, WIN_WIDTH, WIN_HEIGHT, path);
 	env->tab_env = init_data_tab_thread((void*)env, (sizeof(t_env)), 8);
 	thread(env->tab_thread, &raytracing, env->tab_env, sizeof(t_env));
