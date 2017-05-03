@@ -23,10 +23,12 @@ void		set_sepia(t_env *env, t_image *image)
 	int				x;
 	int				y;
 	int				index;
-	t_image			*tmp;
+	char			*data;
+	char			new_data[WIN_WIDTH * WIN_HEIGHT * 3];
 	t_color			color;
 
-	tmp = init_image(env->addr_mlx, WIN_WIDTH, WIN_HEIGHT);
+	data = image->data;
+	new_data = malloc(WIN_WIDTH * WIN_HEIGHT * 3 * sizeof(char));
 	y = 0;
 	while (y < WIN_HEIGHT)
 	{
@@ -34,17 +36,19 @@ void		set_sepia(t_env *env, t_image *image)
 		while (x < WIN_WIDTH)
 		{
 			index = (x * image->bpp) + (y * image->sizeline);
-			color.red = image->data[index+2];
-			color.green = image->data[index+1];
-			color.blue = image->data[index];
+			color.red = data[index+2];
+			color.green = data[index+1];
+			color.blue = data[index];
 			color = wb(color);
-			tmp->data[index] = color.blue;
-			tmp->data[index+1] = color.green;
-			tmp->data[index+2] = color.red;
+			new_data[index] = color.blue;
+			new_data[index+1] = color.green;
+			new_data[index+2] = color.red;
 			x++;
 		}
 		y++;
 	}
+	image->data = new_data;
 	mlx_put_image_to_window(
-			env->addr_mlx, env->addr_win, tmp->addr_img, 0, 0);
+			env->addr_mlx, env->addr_win, image->addr_img, 0, 0);
+	image->data = data;
 }

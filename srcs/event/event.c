@@ -63,7 +63,7 @@ static void		reset(int keycode, t_menu *menu)
 		menu->env->reset ? reset_scene(menu, menu->env->reset) : reset_menu(menu);
 	if (keycode == KEY_S)
 		ft_bitmap(menu->env->image);
-	if (keycode == KEY_Q)
+	if (keycode == KEY_Q && menu->env->etat)
 		set_sepia(menu->env, menu->env->image);
 }
 
