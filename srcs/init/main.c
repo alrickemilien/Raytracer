@@ -25,6 +25,7 @@ void			reset_scene(t_menu *menu, char *path)
 	thread(env->tab_thread, &raytracing, env->tab_env, sizeof(t_env));
 	mlx_put_image_to_window(
 			env->addr_mlx, env->addr_win, env->image->addr_img, 0, 0);
+	system("leaks rt");
 	mlx_hook(env->addr_win, 2, 1L << 0 | 1 << 1, &key_press, menu);
 	mlx_hook(env->addr_win, 17, 0L, &red_cross, menu);
 	mlx_loop(env->addr_mlx);
@@ -68,6 +69,7 @@ void		loop_menu(t_menu *menu)
 	env->image_aspect_ratio = 1000 / 1000;
 	if (!env->tab_thread)
 		env->tab_thread = init_thread(8);
+	system("leaks rt");
 	env->nb_thread = 0;
 	mlx_hook(menu->addr_win, 2, 1L << 0 | 1 << 1, &key_press, menu);
 	mlx_mouse_hook(menu->addr_win, ft_mouse, menu);

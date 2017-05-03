@@ -100,6 +100,7 @@ SRCS=\
 	srcs/event/free_all_list.c\
 	srcs/menu/menu_all_scene.c\
 	srcs/event/bmp.c\
+	srcs/event/set_sepia.c\
 
 OBJ=$(SRCS:.c=.o)
 
