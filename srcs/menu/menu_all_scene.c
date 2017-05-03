@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 16:08:44 by salibert          #+#    #+#             */
-/*   Updated: 2017/05/03 16:08:45 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/03 18:43:23 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void		data_while(t_data_draw *data,
 			tmp = tmp->next;
 			continue;
 		}
+		ft_putendl(data->path);
+		system("leaks rt");		
 		if (!parser(env) || !init_default_camera(env))
 		{
 			data->error = 1;
@@ -49,7 +51,6 @@ void			ray_draw_data(t_menu *menu, t_env *env)
 {
 	t_list		*tmp;
 	t_data_draw	*data;
-
 	tmp = menu->button;
 	data = (t_data_draw*)(tmp->content);
 	draw_menu(*data, menu->page);
@@ -59,4 +60,5 @@ void			ray_draw_data(t_menu *menu, t_env *env)
 	ft_bzero(env->tab_ray, sizeof(t_ray) * 600 * 400);
 	free_list(&env->list, &env->camera, &env->light, env);
 	ft_bzero(env->select, sizeof(t_select));
+	
 }

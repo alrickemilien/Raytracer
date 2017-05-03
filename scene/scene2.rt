@@ -26,7 +26,6 @@ plan:
 	position: (30 0 0)
 	normal: (1 0 0)
 	texture: (sphere/magic.xpm)
-	resize_texture: ()
 }
 
 cylinder:

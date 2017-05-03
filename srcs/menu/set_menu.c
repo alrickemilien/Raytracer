@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 16:09:09 by salibert          #+#    #+#             */
-/*   Updated: 2017/05/03 16:10:08 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/03 18:31:40 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int			set_menu(t_menu *menu)
 	marge = 100 + 135 * nb_data_draw;
 	if (!(menu->page = init_image(menu->addr_mlx, WIN_WIDTH,
 		(WIN_HEIGHT < marge ? marge : WIN_HEIGHT))))
-		merror();
+		parse_error("malloc_error");
 	new_button = params_data_draw(menu);
 	ft_lstadd(&menu->button, ft_lstnew(&new_button, (sizeof(t_data_draw))));
 	closedir(dir);

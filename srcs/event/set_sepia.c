@@ -43,4 +43,5 @@ void				set_sepia(t_env *env, t_image *image)
 	}
 	mlx_put_image_to_window(
 			env->addr_mlx, env->addr_win, tmp->addr_img, 0, 0);
+	free_image(env->addr_mlx, &tmp, tmp->addr_img);
 }

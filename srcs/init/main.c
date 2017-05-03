@@ -36,6 +36,7 @@ void			init_scene(t_menu *menu, char *path)
 	if (!parser(env) || !init_default_camera(env))
 	{
 		close(env->fd);
+		env->reset = NULL;
 		env->etat = 0;
 		free_list(&env->list, &env->camera, &env->light, env);
 		return ;
@@ -61,7 +62,6 @@ void			loop_menu(t_menu *menu)
 	env->image_aspect_ratio = 1000 / 1000;
 	if (!env->tab_thread)
 		env->tab_thread = init_thread(8);
-	system("leaks rt");
 	env->nb_thread = 0;
 	mlx_hook(menu->addr_win, 2, 1L << 0 | 1 << 1, &key_press, menu);
 	mlx_mouse_hook(menu->addr_win, ft_mouse, menu);
