@@ -59,10 +59,13 @@ static int		switch_cam(t_env *env, int keycode)
 
 static void		reset(int keycode, t_menu *menu)
 {
+	t_env *env;
+
+	env = menu->env;
 	if (keycode == KEY_R)
-		menu->env->reset ? reset_scene(menu, menu->env->reset) : reset_menu(menu);
-	if (keycode == KEY_S && menu->env->etat)
-		ft_bitmap(menu->env->image, menu->env->reset);
+		env->reset ? reset_scene(menu, env->reset) : reset_menu(menu);
+	if (keycode == KEY_S && env->etat)
+		ft_bitmap(env->image, env->reset);
 }
 
 int				key_press(int keycode, t_menu *menu)

@@ -6,13 +6,14 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:46:15 by aemilien          #+#    #+#             */
-/*   Updated: 2017/05/02 11:25:28 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/03 14:06:12 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "commun_struct.h"
+#include "parser.h"
 
-static int			set_bitmapfileheader(int fd, t_image *image)
+static int			set_bmpfileheader(int fd, t_image *image)
 {
 	unsigned char	*header;
 	unsigned char	*tmp;
@@ -42,7 +43,7 @@ static int			set_bitmapfileheader(int fd, t_image *image)
 	return (1);
 }
 
-static int			set_bitmapinfoheader(int fd, t_image *image)
+static int			set_bmpinfoheader(int fd, t_image *image)
 {
 	unsigned char	*header;
 	unsigned int	n;
@@ -72,7 +73,7 @@ static int			set_bitmapinfoheader(int fd, t_image *image)
 	return (1);
 }
 
-void				data_to_bitmap(char *bitmap, t_image *image, int i)
+static void			data_to_bitmap(char *bitmap, t_image *image, int i)
 {
 	int				x;
 	int				y;
@@ -97,7 +98,7 @@ void				data_to_bitmap(char *bitmap, t_image *image, int i)
 	}
 }
 
-static int			set_bitmapdata(int fd, t_image *image)
+static int			set_bmpdata(int fd, t_image *image)
 {
 	char			*bitmap;
 	int				len;
@@ -121,25 +122,18 @@ static int			set_bitmapdata(int fd, t_image *image)
 void				ft_bitmap(t_image *image, char *path)
 {
 	int				fd;
-	char 			*name_scene;
+	char			*name_scene;
 
 	name_scene = ft_strjoin(ft_strstr(path, "/") + 1, ".bmp");
 	fd = open(name_scene, O_RDWR | O_CREAT
-			| O_NONBLOCK, S_IRUSR | S_IWUSR);
-	if (fd < 0 
-		|| !set_bitmapfileheader(fd, image)
-		|| !set_bitmapinfoheader(fd, image)
-		|| !set_bitmapdata(fd, image))
-	{
+	| O_NONBLOCK, S_IRUSR | S_IWUSR);
+	if (fd < 0 || !set_bmpfileheader(fd, image) || !set_bmpinfoheader(fd, image)
+				|| !set_bmpdata(fd, image) || (close(fd) < 0))
 		ft_putendl_fd("error appeared creating the screenshot", 2);
-		return ;
-	}
-	if (close(fd) < 0)
+	else
 	{
-		ft_putendl_fd("error appeared creating the screenshot", 2);
-		return ;
+		ft_putstr(name_scene);
+		ft_putendl(" has been created");
 	}
-	ft_putstr(name_scene);
-	ft_putendl(" has been created");
 	ft_strdel(&name_scene);
 }
