@@ -38,25 +38,23 @@ static t_color			raycast(t_env *env, t_ray ray, int d, t_obj *tmp)
 
 	t = 0;
 	c = shining(env->light, &ray, &lightnorme);
-	if (get_intersection(env, &ray, &tmp))
-	{
-		if (lightnorme > ray.t)
-			ft_bzero(&c, sizeof(c));
-		s = get_surface_caracter(ray, tmp);
-		set_color_coeff(env, s, tmp, &t);
-		if ((tmp->etat == SPHERE || tmp->etat == PLAN) && tmp->texture)
-			c = add_color(c, mapping(*(tmp), s), t);
-		else
-			c = add_color(c, tmp->color, t);
-		if (d < 5 && (ray.coeff = fresnel(ray, s)) < 1 && tmp->refraction > 1)
-			c = add_color(c, raycast(env, get_refraction(s, ray), d + 1, NULL),
-						1 - ray.coeff);
-		if (d < 5 && tmp->reflection)
-			c = add_color(c,
-					scolor(raycast(env, get_reflection(s, ray), d + 1, NULL),
-					s.reflection), ray.coeff);
-
-	}
+	if (!get_intersection(env, &ray, &tmp))
+		return (c);
+	if (lightnorme > ray.t)
+		ft_bzero(&c, sizeof(c));
+	s = get_surface_caracter(ray, tmp);
+	set_color_coeff(env, s, tmp, &t);
+	if ((tmp->etat == SPHERE || tmp->etat == PLAN) && tmp->texture)
+		c = add_color(c, mapping(*(tmp), s), t);
+	else
+		c = add_color(c, tmp->color, t);
+	if (d < 5 && (ray.coeff = fresnel(ray, s)) < 1 && tmp->refraction > 1)
+		c = add_color(c, raycast(env, get_refraction(s, ray), d + 1, NULL),
+					1 - ray.coeff);
+	if (d < 5 && tmp->reflection)
+		c = add_color(c,
+				scolor(raycast(env, get_reflection(s, ray), d + 1, NULL),
+				s.reflection), ray.coeff);
 	return (c);
 }
 
