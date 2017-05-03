@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salibert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 19:37:30 by salibert          #+#    #+#             */
-/*   Updated: 2017/05/01 17:06:09 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/05/03 16:00:12 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,5 @@ int				get_next_char(const int fb, char **line, char c);
 t_list			*ptr_of(t_list *lst, void *data, int (*cmp)(void *a, void *b));
 t_list			*elem_rm(t_list *head, t_list *to_rm);
 void			swap(double *a, double *b);
-void			ft_write_n_bytes(unsigned char *dest, unsigned char *src, int i);
+void			ft_write_n_bytes(unsigned char *d, unsigned char *s, int i);
 #endif

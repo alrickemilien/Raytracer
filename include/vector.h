@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:18:23 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/28 13:41:01 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/03 15:36:31 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int					is_vectornull(t_vector v);
 t_vector			get_vec(double x, double y, double z);
 int					betwx(double t, double n1, double n2);
 double				*inv_m(double *m);
-void				swap(double *a, double *b);
 int					betwn(double t, double n1, double n2);
 double				fresnel(t_ray ray, t_surface s);
 t_color				beers_law(
@@ -54,4 +53,6 @@ t_vector			get_surface_normal(t_vector intersection,
 void				rotate_object(t_obj *object, t_vector *vector);
 void				rotate_vec(t_vector rot, t_vector *vector);
 double				range(double a, double b);
+void				set_spaces_diff(t_range *a, t_range *b);
+
 #endif

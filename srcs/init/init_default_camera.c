@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:03 by aemilien          #+#    #+#             */
-/*   Updated: 2017/05/02 11:51:48 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/03 14:52:22 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int				init_default_camera(t_env *env)
 		return (sort_camera(env));
 	obj = ((t_obj*)(env->list->content));
 	if (!(new = (t_camera*)malloc(sizeof(t_camera))))
-		parse_error("malloc error") ;
+		parse_error("malloc error");
 	set_vec(&new->pos, obj->pos.x + 5, obj->pos.y + 5, obj->pos.z + 5);
 	set_vec(&new->to, obj->pos.x, obj->pos.y, obj->pos.z);
 	new->num = 0;

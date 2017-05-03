@@ -9,7 +9,7 @@ static int	check_object(t_env *env, char *line)
 	while (++i < NBR_OBJECT)
 		if (!ft_strcmp(line, env->tab_str_object[i]))
 			break ;
-	if (i == NBR_OBJECT)	
+	if (i == NBR_OBJECT)
 		return (parse_error(INVALID_FORMAT_FILE));
 	get_next_line(env->fd, &crochet);
 	recycle(&crochet, ft_strtrim(crochet));
@@ -38,7 +38,7 @@ int			parser(t_env *env)
 			if (!check_object(env, line))
 			{
 				error = 1;
-				break;
+				break ;
 			}
 		ft_strdel(&line);
 	}

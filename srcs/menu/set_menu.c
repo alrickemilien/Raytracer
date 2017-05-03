@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_menu.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/03 16:09:09 by salibert          #+#    #+#             */
+/*   Updated: 2017/05/03 16:10:08 by salibert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "menu.h"
 #include <dirent.h>
 #include <sys/types.h>
@@ -56,9 +68,9 @@ static int			set_menu(t_menu *menu)
 	return (nb_data_draw);
 }
 
-void		reset_menu(t_menu *menu)
+void				reset_menu(t_menu *menu)
 {
-	t_env	*env;
+	t_env			*env;
 
 	env = menu->env;
 	free_button(&menu->button, menu);

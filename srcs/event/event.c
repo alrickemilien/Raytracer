@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   event.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/03 15:53:24 by salibert          #+#    #+#             */
+/*   Updated: 2017/05/03 15:53:27 by salibert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 #include "parser.h"
 #include "init.h"
@@ -70,34 +82,30 @@ static void		reset(int keycode, t_menu *menu)
 		set_sepia(env, env->image);
 }
 
-int				key_press(int keycode, t_menu *menu)
+int				key_press(int key, t_menu *menu)
 {
 	t_env		*env;
 
 	env = menu->env;
-	if ((keycode == KEY_PAD_SUB || keycode == KEY_PAD_ADD) && env->etat)
+	if ((key == KEY_PAD_SUB || key == KEY_PAD_ADD) && env->etat)
 	{
-		if ((env->k > 0.1) && (keycode == KEY_PAD_SUB))
+		if ((env->k > 0.1) && (key == KEY_PAD_SUB))
 			env->k -= 0.1;
 		else
-			env->k += 0.1;			
-//		free(env->tab_env);
+			env->k += 0.1;
 		env->tab_env = init_data_tab_thread((void*)env, sizeof(t_env), 8);
-		system("leaks rt");		
-		
 		thread(env->tab_thread, raytracing, env->tab_env, sizeof(t_env));
 		mlx_put_image_to_window(
 			env->addr_mlx, env->addr_win, env->image->addr_img, 0, 0);
 	}
-	if ((keycode == KEY_ESC) && (env->etat))
+	if ((key == KEY_ESC) && (env->etat))
 		end_scene(menu, env->addr_mlx, env->addr_win);
-	else if ((keycode == KEY_ESC) && !(env->etat))
+	else if ((key == KEY_ESC) && !(env->etat))
 		end_menu(menu, menu->addr_mlx, menu->addr_win, menu->page->addr_img);
-	if ((keycode == KEY_OPEN_BRACKET || keycode == KEY_CLOSE_BRACKET)
-		&& (env->etat))
-		switch_cam(env, keycode);
+	if ((key == KEY_OPEN_BRACKET || key == KEY_CLOSE_BRACKET) && (env->etat))
+		switch_cam(env, key);
 	if ((env->select->o || env->select->c) && (env->etat))
 		ft_put_pos_select(env);
-	reset(keycode, menu);
+	reset(key, menu);
 	return (0);
 }

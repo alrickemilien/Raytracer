@@ -21,7 +21,6 @@ void			reset_scene(t_menu *menu, char *path)
 	thread(env->tab_thread, &raytracing, env->tab_env, sizeof(t_env));
 	mlx_put_image_to_window(
 			env->addr_mlx, env->addr_win, env->image->addr_img, 0, 0);
-	system("leaks rt");
 	mlx_hook(env->addr_win, 2, 1L << 0 | 1 << 1, &key_press, menu);
 	mlx_hook(env->addr_win, 17, 0L, &red_cross, menu);
 	mlx_loop(env->addr_mlx);
@@ -51,7 +50,7 @@ void			init_scene(t_menu *menu, char *path)
 	mlx_loop(env->addr_mlx);
 }
 
-void		loop_menu(t_menu *menu)
+void			loop_menu(t_menu *menu)
 {
 	t_env		*env;
 

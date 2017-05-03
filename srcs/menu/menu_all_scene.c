@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   menu_all_scene.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/03 16:08:44 by salibert          #+#    #+#             */
+/*   Updated: 2017/05/03 16:08:45 by salibert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 #include "menu.h"
 #include "init.h"
@@ -22,7 +34,7 @@ static void		data_while(t_data_draw *data,
 			data->picture = menu->error;
 			draw_menu(*data, menu->page);
 			tmp = tmp->next;
-			close(env->fd);			
+			close(env->fd);
 			continue;
 		}
 		raytracing((void*)env);

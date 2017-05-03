@@ -36,4 +36,5 @@ plan:
 	normal: (-0.5 0.5 0)
 	position: (0 -3 3)
 	texture: (plan/damier.xpm)
+	resize_texture: (1000)
 }

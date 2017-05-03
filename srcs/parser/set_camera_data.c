@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:47:53 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/28 10:43:51 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/05/03 17:01:57 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,7 @@ void			set_camera_data(t_camera *camera)
 	t_vector	vec_up;
 
 	vec_forward = vec_diff(camera->pos, camera->to);
-
 	rotate_vec(camera->rotation, &vec_forward);
-
 	normalize_vec(&vec_forward);
 	vec_right = cross_product(set_up_vector(camera, vec_forward), vec_forward);
 	vec_up = cross_product(vec_forward, vec_right);
