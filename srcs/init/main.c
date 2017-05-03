@@ -55,8 +55,9 @@ void			loop_menu(t_menu *menu)
 	t_env		*env;
 
 	env = menu->env;
-	if (!(env->image = init_image(env->addr_mlx, WIN_WIDTH, WIN_HEIGHT)))
-		merror();
+	if (!env->image)
+		if (!(env->image = init_image(env->addr_mlx, WIN_WIDTH, WIN_HEIGHT)))
+			parse_error("malloc_error");
 	env->image_aspect_ratio = 1000 / 1000;
 	if (!env->tab_thread)
 		env->tab_thread = init_thread(8);

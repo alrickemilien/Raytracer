@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:52:08 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/25 12:55:16 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/03 17:10:41 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <pthread.h>
 #include <stdio.h>
 
-t_limit		ft_limit_thread(int nb, int width, int height)
+static t_limit		ft_limit_thread(int nb, int width, int height)
 {
 	t_limit		lim;
 	int			modulo_y;
@@ -27,6 +27,19 @@ t_limit		ft_limit_thread(int nb, int width, int height)
 	lim.max_x = (width * (modulo_x + 1)) / 4;
 	lim.max_y = (height * (modulo_y + 1)) / 2;
 	return (lim);
+}
+
+void	set_vignette_dimensions(t_env *e, t_limit *l)
+{
+	if (e->nb_thread == 9)
+	{
+		l->y = -1;
+		l->max_y = 200;
+		l->max_x = 400;
+		l->tmp_x = -1;
+	}
+	else
+		*l = ft_limit_thread(e->nb_thread, e->image->width, e->image->height);
 }
 
 void		thread(pthread_t *t, void *(*funct)(void*), void *params, int size)
