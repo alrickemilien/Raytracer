@@ -19,7 +19,7 @@ static t_list		*split_range(t_list **ret, t_range a, t_range b, t_range *n)
 	ft_lstadd(ret, ft_lstnew(n, sizeof(t_range)));
 	n->t1 = b.t2;
 	ft_lstadd(ret, ft_lstnew(n, sizeof(t_range)));
-	return (*ret = elem_rm(*ret, ptr_of(*ret, &a, &cmp_range)));
+	return (*ret = elem_rm(*ret, &a, &cmp_range));
 }
 
 static t_list		*difference(t_list **ret, t_range a, t_range b)
@@ -35,19 +35,25 @@ static t_list		*difference(t_list **ret, t_range a, t_range b)
 	{
 		n.t2 = b.t1;
 		ft_lstadd(ret, ft_lstnew(&n, sizeof(t_range)));
-		return (*ret = elem_rm(*ret, ptr_of(*ret, &a, &cmp_range)));
+		return (*ret = elem_rm(*ret, &a.t1, &cmp_range));
 	}
 	else if (!betwx(b.t1.t, a.t1.t, a.t2.t) && betwx(b.t2.t, a.t1.t, a.t2.t))
 	{
 		n.t1 = b.t2;
 		ft_lstadd(ret, ft_lstnew(&n, sizeof(t_range)));
-		return (*ret = elem_rm(*ret, ptr_of(*ret, &a, &cmp_range)));
+		return (*ret = elem_rm(*ret, &a, &cmp_range));
 	}
 	else if (!betwx(b.t1.t, a.t1.t, a.t2.t) && !betwx(b.t2.t, a.t1.t, a.t2.t))
 		if (b.t1.t < a.t1.t && b.t2.t > a.t2.t)
-			return (*ret = elem_rm(*ret, ptr_of(*ret, &a, &cmp_range)));
+			return (*ret = elem_rm(*ret, &a, &cmp_range));
 	return (NULL);
 }
+
+/*static void print_range(t_range *r)
+{
+	printf("Voici t1: %lf\n", r->t1.t);
+	printf("Voici t2: %lf\n", r->t2.t);
+}*/
 
 t_list		*f_d(t_list *a, t_list *b)
 {
@@ -55,11 +61,15 @@ t_list		*f_d(t_list *a, t_list *b)
 	t_list	*tmp_ret;
 
 	ret = NULL;
+	//printf("On va print list a \n");
+
 	while (a)
 	{
 		ft_lstadd(&ret, ft_lstnew(a->content, sizeof(t_range)));
+	//	print_range(a->content);
 		a = a->next;
 	}
+	//printf("On a FINI de print list a \n");
 	tmp_ret = ret;
 	while (b)
 	{
@@ -67,9 +77,16 @@ t_list		*f_d(t_list *a, t_list *b)
 		{
 			if (!difference(&ret, *((t_range*)(tmp_ret->content)),
 				*((t_range*)(b->content))))
-				tmp_ret = tmp_ret->next;
+			{
+				if (!ret)
+					tmp_ret = NULL;
+				else
+					tmp_ret = tmp_ret->next;
+			}
 			else
+			{
 				tmp_ret = ret;
+			}
 		}
 		b = b->next;
 	}

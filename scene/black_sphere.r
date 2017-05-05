@@ -1,6 +1,6 @@
 camera:
 {
-	from: (0 10 10)
+	from: (0 0 -10)
 	to: (0 0 0)
 }
 
@@ -31,31 +31,11 @@ csg:
 	}
 }
 
-csg:
-{
-	type: (intersection)
-	sphere:
-	{
-		rayon: (1)
-		position: (0 0 3.3)
-		texture: (sphere/metal.xpm)
-		resize_texture: (10)
-	}
-	sphere:
-	{
-		rayon: (1)
-		position: (0 0 3)
-		texture: (sphere/metal.xpm)
-		resize_texture: (10)
-	}
-}
-
 sphere:
 {
 	position: (0 0 0)
 	rayon: (30)
 	color: (0x213051)
-	texture: (skybox/the_universe.xpm)
 }
 
 light:

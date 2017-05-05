@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 19:37:30 by salibert          #+#    #+#             */
-/*   Updated: 2017/05/03 16:00:12 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:41:53 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ double			ft_dabs(double nb);
 int				get_next_line(const int fb, char **line);
 int				get_next_char(const int fb, char **line, char c);
 t_list			*ptr_of(t_list *lst, void *data, int (*cmp)(void *a, void *b));
-t_list			*elem_rm(t_list *head, t_list *to_rm);
+t_list			*elem_rm(t_list *head, void *value, int cmp(void*, void*));
 void			swap(double *a, double *b);
 void			ft_write_n_bytes(unsigned char *d, unsigned char *s, int i);
 #endif

@@ -1,7 +1,7 @@
 camera:
 {
-	from:(-3 2 0)
-	to: (1 0 0)
+	from:(0 0 0)
+	to: (0 0 1)
 }
 
 camera:
@@ -18,7 +18,7 @@ plan:
 
 csg:
 {
-		type: (intersection)
+	type: (intersection)
 	cylinder:
 		{
 			apex: (1.5 0 0)

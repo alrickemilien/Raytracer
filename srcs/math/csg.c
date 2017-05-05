@@ -31,10 +31,19 @@ static void		get_smaller_t(t_list *lst, t_obj **obj, double *t)
 	}
 }
 
+
 static void		del_range(void *content, size_t size)
 {
 	(void)size;
 	free(content);
+}
+static int		kill(t_list **a, t_list **b)
+{
+	if (*a)
+		ft_lstdel(a, &del_range);
+	if (*b)
+		ft_lstdel(b, &del_range);
+	return (0);
 }
 
 int				csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
@@ -48,18 +57,30 @@ int				csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 	a = NULL;
 	b = NULL;
 	tmp_list = obj->csg;
+	if (!tmp_list)
+		return (kill(&a, &b));
 	obj_thread = (t_obj*)tmp_list->content;
 	obj_thread->func_obj(obj_thread, ray, t, &b);
 	tmp_list = tmp_list->next;
+	if (!tmp_list)
+		return (kill(&a, &b));
 	obj_thread = (t_obj*)tmp_list->content;
 	obj_thread->func_obj(obj_thread, ray, t, &a);
 	list = (obj->type == DIFFERENCE) ? (f_d(a, b)) : (f_i(a, b));
 	get_smaller_t(list, &obj_thread, t);
+	if (!obj_thread)
+		return (kill(&a, &b));
 	obj->pointeur[ray->thread] = obj_thread;
 	ft_lstdel(&a, &del_range);
 	ft_lstdel(&b, &del_range);
 	if (!list)
 		return (0);
-	(!inter) ? ft_lstdel(&list, &del_range) : (*inter = list);
+	if (!inter)
+	{
+		ft_lstdel(&list, &del_range);
+	}
+	else
+		*inter = list;
+//	(!inter) ? ft_lstdel(&list, &del_range) : (*inter = list);
 	return (1);
 }
