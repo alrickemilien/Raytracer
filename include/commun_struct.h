@@ -287,6 +287,7 @@ typedef	struct		s_env
 	int				etat;
 	char			*reset;
 	int				msaa;
+	int				sepia;
 }					t_env;
 
 typedef struct		s_menu

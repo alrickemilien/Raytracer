@@ -28,3 +28,12 @@ int		clean_error(char **str)
 	ft_strdel(str);
 	return (0);
 }
+
+int		clean_error2(char **str, t_obj *obj, void *addr_mlx)
+{
+	if (obj->texture)
+		free_image(addr_mlx, &obj->texture, obj->texture->addr_img);
+	if (str)
+		ft_strdel(str);
+	return (0);
+}

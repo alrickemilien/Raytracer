@@ -28,20 +28,24 @@ void				set_sepia(t_env *env, t_image *image)
 	int				index;
 	t_image			*tmp;
 
-	tmp = init_image(env->addr_mlx, WIN_WIDTH, WIN_HEIGHT);
-	y = 0;
-	while (y < WIN_HEIGHT)
+	if (env->sepia)
 	{
-		x = 0;
-		while (x < WIN_WIDTH)
+		tmp = init_image(env->addr_mlx, WIN_WIDTH, WIN_HEIGHT);
+		y = -1;
+		while (++y < WIN_HEIGHT)
 		{
-			index = (x * image->bpp) + (y * image->sizeline);
-			wb(index, image, tmp);
-			x++;
+			x = -1;
+			while (++x < WIN_WIDTH)
+			{
+				index = (x * image->bpp) + (y * image->sizeline);
+				wb(index, image, tmp);
+			}
 		}
-		y++;
 	}
+	else
+		tmp = image;
 	mlx_put_image_to_window(
 			env->addr_mlx, env->addr_win, tmp->addr_img, 0, 0);
-	free_image(env->addr_mlx, &tmp, tmp->addr_img);
+	if (env->sepia)
+		free_image(env->addr_mlx, &tmp, tmp->addr_img);
 }

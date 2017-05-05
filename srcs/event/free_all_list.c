@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 15:53:45 by salibert          #+#    #+#             */
-/*   Updated: 2017/05/03 15:53:46 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/05 11:18:09 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void			ft_objdel(t_list **obj, void *addr_mlx)
 		{
 			if (tmp->texture)
 				free_image(addr_mlx, &tmp->texture, tmp->texture->addr_img);
-			if (tmp->texture)
-				free(tmp->texture);
 			if (tmp->csg)
 				ft_objdel(&tmp->csg, addr_mlx);
 			if (tmp->matrix)

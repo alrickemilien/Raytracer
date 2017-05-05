@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:49:28 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/25 09:51:48 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/05 11:22:07 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,14 @@ int				set_sphere(t_env *env, t_list **list_obj)
 		recycle(&line, ft_strtrim(line));
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_sphere(env, &new, line, &reference))
-				return (clean_error(&line));
+				return (clean_error2(&line, &new, env->addr_mlx));
 		if (line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
 	if (!check_reference(reference))
-		return (0);
+		return (clean_error2(NULL, &new, env->addr_mlx));
 	new.pos = vec_add(new.pos, new.translation);
 	ft_lstadd(list_obj, ft_lstnew(&new, sizeof(t_obj)));
 	return (1);

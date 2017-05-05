@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 16:08:44 by salibert          #+#    #+#             */
-/*   Updated: 2017/05/03 18:43:23 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/05 13:11:19 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ static void		data_while(t_data_draw *data,
 			tmp = tmp->next;
 			continue;
 		}
-		ft_putendl(data->path);
-		system("leaks rt");		
 		if (!parser(env) || !init_default_camera(env))
 		{
 			data->error = 1;

@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 15:53:24 by salibert          #+#    #+#             */
-/*   Updated: 2017/05/03 17:48:41 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/05 12:01:10 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,10 @@ static void		reset(int keycode, t_menu *menu)
 	if (keycode == KEY_S && env->etat)
 		ft_bitmap(env->image, env->reset);
 	if (keycode == KEY_Q && env->etat)
+	{
+		env->sepia = !env->sepia ? 1 : 0;
 		set_sepia(env, env->image);
+	}
 }
 
 int				key_press(int key, t_menu *menu)

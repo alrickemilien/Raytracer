@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:44:37 by aemilien          #+#    #+#             */
-/*   Updated: 2017/05/03 14:10:40 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/05 11:50:27 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ void		end_menu(t_menu *menu,
 		free_image(addr_mlx, &menu->error, menu->error->addr_img);
 	if (menu->background)
 		free_image(addr_mlx, &menu->background, menu->background->addr_img);
+	free(menu);
 	exit(0);
 }

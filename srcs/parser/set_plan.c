@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:48:47 by aemilien          #+#    #+#             */
-/*   Updated: 2017/04/25 10:42:35 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/05 11:44:11 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,14 @@ int					set_plan(t_env *env, t_list **list_obj)
 		recycle(&line, ft_strtrim(line));
 		if (ft_strcmp(line, "") && ft_strcmp(line, "{") && ft_strcmp(line, "}"))
 			if (!check_plan(env, &new_plan, line, &reference))
-				return (clean_error(&line));
+				return (clean_error2(&line, &new_plan, env->addr_mlx));
 		if (line[ft_strlen(line) - 1] == '}')
 			break ;
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
 	if (!check_reference(reference))
-		return (0);
+		return (clean_error2(&line, &new_plan, env->addr_mlx));
 	normalize_vec(&new_plan.n);
 	rotate_object(&new_plan, &new_plan.n);
 	new_plan.pos = vec_add(new_plan.pos, new_plan.translation);

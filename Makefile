@@ -31,7 +31,6 @@ SRCS=\
 	srcs/event/end_program.c\
 	srcs/event/free_data.c\
 	srcs/event/free_button.c\
-	srcs/event/free_tab.c\
 	srcs/math/light.c\
 	srcs/math/vector_1.c\
 	srcs/math/func_csg.c\
