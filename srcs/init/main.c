@@ -2,6 +2,7 @@
 #include "init.h"
 #include "parser.h"
 #include "menu.h"
+#include <stdio.h>
 
 void			reset_scene(t_menu *menu, char *path)
 {
@@ -13,7 +14,6 @@ void			reset_scene(t_menu *menu, char *path)
 	if (!parser(env) || !init_default_camera(env))
 	{
 		close(env->fd);
-		env->etat = 0;
 		free_list(&env->list, &env->camera, &env->light, env);
 		return ;
 	}
@@ -31,6 +31,7 @@ void			init_scene(t_menu *menu, char *path)
 	t_env		*env;
 
 	env = menu->env;
+	env->k = 0.4;
 	free_list(&env->list, &env->camera, &env->light, env);
 	env->fd = open(path, O_RDWR);
 	if (!parser(env) || !init_default_camera(env))

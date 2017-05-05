@@ -11,7 +11,8 @@ static int	check_object(t_env *env, char *line)
 			break ;
 	if (i == NBR_OBJECT)
 		return (parse_error(INVALID_FORMAT_FILE));
-	get_next_line(env->fd, &crochet);
+	if (!get_next_line(env->fd, &crochet))
+		return (0);
 	recycle(&crochet, ft_strtrim(crochet));
 	if (ft_strcmp("{", crochet))
 	{
