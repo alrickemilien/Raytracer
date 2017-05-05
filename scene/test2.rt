@@ -1,0 +1,61 @@
+camera:
+{
+  from: (20 20 8)
+  to: (0 0 0)
+}
+
+light:
+{
+  position: (10 5 15)
+  intensity: (20)
+}
+
+light:
+{
+  position: (1 15 1)
+  intensity: (20)
+}
+
+sphere:
+{
+	position: (0 1 1)
+	rayon: (3)
+	specular: (0.1)
+	refraction: (0)
+	reflection: (0.25)
+	texture: (rose.xpm)
+}
+
+sphere:
+{
+	position: (3 -5 -1)
+	rayon: (2)
+	specular: (0.1)
+	refraction: (0)
+	reflection: (0.25)
+  	color: (0xa1148a)
+}
+
+plan:
+{
+  	position: (-7 1 10)
+	normal: (2 1 0)
+ 	 color: (0xa11443)
+}
+
+box:
+{
+	position: (-5 2 2)
+	size: (2)
+	color: (0x14a172)
+  	reflection: (0.5)
+}
+
+cone:
+{
+	axis: (0.5 -1 2)
+	apex: (5 1 5)
+	size: (4)
+	angle: (60)
+  	reflection: (0.5)
+}
