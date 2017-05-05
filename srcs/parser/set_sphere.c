@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:49:28 by aemilien          #+#    #+#             */
-/*   Updated: 2017/05/05 11:22:07 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/05 13:55:33 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ int				set_sphere(t_env *env, t_list **list_obj)
 				return (clean_error2(&line, &new, env->addr_mlx));
 		if (line[ft_strlen(line) - 1] == '}')
 			break ;
-		ft_strdel(&line);
+		recycle(&line, NULL);
 	}
-	ft_strdel(&line);
+	recycle(&line, NULL);	
 	if (!check_reference(reference))
 		return (clean_error2(NULL, &new, env->addr_mlx));
 	new.pos = vec_add(new.pos, new.translation);

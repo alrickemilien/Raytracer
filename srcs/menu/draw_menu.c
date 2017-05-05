@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 16:09:01 by salibert          #+#    #+#             */
-/*   Updated: 2017/05/03 16:09:03 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/05 14:22:10 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void		draw_menu(t_data_draw draw, t_image *image)
 void		draw_list(t_menu *menu)
 {
 	t_list	*tmp;
-
+	
 	tmp = menu->button;
 	while (tmp)
 	{

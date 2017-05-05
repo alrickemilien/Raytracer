@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 15:53:24 by salibert          #+#    #+#             */
-/*   Updated: 2017/05/05 12:01:10 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/05 14:52:23 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,10 @@ int				key_press(int key, t_menu *menu)
 	else if ((key == KEY_ESC) && !(env->etat))
 		end_menu(menu, menu->addr_mlx, menu->addr_win, menu->page->addr_img);
 	if ((key == KEY_OPEN_BRACKET || key == KEY_CLOSE_BRACKET) && (env->etat))
+	{
 		switch_cam(env, key);
-	if ((env->select->o || env->select->c) && (env->etat))
 		ft_put_pos_select(env);
+	}
 	reset(key, menu);
 	return (0);
 }
