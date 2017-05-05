@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 15:53:24 by salibert          #+#    #+#             */
-/*   Updated: 2017/05/05 12:01:10 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/05 13:55:46 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ static void		reset(int keycode, t_menu *menu)
 	{
 		env->sepia = !env->sepia ? 1 : 0;
 		set_sepia(env, env->image);
+	}
+	if (keycode == KEY_A && env->etat)
+	{
+		env->rep = !env->rep ? 1 : 0;
+		set_rep(env, env->image);
 	}
 }
 

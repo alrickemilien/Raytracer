@@ -37,6 +37,7 @@ void		end_menu(
 			t_menu *menu, void *addr_mlx, void *addr_win, void *addr_img);
 void		ray_draw_data(t_menu *menu, t_env *env);
 void		set_sepia(t_env *env, t_image *image);
+void		set_rep(t_env *env, t_image *image);
 void		ft_bitmap(t_image *image, char *path);
 
 #endif

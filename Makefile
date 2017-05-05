@@ -102,6 +102,7 @@ SRCS=\
 	srcs/raytracing/set_primary_ray.c\
 	srcs/raytracing/colors.c\
 	srcs/raytracing/shining.c\
+	srcs/event/set_rep.c\
 
 OBJ=$(SRCS:.c=.o)
 
