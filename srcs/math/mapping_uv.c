@@ -5,7 +5,6 @@ t_color			mlx_put_xpm(int u, int v, t_image texture)
 	t_color		color;
 	int			tmp;
 
-
 	u = abs(u) % (texture.width - 1);
 	v = abs(v) % (texture.height - 1);
 	tmp = (u * (texture.bpp)) + (v * texture.sizeline);
