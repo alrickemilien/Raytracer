@@ -6,6 +6,12 @@ camera:
 
 camera:
 {
+	from: (0 0 30)
+	to: (0 0 0 )
+}
+
+camera:
+{
 	from: (0 0 12)
 	to: (0 0 0 )
 }
@@ -107,7 +113,7 @@ cylinder:
 sphere:
 {
 	position: (-3 2 1)
-	color: (0xFF0000)
+	color: (0x982ac9)
 	rayon: (0.5)
 }
 

@@ -1,6 +1,6 @@
 scene:
 {
-	antialiasing: (yes)	
+	antialiasing: (yes)
 	ambient: (0.25)
 }
 
@@ -34,7 +34,9 @@ cone:
 	apex: (0 3 1)
 	axis: (0.3 0.1 1)
 	size: (5)
+	reflection: (0.1)
 	specular: (0.9)
+	diffuse: (0.9)
 	color: (0xff0000)
 }
 
