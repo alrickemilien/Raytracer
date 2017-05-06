@@ -75,12 +75,6 @@ int				csg(t_obj *obj, t_ray *ray, double *t, t_list **inter)
 	ft_lstdel(&b, &del_range);
 	if (!list)
 		return (0);
-	if (!inter)
-	{
-		ft_lstdel(&list, &del_range);
-	}
-	else
-		*inter = list;
-//	(!inter) ? ft_lstdel(&list, &del_range) : (*inter = list);
+	(!inter) ? ft_lstdel(&list, &del_range) : (*inter = list);
 	return (1);
 }
