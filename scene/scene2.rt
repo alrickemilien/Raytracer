@@ -21,13 +21,6 @@ sphere:
 	color: (0x65bfa6)
 }
 
-plan:
-{
-	position: (30 0 0)
-	normal: (1 0 0)
-	texture: (sphere/magic.xpm)
-}
-
 cylinder:
 {
 	axis: (0 0 1)
