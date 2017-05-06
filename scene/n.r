@@ -65,6 +65,13 @@ csg:
 		rotation: (0 0 90)
 	}
 }
+		
+light:
+{
+	position: (-1 1.1 1.5)
+	shining: (yes)
+	intensity: (0.5)
+}
 
 plan:
 {
@@ -95,20 +102,40 @@ plan:
 	normal: (0 0 1)
 }
 
-cylinder:
+
+csg:
 {
-	apex: (-3 2 0.5)
-	axis: (0 0 1)
-	color: (0x982ac9)
-	size: (1)
-	rayon: (0.5)
+	type: (intersection)
+	cylinder:
+	{
+		apex: (-3 2 0.5)
+		axis: (0 0 1)
+		color: (0x982ac9)
+		rayon: (0.5)
+		transparent: (0.5)
+		reflection: (0.1)
+		refraction: (1.01)
+	}
+	sphere:
+	{
+		rayon: (1)
+		position: (-3 2 0.5)
+		color: (0x982ac9)
+		transparent: (0.5)
+		reflection: (0.1)
+		refraction: (1.01)
+	}
 }
+
 
 sphere:
 {
-	position: (-3 2 1)
-	color: (0xFF0000)
-	rayon: (0.5)
+	position: (-3 2 1.2)
+	rayon: (0.52)
+	color: (0x982ac9)
+	transparent: (0.3)
+	reflection: (0.1)
+	refraction: (1.01)
 }
 
 sphere:
