@@ -48,10 +48,10 @@ static t_color			raycast(t_env *env, t_ray ray, int d, t_obj *tmp)
 		c = add_color(c, mapping(*(tmp), s), t);
 	else
 		c = add_color(c, tmp->color, t);
-	if (d < 5 && (ray.coeff = fresnel(ray, s)) < 1 && tmp->refraction > 1)
+	if (d < 4 && (ray.coeff = fresnel(ray, s)) < 1 && tmp->refraction > 1)
 		c = add_color(c, raycast(env, get_refraction(s, ray), d + 1, NULL),
 					1 - ray.coeff);
-	if (d < 5 && tmp->reflection)
+	if (d < 4 && tmp->reflection)
 		c = add_color(c,
 				scolor(raycast(env, get_reflection(s, ray), d + 1, NULL),
 				s.reflection), ray.coeff);

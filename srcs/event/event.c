@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 15:53:24 by salibert          #+#    #+#             */
-/*   Updated: 2017/05/05 17:51:39 by aemilien         ###   ########.fr       */
+/*   Updated: 2017/05/06 08:53:15 by aemilien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static int		switch_cam(t_env *env, int keycode)
 	t_camera	*cam;
 	t_list		*tmp;
 
+	if (!env->camera)
+		return (0);
 	tmp = (t_list*)(env->camera);
 	i = 0;
 	select_index_camera(env, keycode, &i);
@@ -111,10 +113,7 @@ int				key_press(int key, t_menu *menu)
 	else if ((key == KEY_ESC) && !(env->etat))
 		end_menu(menu, menu->addr_mlx, menu->addr_win, menu->page->addr_img);
 	if ((key == KEY_OPEN_BRACKET || key == KEY_CLOSE_BRACKET) && (env->etat))
-	{
 		switch_cam(env, key);
-		ft_put_pos_select(env);
-	}
 	reset(key, menu);
 	return (0);
 }

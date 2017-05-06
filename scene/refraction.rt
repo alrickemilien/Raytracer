@@ -1,0 +1,95 @@
+scene:
+{
+    antialiasing: (yes)
+    ambient: (0.35)
+}
+
+camera:
+{
+    from: (-3 -13 -1)
+    to: (5 10 5)
+}
+
+plan:
+{
+    normal: (0 1 0)
+    position: (0 20 0)
+    color: (0xFFFFFF)
+    reflection: (0.5)
+}
+
+plan:
+{
+    normal: (1 0 0)
+    position: (10 20 0)
+    color: (0xFFFFFF)
+    reflection: (0.5)
+}
+
+plan:
+{
+    normal: (1 0 0)
+    position: (-5 -15 -5)
+    color: (0x00)
+    reflection: (0.3)
+}
+
+plan:
+{
+    normal: (0 0 1)
+    position: (0 20 10)
+    color: (0xFFFFFF)
+    reflection: (0.5)
+}
+
+sphere:
+{
+	position: (6 11 6)
+	rayon: (1.5)
+	color: (0x88)
+	refraction: (2.5)
+	reflection: (1)
+	transparent: (0.9)
+	specular: (0.9)
+    brillance: (1)
+	diffuse: (0.1)
+}
+
+sphere:
+{
+	position: (8 5 0)
+	rayon: (0.5)
+	color: (0xFFFF)
+	refraction: (0.2)
+	reflection: (1)
+	diffuse: (1)
+}
+
+csg:
+{
+	type: (intersection)
+	cylinder:
+	{
+		apex: (9 15 5)
+		axis: (0 1 1)
+		rayon: (0.8)
+        reflection: (1)
+	}
+	cylinder:
+	{
+		apex: (9 15 5)
+		axis: (0 1 0.5)
+		rayon: (0.8)
+        reflection: (1)
+	}
+	specular: (0.9)
+	diffuse: (0.1)
+    translation: (-3 -3 -3)
+}
+
+light:
+{
+    position: (9.5 19.5 9.5)
+    intensity: (10)
+    shining: (yes)
+}
