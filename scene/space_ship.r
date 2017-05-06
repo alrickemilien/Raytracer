@@ -4,6 +4,12 @@ camera:
 	to: (0 10 0)
 }
 
+camera:
+{
+	from: (0 10 -4)
+	to: (0 10 1)
+}
+
 csg:
 {
 	type: (difference)

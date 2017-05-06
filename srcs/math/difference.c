@@ -49,27 +49,17 @@ static t_list		*difference(t_list **ret, t_range a, t_range b)
 	return (NULL);
 }
 
-/*static void print_range(t_range *r)
-{
-	printf("Voici t1: %lf\n", r->t1.t);
-	printf("Voici t2: %lf\n", r->t2.t);
-}*/
-
 t_list		*f_d(t_list *a, t_list *b)
 {
 	t_list	*ret;
 	t_list	*tmp_ret;
 
 	ret = NULL;
-	//printf("On va print list a \n");
-
 	while (a)
 	{
 		ft_lstadd(&ret, ft_lstnew(a->content, sizeof(t_range)));
-	//	print_range(a->content);
 		a = a->next;
 	}
-	//printf("On a FINI de print list a \n");
 	tmp_ret = ret;
 	while (b)
 	{
@@ -77,16 +67,9 @@ t_list		*f_d(t_list *a, t_list *b)
 		{
 			if (!difference(&ret, *((t_range*)(tmp_ret->content)),
 				*((t_range*)(b->content))))
-			{
-				if (!ret)
-					tmp_ret = NULL;
-				else
-					tmp_ret = tmp_ret->next;
-			}
+				tmp_ret = (!ret) ? NULL : tmp_ret->next;
 			else
-			{
 				tmp_ret = ret;
-			}
 		}
 		b = b->next;
 	}
