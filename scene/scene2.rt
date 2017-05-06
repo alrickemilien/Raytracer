@@ -25,7 +25,7 @@ cylinder:
 {
 	axis: (0 0 1)
 	transparent: (0.9)
-	refraction: (1.01)
+	refraction: (1.9)
 	color: (0xffffff)
 }
 

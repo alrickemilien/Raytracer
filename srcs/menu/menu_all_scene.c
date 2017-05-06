@@ -6,7 +6,7 @@
 /*   By: salibert <salibert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 16:08:44 by salibert          #+#    #+#             */
-/*   Updated: 2017/05/05 13:36:36 by salibert         ###   ########.fr       */
+/*   Updated: 2017/05/06 10:34:48 by salibert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void		data_while(t_data_draw *data,
 			close(env->fd);
 			continue;
 		}
+		env->msaa = 0;
 		raytracing((void*)env);
 		data->picture = env->image;
 		draw_menu(*data, menu->page);

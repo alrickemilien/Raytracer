@@ -6,6 +6,12 @@ camera:
 
 camera:
 {
+	from: (0 0 30)
+	to: (0 0 0 )
+}
+
+camera:
+{
 	from: (0 0 12)
 	to: (0 0 0 )
 }
@@ -130,12 +136,9 @@ csg:
 
 sphere:
 {
-	position: (-3 2 1.2)
-	rayon: (0.52)
+	position: (-3 2 1)
 	color: (0x982ac9)
-	transparent: (0.3)
-	reflection: (0.1)
-	refraction: (1.01)
+	rayon: (0.5)
 }
 
 sphere:
