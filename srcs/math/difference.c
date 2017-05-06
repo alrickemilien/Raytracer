@@ -68,8 +68,6 @@ t_list		*f_d(t_list *a, t_list *b)
 			if (!difference(&ret, *((t_range*)(tmp_ret->content)),
 				*((t_range*)(b->content))))
 				tmp_ret = (!ret) ? NULL : tmp_ret->next;
-			else
-				tmp_ret = ret;
 		}
 		b = b->next;
 	}

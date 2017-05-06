@@ -4,19 +4,8 @@
 #include "menu.h"
 #include <stdio.h>
 
-void			reset_scene(t_menu *menu, char *path)
+static void		loop_scene(t_menu *menu, t_env *env)
 {
-	t_env		*env;
-
-	env = menu->env;
-	free_list(&env->list, &env->camera, &env->light, env);
-	env->fd = open(path, O_RDWR);
-	if (!parser(env) || !init_default_camera(env))
-	{
-		close(env->fd);
-		free_list(&env->list, &env->camera, &env->light, env);
-		return ;
-	}
 	env->tab_env = init_data_tab_thread((void*)env, (sizeof(t_env)), 8);
 	thread(env->tab_thread, &raytracing, env->tab_env, sizeof(t_env));
 	mlx_put_image_to_window(
@@ -26,6 +15,26 @@ void			reset_scene(t_menu *menu, char *path)
 	mlx_loop(env->addr_mlx);
 }
 
+void			reset_scene(t_menu *menu, char *path)
+{
+	t_env		*env;
+
+	env = menu->env;
+	free_list(&env->list, &env->camera, &env->light, env);
+	if ((env->fd = open(path, O_RDWR)) == -1)
+	{
+		end_scene(menu, menu->env->addr_mlx, menu->env->addr_win);
+		return ;
+	}
+	if (!parser(env) || !init_default_camera(env))
+	{
+		close(env->fd);
+		free_list(&env->list, &env->camera, &env->light, env);
+		return ;
+	}
+	loop_scene(menu, env);
+}
+
 void			init_scene(t_menu *menu, char *path)
 {
 	t_env		*env;
@@ -33,7 +42,12 @@ void			init_scene(t_menu *menu, char *path)
 	env = menu->env;
 	env->k = 0.4;
 	free_list(&env->list, &env->camera, &env->light, env);
-	env->fd = open(path, O_RDWR);
+	if ((env->fd = open(path, O_RDWR)) == -1)
+	{
+		env->reset = NULL;
+		env->etat = 0;
+		return ;
+	}
 	if (!parser(env) || !init_default_camera(env))
 	{
 		close(env->fd);
@@ -43,13 +57,7 @@ void			init_scene(t_menu *menu, char *path)
 		return ;
 	}
 	env->addr_win = mlx_new_window(env->addr_mlx, WIN_WIDTH, WIN_HEIGHT, path);
-	env->tab_env = init_data_tab_thread((void*)env, (sizeof(t_env)), 8);
-	thread(env->tab_thread, &raytracing, env->tab_env, sizeof(t_env));
-	mlx_put_image_to_window(
-			env->addr_mlx, env->addr_win, env->image->addr_img, 0, 0);
-	mlx_hook(env->addr_win, 2, 1L << 0 | 1 << 1, &key_press, menu);
-	mlx_hook(env->addr_win, 17, 0L, &red_cross, menu);
-	mlx_loop(env->addr_mlx);
+	loop_scene(menu, env);
 }
 
 void			loop_menu(t_menu *menu)
