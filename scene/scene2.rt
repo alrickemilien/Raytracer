@@ -1,0 +1,168 @@
+scene:
+{
+	antialiasing: (yes)
+}
+
+camera:
+{
+	from: (-20 0 10)
+	to: (0 0 0)
+}
+
+light:
+{
+	position: (-10 5 20)
+}
+
+sphere:
+{
+	position: (0 0 -200)
+	rayon: (200)
+	color: (0x65bfa6)
+}
+
+cylinder:
+{
+	axis: (0 0 1)
+	transparent: (0.9)
+	refraction: (1.9)
+	color: (0xffffff)
+}
+
+
+light:
+{
+	position: (0 0 15)
+}
+
+light:
+{
+	position: (0 0 13)
+}
+
+box:
+{
+	position: (0 0 0)
+	size: (2)
+	color: (0x111111)
+}
+
+sphere:
+{
+	position: (0 6 0)
+}
+
+sphere:
+{
+	position: (-6 6 0)
+}
+
+sphere:
+{
+	position: (-6 0 0)
+}
+
+sphere:
+{
+	position: (6 6 0)
+}
+
+sphere:
+{
+	position: (6 0 0)
+}
+
+sphere:
+{
+	position: (6 -6 0)
+}
+
+sphere:
+{
+	position: (0 -6 0)
+}
+
+sphere:
+{
+	position: (-6 -6 0)
+}
+
+
+cylinder:
+{
+	apex: (-6 6 20)
+	axis: (0 0 1)
+	rayon: (0.5)
+	size: (3)
+	color: (0xffcccc)
+}
+
+cylinder:
+{
+	apex: (6 -6 20)
+	axis: (0 0 1)
+	rayon: (0.5)
+	size: (3)
+	color: (0xffcccc)
+}
+
+cylinder:
+{
+	apex: (6 6 20)
+	axis: (0 0 1)
+	rayon: (0.5)
+	size: (3)
+	color: (0xffcccc)
+}
+
+cylinder:
+{
+	apex: (-6 -6 20)
+	axis: (0 0 1)
+	rayon: (0.5)
+	size: (3)
+	color: (0xffcccc)
+}
+
+sphere:
+{
+	position: (6 6 3)
+	color: (0xff00ff)
+}
+
+sphere:
+{
+	position: (6 -6 3)
+	color: (0xff00ff)
+}
+
+sphere:
+{
+	position: (-6 6 3)
+	color: (0xff00ff)
+}
+
+sphere:
+{
+	position: (-6 -6 3)
+	color: (0xff00ff)
+}
+
+csg:
+{
+	type: (intersection)
+		sphere:
+		{
+			position: (0 0 4)
+			rayon: (3)
+			color: (0xe17f3c)
+		}
+		plan:
+		{
+			position: (0 0 6)
+			normal: (-0.2 0 1)
+			color: (0xe17f3c)
+			transparent: (0.9)
+			refraction: (1.001)
+		}
+}
